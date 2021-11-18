@@ -64,30 +64,7 @@ class _ContactsState extends State<Contacts> {
 
                             Heading2WithDescription("Let keep in Touch","Description Paragraph"),
 
-                            Container(
-                              margin: EdgeInsets.only(top: 20),
-                              width: MediaQuery.of(context).size.width,
-                              height: 2,
-                              color: Colors.grey,),
-
-                            Row(
-                              children: <Widget>[
-                                Column(children: <Widget>[
-                                  ContactsIconDescription(Icons.mail_rounded, "Email", "ullahk240@gmail.com",),
-                                  SizedBox(height: 5,),
-                                  ContactsIconDescription(Icons.mail_rounded, "Email", "ullahk240@gmail.com",),
-                                  SizedBox(height: 5,),
-                                  ContactsIconDescription(Icons.mail_rounded, "Email", "ullahk240@gmail.com",),
-                                ],),
-                                ContactsDescription("Description")
-                              ],
-                            ),
-
-                            Container(
-                              margin: EdgeInsets.only(top: 20,bottom: 20),
-                              width: MediaQuery.of(context).size.width,
-                              height: 2,
-                              color: Colors.grey,),
+                            ContactsIconDescription(Icons.email, "Email", "abc@gmail.com", Icons.phone, "Phone", "123456789", Icons.add_location, "Address", "Peshawer Pakistan","Description","Description Paragraph"),
 
                             Heading2("Drop Me A Line"),
 

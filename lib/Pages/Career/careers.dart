@@ -64,7 +64,7 @@ class _CareerState extends State<Career> {
 
                             Heading2WithDescription("Let keep in Touch","Description"),
 
-                            ContactsIconDescription(Icons.mail_rounded, "Email", "123@gmail.com"),
+                            ContactsIconDescription(Icons.email, "Email", "abc@gmail.com", Icons.phone, "Phone", "123456789", Icons.add_location, "Address", "Peshawer Pakistan","Description","Description Paragraph"),
 
                             Heading2("Drop Me A Line"),
 

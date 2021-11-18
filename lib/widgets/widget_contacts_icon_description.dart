@@ -3,13 +3,28 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class ContactsIconDescription extends StatefulWidget {
-  IconData icon;
+  IconData icon1;
   // ignore: non_constant_identifier_names
-  String H2;
+  String icon1_H2;
   // ignore: non_constant_identifier_names
-  String H1;
+  String icon1_H1;
 
-  ContactsIconDescription(this.icon,this.H1,this.H2);
+  IconData icon2;
+  // ignore: non_constant_identifier_names
+  String icon2_H2;
+  // ignore: non_constant_identifier_names
+  String icon2_H1;
+
+  IconData icon3;
+  // ignore: non_constant_identifier_names
+  String icon3_H2;
+  // ignore: non_constant_identifier_names
+  String icon3_H1;
+
+  String Description_H1;
+  String Description;
+
+  ContactsIconDescription(this.icon1,this.icon1_H1,this.icon1_H2,this.icon2,this.icon2_H1,this.icon2_H2,this.icon3,this.icon3_H1,this.icon3_H2, this.Description_H1,this.Description);
 
 
   @override
@@ -22,82 +37,105 @@ class _ContactsIconDescriptionState extends State<ContactsIconDescription> {
     return Container(
       margin: EdgeInsets.only(top: 10),
       child: Column(
-        children: <Widget>[
-          Container(
-            margin: EdgeInsets.only(top: 10,bottom: 10),
-            width: MediaQuery.of(context).size.width,
-            height: 2,
-            color: Colors.grey,),
-          Container(
-            margin: EdgeInsets.only(bottom: 5),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                Icon(widget.icon,size: 25,color: Colors.amber,),
-                Container(
-                  margin: EdgeInsets.only(right: 15),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(widget.H1,style: TextStyle(fontSize: 10,fontWeight: FontWeight.bold),),
-                      Text(widget.H2,),
-                    ],
-                  ),
-                ),
-                SizedBox(width: MediaQuery.of(context).size.width*0.2,),
-              ],
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.only(bottom: 5),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                Icon(widget.icon,size: 25,color: Colors.amber,),
-                Container(
-                  margin: EdgeInsets.only(right: 15),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(widget.H1,style: TextStyle(fontSize: 10,fontWeight: FontWeight.bold),),
-                      Text(widget.H2,),
-                    ],
-                  ),
-                ),
-
-              ],
-            ),
-          ),
-          Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              Icon(widget.icon,size: 25,color: Colors.amber,),
               Container(
-                margin: EdgeInsets.only(right: 15),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(widget.H1,style: TextStyle(fontSize: 10,fontWeight: FontWeight.bold),),
-                    Text(widget.H2,),
-                  ],
-                ),
-              ),
+                margin: EdgeInsets.only(top: 10,bottom: 10),
+                width: MediaQuery.of(context).size.width,
+                height: 2,
+                color: Colors.grey,),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Container(
+                    margin: EdgeInsets.only(right: 10),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                      Container(
+                        margin: EdgeInsets.only(bottom: 5),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: <Widget>[
+                            Icon(widget.icon1,size: 25,color: Colors.amber,),
+                            Container(
+                              margin: EdgeInsets.only(right: 15),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Text(widget.icon1_H1,style: TextStyle(fontSize: 10,fontWeight: FontWeight.bold),),
+                                  Text(widget.icon1_H2,),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(bottom: 5),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: <Widget>[
+                            Icon(widget.icon2,size: 25,color: Colors.amber,),
+                            Container(
+                              margin: EdgeInsets.only(right: 15),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Text(widget.icon2_H1,style: TextStyle(fontSize: 10,fontWeight: FontWeight.bold),),
+                                  Text(widget.icon2_H2,),
+                                ],
+                              ),
+                            ),
 
+                          ],
+                        ),
+                      ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: <Widget>[
+                          Icon(widget.icon3,size: 25,color: Colors.amber,),
+                          Container(
+                            margin: EdgeInsets.only(right: 15),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text(widget.icon3_H1,style: TextStyle(fontSize: 10,fontWeight: FontWeight.bold),),
+                                Text(widget.icon3_H2,),
+                              ],
+                            ),
+                          ),
+
+                        ],
+                      ),
+                    ],),
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(widget.Description_H1,style: TextStyle(fontSize: 15,fontWeight: FontWeight.normal)),
+                      Text(widget.Description,style: TextStyle(fontSize: 10,fontWeight: FontWeight.normal))
+                    ],
+                  )
+                ],
+              ),
+              Container(
+                margin: EdgeInsets.only(top: 10,bottom: 10),
+                width: MediaQuery.of(context).size.width,
+                height: 2,
+                color: Colors.grey,),
             ],
           ),
-          Container(
-            margin: EdgeInsets.only(top: 10,bottom: 10),
-            width: MediaQuery.of(context).size.width,
-            height: 2,
-            color: Colors.grey,),
-        ],
-      ),
     );
   }
 }
