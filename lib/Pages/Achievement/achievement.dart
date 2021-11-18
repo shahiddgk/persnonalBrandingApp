@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kf_drawer/kf_drawer.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading1.dart';
-import 'package:personal_branding/widgets/Headings/widget_heading2.dart';
+import 'package:personal_branding/widgets/Headings/widget_heading2withdescription.dart';
 
 import 'achievement_picture_details.dart';
 
@@ -55,14 +55,10 @@ class _AchievementState extends State<Achievement> {
                         children: <Widget>[
                           Heading1("Achievement"),
 
-                          Container(margin:EdgeInsets.only(top: 25),height: 7,width: 90,color: Colors.amberAccent,),
-
-                          Heading2("Our Portfolio"),
-
-                          Container(margin:EdgeInsets.only(top: 25),child: Text("Description Paragraph")),
+                          Heading2WithDescription("Our Portfolio","Description Paragraph"),
 
                           Container(
-                margin:EdgeInsets.only(top: 25),
+                            margin:EdgeInsets.only(top: 25),
                             child: ListView.builder(itemCount: images.length,
                               shrinkWrap: true,
                               scrollDirection: Axis.vertical,

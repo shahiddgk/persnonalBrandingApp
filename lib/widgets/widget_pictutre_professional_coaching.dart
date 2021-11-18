@@ -17,8 +17,11 @@ class ProfessionalCoachingPictures extends StatefulWidget {
   // ignore: non_constant_identifier_names
   String B3title;
   // ignore: non_constant_identifier_names
+  Function B1_Onpress;
+  Function B2_Onpress;
+  Function B3_Onpress;
 
-  ProfessionalCoachingPictures(this.imageUrl,this.Date,this.title,this.B1title,this.B2title,this.B3title,this.Description);
+  ProfessionalCoachingPictures(this.imageUrl,this.Date,this.title,this.B1title,this.B2title,this.B3title,this.Description,this.B1_Onpress,this.B2_Onpress,this.B3_Onpress);
 
 
   @override
@@ -49,16 +52,16 @@ class _ProfessionalCoachingPicturesState extends State<ProfessionalCoachingPictu
                   Container(
                       height: 40,
                       width: 40,
-                      child: TextButton(onPressed:(){},child: Text(widget.B1title,style: const TextStyle(fontSize:10,color: Colors.black),))),
+                      child: TextButton(onPressed:(){widget.B1_Onpress;},child: Text(widget.B1title,style: const TextStyle(fontSize:10,color: Colors.black),))),
                   Container(
                       height: 40,
                       width: 40,
-                      child: TextButton(onPressed:(){},child: Text(widget.B2title,style: TextStyle(fontSize:10,color: Colors.black),))),
+                      child: TextButton(onPressed:(){widget.B2_Onpress;},child: Text(widget.B2title,style: TextStyle(fontSize:10,color: Colors.black),))),
                   Container(
                       height: 40,
                       width: 40,
                       // ignore: prefer_const_constructors
-                      child: TextButton(onPressed:(){},child: Text(widget.B3title,style: TextStyle(fontSize:9,color: Colors.black),))),
+                      child: TextButton(onPressed:(){widget.B3_Onpress;},child: Text(widget.B3title,style: TextStyle(fontSize:9,color: Colors.black),))),
                 ],),
               ),
               Container(margin:EdgeInsets.only(top: 25),height: 7,width: 90,color: Colors.amberAccent,),

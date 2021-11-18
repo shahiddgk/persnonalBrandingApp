@@ -20,27 +20,30 @@ class _NameFieldState extends State<NameField> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        TextFormField(
-          style: TextStyle(
-              color: Colors.black,
-              fontFamily: 'SFUIDisplay'
-          ),
-          controller: widget.controller,
-          validator: (value){
-            if(value!.isEmpty) {
-              return "Name is required";
-            }
-            return null;
-          },
-          decoration: InputDecoration(
-              border: OutlineInputBorder(),
-              hintText: widget.hint,
-              prefixIcon: Icon(Icons.person_outline),
-              labelStyle: TextStyle(
-                  fontSize: 15
-              )
-          ),
+        Container(
+          margin: EdgeInsets.only(top: 20),
+          child: TextFormField(
+            style: TextStyle(
+                color: Colors.black,
+                fontFamily: 'SFUIDisplay'
+            ),
+            controller: widget.controller,
+            validator: (value){
+              if(value!.isEmpty) {
+                return "Name is required";
+              }
+              return null;
+            },
+            decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                hintText: widget.hint,
+                prefixIcon: Icon(Icons.person_outline),
+                labelStyle: TextStyle(
+                    fontSize: 15
+                )
+            ),
 
+          ),
         ),
       ],
     );

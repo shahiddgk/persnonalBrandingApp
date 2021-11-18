@@ -20,30 +20,33 @@ class _EmailFieldState extends State<EmailField> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-    TextFormField(
-    style: TextStyle(
-    color: Colors.black,
-        fontFamily: 'SFUIDisplay'
-    ),
+    Container(
+      margin: EdgeInsets.only(top: 10),
+      child: TextFormField(
+      style: TextStyle(
+      color: Colors.black,
+          fontFamily: 'SFUIDisplay'
+      ),
 
-    controller: widget.controller,
-    validator: (value){
-    if(value!.isEmpty) {
-      return "Please enter email";
-    }else if(!new  RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(value)){
-      return "Please enter valid email";
-    }
-    return null;
-    },
-    decoration: InputDecoration(
-    border: OutlineInputBorder(),
-    hintText: widget.hint,
-    prefixIcon: Icon(Icons.email),
-    labelStyle: TextStyle(
-    fontSize: 15
-    )
-    ),
+      controller: widget.controller,
+      validator: (value){
+      if(value!.isEmpty) {
+        return "Please enter email";
+      }else if(!new  RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(value)){
+        return "Please enter valid email";
+      }
+      return null;
+      },
+      decoration: InputDecoration(
+      border: OutlineInputBorder(),
+      hintText: widget.hint,
+      prefixIcon: Icon(Icons.email),
+      labelStyle: TextStyle(
+      fontSize: 15
+      )
+      ),
 
+      ),
     ),
       ],
     );

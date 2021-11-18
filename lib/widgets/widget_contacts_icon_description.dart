@@ -19,28 +19,85 @@ class ContactsIconDescription extends StatefulWidget {
 class _ContactsIconDescriptionState extends State<ContactsIconDescription> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            Icon(widget.icon,size: 25,color: Colors.amber,),
-            Container(
-              margin: EdgeInsets.only(right: 15),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(widget.H1,style: TextStyle(fontSize: 10,fontWeight: FontWeight.bold),),
-                  Text(widget.H2,),
-                ],
-              ),
+    return Container(
+      margin: EdgeInsets.only(top: 10),
+      child: Column(
+        children: <Widget>[
+          Container(
+            margin: EdgeInsets.only(top: 10,bottom: 10),
+            width: MediaQuery.of(context).size.width,
+            height: 2,
+            color: Colors.grey,),
+          Container(
+            margin: EdgeInsets.only(bottom: 5),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                Icon(widget.icon,size: 25,color: Colors.amber,),
+                Container(
+                  margin: EdgeInsets.only(right: 15),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(widget.H1,style: TextStyle(fontSize: 10,fontWeight: FontWeight.bold),),
+                      Text(widget.H2,),
+                    ],
+                  ),
+                ),
+                SizedBox(width: MediaQuery.of(context).size.width*0.2,),
+              ],
             ),
-            SizedBox(width: MediaQuery.of(context).size.width*0.2,),
-          ],
-        ),
-      ],
+          ),
+          Container(
+            margin: EdgeInsets.only(bottom: 5),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                Icon(widget.icon,size: 25,color: Colors.amber,),
+                Container(
+                  margin: EdgeInsets.only(right: 15),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(widget.H1,style: TextStyle(fontSize: 10,fontWeight: FontWeight.bold),),
+                      Text(widget.H2,),
+                    ],
+                  ),
+                ),
+
+              ],
+            ),
+          ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Icon(widget.icon,size: 25,color: Colors.amber,),
+              Container(
+                margin: EdgeInsets.only(right: 15),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(widget.H1,style: TextStyle(fontSize: 10,fontWeight: FontWeight.bold),),
+                    Text(widget.H2,),
+                  ],
+                ),
+              ),
+
+            ],
+          ),
+          Container(
+            margin: EdgeInsets.only(top: 10,bottom: 10),
+            width: MediaQuery.of(context).size.width,
+            height: 2,
+            color: Colors.grey,),
+        ],
+      ),
     );
   }
 }

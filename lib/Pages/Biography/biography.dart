@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kf_drawer/kf_drawer.dart';
 import 'package:personal_branding/Pages/Biography/picture_detail.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading1.dart';
-import 'package:personal_branding/widgets/Headings/widget_heading2.dart';
+import 'package:personal_branding/widgets/Headings/widget_heading2withdescription.dart';
 
 // ignore: must_be_immutable
 class Biography extends KFDrawerContent {
@@ -51,13 +51,9 @@ class _BiographyState extends State<Biography> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
-                          Heading1("Future Goals"),
+                          Heading1("Biography"),
 
-                          Container(margin:EdgeInsets.only(top: 25),height: 7,width: 90,color: Colors.amberAccent,),
-
-                          Heading2("Our Portfolio"),
-
-                          Container(margin:EdgeInsets.only(top: 25),child: Text("Description Paragraph")),
+                          Heading2WithDescription("Our Portfolio","Description Paragraph"),
 
                           Container(
                             margin:EdgeInsets.only(top: 25),

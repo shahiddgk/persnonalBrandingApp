@@ -57,7 +57,8 @@ class _HomeState extends State<Home> {
               ),
 
               Container(
-                height:  MediaQuery.of(context).size.height-160,
+                width: MediaQuery.of(context).size.width,
+                height:  MediaQuery.of(context).size.height*0.8,
                 child: CarouselSlider.builder(
                   itemCount: urlImages.length,
                   itemBuilder: (context, index, realIndex){
@@ -73,7 +74,7 @@ class _HomeState extends State<Home> {
                   ),
                 ),
               ),
-              Container(margin:EdgeInsets.only(top: 25),child: buildIndicator()),
+              Container(margin:EdgeInsets.only(top: 15),child: buildIndicator()),
 
               //Center(child: Text("Home"),),
               // Padding(

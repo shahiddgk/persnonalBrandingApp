@@ -30,23 +30,24 @@ class _IconDescriptionState extends State<IconDescription> {
           width: MediaQuery.of(context).size.width,
           height: 2,
           color: Colors.grey,),
-        SizedBox(height: 8,),
         Container(
           margin: EdgeInsets.only(top: 18),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Icon(widget.icon,size: 35,color: Colors.amber,),
-                  Text(widget.H2,style: TextStyle(fontSize: 10,fontWeight: FontWeight.bold),),
-                  Text(widget.H1,style: TextStyle(fontSize: 13,fontWeight: FontWeight.bold),),Text(widget.H3),
-                ],
+              Container(
+                margin: EdgeInsets.only(right: 25),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Icon(widget.icon,size: 35,color: Colors.amber,),
+                    Text(widget.H2,style: TextStyle(fontSize: 10,fontWeight: FontWeight.bold),),
+                    Text(widget.H1,style: TextStyle(fontSize: 13,fontWeight: FontWeight.bold),),Text(widget.H3),
+                  ],
+                ),
               ),
-              SizedBox(width: MediaQuery.of(context).size.width*0.2,),
               Text(widget.Description),
             ],
           ),

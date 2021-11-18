@@ -20,29 +20,32 @@ class _MessageFieldState extends State<MessageField> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        TextFormField(
-          maxLines: 4,
-          style: TextStyle(
-              color: Colors.black,
-              fontFamily: 'SFUIDisplay'
-          ),
+        Container(
+          margin: EdgeInsets.only(top: 10),
+          child: TextFormField(
+            maxLines: 4,
+            style: TextStyle(
+                color: Colors.black,
+                fontFamily: 'SFUIDisplay'
+            ),
 
-          controller: widget.controller,
-          validator: (value){
-            if(value!.isEmpty) {
-              return "Message is required";
-            }
-            return null;
-          },
-          decoration: InputDecoration(
-              border: OutlineInputBorder(),
-              hintText: widget.hint,
-              prefixIcon: Icon(Icons.message),
-              labelStyle: TextStyle(
-                  fontSize: 15
-              )
-          ),
+            controller: widget.controller,
+            validator: (value){
+              if(value!.isEmpty) {
+                return "Message is required";
+              }
+              return null;
+            },
+            decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                hintText: widget.hint,
+                prefixIcon: Icon(Icons.message),
+                labelStyle: TextStyle(
+                    fontSize: 15
+                )
+            ),
 
+          ),
         ),
       ],
     );

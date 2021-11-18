@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class Heading1 extends StatefulWidget {
@@ -14,6 +15,16 @@ class Heading1 extends StatefulWidget {
 class _Heading1State extends State<Heading1> {
   @override
   Widget build(BuildContext context) {
-    return Text(widget.H1,style: TextStyle(fontSize: 28,fontWeight: FontWeight.bold));
+    return Container(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(widget.H1,style: TextStyle(fontSize: 28,fontWeight: FontWeight.bold)
+            ),
+            Container(margin:EdgeInsets.only(top: 25,bottom: 25),height: 7,width: 90,color: Colors.amberAccent,),
+          ],
+        ),
+    );
   }
 }

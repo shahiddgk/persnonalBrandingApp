@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:kf_drawer/kf_drawer.dart';
+import 'package:personal_branding/widgets/Buttons/widget_forgotPasswordButtong.dart';
 import 'package:personal_branding/widgets/TextFields/widget_email_field.dart';
 import 'package:personal_branding/widgets/TextFields/widget_name_field.dart';
 import 'package:personal_branding/widgets/TextFields/widget_password_field.dart';
-import 'package:personal_branding/widgets/widget_button.dart';
+import 'package:personal_branding/widgets/Buttons/widget_button.dart';
 
 // ignore: must_be_immutable
 class Register extends KFDrawerContent {
@@ -56,7 +57,7 @@ class _RegisterState extends State<Register> {
                       children: <Widget>[
                         Container(
                           width: MediaQuery.of(context).size.width,
-                          margin: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.1),
+                          margin: EdgeInsets.only(top: MediaQuery.of(context).size.height*1/40),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
                             color: Colors.white,
@@ -99,18 +100,7 @@ class _RegisterState extends State<Register> {
                                       },
                                     ),
                                   ),
-                                  Padding(
-                                    padding: EdgeInsets.only(top: 20),
-                                    child: Center(
-                                      child: Text('Forgot your password?',
-                                        style: TextStyle(
-                                            fontFamily: 'SFUIDisplay',
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.bold
-                                        ),
-                                      ),
-                                    ),
-                                  ),
+                                  ForgotPassword(title: "Forgot Password",onPressed: () {},)
                                 ],
                               ),
                             ),

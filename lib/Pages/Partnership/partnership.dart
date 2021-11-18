@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:kf_drawer/kf_drawer.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading1.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading2.dart';
+import 'package:personal_branding/widgets/Headings/widget_heading2withdescription.dart';
 import 'package:personal_branding/widgets/TextFields/widget_email_field.dart';
 import 'package:personal_branding/widgets/TextFields/widget_message_field.dart';
 import 'package:personal_branding/widgets/TextFields/widget_name_field.dart';
-import 'package:personal_branding/widgets/widget_button.dart';
+import 'package:personal_branding/widgets/Buttons/widget_button.dart';
 
 // ignore: must_be_immutable
 class Partnership extends KFDrawerContent {
@@ -52,7 +53,7 @@ class _PartnershipState extends State<Partnership> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Padding(padding: EdgeInsets.only(top:MediaQuery.of(context).size.height*0.1,left: 10,right: 10),
+                    Padding(padding: EdgeInsets.only(top:MediaQuery.of(context).size.height*1/40,left: 10,right: 10),
                       child: Align(alignment: Alignment.centerLeft,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,20 +61,17 @@ class _PartnershipState extends State<Partnership> {
                           children: <Widget>[
                             Heading1("Partnership"),
 
-                            Container(margin: EdgeInsets.only(top: 25),height: 7,width: 90,color: Colors.amberAccent,),
-
-                            Heading2("Let keep in Touch"),
-                            Text("Description"),
+                            Heading2WithDescription("Let keep in Touch","Description"),
 
                             Heading2("Drop Me A Line"),
 
-                            Container(margin: EdgeInsets.only(top: 25),child: NameField(hint: "Your Name", controller: _nameFieldController,)),
+                            NameField(hint: "Your Name", controller: _nameFieldController,),
 
-                            Container(margin: EdgeInsets.only(top: 20),child: EmailField(hint: "Your Email", controller: _emailFieldController,)),
+                            EmailField(hint: "Your Email", controller: _emailFieldController,),
 
-                            Container(margin: EdgeInsets.only(top: 20),child: MessageField(hint: "Enter Message", controller: _messageFieldController,)),
+                            MessageField(hint: "Enter Message", controller: _messageFieldController,),
 
-                            Container(margin: EdgeInsets.only(top: 20),child: Button(title: "Say Hello",onPressed: (){},)),
+                            Button(title: "Say Hello",onPressed: (){},),
                           ],
                         ),),)
                   ],
