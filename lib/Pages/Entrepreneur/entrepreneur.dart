@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kf_drawer/kf_drawer.dart';
+import 'package:personal_branding/Pages/Biography/picture_detail.dart';
+import 'package:personal_branding/Pages/Entrepreneur/project_Description_chat_screen.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading1.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading2.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading2withdescription.dart';
@@ -62,15 +64,21 @@ class _EntrepreneurState extends State<Entrepreneur> {
 
                           Heading2WithDescription("Let keep in Touch","Description"),
 
-                          Heading2("Drop Me A Line"),
+                          Heading2("Drop  A Line"),
                           
                           NameField(hint: "Your Name",controller: _nameFieldController,),
                           
                           EmailField(hint: "Your Email",controller: _emailFieldController,),
                           
                           MessageField(hint: "Enter Message",controller: _messageFieldController,),
+                          Container(child: TextButton(
+                            onPressed: () { Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ProjectDescriptionWithChatScreen())); },
+                            child: Text("New Page"),
+                          ),),
                           
-                          Button(title: "Say Hello",onPressed: (){},),
+                          GestureDetector(
+                            onTap: (){Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ProjectDescriptionWithChatScreen()));},
+                              child: Button(title: "Say Hello",onPressed: (){ Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ProjectDescriptionWithChatScreen()));},)),
                         ],
                       ),),)
                   ],
