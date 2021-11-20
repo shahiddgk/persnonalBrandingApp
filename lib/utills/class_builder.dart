@@ -1,18 +1,18 @@
 
-import 'package:personal_branding/Pages/About/about.dart';
+import 'package:personal_branding/Pages/about.dart';
 import 'package:personal_branding/Pages/Achievement/achievement.dart';
-import 'package:personal_branding/Pages/Authentication/login.dart';
-import 'package:personal_branding/Pages/Authentication/register.dart';
+import 'package:personal_branding/Pages/login.dart';
+import 'package:personal_branding/Pages/register.dart';
 import 'package:personal_branding/Pages/Biography/biography.dart';
-import 'package:personal_branding/Pages/Career/careers.dart';
-import 'package:personal_branding/Pages/Contact/contacts.dart';
+import 'package:personal_branding/Pages/careers.dart';
+import 'package:personal_branding/Pages/contacts.dart';
 import 'package:personal_branding/Pages/Entrepreneur/entrepreneur.dart';
-import 'package:personal_branding/Pages/Experience/experience.dart';
+import 'package:personal_branding/Pages/experience.dart';
 import 'package:personal_branding/Pages/Future_Goals/future_goals.dart';
-import 'package:personal_branding/Pages/Home/home.dart';
-import 'package:personal_branding/Pages/Partnership/partnership.dart';
-import 'package:personal_branding/Pages/Professional_Coaching/professional_coaching.dart';
-import 'package:personal_branding/Pages/Testimonial/testimonials.dart';
+import 'package:personal_branding/Pages/home.dart';
+import 'package:personal_branding/Pages/partnership.dart';
+import 'package:personal_branding/Pages/professional_coaching.dart';
+import 'package:personal_branding/Pages/testimonials.dart';
 
 typedef T Constructor<T>();
 

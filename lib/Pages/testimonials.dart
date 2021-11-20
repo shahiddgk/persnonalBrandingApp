@@ -2,20 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:kf_drawer/kf_drawer.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading1.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading2withdescription.dart';
-
-import 'future_picture_details.dart';
+import 'package:personal_branding/widgets/widget_icon_with_description.dart';
 
 // ignore: must_be_immutable
-class FutureGoals extends KFDrawerContent {
+class Testimonials extends KFDrawerContent {
+
 
   @override
-  _FutureGoalsState createState() => _FutureGoalsState();
+  _TestimonialsState createState() => _TestimonialsState();
 }
 
-class _FutureGoalsState extends State<FutureGoals> {
-
-  List images = ["https://images.pexels.com/photos/1072179/pexels-photo-1072179.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",];
-
+class _TestimonialsState extends State<Testimonials> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,27 +54,19 @@ class _FutureGoalsState extends State<FutureGoals> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: <Widget>[
-                            Heading1("Future Goals"),
+                            Heading1("Testimonial"),
 
-                            Heading2WithDescription("Our Portfolio","Description Paragraph"),
+                            Heading2WithDescription("Just my education","Description Paragraph"),
 
-                            Container(
-                              margin:EdgeInsets.only(top: 25),
-                              child: ListView.builder(itemCount: images.length,
-                                shrinkWrap: true,
-                                scrollDirection: Axis.vertical,
-                                itemBuilder: (context, index) {
-                                  return GestureDetector(
-                                    onTap: () {
-                                      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>FutureGoalsPictureDetails()));
-                                    },
-                                    child: Container(
-                                      width: MediaQuery.of(context).size.width,
-                                      child: Image.network(images[index]),
-                                    ),
-                                  );
-                                },),
-                            )
+                            IconDescription(Icons.email, "Ace Adevertising", "Project Manager", "2013-2011","Description"),
+                            IconDescription(Icons.message, "Ace Adevertising", "Project Manager", "2013-2011","Description"),
+                            IconDescription(Icons.send, "Ace Adevertising", "Project Manager", "2013-2011","Description"),
+                            IconDescription(Icons.print, "Ace Adevertising", "Project Manager", "2013-2011","Description"),
+                            IconDescription(Icons.search, "Ace Adevertising", "Project Manager", "2013-2011","Description"),
+                            IconDescription(Icons.title, "Ace Adevertising", "Project Manager", "2013-2011","Description"),
+                            IconDescription(Icons.access_alarm, "Ace Adevertising", "Project Manager", "2013-2011","Description"),
+                            IconDescription(Icons.accessibility_new, "Ace Adevertising", "Project Manager", "2013-2011","Description"),
+                            IconDescription(Icons.accessible_sharp, "Ace Adevertising", "Project Manager", "2013-2011","Description"),
                           ],
                         ),
                       ),

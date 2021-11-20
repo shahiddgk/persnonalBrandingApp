@@ -16,71 +16,76 @@ class _BiographyState extends State<Biography> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Center(
-        child: Column(
-          children: <Widget>[
-            Row(
-              children: <Widget>[
-                ClipRRect(
-                  borderRadius: BorderRadius.all(Radius.circular(32.0)),
-                  child: Material(
-                    shadowColor: Colors.transparent,
-                    color: Colors.transparent,
-                    child: IconButton(
-                      icon: Icon(
-                        Icons.menu,
-                        color: Colors.black,
+    return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(onPressed:  widget.onMenuPressed, icon: Icon(Icons.menu),),
+      ),
+      body: SafeArea(
+        child: Center(
+          child: Column(
+            children: <Widget>[
+              // Row(
+              //   children: <Widget>[
+              //     ClipRRect(
+              //       borderRadius: BorderRadius.all(Radius.circular(32.0)),
+              //       child: Material(
+              //         shadowColor: Colors.transparent,
+              //         color: Colors.transparent,
+              //         child: IconButton(
+              //           icon: Icon(
+              //             Icons.menu,
+              //             color: Colors.black,
+              //           ),
+              //           onPressed: widget.onMenuPressed,
+              //         ),
+              //       ),
+              //     ),
+              //   ],
+              // ),
+              Expanded(
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.vertical,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: <Widget>[
+                      Padding(padding: EdgeInsets.only(top:MediaQuery.of(context).size.height*1/40,left: 20,right: 20),child:
+                      Align(alignment: Alignment.centerLeft,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: <Widget>[
+                            Heading1("Biography"),
+
+                            Heading2WithDescription("Our Portfolio","Description Paragraph"),
+
+                            Container(
+                              margin:EdgeInsets.only(top: 25),
+                              child: ListView.builder(itemCount: images.length,
+                                shrinkWrap: true,
+                                scrollDirection: Axis.vertical,
+                                itemBuilder: (context, index) {
+                                  return GestureDetector(
+                                    onTap: () {
+                                      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>PictureDetails()));
+                                    },
+                                    child: Container(
+                                      width: MediaQuery.of(context).size.width,
+                                      child: Image.network(images[index]),
+                                    ),
+                                  );
+                                },),
+                            )
+                          ],
+                        ),
                       ),
-                      onPressed: widget.onMenuPressed,
-                    ),
+                      ),
+                    ],
                   ),
                 ),
-              ],
-            ),
-            Expanded(
-              child: SingleChildScrollView(
-                scrollDirection: Axis.vertical,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[
-                    Padding(padding: EdgeInsets.only(top:MediaQuery.of(context).size.height*1/40,left: 20,right: 20),child:
-                    Align(alignment: Alignment.centerLeft,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: <Widget>[
-                          Heading1("Biography"),
-
-                          Heading2WithDescription("Our Portfolio","Description Paragraph"),
-
-                          Container(
-                            margin:EdgeInsets.only(top: 25),
-                            child: ListView.builder(itemCount: images.length,
-                              shrinkWrap: true,
-                              scrollDirection: Axis.vertical,
-                              itemBuilder: (context, index) {
-                                return GestureDetector(
-                                  onTap: () {
-                                    Navigator.of(context).push(MaterialPageRoute(builder: (context)=>PictureDetails()));
-                                  },
-                                  child: Container(
-                                    width: MediaQuery.of(context).size.width,
-                                    child: Image.network(images[index]),
-                                  ),
-                                );
-                              },),
-                          )
-                        ],
-                      ),
-                    ),
-                    ),
-                  ],
-                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

@@ -1,20 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kf_drawer/kf_drawer.dart';
-import 'Pages/About/about.dart';
+import 'Pages/about.dart';
 import 'Pages/Achievement/achievement.dart';
-import 'Pages/Authentication/login.dart';
-import 'Pages/Authentication/register.dart';
+import 'Pages/login.dart';
+import 'Pages/register.dart';
 import 'Pages/Biography/biography.dart';
-import 'Pages/Career/careers.dart';
-import 'Pages/Contact/contacts.dart';
+import 'Pages/careers.dart';
+import 'Pages/contacts.dart';
 import 'Pages/Entrepreneur/entrepreneur.dart';
-import 'Pages/Experience/experience.dart';
+import 'Pages/experience.dart';
 import 'Pages/Future_Goals/future_goals.dart';
-import 'Pages/Home/home.dart';
-import 'Pages/Partnership/partnership.dart';
-import 'Pages/Professional_Coaching/professional_coaching.dart';
-import 'Pages/Testimonial/testimonials.dart';
+import 'Pages/home.dart';
+import 'Pages/partnership.dart';
+import 'Pages/professional_coaching.dart';
+import 'Pages/testimonials.dart';
 import 'utills/class_builder.dart';
 
 class MainWidget extends StatefulWidget {

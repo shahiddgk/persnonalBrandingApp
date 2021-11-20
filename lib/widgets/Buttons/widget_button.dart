@@ -5,7 +5,7 @@ class Button extends StatefulWidget {
   final String title;
   final Function onPressed;
 
-  const Button({Key? key, required this.title, required this.onPressed}) : super(key: key);
+  const Button({required this.title, required this.onPressed});
 
   @override
   _ButtonState createState() => _ButtonState();
@@ -19,7 +19,7 @@ class _ButtonState extends State<Button> {
       width: 400,
       decoration: BoxDecoration(border: Border.all(color: Colors.yellow,width: 3)),
       child: MaterialButton(
-        onPressed:(){widget.onPressed;},//since this is only a UI app
+        onPressed:(){widget.onPressed();},//since this is only a UI app
         child: Text(widget.title,
           style: TextStyle(
             fontSize: 15,
