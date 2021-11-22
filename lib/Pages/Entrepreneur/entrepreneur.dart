@@ -23,6 +23,23 @@ class _EntrepreneurState extends State<Entrepreneur> {
   TextEditingController _emailFieldController = TextEditingController();
   TextEditingController _messageFieldController = TextEditingController();
 
+  int _radioValue = 0;
+
+
+   _handleRadioValueChange(int value) {
+
+    setState(() {
+      _radioValue = value;
+      switch (_radioValue) {
+        case 0:
+          break;
+        case 1:
+          break;
+      }
+    });
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,31 +75,54 @@ class _EntrepreneurState extends State<Entrepreneur> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Padding(padding: EdgeInsets.only(top:MediaQuery.of(context).size.height*1/40,left: 10,right: 10),
+                      Padding(padding: EdgeInsets.only(top:MediaQuery.of(context).size.height*1/70,left: 10,right: 10),
                         child: Align(alignment: Alignment.centerLeft,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: <Widget>[
-                            Heading1("Entrepreneur"),
+                            Heading1("Let's Change the world together"),
 
-                            Heading2WithDescription("Let keep in Touch","Description"),
+                            Heading2WithDescription("Dream,Explore,Discover","Description"),
 
-                            Heading2("Drop  A Line"),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Text("First Step to change world"),
+                                TextButton(onPressed: (){}, child: Text("New Idea",style: TextStyle(color: Colors.grey),))
+                            ],),
 
-                            NameField(hint: "Your Name",controller: _nameFieldController,),
+                            NameField(hint: "Title",controller: _nameFieldController,),
 
-                            EmailField(hint: "Your Email",controller: _emailFieldController,),
+                            NameField(hint: "Target Industry",controller: _nameFieldController,),
 
-                            MessageField(hint: "Enter Message",controller: _messageFieldController,),
-                            Container(child: TextButton(
-                              onPressed: () { Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ProjectDescriptionWithChatScreen())); },
-                              child: Text("New Page"),
-                            ),),
+                            MessageField(hint: "Description",controller: _messageFieldController,),
 
-                            GestureDetector(
-                              onTap: (){Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ProjectDescriptionWithChatScreen()));},
-                                child: Button(title: "Say Hello",onPressed: (){ Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ProjectDescriptionWithChatScreen()));},)),
+                            NameField(hint: "Date Picker Here",controller: _nameFieldController,),
+
+                            Button(title: "Browse", onPressed: (){}, Width: 90),
+
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Radio(value: 0, groupValue: _radioValue, onChanged: _handleRadioValueChange(0)),
+                                Text("Partnership",style: TextStyle(color: Colors.grey),),
+                                Radio(value: 1, groupValue: _radioValue, onChanged: _handleRadioValueChange(1)),
+                                Text("Investment Plan",style: TextStyle(color: Colors.grey),)
+
+                                ],),
+
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+
+                                Button(title: "Register",Width: 95,onPressed: (){ Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ProjectDescriptionWithChatScreen()));},),
+                                Button(title: "Login",Width: 90,onPressed: (){ Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ProjectDescriptionWithChatScreen()));},),
+
+                              ],)
+
+
                           ],
                         ),),)
                     ],

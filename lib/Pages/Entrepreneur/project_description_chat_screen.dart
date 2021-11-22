@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading2.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading2withdescription.dart';
 import 'package:personal_branding/widgets/Headings/widget_related_topics.dart';
+import 'package:personal_branding/widgets/TextFields/widget_chatScreen_message_box.dart';
+import 'package:personal_branding/widgets/widget_chat_screen_textfield_button.dart';
 
 class ProjectDescriptionWithChatScreen extends StatefulWidget {
   const ProjectDescriptionWithChatScreen({Key? key}) : super(key: key);
@@ -15,6 +17,7 @@ class ProjectDescriptionWithChatScreen extends StatefulWidget {
 class _ProjectDescriptionWithChatScreenState extends State<ProjectDescriptionWithChatScreen> {
 
 List relatedTopics = [RelatedTopics("Feasibility Report"),RelatedTopics("Feasibility Report"),RelatedTopics("Feasibility Report"),RelatedTopics("Feasibility Report")];
+TextEditingController _MessageController = new TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +31,7 @@ List relatedTopics = [RelatedTopics("Feasibility Report"),RelatedTopics("Feasibi
           child: Column(
             children: <Widget>[
               Padding(
-                  padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*1/40),
+                  padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*1/70,left: 10,right: 10),
                   child: SingleChildScrollView(
                     scrollDirection: Axis.vertical,
                     child: Column(
@@ -59,21 +62,9 @@ List relatedTopics = [RelatedTopics("Feasibility Report"),RelatedTopics("Feasibi
                                   height: 50,color: Colors.grey,
                                   child: Align(
                                       alignment: Alignment.centerLeft,
-                                      child: Text("Project Name",style: TextStyle(fontSize: 20),)),),
-                                  Container(height: 360,color: Colors.white,width: MediaQuery.of(context).size.width,),
-                                  Row(children: <Widget>[
-                                    Container(height: 68,color: Colors.grey,width: MediaQuery.of(context).size.width*0.78,child: Padding(
-                                      padding: EdgeInsets.only(left: 10),
-                                      child: TextFormField(
-                                        textAlignVertical: TextAlignVertical.center,
-                                        decoration: InputDecoration(
-                                          hintText: "Enter message here",
-                                          border: InputBorder.none
-                                        ),
-                                      ),
-                                    ),),
-                                    Container(height: 68,width: 68,color: Colors.green,child: Align(alignment:Alignment.center,child: Text("Send",style: TextStyle(color: Colors.white),)),)
-                                  ],)
+                                      child: Heading2("Project Name")),),
+                                  ChatBox(Container(child: Center(child: Text("Message here"),),)),
+                                  TextFieldAndButton(_MessageController, "Send", "Enter Your Message", (){}),
                                 ],
                               ),
                             ),

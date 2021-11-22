@@ -11,6 +11,6 @@ class Heading2 extends StatefulWidget {
 class _Heading2State extends State<Heading2> {
   @override
   Widget build(BuildContext context) {
-    return Text(widget.H2,style: TextStyle(fontSize: 24,fontWeight: FontWeight.normal));
+    return Text(widget.H2,style: TextStyle(fontSize: 20,fontWeight: FontWeight.normal));
   }
 }

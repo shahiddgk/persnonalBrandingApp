@@ -21,7 +21,7 @@ class _NameFieldState extends State<NameField> {
     return Column(
       children: [
         Container(
-          margin: EdgeInsets.only(top: 20),
+          margin: EdgeInsets.only(top: 10),
           child: TextFormField(
             style: TextStyle(
                 color: Colors.black,
@@ -42,7 +42,6 @@ class _NameFieldState extends State<NameField> {
                     fontSize: 15
                 )
             ),
-
           ),
         ),
       ],

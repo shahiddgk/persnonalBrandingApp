@@ -61,7 +61,7 @@ class _RegisterState extends State<Register> {
                         children: <Widget>[
                           Container(
                             width: MediaQuery.of(context).size.width,
-                            margin: EdgeInsets.only(top: MediaQuery.of(context).size.height*1/40),
+                            margin: EdgeInsets.only(top: MediaQuery.of(context).size.height*1/70,left: 10,right: 10),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
                               color: Colors.white,
@@ -72,39 +72,30 @@ class _RegisterState extends State<Register> {
                                   shrinkWrap: true,
                                   scrollDirection: Axis.vertical,
                                   children: <Widget>[
-                                    Padding(
-                                      padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
-                                      child: Container(
-                                        color: Color(0xfff5f5f5),
+                                    Container(
                                         child: NameField(
                                           hint: "Enter Name",
                                           controller: _nameFieldController,
                                         )
                                       ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
-                                      child: Container(
-                                        color: Color(0xfff5f5f5),
+                                    Container(
                                         child: EmailField(
                                           hint: "Enter Email",
                                           controller: _emailFieldController,
                                         )
                                       ),
-                                    ),
                                     Container(
-                                      color: Color(0xfff5f5f5),
                                       child: PasswordField(hint: "Enter Password",
                                       controller: _passwordFieldController,)
                                     ),
                                     Padding(
                                       padding: EdgeInsets.only(top: 20),
-                                      child: Button(title: "SignUp",onPressed: (){
+                                      child: Button(title: "SignUp",Width: MediaQuery.of(context).size.width,onPressed: (){
                                         _SignUp();
                                         },
                                       ),
                                     ),
-                                    ForgotPassword(title: "Forgot Password",onPressed: () {},)
+                                    ForgotPassword(title: "Forgot Password!",onPressed: () {},)
                                   ],
                                 ),
                               ),

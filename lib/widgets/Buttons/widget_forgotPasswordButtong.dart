@@ -23,7 +23,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
       margin: EdgeInsets.only(top: 20),
       // ignore: file_names
       child: TextButton(onPressed: () { widget.onPressed; },
-      child: Text(widget.title),),
+      child: Text(widget.title,style: TextStyle(color: Colors.black),)),
     );
   }
 }

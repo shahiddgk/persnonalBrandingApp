@@ -60,7 +60,7 @@ class _LogInState extends State<LogIn> {
                       children: <Widget>[
                         Container(
                           width: MediaQuery.of(context).size.width,
-                          margin: EdgeInsets.only(top: MediaQuery.of(context).size.height*1/40),
+                          margin: EdgeInsets.only(top: MediaQuery.of(context).size.height*1/70,left: 10,right: 10),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
                             color: Colors.white,
@@ -71,28 +71,19 @@ class _LogInState extends State<LogIn> {
                               shrinkWrap: true,
                               scrollDirection: Axis.vertical,
                               children: <Widget>[
-                                Padding(
-                                  padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
-                                  child: Container(
-                                    color: Color(0xfff5f5f5),
-                                    child: EmailField(
+                                EmailField(
                                       hint: "Enter email",
                                       controller: _emailFieldController,
-                                    )
-                                  ),
-                                ),
-                                Container(
-                                  color: Color(0xfff5f5f5),
-                                  child: PasswordField(
+                                    ),
+                                PasswordField(
                                     hint: "Enter password",
                                     controller: _passwordFieldController,
-                                  )
-                                ),
-                                Button(title: "SignIn",onPressed: (){
+                                  ),
+                                Button(title: "SignIn",Width: MediaQuery.of(context).size.width,onPressed: (){
                                     _SignIn();
                                     },
                                   ),
-                                ForgotPassword(title: "Forgot Password",onPressed: () {},)
+                                ForgotPassword(title: "Forgot Password!",onPressed: () {},)
                               ],
                             ),
                           ),

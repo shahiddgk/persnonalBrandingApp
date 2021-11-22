@@ -19,7 +19,7 @@ class _AboutSectionDetailsState extends State<AboutSectionDetails> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 10,bottom: 10),
+      margin: EdgeInsets.only(bottom: 10),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,

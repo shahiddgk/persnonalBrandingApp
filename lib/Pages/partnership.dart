@@ -57,7 +57,7 @@ class _PartnershipState extends State<Partnership> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Padding(padding: EdgeInsets.only(top:MediaQuery.of(context).size.height*1/40,left: 10,right: 10),
+                      Padding(padding: EdgeInsets.only(top:MediaQuery.of(context).size.height*1/70,left: 10,right: 10),
                         child: Align(alignment: Alignment.centerLeft,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -75,7 +75,7 @@ class _PartnershipState extends State<Partnership> {
 
                               MessageField(hint: "Enter Message", controller: _messageFieldController,),
 
-                              Button(title: "Say Hello",onPressed: (){},),
+                              Button(title: "Say Hello",Width: MediaQuery.of(context).size.width,onPressed: (){},),
                             ],
                           ),),)
                     ],

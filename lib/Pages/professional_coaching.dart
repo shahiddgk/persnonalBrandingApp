@@ -23,66 +23,71 @@ class _ProfessionalCoachingState extends State<ProfessionalCoaching> {
   
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Center(
-        child: Column(
-          children: <Widget>[
-            Row(
-              children: <Widget>[
-                ClipRRect(
-                  borderRadius: BorderRadius.all(Radius.circular(32.0)),
-                  child: Material(
-                    shadowColor: Colors.transparent,
-                    color: Colors.transparent,
-                    child: IconButton(
-                      icon: Icon(
-                        Icons.menu,
-                        color: Colors.black,
+    return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(onPressed:  widget.onMenuPressed, icon: Icon(Icons.menu),),
+      ),
+      body: SafeArea(
+        child: Center(
+          child: Column(
+            children: <Widget>[
+              // Row(
+              //   children: <Widget>[
+              //     ClipRRect(
+              //       borderRadius: BorderRadius.all(Radius.circular(32.0)),
+              //       child: Material(
+              //         shadowColor: Colors.transparent,
+              //         color: Colors.transparent,
+              //         child: IconButton(
+              //           icon: Icon(
+              //             Icons.menu,
+              //             color: Colors.black,
+              //           ),
+              //           onPressed: widget.onMenuPressed,
+              //         ),
+              //       ),
+              //     ),
+              //   ],
+              // ),
+              Expanded(
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.vertical,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: <Widget>[
+                      Padding(padding: EdgeInsets.only(top:MediaQuery.of(context).size.height*1/70,left: 10,right: 10),
+                        child: Align(alignment: Alignment.centerLeft,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: <Widget>[
+                              Heading1("Professional Coaching"),
+                              Container(
+                                margin: EdgeInsets.only(top: 25),
+                                child: GridView.builder(
+                                  scrollDirection: Axis.vertical,
+                                  shrinkWrap: true,
+                                  itemCount: profile_coaching.length,
+                                    gridDelegate:  SliverGridDelegateWithMaxCrossAxisExtent(
+                                    maxCrossAxisExtent: 300,
+                                    childAspectRatio: 2,
+                                    crossAxisSpacing: 5,
+                                    mainAxisExtent: MediaQuery.of(context).size.height,
+                                    mainAxisSpacing: 5),
+                                    itemBuilder:(context, index) {
+                                    return profile_coaching[index];
+                                    } ),
+                              ),
+                            ],
+                          ),),
                       ),
-                      onPressed: widget.onMenuPressed,
-                    ),
+                    ],
                   ),
                 ),
-              ],
-            ),
-            Expanded(
-              child: SingleChildScrollView(
-                scrollDirection: Axis.vertical,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[
-                    Padding(padding: EdgeInsets.only(top:MediaQuery.of(context).size.height*1/40,left: 20,right: 20),
-                      child: Align(alignment: Alignment.centerLeft,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: <Widget>[
-                            Heading1("Professional Coaching"),
-                            Container(
-                              margin: EdgeInsets.only(top: 25),
-                              child: GridView.builder(
-                                scrollDirection: Axis.vertical,
-                                shrinkWrap: true,
-                                itemCount: profile_coaching.length,
-                                  gridDelegate:  SliverGridDelegateWithMaxCrossAxisExtent(
-                                  maxCrossAxisExtent: 300,
-                                  childAspectRatio: 2,
-                                  crossAxisSpacing: 5,
-                                  mainAxisExtent: MediaQuery.of(context).size.height,
-                                  mainAxisSpacing: 5),
-                                  itemBuilder:(context, index) {
-                                  return profile_coaching[index];
-                                  } ),
-                            ),
-                          ],
-                        ),),
-                    ),
-                  ],
-                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

@@ -21,7 +21,7 @@ class _EmailFieldState extends State<EmailField> {
     return Column(
       children: [
     Container(
-      margin: EdgeInsets.only(top: 10),
+      margin: EdgeInsets.only(top: 10,bottom: 10),
       child: TextFormField(
       style: TextStyle(
       color: Colors.black,
@@ -51,27 +51,6 @@ class _EmailFieldState extends State<EmailField> {
       ],
     );
   }
-
-  // String fieldValidation(String v) {
-  //   if (v.isEmpty) {
-  //     setState(() {
-  //       isEmailValidated = true;
-  //       isEmptyValidated = true;
-  //     });
-  //     return null;
-  //   } else {
-  //     setState(() {
-  //       isEmailValidated = widget.isEmail ? v.isValidEmail() : true;
-  //     });
-  //     return isEmailValidated
-  //         ? null
-  //         : "";
-  //   }
-  // }
-  //
-  // String isValidEmail() {
-  //
-  // }
 
 }
 
