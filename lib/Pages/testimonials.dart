@@ -54,9 +54,9 @@ class _TestimonialsState extends State<Testimonials> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: <Widget>[
-                            Heading1("Testimonial"),
+                            Heading1("TESTIMONIAL"),
 
-                            Heading2WithDescription("Just my education","Description Paragraph"),
+                            Heading2WithDescription("JUST MY EDUCATION","Description Paragraph"),
 
                             IconDescription(Icons.email, "Ace Adevertising", "Project Manager", "2013-2011","Description"),
                             IconDescription(Icons.message, "Ace Adevertising", "Project Manager", "2013-2011","Description"),

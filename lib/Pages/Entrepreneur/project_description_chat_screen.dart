@@ -38,28 +38,23 @@ TextEditingController _MessageController = new TextEditingController();
                      crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
-                          Heading2WithDescription("Description", "Descrition paragraph"),
-                          Heading2("Related Topics"),
+                          Heading2WithDescription("DESCRIPTION", "Descrition paragraph"),
+                          Heading2("RELATED DOCUMENTS"),
                           Row(
                             children: <Widget>[
                               RelatedTopics("Feasibility Report"),
                               RelatedTopics("Feasibility Report"),
                             ],
                           ),
-
-                          Padding(
-                            padding: EdgeInsets.only(left: 5,right: 4),
-                            child: Container(
+                          Container(
                               margin: EdgeInsets.only(top: 5),
-                              width: MediaQuery.of(context).size.width,
-                              height: MediaQuery.of(context).size.height*0.6,
                               decoration: BoxDecoration(
                                 border: Border.all(color: Colors.black54)
                               ),
                               child: Column(
                                 children: <Widget>[
                                   Container(width: MediaQuery.of(context).size.width,
-                                  height: 50,color: Colors.grey,
+                                  height: 50,color: Colors.black12,
                                   child: Align(
                                       alignment: Alignment.centerLeft,
                                       child: Heading2("Project Name")),),
@@ -68,21 +63,6 @@ TextEditingController _MessageController = new TextEditingController();
                                 ],
                               ),
                             ),
-                          )
-
-                          // GridView.builder(
-                          //     scrollDirection: Axis.vertical,
-                          //     shrinkWrap: true,
-                          //     itemCount: relatedTopics.length,
-                          //     gridDelegate:  SliverGridDelegateWithMaxCrossAxisExtent(
-                          //         maxCrossAxisExtent: 300,
-                          //         childAspectRatio: 2,
-                          //         crossAxisSpacing: 5,
-                          //         mainAxisExtent: MediaQuery.of(context).size.height,
-                          //         mainAxisSpacing: 5),
-                          //     itemBuilder:(context, index) {
-                          //       return relatedTopics[index];
-                          //     } ),
                         ],
                     ),
                   ),

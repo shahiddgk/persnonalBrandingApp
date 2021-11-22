@@ -26,7 +26,7 @@ class _AchievementPictureDetailsState extends State<AchievementPictureDetails> {
           children: <Widget>[
             Padding(padding: EdgeInsets.only(top:MediaQuery.of(context).size.height*1/70,left: 10,right: 10),child:Align(alignment: Alignment.centerLeft,child: Column(crossAxisAlignment: CrossAxisAlignment.start,mainAxisAlignment: MainAxisAlignment.start,children: <Widget>[
 
-              PictureDetailsDescription("Picture Description", "Picture Name", "Desgin and developemnt"),
+              PictureDetailsDescription("PICTURE DESCRIPTION", "PICTURE NAME", "DESIGN AND DEVELOPMENT"),
 
               Container(
                   height: MediaQuery.of(context).size.height/2,

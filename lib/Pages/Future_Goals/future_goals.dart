@@ -57,9 +57,9 @@ class _FutureGoalsState extends State<FutureGoals> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: <Widget>[
-                            Heading1("Future Goals"),
+                            Heading1("FUTURE GOALS"),
 
-                            Heading2WithDescription("Our Portfolio","Description Paragraph"),
+                            Heading2WithDescription("OUR PORTFOLIO","Description Paragraph"),
 
                             Container(
                               margin:EdgeInsets.only(top: 25),

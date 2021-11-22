@@ -18,7 +18,7 @@ class _TextFieldAndButtonState extends State<TextFieldAndButton> {
   @override
   Widget build(BuildContext context) {
     return Row(children: <Widget>[
-      Container(height: 58,color: Colors.grey,width: MediaQuery.of(context).size.width*0.72,child: Padding(
+      Container(height: 58,color: Colors.black12,width: MediaQuery.of(context).size.width*0.73,child: Padding(
         padding: EdgeInsets.only(left: 10),
         child: TextFormField(
           textAlignVertical: TextAlignVertical.center,
@@ -28,7 +28,7 @@ class _TextFieldAndButtonState extends State<TextFieldAndButton> {
           ),
         ),
       ),),
-      Container(height: 58,width: 69,color: Colors.green,child: Align(alignment:Alignment.center,child: TextButton(child: Text(widget.ButtonTitle,style: TextStyle(color: Colors.white),),onPressed: widget.onpressed(),)),)
+      Container(height: 58,width: 75,color: Colors.green,child: Align(alignment:Alignment.center,child: TextButton(child: Text(widget.ButtonTitle,style: TextStyle(color: Colors.white),),onPressed: widget.onpressed(),)),)
     ],);
   }
 }

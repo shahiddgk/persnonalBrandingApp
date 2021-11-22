@@ -62,9 +62,8 @@ class _ProfessionalCoachingState extends State<ProfessionalCoaching> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: <Widget>[
-                              Heading1("Professional Coaching"),
+                              Heading1("PROFESSIONAL COACHING"),
                               Container(
-                                margin: EdgeInsets.only(top: 25),
                                 child: GridView.builder(
                                   scrollDirection: Axis.vertical,
                                   shrinkWrap: true,

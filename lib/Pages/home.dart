@@ -71,8 +71,8 @@ class _HomeState extends State<Home> {
       crossAxisAlignment: CrossAxisAlignment.end,
       children: <Widget>[
         Align(alignment:Alignment.bottomLeft,child: Container(child: Text("Hello, I'M",style: TextStyle(color: Colors.white,fontSize: 22),))),
-        Align(alignment:Alignment.bottomLeft,child: Container(child: Text("Kaleem Ullah Khan",style: TextStyle(color: Colors.white,fontSize: 22),))),
-        Align(alignment:Alignment.bottomLeft,child: Container(child: Text("Flutter Developer",style: TextStyle(color: Colors.white,fontSize: 12),))),
+        Align(alignment:Alignment.bottomLeft,child: Container(child: Text("DR.AHMEN HUSSAIN",style: TextStyle(color: Colors.white,fontSize: 22),))),
+        Align(alignment:Alignment.bottomLeft,child: Container(child: Text("ENTREPRENUR/INFLUENCER",style: TextStyle(color: Colors.white,fontSize: 12),))),
       ],
     )),
   );

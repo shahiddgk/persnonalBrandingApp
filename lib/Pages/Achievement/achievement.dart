@@ -57,7 +57,7 @@ class _AchievementState extends State<Achievement> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: <Widget>[
-                            Heading1("Achievement"),
+                            Heading1("ACHIEVEMENT"),
 
                             Heading2WithDescription("Our Portfolio","Description Paragraph"),
 

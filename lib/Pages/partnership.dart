@@ -63,11 +63,11 @@ class _PartnershipState extends State<Partnership> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: <Widget>[
-                              Heading1("Partnership"),
+                              Heading1("PARTNERSHIP"),
 
-                              Heading2WithDescription("Let keep in Touch","Description"),
+                              Heading2WithDescription("LET KEEP IN TOUCH","Description"),
 
-                              Heading2("Drop Me A Line"),
+                              Heading2("DROP ME A LINE"),
 
                               NameField(hint: "Your Name", controller: _nameFieldController,),
 
@@ -75,7 +75,7 @@ class _PartnershipState extends State<Partnership> {
 
                               MessageField(hint: "Enter Message", controller: _messageFieldController,),
 
-                              Button(title: "Say Hello",Width: MediaQuery.of(context).size.width,onPressed: (){},),
+                              Button(title: "SAY HELLO",Width: MediaQuery.of(context).size.width,onPressed: (){},),
                             ],
                           ),),)
                     ],

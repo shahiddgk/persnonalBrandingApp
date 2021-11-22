@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kf_drawer/kf_drawer.dart';
 import 'package:personal_branding/widgets/Buttons/widget_forgotPasswordButtong.dart';
+import 'package:personal_branding/widgets/Headings/widget_heading1.dart';
 import 'package:personal_branding/widgets/TextFields/widget_email_field.dart';
 import 'package:personal_branding/widgets/TextFields/widget_name_field.dart';
 import 'package:personal_branding/widgets/TextFields/widget_password_field.dart';
@@ -72,6 +73,7 @@ class _RegisterState extends State<Register> {
                                   shrinkWrap: true,
                                   scrollDirection: Axis.vertical,
                                   children: <Widget>[
+                                    Heading1("REGISTER"),
                                     Container(
                                         child: NameField(
                                           hint: "Enter Name",
@@ -88,13 +90,10 @@ class _RegisterState extends State<Register> {
                                       child: PasswordField(hint: "Enter Password",
                                       controller: _passwordFieldController,)
                                     ),
-                                    Padding(
-                                      padding: EdgeInsets.only(top: 20),
-                                      child: Button(title: "SignUp",Width: MediaQuery.of(context).size.width,onPressed: (){
+                                   Button(title: "SignUp",Width: MediaQuery.of(context).size.width,onPressed: (){
                                         _SignUp();
                                         },
                                       ),
-                                    ),
                                     ForgotPassword(title: "Forgot Password!",onPressed: () {},)
                                   ],
                                 ),

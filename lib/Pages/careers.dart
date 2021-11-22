@@ -64,9 +64,9 @@ class _CareerState extends State<Career> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: <Widget>[
-                              Heading1("Career"),
+                              Heading1("CAREER"),
 
-                              Heading2WithDescription("Let keep in Touch","Description"),
+                              Heading2WithDescription("LET KEEP IN TOUCH","Description"),
 
                               ContactsIconDescription(Icons.email, "Email", "abc@gmail.com", Icons.phone, "Phone", "123456789", Icons.add_location, "Address", "Peshawer Pakistan","Description","Description Paragraph"),
 
@@ -78,7 +78,7 @@ class _CareerState extends State<Career> {
 
                               MessageField(hint: "Enter Message",controller: _messageFieldController,),
 
-                              Button(title: "Say Hello",Width: MediaQuery.of(context).size.width,onPressed: (){},),
+                              Button(title: "SAY HELLO",Width: MediaQuery.of(context).size.width,onPressed: (){},),
                             ],
                           ),),)
                     ],

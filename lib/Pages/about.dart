@@ -51,11 +51,11 @@ class _AboutState extends State<About> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: <Widget>[
-                            Heading1("About"),
+                            Heading1("ABOUT"),
 
-                            AboutSectionDetails("Kaleem ullah khan", "example@gmail.com", "123456789", "23 February 1998", "Peshawer Pakistan", "Pakistan"),
+                           // AboutSectionDetails("Kaleem ullah khan", "example@gmail.com", "123456789", "23 February 1998", "Peshawer Pakistan", "Pakistan"),
 
-                            Heading2WithDescription("Professional Profile","Description"),
+                            Heading2WithDescription("PROFESSIONAL PROFILE","Description"),
 
                           // Button(title: "Download Resume as PDF",onPressed: (){},)
                             ],

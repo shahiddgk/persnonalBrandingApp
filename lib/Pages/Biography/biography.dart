@@ -55,9 +55,9 @@ class _BiographyState extends State<Biography> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: <Widget>[
-                            Heading1("Biography"),
+                            Heading1("BIOGRAPHY"),
 
-                            Heading2WithDescription("Our Portfolio","Description Paragraph"),
+                            Heading2WithDescription("OUR PORTFOLIO","DESCRIPTION PARAGRAPH"),
 
                             Container(
                               margin:EdgeInsets.only(top: 25),

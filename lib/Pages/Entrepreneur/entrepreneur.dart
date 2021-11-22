@@ -81,16 +81,16 @@ class _EntrepreneurState extends State<Entrepreneur> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: <Widget>[
-                            Heading1("Let's Change the world together"),
+                            Heading1("LET'S CHANGE THE WORLD TOGETHER"),
 
-                            Heading2WithDescription("Dream,Explore,Discover","Description"),
+                            Heading2WithDescription("DREAM,EXPLORE,DISCOVER","Description"),
 
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
-                                Text("First Step to change world"),
-                                TextButton(onPressed: (){}, child: Text("New Idea",style: TextStyle(color: Colors.grey),))
+                                Text("YOUR STRPS TO CHNAGE THE WORLD"),
+                                TextButton(onPressed: (){}, child: Text("NEW IDEA",style: TextStyle(color: Colors.grey),))
                             ],),
 
                             NameField(hint: "Title",controller: _nameFieldController,),
@@ -117,8 +117,8 @@ class _EntrepreneurState extends State<Entrepreneur> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
 
-                                Button(title: "Register",Width: 95,onPressed: (){ Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ProjectDescriptionWithChatScreen()));},),
-                                Button(title: "Login",Width: 90,onPressed: (){ Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ProjectDescriptionWithChatScreen()));},),
+                                Button(title: "REGISTER",Width: 95,onPressed: (){ Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ProjectDescriptionWithChatScreen()));},),
+                                Button(title: "LOGIN",Width: 90,onPressed: (){ Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ProjectDescriptionWithChatScreen()));},),
 
                               ],)
 

@@ -64,13 +64,13 @@ class _ContactsState extends State<Contacts> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: <Widget>[
-                              Heading1("Contacts"),
+                              Heading1("CONTACTS"),
 
-                              Heading2WithDescription("Let keep in Touch","Description Paragraph"),
+                              Heading2WithDescription("LET KEEP IN TOUCH","Description Paragraph"),
 
                               ContactsIconDescription(Icons.email, "Email", "abc@gmail.com", Icons.phone, "Phone", "123456789", Icons.add_location, "Address", "Peshawer Pakistan","Description","Description Paragraph"),
 
-                              Heading2("Drop Me A Line"),
+                              Heading2("DROP ME A LINE"),
 
                               NameField(hint: "Your Name",controller: _nameFieldController,),
 
@@ -78,7 +78,7 @@ class _ContactsState extends State<Contacts> {
 
                               MessageField(hint: "Enter Message", controller: _messageFieldController,),
 
-                              Button(title: "Say Hello",Width: MediaQuery.of(context).size.width,onPressed: (){},),
+                              Button(title: "SAY HELLO",Width: MediaQuery.of(context).size.width,onPressed: (){},),
                             ],
                           ),),)
                     ],

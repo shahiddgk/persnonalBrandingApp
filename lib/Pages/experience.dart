@@ -55,9 +55,9 @@ class _ExperienceState extends State<Experience> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
-                          Heading1("Experience"),
+                          Heading1("EXPERIENCE"),
 
-                          Heading2WithDescription("14 Years Experience","Description Paragraph"),
+                          Heading2WithDescription("14 YEARS EXPERIENCE","Description Paragraph"),
 
                           IconDescription(Icons.email, "Ace Adevertising", "Project Manager", "2013-2011","Description"),
                           IconDescription(Icons.message, "Ace Adevertising", "Project Manager", "2013-2011","Description"),
