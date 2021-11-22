@@ -67,9 +67,7 @@ class _RegisterState extends State<Register> {
                               borderRadius: BorderRadius.circular(20),
                               color: Colors.white,
                             ),
-                            child: Padding(
-                                padding: EdgeInsets.all(23),
-                                child: ListView(
+                            child: ListView(
                                   shrinkWrap: true,
                                   scrollDirection: Axis.vertical,
                                   children: <Widget>[
@@ -90,14 +88,13 @@ class _RegisterState extends State<Register> {
                                       child: PasswordField(hint: "Enter Password",
                                       controller: _passwordFieldController,)
                                     ),
-                                   Button(title: "SignUp",Width: MediaQuery.of(context).size.width,onPressed: (){
+                                   Button(title: "SIGN UP",Width: MediaQuery.of(context).size.width,onPressed: (){
                                         _SignUp();
                                         },
                                       ),
                                     ForgotPassword(title: "Forgot Password!",onPressed: () {},)
                                   ],
                                 ),
-                              ),
                           )
                         ],
                       ),

@@ -16,9 +16,9 @@ class _ProfessionalCoachingState extends State<ProfessionalCoaching> {
   
   // ignore: non_constant_identifier_names
   List profile_coaching = [
-    ProfessionalCoachingPictures("https://c4.wallpaperflare.com/wallpaper/974/565/254/windows-11-windows-10-minimalism-hd-wallpaper-preview.jpg", "Saturday", "Picture Name", "Admin", "WebDesign", "Comments", "Description", (){}, (){}, (){}),
-    ProfessionalCoachingPictures("https://c4.wallpaperflare.com/wallpaper/974/565/254/windows-11-windows-10-minimalism-hd-wallpaper-preview.jpg", "Saturday", "Picture Name", "Admin", "WebDesign", "Comments", "Description", (){}, (){}, (){}),
-    ProfessionalCoachingPictures("https://c4.wallpaperflare.com/wallpaper/974/565/254/windows-11-windows-10-minimalism-hd-wallpaper-preview.jpg", "Saturday", "Picture Name", "Admin", "WebDesign", "Comments", "Description", (){}, (){}, (){})
+    ProfessionalCoachingPictures("https://c4.wallpaperflare.com/wallpaper/974/565/254/windows-11-windows-10-minimalism-hd-wallpaper-preview.jpg", "Saturday", "Picture Name", "Admin", "WebDesign", "Comments", "Lorem Ipsum is simply dummy text of the printing and typesetting industry.", (){}, (){}, (){}),
+    ProfessionalCoachingPictures("https://c4.wallpaperflare.com/wallpaper/974/565/254/windows-11-windows-10-minimalism-hd-wallpaper-preview.jpg", "Saturday", "Picture Name", "Admin", "WebDesign", "Comments", "Lorem Ipsum is simply dummy text of the printing and typesetting industry.", (){}, (){}, (){}),
+    ProfessionalCoachingPictures("https://c4.wallpaperflare.com/wallpaper/974/565/254/windows-11-windows-10-minimalism-hd-wallpaper-preview.jpg", "Saturday", "Picture Name", "Admin", "WebDesign", "Comments", "Lorem Ipsum is simply dummy text of the printing and typesetting industry.", (){}, (){}, (){})
                           ];     
   
   @override

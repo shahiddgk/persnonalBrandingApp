@@ -29,7 +29,7 @@ class _PictureDetailsDescriptionState extends State<PictureDetailsDescription> {
           ),
           Text(widget.H2,style: TextStyle(fontSize: 24,fontWeight: FontWeight.normal)),
           Container(margin:EdgeInsets.only(top:25,bottom: 25),height: 6,width: MediaQuery.of(context).size.width,color: Colors.amberAccent,),
-          Text(widget.Description),
+          Text(widget.Description,style: TextStyle(color: Colors.black54),textAlign: TextAlign.justify,),
         ],
       ),
     );

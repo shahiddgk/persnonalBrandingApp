@@ -21,7 +21,7 @@ class _Heading2WithDescriptionState extends State<Heading2WithDescription> {
       mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
         Text(widget.H2,style: TextStyle(fontSize: 20,fontWeight: FontWeight.normal)),
-        Container(margin:EdgeInsets.only(top: 25),child: Text(widget.Descrition,style: TextStyle(color: Colors.grey),)),
+        Container(margin:EdgeInsets.only(top: 25),child: Text(widget.Descrition,style: TextStyle(color: Colors.black54),textAlign: TextAlign.justify,)),
       ],
     ));
   }

@@ -66,9 +66,9 @@ class _CareerState extends State<Career> {
                             children: <Widget>[
                               Heading1("CAREER"),
 
-                              Heading2WithDescription("LET KEEP IN TOUCH","Description"),
+                              Heading2WithDescription("LET KEEP IN TOUCH","Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."),
 
-                              ContactsIconDescription(Icons.email, "Email", "abc@gmail.com", Icons.phone, "Phone", "123456789", Icons.add_location, "Address", "Peshawer Pakistan","Description","Description Paragraph"),
+                              ContactsIconDescription(Icons.email, "Email", "abc@gmail.com", Icons.phone, "Phone", "123456789", Icons.add_location, "Address", "Peshawer Pakistan","DESCRIPTION","Lorem Ipsum is simply dummy text of the printing and typesetting industry.",(){},(){},(){},(){}),
 
                               Heading2("Drop Me A Line"),
 

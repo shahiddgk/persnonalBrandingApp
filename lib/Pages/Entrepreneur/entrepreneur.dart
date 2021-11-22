@@ -5,10 +5,13 @@ import 'package:personal_branding/Pages/Entrepreneur/project_Description_chat_sc
 import 'package:personal_branding/widgets/Headings/widget_heading1.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading2.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading2withdescription.dart';
+import 'package:personal_branding/widgets/Headings/widget_text_partnership.dart';
 import 'package:personal_branding/widgets/TextFields/widget_email_field.dart';
+import 'package:personal_branding/widgets/TextFields/widget_industry_fields.dart';
 import 'package:personal_branding/widgets/TextFields/widget_message_field.dart';
 import 'package:personal_branding/widgets/TextFields/widget_name_field.dart';
 import 'package:personal_branding/widgets/Buttons/widget_button.dart';
+import 'package:personal_branding/widgets/TextFields/widget_title_field.dart';
 
 // ignore: must_be_immutable
 class Entrepreneur extends KFDrawerContent {
@@ -83,7 +86,7 @@ class _EntrepreneurState extends State<Entrepreneur> {
                           children: <Widget>[
                             Heading1("LET'S CHANGE THE WORLD TOGETHER"),
 
-                            Heading2WithDescription("DREAM,EXPLORE,DISCOVER","Description"),
+                            Heading2WithDescription("DREAM,EXPLORE,DISCOVER","Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."),
 
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.center,
@@ -93,13 +96,13 @@ class _EntrepreneurState extends State<Entrepreneur> {
                                 TextButton(onPressed: (){}, child: Text("NEW IDEA",style: TextStyle(color: Colors.grey),))
                             ],),
 
-                            NameField(hint: "Title",controller: _nameFieldController,),
+                            IndustryTitle(hint: "Title",controller: _nameFieldController,),
 
-                            NameField(hint: "Target Industry",controller: _nameFieldController,),
+                            Industry(hint: "Target Industry",controller: _nameFieldController,),
 
                             MessageField(hint: "Description",controller: _messageFieldController,),
 
-                            NameField(hint: "Date Picker Here",controller: _nameFieldController,),
+                            Industry(hint: "Date Picker Here",controller: _nameFieldController,),
 
                             Button(title: "Browse", onPressed: (){}, Width: 90),
 
@@ -117,12 +120,11 @@ class _EntrepreneurState extends State<Entrepreneur> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
 
-                                Button(title: "REGISTER",Width: 95,onPressed: (){ Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ProjectDescriptionWithChatScreen()));},),
+                                Button(title: "REGISTER",Width: 110,onPressed: (){ Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ProjectDescriptionWithChatScreen()));},),
                                 Button(title: "LOGIN",Width: 90,onPressed: (){ Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ProjectDescriptionWithChatScreen()));},),
 
-                              ],)
-
-
+                              ],),
+                            PartnerShipText()
                           ],
                         ),),)
                     ],

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 // ignore: must_be_immutable
 class ContactsIconDescription extends StatefulWidget {
@@ -21,10 +22,15 @@ class ContactsIconDescription extends StatefulWidget {
   // ignore: non_constant_identifier_names
   String icon3_H1;
 
+  Function facebook_Onpressed;
+  Function twitter_Onpressed;
+  Function linkedIn_Onpressed;
+  Function youtube_Onpressed;
+
   String Description_H1;
   String Description;
 
-  ContactsIconDescription(this.icon1,this.icon1_H1,this.icon1_H2,this.icon2,this.icon2_H1,this.icon2_H2,this.icon3,this.icon3_H1,this.icon3_H2, this.Description_H1,this.Description);
+  ContactsIconDescription(this.icon1,this.icon1_H1,this.icon1_H2,this.icon2,this.icon2_H1,this.icon2_H2,this.icon3,this.icon3_H1,this.icon3_H2, this.Description_H1,this.Description,this.facebook_Onpressed,this.twitter_Onpressed,this.youtube_Onpressed,this.linkedIn_Onpressed);
 
 
   @override
@@ -63,7 +69,7 @@ class _ContactsIconDescriptionState extends State<ContactsIconDescription> {
                           children: <Widget>[
                             Icon(widget.icon1,size: 25,color: Colors.amber,),
                             Container(
-                              margin: EdgeInsets.only(right: 15),
+                              margin: EdgeInsets.only(right: 5),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -84,7 +90,7 @@ class _ContactsIconDescriptionState extends State<ContactsIconDescription> {
                           children: <Widget>[
                             Icon(widget.icon2,size: 25,color: Colors.amber,),
                             Container(
-                              margin: EdgeInsets.only(right: 15),
+                              margin: EdgeInsets.only(right: 5),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -104,7 +110,7 @@ class _ContactsIconDescriptionState extends State<ContactsIconDescription> {
                         children: <Widget>[
                           Icon(widget.icon3,size: 25,color: Colors.amber,),
                           Container(
-                            margin: EdgeInsets.only(right: 15),
+                            margin: EdgeInsets.only(right: 5),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -124,7 +130,24 @@ class _ContactsIconDescriptionState extends State<ContactsIconDescription> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(widget.Description_H1,style: TextStyle(fontSize: 15,fontWeight: FontWeight.normal)),
-                      Text(widget.Description,style: TextStyle(fontSize: 10,fontWeight: FontWeight.normal))
+                      Container(
+                        width: MediaQuery.of(context).size.width/2,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: <Widget>[
+                              Text(widget.Description,style: TextStyle(fontWeight: FontWeight.normal),textAlign: TextAlign.justify,),
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: <Widget>[
+                                  Container(child: IconButton(onPressed: widget.facebook_Onpressed(), icon: Icon(Icons.facebook,size: 20,)),),
+                                  Container(child: IconButton(onPressed: widget.twitter_Onpressed(), icon: FaIcon(FontAwesomeIcons.twitter,size: 20,)),),
+                                  Container(child: IconButton(onPressed: widget.youtube_Onpressed(), icon: FaIcon(FontAwesomeIcons.youtube,size: 20,)),),
+                                 // Container(child: IconButton(onPressed: widget.linkedIn_Onpressed(), icon: Icon(Icons.facebook,size: 20,)),),
+                                ],)
+                            ],
+                          ))
                     ],
                   )
                 ],

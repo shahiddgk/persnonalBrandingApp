@@ -37,7 +37,7 @@ class _IconDescriptionState extends State<IconDescription> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               Container(
-                margin: EdgeInsets.only(right: 25),
+                margin: EdgeInsets.only(right: 30),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -48,7 +48,7 @@ class _IconDescriptionState extends State<IconDescription> {
                   ],
                 ),
               ),
-              Text(widget.Description),
+              Container(width:MediaQuery.of(context).size.width/2,child: Text(widget.Description,textAlign: TextAlign.justify,)),
             ],
           ),
         )

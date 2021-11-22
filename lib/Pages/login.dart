@@ -66,8 +66,6 @@ class _LogInState extends State<LogIn> {
                             borderRadius: BorderRadius.circular(20),
                             color: Colors.white,
                           ),
-                          child: Padding(
-                            padding: EdgeInsets.all(23),
                             child: ListView(
                               shrinkWrap: true,
                               scrollDirection: Axis.vertical,
@@ -88,7 +86,6 @@ class _LogInState extends State<LogIn> {
                                 ForgotPassword(title: "Forgot Password!",onPressed: () {},)
                               ],
                             ),
-                          ),
                         )
                       ],
                     ),

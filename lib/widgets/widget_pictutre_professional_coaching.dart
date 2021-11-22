@@ -65,7 +65,7 @@ class _ProfessionalCoachingPicturesState extends State<ProfessionalCoachingPictu
                 ],),
               ),
               Container(margin:EdgeInsets.only(top: 25),height: 7,width: 90,color: Colors.amberAccent,),
-              Container(margin:EdgeInsets.only(top: 25),child: Text(widget.Description)),
+              Container(margin:EdgeInsets.only(top: 25),child: Text(widget.Description,textAlign: TextAlign.justify,)),
             ],),
         ),
       ),

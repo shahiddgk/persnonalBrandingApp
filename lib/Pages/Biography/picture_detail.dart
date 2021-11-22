@@ -17,7 +17,6 @@ class _PictureDetailsState extends State<PictureDetails> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Details"),
-        backgroundColor: Colors.amber,
       ),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
@@ -27,7 +26,7 @@ class _PictureDetailsState extends State<PictureDetails> {
           children: <Widget>[
             Padding(padding: EdgeInsets.only(top:MediaQuery.of(context).size.height*1/70,left: 10,right: 10),child:Align(alignment: Alignment.centerLeft,child: Column(crossAxisAlignment: CrossAxisAlignment.start,mainAxisAlignment: MainAxisAlignment.start,children: <Widget>[
 
-              PictureDetailsDescription("PICTURE DESCRIPTION", "PICTURE NAME", "DESIGN AND dEVELOPMENT"),
+              PictureDetailsDescription("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", "PICTURE NAME", "DESIGN AND dEVELOPMENT"),
 
               Container(
                 height: MediaQuery.of(context).size.height/2,
