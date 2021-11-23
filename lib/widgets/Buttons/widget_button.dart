@@ -20,7 +20,9 @@ class _ButtonState extends State<Button> {
       width: widget.Width,
       decoration: BoxDecoration(border: Border.all(color: Colors.yellow,width: 3)),
       child: MaterialButton(
-        onPressed:(){widget.onPressed();},//since this is only a UI app
+        onPressed:() {
+          widget.onPressed();
+        },//since this is only a UI app
         child: Text(widget.title,
           style: TextStyle(
             fontSize: 15,

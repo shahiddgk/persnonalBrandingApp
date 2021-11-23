@@ -22,7 +22,7 @@ class _Heading1State extends State<Heading1> {
           children: <Widget>[
             Text(widget.H1,style: TextStyle(fontSize: 28,fontWeight: FontWeight.bold)
             ),
-            Container(margin:EdgeInsets.only(top: 25,bottom: 25),height: 7,width: 90,color: Colors.amberAccent,),
+            Container(margin:EdgeInsets.only(top: 25,bottom: 25),height: 7,width: 90,color: Colors.yellow,),
           ],
         ),
     );

@@ -13,7 +13,7 @@ import 'Pages/experience.dart';
 import 'Pages/Future_Goals/future_goals.dart';
 import 'Pages/home.dart';
 import 'Pages/partnership.dart';
-import 'Pages/professional_coaching.dart';
+import 'Pages/Professional_Coaching/professional_coaching.dart';
 import 'Pages/testimonials.dart';
 import 'utills/class_builder.dart';
 

@@ -24,12 +24,12 @@ class _AboutSectionDetailsState extends State<AboutSectionDetails> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Container(margin:EdgeInsets.only(bottom: 2),child: Text("• Name: ${widget.Name}",style: TextStyle(color: Colors.grey,fontSize: 17),)),
-          Container(margin:EdgeInsets.only(bottom: 2),child: Text("• Email: ${widget.Email}",style: TextStyle(color: Colors.grey,fontSize: 17),)),
-          Container(margin:EdgeInsets.only(bottom: 2),child: Text("• Phone: ${widget.Phone}",style: TextStyle(color: Colors.grey,fontSize: 17),)),
-          Container(margin:EdgeInsets.only(bottom: 2),child: Text("• Date of birth: ${widget.DateOfBirth}",style: TextStyle(color: Colors.grey,fontSize: 17),)),
-          Container(margin:EdgeInsets.only(bottom: 2),child: Text("• Address: ${widget.Address}",style: TextStyle(color: Colors.grey,fontSize: 17),)),
-          Container(margin:EdgeInsets.only(bottom: 2),child: Text("• Nationality: ${widget.Natinality}",style: TextStyle(color: Colors.grey,fontSize: 17),)),
+          Container(margin:EdgeInsets.only(bottom: 2),child: Text("• Name: ${widget.Name}",style: TextStyle(color: Colors.black54,fontSize: 17),)),
+          Container(margin:EdgeInsets.only(bottom: 2),child: Text("• Email: ${widget.Email}",style: TextStyle(color: Colors.black54,fontSize: 17),)),
+          Container(margin:EdgeInsets.only(bottom: 2),child: Text("• Phone: ${widget.Phone}",style: TextStyle(color: Colors.black54,fontSize: 17),)),
+          Container(margin:EdgeInsets.only(bottom: 2),child: Text("• Date of birth: ${widget.DateOfBirth}",style: TextStyle(color: Colors.black54,fontSize: 17),)),
+          Container(margin:EdgeInsets.only(bottom: 2),child: Text("• Address: ${widget.Address}",style: TextStyle(color: Colors.black54,fontSize: 17),)),
+          Container(margin:EdgeInsets.only(bottom: 2),child: Text("• Nationality: ${widget.Natinality}",style: TextStyle(color: Colors.black54,fontSize: 17),)),
         ],
       ),
     );

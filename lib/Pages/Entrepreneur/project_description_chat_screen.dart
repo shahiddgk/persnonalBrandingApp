@@ -38,7 +38,7 @@ TextEditingController _MessageController = new TextEditingController();
                      crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
-                          Heading2WithDescription("DESCRIPTION", "Descrition paragraph"),
+                          Heading2WithDescription("DESCRIPTION", "It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."),
                           Heading2("RELATED DOCUMENTS"),
                           Row(
                             children: <Widget>[

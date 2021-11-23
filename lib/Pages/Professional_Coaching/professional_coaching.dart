@@ -4,6 +4,8 @@ import 'package:kf_drawer/kf_drawer.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading1.dart';
 import 'package:personal_branding/widgets/widget_pictutre_professional_coaching.dart';
 
+import 'details_page.dart';
+
 // ignore: must_be_immutable
 class ProfessionalCoaching extends KFDrawerContent {
 
@@ -16,9 +18,9 @@ class _ProfessionalCoachingState extends State<ProfessionalCoaching> {
   
   // ignore: non_constant_identifier_names
   List profile_coaching = [
-    ProfessionalCoachingPictures("https://c4.wallpaperflare.com/wallpaper/974/565/254/windows-11-windows-10-minimalism-hd-wallpaper-preview.jpg", "Saturday", "Picture Name", "Admin", "WebDesign", "Comments", "Lorem Ipsum is simply dummy text of the printing and typesetting industry.", (){}, (){}, (){}),
-    ProfessionalCoachingPictures("https://c4.wallpaperflare.com/wallpaper/974/565/254/windows-11-windows-10-minimalism-hd-wallpaper-preview.jpg", "Saturday", "Picture Name", "Admin", "WebDesign", "Comments", "Lorem Ipsum is simply dummy text of the printing and typesetting industry.", (){}, (){}, (){}),
-    ProfessionalCoachingPictures("https://c4.wallpaperflare.com/wallpaper/974/565/254/windows-11-windows-10-minimalism-hd-wallpaper-preview.jpg", "Saturday", "Picture Name", "Admin", "WebDesign", "Comments", "Lorem Ipsum is simply dummy text of the printing and typesetting industry.", (){}, (){}, (){})
+    ProfessionalCoachingPictures("https://c4.wallpaperflare.com/wallpaper/974/565/254/windows-11-windows-10-minimalism-hd-wallpaper-preview.jpg", "Saturday / Nov 23,2021", "Picture Name", "Admin", "WebDesign", "Comments", "Lorem Ipsum is simply dummy text of the printing and typesetting industry.", (){}, (){}, (){},(){},(){},(){},(){},(){}),
+    ProfessionalCoachingPictures("https://c4.wallpaperflare.com/wallpaper/974/565/254/windows-11-windows-10-minimalism-hd-wallpaper-preview.jpg", "Saturday / Nov 23,2021", "Picture Name", "Admin", "WebDesign", "Comments", "Lorem Ipsum is simply dummy text of the printing and typesetting industry.", (){}, (){}, (){},(){},(){},(){},(){},(){}),
+    ProfessionalCoachingPictures("https://c4.wallpaperflare.com/wallpaper/974/565/254/windows-11-windows-10-minimalism-hd-wallpaper-preview.jpg", "Saturday / Nov 23,2021", "Picture Name", "Admin", "WebDesign", "Comments", "Lorem Ipsum is simply dummy text of the printing and typesetting industry.", (){}, (){}, (){},(){},(){},(){},(){},(){})
                           ];     
   
   @override
@@ -31,24 +33,6 @@ class _ProfessionalCoachingState extends State<ProfessionalCoaching> {
         child: Center(
           child: Column(
             children: <Widget>[
-              // Row(
-              //   children: <Widget>[
-              //     ClipRRect(
-              //       borderRadius: BorderRadius.all(Radius.circular(32.0)),
-              //       child: Material(
-              //         shadowColor: Colors.transparent,
-              //         color: Colors.transparent,
-              //         child: IconButton(
-              //           icon: Icon(
-              //             Icons.menu,
-              //             color: Colors.black,
-              //           ),
-              //           onPressed: widget.onMenuPressed,
-              //         ),
-              //       ),
-              //     ),
-              //   ],
-              // ),
               Expanded(
                 child: SingleChildScrollView(
                   scrollDirection: Axis.vertical,
@@ -64,18 +48,17 @@ class _ProfessionalCoachingState extends State<ProfessionalCoaching> {
                             children: <Widget>[
                               Heading1("PROFESSIONAL COACHING"),
                               Container(
-                                child: GridView.builder(
+                                child: ListView.builder(
                                   scrollDirection: Axis.vertical,
                                   shrinkWrap: true,
                                   itemCount: profile_coaching.length,
-                                    gridDelegate:  SliverGridDelegateWithMaxCrossAxisExtent(
-                                    maxCrossAxisExtent: 300,
-                                    childAspectRatio: 2,
-                                    crossAxisSpacing: 5,
-                                    mainAxisExtent: MediaQuery.of(context).size.height,
-                                    mainAxisSpacing: 5),
                                     itemBuilder:(context, index) {
-                                    return profile_coaching[index];
+                                    return GestureDetector(
+                                      onTap: (){
+                                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>PictureDetails()));
+                                      },
+                                      child: profile_coaching[index],
+                                    );
                                     } ),
                               ),
                             ],

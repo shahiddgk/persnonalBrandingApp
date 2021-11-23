@@ -26,11 +26,12 @@ class ContactsIconDescription extends StatefulWidget {
   Function twitter_Onpressed;
   Function linkedIn_Onpressed;
   Function youtube_Onpressed;
+  Function googlePlus_Onpressed;
 
   String Description_H1;
   String Description;
 
-  ContactsIconDescription(this.icon1,this.icon1_H1,this.icon1_H2,this.icon2,this.icon2_H1,this.icon2_H2,this.icon3,this.icon3_H1,this.icon3_H2, this.Description_H1,this.Description,this.facebook_Onpressed,this.twitter_Onpressed,this.youtube_Onpressed,this.linkedIn_Onpressed);
+  ContactsIconDescription(this.icon1,this.icon1_H1,this.icon1_H2,this.icon2,this.icon2_H1,this.icon2_H2,this.icon3,this.icon3_H1,this.icon3_H2, this.Description_H1,this.Description,this.facebook_Onpressed,this.twitter_Onpressed,this.youtube_Onpressed,this.googlePlus_Onpressed,this.linkedIn_Onpressed);
 
 
   @override
@@ -56,7 +57,7 @@ class _ContactsIconDescriptionState extends State<ContactsIconDescription> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Container(
-                    margin: EdgeInsets.only(right: 10),
+                    margin: EdgeInsets.only(right: 5),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -67,7 +68,9 @@ class _ContactsIconDescriptionState extends State<ContactsIconDescription> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: <Widget>[
-                            Icon(widget.icon1,size: 25,color: Colors.amber,),
+                            Container(
+                                margin: EdgeInsets.only(right: 5),
+                                child: Icon(widget.icon1,size: 25,color: Colors.yellow,)),
                             Container(
                               margin: EdgeInsets.only(right: 5),
                               child: Column(
@@ -88,7 +91,9 @@ class _ContactsIconDescriptionState extends State<ContactsIconDescription> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: <Widget>[
-                            Icon(widget.icon2,size: 25,color: Colors.amber,),
+                            Container(
+                                margin: EdgeInsets.only(right: 5),
+                                child: Icon(widget.icon2,size: 25,color: Colors.yellow,)),
                             Container(
                               margin: EdgeInsets.only(right: 5),
                               child: Column(
@@ -108,7 +113,9 @@ class _ContactsIconDescriptionState extends State<ContactsIconDescription> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
-                          Icon(widget.icon3,size: 25,color: Colors.amber,),
+                          Container(
+                              margin: EdgeInsets.only(right: 5),
+                              child: Icon(widget.icon3,size: 25,color: Colors.yellow,)),
                           Container(
                             margin: EdgeInsets.only(right: 5),
                             child: Column(
@@ -129,9 +136,11 @@ class _ContactsIconDescriptionState extends State<ContactsIconDescription> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text(widget.Description_H1,style: TextStyle(fontSize: 15,fontWeight: FontWeight.normal)),
                       Container(
-                        width: MediaQuery.of(context).size.width/2,
+                          width: MediaQuery.of(context).size.width/2.2,
+                          child: Text(widget.Description_H1,style: TextStyle(fontSize: 15,fontWeight: FontWeight.normal))),
+                      Container(
+                        width: MediaQuery.of(context).size.width/2.2,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.start,
@@ -141,9 +150,26 @@ class _ContactsIconDescriptionState extends State<ContactsIconDescription> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: <Widget>[
-                                  Container(child: IconButton(onPressed: widget.facebook_Onpressed(), icon: Icon(Icons.facebook,size: 20,)),),
-                                  Container(child: IconButton(onPressed: widget.twitter_Onpressed(), icon: FaIcon(FontAwesomeIcons.twitter,size: 20,)),),
-                                  Container(child: IconButton(onPressed: widget.youtube_Onpressed(), icon: FaIcon(FontAwesomeIcons.youtube,size: 20,)),),
+                                  Container(
+                                    margin: EdgeInsets.only(right: 17),
+                                    width: 10,
+                                    child: IconButton(onPressed: widget.facebook_Onpressed(), icon: Icon(Icons.facebook,size: 20,)),),
+                                  Container(
+                                    margin: EdgeInsets.only(right: 17),
+                                    width: 10,
+                                    child: IconButton(onPressed: widget.twitter_Onpressed(), icon: FaIcon(FontAwesomeIcons.twitter,size: 20,)),),
+                                  Container(
+                                    margin: EdgeInsets.only(right: 17),
+                                    width: 10,
+                                    child: IconButton(onPressed: widget.youtube_Onpressed(), icon: FaIcon(FontAwesomeIcons.youtube,size: 20,)),),
+                                  Container(
+                                    margin: EdgeInsets.only(right: 17),
+                                    width: 10,
+                                    child: IconButton(onPressed: widget.googlePlus_Onpressed(), icon: FaIcon(FontAwesomeIcons.googlePlus,size: 20,)),),
+                                  Container(
+                                    margin: EdgeInsets.only(right: 17),
+                                    width: 10,
+                                    child: IconButton(onPressed: widget.linkedIn_Onpressed(), icon: FaIcon(FontAwesomeIcons.linkedin,size: 20,)),),
                                  // Container(child: IconButton(onPressed: widget.linkedIn_Onpressed(), icon: Icon(Icons.facebook,size: 20,)),),
                                 ],)
                             ],
