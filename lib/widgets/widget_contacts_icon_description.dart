@@ -57,7 +57,8 @@ class _ContactsIconDescriptionState extends State<ContactsIconDescription> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Container(
-                    margin: EdgeInsets.only(right: 5),
+                    width: MediaQuery.of(context).size.width/2.45,
+                    margin: EdgeInsets.only(right: 2),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -69,15 +70,15 @@ class _ContactsIconDescriptionState extends State<ContactsIconDescription> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: <Widget>[
                             Container(
-                                margin: EdgeInsets.only(right: 5),
-                                child: Icon(widget.icon1,size: 25,color: Colors.yellow,)),
+                                margin: EdgeInsets.only(right:2),
+                                child: Icon(widget.icon1,size: 17,color: Colors.amber,)),
                             Container(
-                              margin: EdgeInsets.only(right: 5),
+                              margin: EdgeInsets.only(right: 2),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
-                                  Text(widget.icon1_H1,style: TextStyle(fontSize: 10,fontWeight: FontWeight.bold),),
+                                  Text(widget.icon1_H1,style: TextStyle(fontSize: 8,fontWeight: FontWeight.bold),),
                                   Text(widget.icon1_H2,),
                                 ],
                               ),
@@ -92,15 +93,15 @@ class _ContactsIconDescriptionState extends State<ContactsIconDescription> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: <Widget>[
                             Container(
-                                margin: EdgeInsets.only(right: 5),
-                                child: Icon(widget.icon2,size: 25,color: Colors.yellow,)),
+                                margin: EdgeInsets.only(right: 2),
+                                child: Icon(widget.icon2,size: 17,color: Colors.amber,)),
                             Container(
-                              margin: EdgeInsets.only(right: 5),
+                              margin: EdgeInsets.only(right: 2),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
-                                  Text(widget.icon2_H1,style: TextStyle(fontSize: 10,fontWeight: FontWeight.bold),),
+                                  Text(widget.icon2_H1,style: TextStyle(fontSize: 8,fontWeight: FontWeight.bold),),
                                   Text(widget.icon2_H2,),
                                 ],
                               ),
@@ -114,15 +115,15 @@ class _ContactsIconDescriptionState extends State<ContactsIconDescription> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
                           Container(
-                              margin: EdgeInsets.only(right: 5),
-                              child: Icon(widget.icon3,size: 25,color: Colors.yellow,)),
+                              margin: EdgeInsets.only(right: 2),
+                              child: Icon(widget.icon3,size: 17,color: Colors.amber,)),
                           Container(
-                            margin: EdgeInsets.only(right: 5),
+                            margin: EdgeInsets.only(right: 2),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                Text(widget.icon3_H1,style: TextStyle(fontSize: 10,fontWeight: FontWeight.bold),),
+                                Text(widget.icon3_H1,style: TextStyle(fontSize: 8,fontWeight: FontWeight.bold),),
                                 Text(widget.icon3_H2,),
                               ],
                             ),
@@ -137,10 +138,10 @@ class _ContactsIconDescriptionState extends State<ContactsIconDescription> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Container(
-                          width: MediaQuery.of(context).size.width/2.2,
-                          child: Text(widget.Description_H1,style: TextStyle(fontSize: 15,fontWeight: FontWeight.normal))),
+                          width: MediaQuery.of(context).size.width/2.3,
+                          child: Text(widget.Description_H1,style: TextStyle(fontSize: 12,fontWeight: FontWeight.normal))),
                       Container(
-                        width: MediaQuery.of(context).size.width/2.2,
+                        width: MediaQuery.of(context).size.width/2.3,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.start,

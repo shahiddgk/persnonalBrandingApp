@@ -78,7 +78,7 @@ class _EntrepreneurState extends State<Entrepreneur> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Padding(padding: EdgeInsets.only(top:MediaQuery.of(context).size.height*1/70,left: 10,right: 10),
+                      Padding(padding: EdgeInsets.only(top:MediaQuery.of(context).size.height*1/70,left: 20,right: 20,bottom:MediaQuery.of(context).size.height*1/70,),
                         child: Align(alignment: Alignment.centerLeft,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -88,13 +88,16 @@ class _EntrepreneurState extends State<Entrepreneur> {
 
                             Heading2WithDescription("DREAM,EXPLORE,DISCOVER","Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."),
 
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                Text("YOUR STRPS TO CHNAGE THE WORLD"),
-                                TextButton(onPressed: (){}, child: Text("NEW IDEA",style: TextStyle(color: Colors.grey),))
-                            ],),
+                            Container(
+                              width: MediaQuery.of(context).size.width,
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  Text("YOUR STRPS TO CHNAGE THE WORLD",style: TextStyle(fontSize: 10),),
+                                  TextButton(onPressed: (){}, child: Text("NEW IDEA",style: TextStyle(color: Colors.grey),))
+                              ],),
+                            ),
 
                             IndustryTitle(hint: "Title",controller: _nameFieldController,),
 
@@ -110,9 +113,9 @@ class _EntrepreneurState extends State<Entrepreneur> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Radio(value: 0, groupValue: _radioValue, onChanged: _handleRadioValueChange(0)),
-                                Text("Partnership",style: TextStyle(color: Colors.grey),),
+                                Text("Partnership",style: TextStyle(color: Colors.black87),),
                                 Radio(value: 1, groupValue: _radioValue, onChanged: _handleRadioValueChange(1)),
-                                Text("Investment Plan",style: TextStyle(color: Colors.grey),)
+                                Text("Investment Plan",style: TextStyle(color: Colors.black87),)
 
                                 ],),
 

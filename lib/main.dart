@@ -16,8 +16,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        primarySwatch: Colors.yellow,
-        primaryColor: Colors.yellow
+        primarySwatch: Colors.amber,
+        primaryColor: Colors.amber,
+        cursorColor: Colors.black,
+        textSelectionTheme: TextSelectionThemeData(
+          cursorColor: Colors.black
+        )
       ),
       debugShowCheckedModeBanner: false,
       home: MainWidget(title: ' ',),

@@ -23,13 +23,13 @@ class _PictureDetailsState extends State<PictureDetails> {
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Padding(
-          padding: EdgeInsets.only(top: MediaQuery.of(context).size.height/70,left: 10,right: 10),
+          padding: EdgeInsets.only(top: MediaQuery.of(context).size.height/70,left: 20,right: 20,bottom: MediaQuery.of(context).size.height*1/70),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Heading2("THIS IS A STANDARD POST WITH PREVIEW IMAGE"),
 
-              ButtonsRow("HOME",(){},"BLOG",(){},"THIS IS A STANDARD POST",(){}),
+            //  ButtonsRow("HOME",(){},"BLOG",(){},"THIS IS A STANDARD POST",(){}),
 
               ButtonsRow("Admin",(){},"Web Design",(){},"Comments",(){}),
 

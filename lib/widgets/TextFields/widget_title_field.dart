@@ -37,6 +37,10 @@ class _IndustryTitleState extends State<IndustryTitle> {
             decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 hintText: widget.hint,
+                fillColor: Colors.black,
+                focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black)
+                ),
                 prefixIcon: Icon(Icons.title),
                 labelStyle: TextStyle(
                     fontSize: 15

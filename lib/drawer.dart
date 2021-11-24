@@ -162,7 +162,7 @@ class _MainWidgetState extends State<MainWidget> with TickerProviderStateMixin {
             child: Container(
                   height: 50,
                   width: 30,
-              color: Colors.yellow,
+              color: Colors.amber,
               child: Center(
                 child: Text("Logo",style: TextStyle(color: Colors.white),),
               ),

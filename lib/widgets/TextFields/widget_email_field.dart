@@ -27,7 +27,6 @@ class _EmailFieldState extends State<EmailField> {
       color: Colors.black,
           fontFamily: 'SFUIDisplay'
       ),
-
       controller: widget.controller,
       validator: (value){
       if(value!.isEmpty) {
@@ -38,8 +37,13 @@ class _EmailFieldState extends State<EmailField> {
       return null;
       },
       decoration: InputDecoration(
+        focusColor: Colors.black,
       border: OutlineInputBorder(),
       hintText: widget.hint,
+      fillColor: Colors.black,
+      focusedBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: Colors.black)
+      ),
       prefixIcon: Icon(Icons.email),
       labelStyle: TextStyle(
       fontSize: 15

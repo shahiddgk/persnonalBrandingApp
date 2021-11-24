@@ -62,7 +62,7 @@ class _RegisterState extends State<Register> {
                         children: <Widget>[
                           Container(
                             width: MediaQuery.of(context).size.width,
-                            margin: EdgeInsets.only(top: MediaQuery.of(context).size.height*1/70,left: 10,right: 10),
+                            margin: EdgeInsets.only(top: MediaQuery.of(context).size.height*1/70,left: 20,right: 20),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
                               color: Colors.white,

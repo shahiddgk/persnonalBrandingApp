@@ -37,6 +37,10 @@ class _IndustryState extends State<Industry> {
             decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 hintText: widget.hint,
+                fillColor: Colors.black,
+                focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black)
+                ),
                 prefixIcon: Icon(Icons.home_repair_service),
                 labelStyle: TextStyle(
                     fontSize: 15

@@ -18,12 +18,15 @@ class ButtonsRow extends StatefulWidget {
 class _ButtonsRowState extends State<ButtonsRow> {
   @override
   Widget build(BuildContext context) {
-    return Row(children: <Widget>[
-      TextButton(onPressed: widget.B1_Onpessed(), child: Text(widget.B1_title,style: TextStyle(color: Colors.black54),)),
-      Text("/"),
-      TextButton(onPressed: widget.B2_Onpessed(), child: Text(widget.B2_title,style: TextStyle(color: Colors.black54),)),
-      Text("/"),
-      TextButton(onPressed: widget.B3_Onpessed(), child: Text(widget.B3_title,style: TextStyle(color: Colors.black54,),))
-    ],);
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      child: Row(children: <Widget>[
+        TextButton(onPressed: widget.B1_Onpessed(), child: Text(widget.B1_title,style: TextStyle(color: Colors.black54),)),
+        Text("/"),
+        TextButton(onPressed: widget.B2_Onpessed(), child: Text(widget.B2_title,style: TextStyle(color: Colors.black54),)),
+        Text("/"),
+        TextButton(onPressed: widget.B3_Onpessed(), child: Text(widget.B3_title,style: TextStyle(color: Colors.black54,),))
+      ],),
+    );
   }
 }

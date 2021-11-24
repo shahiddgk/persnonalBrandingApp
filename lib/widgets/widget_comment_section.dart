@@ -28,7 +28,7 @@ class _CommentsSectionState extends State<CommentsSection> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Container(
-            margin: EdgeInsets.only(right: 5),
+            margin: EdgeInsets.only(right: 2),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -37,10 +37,13 @@ class _CommentsSectionState extends State<CommentsSection> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Container(width: 40,height: 40,child: CircleAvatar(
+                    Container(width: MediaQuery.of(context).size.width/10,child: CircleAvatar(
                       child: Image.network(widget.Imageurl),
                       backgroundColor: Colors.transparent,),),
-                    Column(children: <Widget>[
+                    Column(
+                      crossAxisAlignment:CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
                       Text(widget.Name,style: TextStyle(fontSize: 12,color: Colors.black),textAlign: TextAlign.justify,),
                       Text(widget.Date,style: TextStyle(fontSize: 8,color: Colors.black),textAlign: TextAlign.justify)
                     ],)
@@ -56,7 +59,7 @@ class _CommentsSectionState extends State<CommentsSection> {
               ],),
           ),
           Container(
-              width: MediaQuery.of(context).size.width/1.5,
+              width: MediaQuery.of(context).size.width/1.7,
               child: Text(widget.Message,textAlign: TextAlign.justify,))
         ],
       ),

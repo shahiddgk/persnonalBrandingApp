@@ -31,7 +31,7 @@ TextEditingController _MessageController = new TextEditingController();
           child: Column(
             children: <Widget>[
               Padding(
-                  padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*1/70,left: 10,right: 10),
+                  padding: EdgeInsets.only(top: MediaQuery.of(context).size.height*1/70,left: 20,right: 20,bottom: MediaQuery.of(context).size.height*1/70),
                   child: SingleChildScrollView(
                     scrollDirection: Axis.vertical,
                     child: Column(

@@ -39,6 +39,10 @@ class _MessageFieldState extends State<MessageField> {
             decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 hintText: widget.hint,
+                fillColor: Colors.black,
+                focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black)
+                ),
                 prefixIcon: Icon(Icons.message),
                 labelStyle: TextStyle(
                     fontSize: 15

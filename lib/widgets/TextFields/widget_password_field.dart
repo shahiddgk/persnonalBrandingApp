@@ -38,6 +38,10 @@ class _PasswordFieldState extends State<PasswordField> {
           decoration: InputDecoration(
               border: OutlineInputBorder(),
               hintText: widget.hint,
+              fillColor: Colors.black,
+              focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black)
+              ),
               prefixIcon: Icon(Icons.lock_outline),
               labelStyle: TextStyle(
                   fontSize: 15
