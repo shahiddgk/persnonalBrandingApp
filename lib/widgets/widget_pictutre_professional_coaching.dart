@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 // ignore: must_be_immutable
 class ProfessionalCoachingPictures extends StatefulWidget {
@@ -45,52 +46,72 @@ class _ProfessionalCoachingPicturesState extends State<ProfessionalCoachingPictu
         padding: EdgeInsets.only(left: 1,right: 1),
         child: Align(
           alignment: Alignment.centerLeft,
-          child: Column(
+          child: ResponsiveWrapper.of(context).isDesktop || ResponsiveWrapper.of(context).isTablet ? Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              Container(
-                  child: Image.network(widget.imageUrl)),
-              Text(widget.Date),
-              Text(widget.title,style: TextStyle(fontSize: 10,fontWeight: FontWeight.bold),),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  Container(
-                      height: 40,
-                      width: 55,
-                      child: TextButton(onPressed:widget.B1_Onpress(),child: Text(widget.B1title,style: const TextStyle(fontSize:12,color: Colors.black),))),
-                  Container(
-                      height: 40,
-                      width: 80,
-                      child: TextButton(onPressed: widget.B2_Onpress(),child: Text(widget.B2title,style: TextStyle(fontSize:12,color: Colors.black),))),
-                  Container(
-                      height: 40,
-                      width: 75,
-                      // ignore: prefer_const_constructors
-                      child: TextButton(onPressed:widget.B3_Onpress(),child: Text(widget.B3title,style: TextStyle(fontSize:12,color: Colors.black),))),
-                ],),
+              Expanded(
+                flex: 20,
+                child: Container(
+                    child: Image.network(widget.imageUrl,fit: BoxFit.cover,)),
+              ),
+              Expanded(
+                  flex: 1 ,
+                  child: Text(widget.Date)),
+              Expanded(
+                  flex: 1,
+                  child: Text(widget.title,style: TextStyle(fontSize: 10,fontWeight: FontWeight.bold),)),
+              Expanded(
+                flex: 1,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    Expanded(
+                      flex:1,
+                      child: Container(
+                          height: 40,
+                          width: 55,
+                          child: TextButton(onPressed:widget.B1_Onpress(),child: Text(widget.B1title,style: const TextStyle(fontSize:12,color: Colors.black),))),
+                    ),
+                    Expanded(
+                      flex: 3,
+                      child: Container(
+                          height: 40,
+                          width: 80,
+                          child: TextButton(onPressed: widget.B2_Onpress(),child: Text(widget.B2title,style: TextStyle(fontSize:12,color: Colors.black),))),
+                    ),
+                    Expanded(
+                      flex: 2,
+                      child: Container(
+                          height: 40,
+                          width: 75,
+                          // ignore: prefer_const_constructors
+                          child: TextButton(onPressed:widget.B3_Onpress(),child: Text(widget.B3title,style: TextStyle(fontSize:12,color: Colors.black),))),
+                    ),
+                  ],),
+              ),
               Container(margin:EdgeInsets.only(top: 10,bottom: 10),height: 7,width: 90,color: Colors.amber,),
-              Text(widget.Description,style: TextStyle(fontWeight: FontWeight.normal),textAlign: TextAlign.justify,),
+              Expanded(flex:2,
+                  child: Text(widget.Description,style: TextStyle(fontWeight: FontWeight.normal),textAlign: TextAlign.justify,)),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   Container(
-                    margin: EdgeInsets.only(right: 16),
+                  //  margin: EdgeInsets.only(right: 10),
                     width: 10,
                     child: IconButton(onPressed: widget.facebook_Onpressed(), icon: Icon(Icons.facebook,size: 20,)),),
                   Container(
-                    margin: EdgeInsets.only(right: 16),
+                  //  margin: EdgeInsets.only(right: 10),
                     width: 10,
                     child: IconButton(onPressed: widget.twitter_Onpressed(), icon: FaIcon(FontAwesomeIcons.twitter,size: 20,)),),
                   Container(
-                    margin: EdgeInsets.only(right: 16),
+                   // margin: EdgeInsets.only(right: 10),
                     width: 10,
                     child: IconButton(onPressed: widget.youtube_Onpressed(), icon: FaIcon(FontAwesomeIcons.youtube,size: 20,)),),
                   Container(
-                    margin: EdgeInsets.only(right: 16),
+                 //   margin: EdgeInsets.only(right: 10),
                     width: 10,
                     child: IconButton(onPressed: widget.youtube_Onpressed(), icon: FaIcon(FontAwesomeIcons.googlePlus,size: 20,)),),
                   Container(
@@ -98,7 +119,60 @@ class _ProfessionalCoachingPicturesState extends State<ProfessionalCoachingPictu
                     child: IconButton(onPressed: widget.linkedIn_Onpressed(), icon: FaIcon(FontAwesomeIcons.linkedin,size: 20,)),),
                   // Container(child: IconButton(onPressed: widget.linkedIn_Onpressed(), icon: Icon(Icons.facebook,size: 20,)),),
                 ],)
-            ],),
+            ],) : Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Container(
+                    child: Image.network(widget.imageUrl)),
+              Text(widget.Date),
+              Text(widget.title,style: TextStyle(fontSize: 10,fontWeight: FontWeight.bold),),
+              Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    Container(
+                          height: 40,
+                          width: 55,
+                          child: TextButton(onPressed:widget.B1_Onpress(),child: Text(widget.B1title,style: const TextStyle(fontSize:12,color: Colors.black),))),
+                    Container(
+                          height: 40,
+                          width: 80,
+                          child: TextButton(onPressed: widget.B2_Onpress(),child: Text(widget.B2title,style: TextStyle(fontSize:12,color: Colors.black),))),
+                    Container(
+                          height: 40,
+                          width: 75,
+                          // ignore: prefer_const_constructors
+                          child: TextButton(onPressed:widget.B3_Onpress(),child: Text(widget.B3title,style: TextStyle(fontSize:12,color: Colors.black),))),
+                  ],),
+              Container(margin:EdgeInsets.only(top: 10,bottom: 10),height: 7,width: 90,color: Colors.amber,),
+              Text(widget.Description,style: TextStyle(fontWeight: FontWeight.normal),textAlign: TextAlign.justify,),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  Container(
+                    //  margin: EdgeInsets.only(right: 10),
+                    width: 10,
+                    child: IconButton(onPressed: widget.facebook_Onpressed(), icon: Icon(Icons.facebook,size: 20,)),),
+                  Container(
+                    //  margin: EdgeInsets.only(right: 10),
+                    width: 10,
+                    child: IconButton(onPressed: widget.twitter_Onpressed(), icon: FaIcon(FontAwesomeIcons.twitter,size: 20,)),),
+                  Container(
+                    // margin: EdgeInsets.only(right: 10),
+                    width: 10,
+                    child: IconButton(onPressed: widget.youtube_Onpressed(), icon: FaIcon(FontAwesomeIcons.youtube,size: 20,)),),
+                  Container(
+                    //   margin: EdgeInsets.only(right: 10),
+                    width: 10,
+                    child: IconButton(onPressed: widget.youtube_Onpressed(), icon: FaIcon(FontAwesomeIcons.googlePlus,size: 20,)),),
+                  Container(
+                    width: 10,
+                    child: IconButton(onPressed: widget.linkedIn_Onpressed(), icon: FaIcon(FontAwesomeIcons.linkedin,size: 20,)),),
+                  // Container(child: IconButton(onPressed: widget.linkedIn_Onpressed(), icon: Icon(Icons.facebook,size: 20,)),),
+                ],)
+            ],)
         ),
       ),
     );

@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:personal_branding/widgets/Buttons/widget_button.dart';
-import 'package:personal_branding/widgets/Headings/widget_heading1.dart';
+import 'package:personal_branding/widgets/Headings/widget_description_text.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading2.dart';
-import 'package:personal_branding/widgets/Headings/widget_heading2withdescription.dart';
 import 'package:personal_branding/widgets/widget_buttons_row.dart';
 import 'package:personal_branding/widgets/widget_comment_section.dart';
 import 'package:personal_branding/widgets/widget_socialmedia_tags_professional.dart';
@@ -33,9 +30,9 @@ class _PictureDetailsState extends State<PictureDetails> {
 
               ButtonsRow("Admin",(){},"Web Design",(){},"Comments",(){}),
 
-              Image.network("https://images.pexels.com/photos/1072179/pexels-photo-1072179.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"),
+              Align(alignment:Alignment.topCenter,child: Image.network("https://images.pexels.com/photos/1072179/pexels-photo-1072179.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500")),
 
-              Text("Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry. ",textAlign: TextAlign.justify,style: TextStyle(color: Colors.black54),),
+              Description("Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry."),
 
               SocialMediaTags((){},(){},(){},(){},(){}),
 

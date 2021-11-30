@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:kf_drawer/kf_drawer.dart';
 import 'package:personal_branding/Pages/Biography/picture_detail.dart';
+import 'package:personal_branding/Pages/Entrepreneur/pages/home_page.dart';
+import 'package:personal_branding/Pages/Entrepreneur/pages/splash_page.dart';
 import 'package:personal_branding/Pages/Entrepreneur/project_Description_chat_screen.dart';
+import 'package:personal_branding/providers/auth_provider.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading1.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading2.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading2withdescription.dart';
@@ -12,6 +16,8 @@ import 'package:personal_branding/widgets/TextFields/widget_message_field.dart';
 import 'package:personal_branding/widgets/TextFields/widget_name_field.dart';
 import 'package:personal_branding/widgets/Buttons/widget_button.dart';
 import 'package:personal_branding/widgets/TextFields/widget_title_field.dart';
+import 'package:provider/src/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 // ignore: must_be_immutable
 class Entrepreneur extends KFDrawerContent {
@@ -44,7 +50,49 @@ class _EntrepreneurState extends State<Entrepreneur> {
 
 
   @override
+  void initState() {
+    super.initState();
+
+    Future.delayed(Duration(seconds: 1), () {
+      // just delay for showing this slash page clearer because it too fast
+      checkSignedIn();
+    });
+  }
+
+  void checkSignedIn() async {
+    AuthProvider authProvider = context.read<AuthProvider>();
+    bool isLoggedIn = await authProvider.isLoggedIn();
+    if (isLoggedIn) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => HomePage()),
+      );
+      return;
+    }
+    // Navigator.pushReplacement(
+    //   context,
+    //   MaterialPageRoute(builder: (context) => Entrepreneur()),
+    // );
+  }
+
+  @override
   Widget build(BuildContext context) {
+
+    AuthProvider authProvider = Provider.of<AuthProvider>(context);
+    switch (authProvider.status) {
+      case Status.authenticateError:
+        Fluttertoast.showToast(msg: "Sign in fail");
+        break;
+      case Status.authenticateCanceled:
+        Fluttertoast.showToast(msg: "Sign in canceled");
+        break;
+      case Status.authenticated:
+        Fluttertoast.showToast(msg: "Sign in success");
+        break;
+      default:
+        break;
+    }
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(onPressed:  widget.onMenuPressed, icon: Icon(Icons.menu),),
@@ -123,8 +171,18 @@ class _EntrepreneurState extends State<Entrepreneur> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
 
-                                Button(title: "REGISTER",Width: 110,onPressed: (){ Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ProjectDescriptionWithChatScreen()));},),
-                                Button(title: "LOGIN",Width: 90,onPressed: (){ Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ProjectDescriptionWithChatScreen()));},),
+                                Button(title: "REGISTER",Width: 110,onPressed: (){ Navigator.of(context).push(MaterialPageRoute(builder: (context)=>PictureDetails()));},),
+                                Button(title: "LOGIN",Width: 90,onPressed: () async {
+                                  bool isSuccess = await authProvider.handleSignIn();
+                                  if (isSuccess) {
+                                    Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => HomePage(),
+                                      ),
+                                    );
+                                  }
+                                },),
 
                               ],),
                             PartnerShipText()

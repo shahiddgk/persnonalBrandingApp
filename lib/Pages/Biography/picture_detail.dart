@@ -1,8 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:personal_branding/widgets/Headings/widget_heading1.dart';
-import 'package:personal_branding/widgets/Headings/widget_heading2.dart';
-import 'package:personal_branding/widgets/Headings/widget_heading2withdescription.dart';
 import 'package:personal_branding/widgets/widget_picture_details_decription.dart';
 
 class PictureDetails extends StatefulWidget {

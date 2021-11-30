@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:responsive_framework/responsive_wrapper.dart';
 
 class AboutSectionDetails extends StatefulWidget {
   String Name;
@@ -18,7 +19,21 @@ class AboutSectionDetails extends StatefulWidget {
 class _AboutSectionDetailsState extends State<AboutSectionDetails> {
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return ResponsiveWrapper.of(context).isTablet || ResponsiveWrapper.of(context).isDesktop ? Container(
+      margin: EdgeInsets.only(bottom: 10),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Container(margin:EdgeInsets.only(bottom: 2),child: Text("• Name: ${widget.Name}",style: TextStyle(color: Colors.black87,fontSize: 22),)),
+          Container(margin:EdgeInsets.only(bottom: 2),child: Text("• Email: ${widget.Email}",style: TextStyle(color: Colors.black87,fontSize: 22),)),
+          Container(margin:EdgeInsets.only(bottom: 2),child: Text("• Phone: ${widget.Phone}",style: TextStyle(color: Colors.black87,fontSize: 22),)),
+          Container(margin:EdgeInsets.only(bottom: 2),child: Text("• Date of birth: ${widget.DateOfBirth}",style: TextStyle(color: Colors.black87,fontSize: 22),)),
+          Container(margin:EdgeInsets.only(bottom: 2),child: Text("• Address: ${widget.Address}",style: TextStyle(color: Colors.black87,fontSize: 22),)),
+          Container(margin:EdgeInsets.only(bottom: 2),child: Text("• Nationality: ${widget.Natinality}",style: TextStyle(color: Colors.black87,fontSize: 22),)),
+        ],
+      ),
+    ) : Container(
       margin: EdgeInsets.only(bottom: 10),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,

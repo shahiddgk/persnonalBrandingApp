@@ -1,30 +1,92 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:personal_branding/providers/auth_provider.dart';
+import 'package:personal_branding/providers/chat_provider.dart';
+import 'package:personal_branding/providers/home_provider.dart';
+import 'package:personal_branding/providers/setting_provider.dart';
 import 'package:personal_branding/utills/class_builder.dart';
+import 'package:provider/provider.dart';
+import 'package:responsive_framework/responsive_framework.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 import 'drawer.dart';
 
-void main() {
+Future<void> main() async {
   ClassBuilder.registerClasses();
-  runApp(MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  runApp(MyApp(prefs: prefs));
 }
 
 class MyApp extends StatelessWidget {
+
+  final SharedPreferences prefs;
+  final FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+  final FirebaseStorage firebaseStorage = FirebaseStorage.instance;
+
+  MyApp({required this.prefs});
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        primarySwatch: Colors.amber,
-        primaryColor: Colors.amber,
-        cursorColor: Colors.black,
-        textSelectionTheme: TextSelectionThemeData(
-          cursorColor: Colors.black
-        )
+    return MultiProvider(
+        providers: [
+          ChangeNotifierProvider<AuthProvider>(
+            create: (_) => AuthProvider(
+              firebaseAuth: FirebaseAuth.instance,
+              googleSignIn: GoogleSignIn(),
+              prefs: this.prefs,
+              firebaseFirestore: this.firebaseFirestore,
+            ),
+          ),
+          Provider<SettingProvider>(
+            create: (_) => SettingProvider(
+              prefs: this.prefs,
+              firebaseFirestore: this.firebaseFirestore,
+              firebaseStorage: this.firebaseStorage,
+            ),
+          ),
+          Provider<HomeProvider>(
+            create: (_) => HomeProvider(
+              firebaseFirestore: this.firebaseFirestore,
+            ),
+          ),
+          Provider<ChatProvider>(
+            create: (_) => ChatProvider(
+              prefs: this.prefs,
+              firebaseFirestore: this.firebaseFirestore,
+              firebaseStorage: this.firebaseStorage,
+            ),
+          ),
+        ],
+      child: MaterialApp(
+        theme: ThemeData(
+            primarySwatch: Colors.amber,
+            primaryColor: Colors.amber,
+            cursorColor: Colors.black,
+            textSelectionTheme: TextSelectionThemeData(
+                cursorColor: Colors.black
+            )
+        ),
+        builder: (context,widget)=>ResponsiveWrapper.builder(
+            ClampingScrollWrapper.builder(context, widget!),
+            breakpoints: const [
+              ResponsiveBreakpoint.resize(350,name: MOBILE),
+              ResponsiveBreakpoint.resize(600,name: TABLET),
+              ResponsiveBreakpoint.resize(800,name: DESKTOP),
+              ResponsiveBreakpoint.autoScale(1700,name: 'XL'),
+            ]
+        ),
+        debugShowCheckedModeBanner: false,
+        home: MainWidget(title: ' ',),
       ),
-      debugShowCheckedModeBanner: false,
-      home: MainWidget(title: ' ',),
     );
   }
 }

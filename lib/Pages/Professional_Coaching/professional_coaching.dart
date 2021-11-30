@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:kf_drawer/kf_drawer.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading1.dart';
 import 'package:personal_branding/widgets/widget_pictutre_professional_coaching.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 import 'details_page.dart';
 
@@ -47,20 +48,35 @@ class _ProfessionalCoachingState extends State<ProfessionalCoaching> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: <Widget>[
                               Heading1("PROFESSIONAL COACHING"),
+                              ResponsiveWrapper.of(context).isDesktop ?
+                              Container(
+                                child: GridView.builder(
+                                    shrinkWrap:true,
+                                    gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(childAspectRatio: 3/2,crossAxisSpacing: 10,mainAxisSpacing: 10, maxCrossAxisExtent: 800),
+                                    itemCount: profile_coaching.length,
+                                    itemBuilder: (context,index) {
+                                      return GestureDetector(
+                                        onTap: (){
+                                          Navigator.of(context).push(MaterialPageRoute(builder: (context)=>PictureDetails()));
+                                        },
+                                        child: profile_coaching[index],
+                                      );
+                                    }),
+                              ) :
                               Container(
                                 child: ListView.builder(
-                                  scrollDirection: Axis.vertical,
-                                  shrinkWrap: true,
-                                  itemCount: profile_coaching.length,
+                                    scrollDirection: Axis.vertical,
+                                    shrinkWrap: true,
+                                    itemCount: profile_coaching.length,
                                     itemBuilder:(context, index) {
-                                    return GestureDetector(
-                                      onTap: (){
-                                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>PictureDetails()));
-                                      },
-                                      child: profile_coaching[index],
-                                    );
+                                      return GestureDetector(
+                                        onTap: (){
+                                          Navigator.of(context).push(MaterialPageRoute(builder: (context)=>PictureDetails()));
+                                        },
+                                        child: profile_coaching[index],
+                                      );
                                     } ),
-                              ),
+                              )
                             ],
                           ),),
                       ),

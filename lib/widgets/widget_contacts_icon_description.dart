@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 // ignore: must_be_immutable
 class ContactsIconDescription extends StatefulWidget {
@@ -41,7 +42,7 @@ class ContactsIconDescription extends StatefulWidget {
 class _ContactsIconDescriptionState extends State<ContactsIconDescription> {
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return ResponsiveWrapper.of(context).isTablet || ResponsiveWrapper.of(context).isDesktop ? Container(
       margin: EdgeInsets.only(top: 10),
       child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -56,126 +57,149 @@ class _ContactsIconDescriptionState extends State<ContactsIconDescription> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Container(
-                    width: MediaQuery.of(context).size.width/2.45,
-                    margin: EdgeInsets.only(right: 2),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                      Container(
-                        margin: EdgeInsets.only(bottom: 5),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: <Widget>[
-                            Container(
-                                margin: EdgeInsets.only(right:2),
-                                child: Icon(widget.icon1,size: 17,color: Colors.amber,)),
-                            Container(
-                              margin: EdgeInsets.only(right: 2),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Text(widget.icon1_H1,style: TextStyle(fontSize: 8,fontWeight: FontWeight.bold),),
-                                  Text(widget.icon1_H2,),
-                                ],
+                  Expanded(
+                    flex: 1,
+                    child: Container(
+                      width: MediaQuery.of(context).size.width/2.45,
+                      margin: EdgeInsets.only(right: 2),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                        Container(
+                          margin: EdgeInsets.only(bottom: 5),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: <Widget>[
+                              Container(
+                                  margin: EdgeInsets.only(right:2),
+                                  child: Icon(widget.icon1,size: 28,color: Colors.amber,)),
+                              Container(
+                                margin: EdgeInsets.only(right: 2),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Text(widget.icon1_H1,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                                    Text(widget.icon1_H2,style: TextStyle(fontSize: 16),),
+                                  ],
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(bottom: 5),
-                        child: Row(
+                        Container(
+                          margin: EdgeInsets.only(bottom: 5),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: <Widget>[
+                              Container(
+                                  margin: EdgeInsets.only(right: 2),
+                                  child: Icon(widget.icon2,size: 28,color: Colors.amber,)),
+                              Container(
+                                margin: EdgeInsets.only(right: 2),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Text(widget.icon2_H1,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                                    Text(widget.icon2_H2,style: TextStyle(fontSize: 16),),
+                                  ],
+                                ),
+                              ),
+
+                            ],
+                          ),
+                        ),
+                        Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: <Widget>[
                             Container(
                                 margin: EdgeInsets.only(right: 2),
-                                child: Icon(widget.icon2,size: 17,color: Colors.amber,)),
+                                child: Icon(widget.icon3,size: 28,color: Colors.amber,)),
                             Container(
                               margin: EdgeInsets.only(right: 2),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
-                                  Text(widget.icon2_H1,style: TextStyle(fontSize: 8,fontWeight: FontWeight.bold),),
-                                  Text(widget.icon2_H2,),
+                                  Text(widget.icon3_H1,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                                  Text(widget.icon3_H2,style: TextStyle(fontSize: 16),),
                                 ],
                               ),
                             ),
 
                           ],
                         ),
-                      ),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: <Widget>[
-                          Container(
-                              margin: EdgeInsets.only(right: 2),
-                              child: Icon(widget.icon3,size: 17,color: Colors.amber,)),
-                          Container(
-                            margin: EdgeInsets.only(right: 2),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Text(widget.icon3_H1,style: TextStyle(fontSize: 8,fontWeight: FontWeight.bold),),
-                                Text(widget.icon3_H2,),
-                              ],
-                            ),
-                          ),
-
-                        ],
-                      ),
-                    ],),
+                      ],),
+                    ),
                   ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Container(
+                  Expanded(
+                    flex: 3,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Container(
+                            width: MediaQuery.of(context).size.width/2.3,
+                            child: Text(widget.Description_H1,style: TextStyle(fontSize: 20,fontWeight: FontWeight.normal))),
+                        Text(widget.Description,style: TextStyle(fontSize:18,fontWeight: FontWeight.normal),textAlign: TextAlign.justify,),
+                        Container(
                           width: MediaQuery.of(context).size.width/2.3,
-                          child: Text(widget.Description_H1,style: TextStyle(fontSize: 12,fontWeight: FontWeight.normal))),
-                      Container(
-                        width: MediaQuery.of(context).size.width/2.3,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: <Widget>[
-                              Text(widget.Description,style: TextStyle(fontWeight: FontWeight.normal),textAlign: TextAlign.justify,),
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: <Widget>[
-                                  Container(
-                                    margin: EdgeInsets.only(right: 17),
-                                    width: 10,
-                                    child: IconButton(onPressed: widget.facebook_Onpressed(), icon: Icon(Icons.facebook,size: 20,)),),
-                                  Container(
-                                    margin: EdgeInsets.only(right: 17),
-                                    width: 10,
-                                    child: IconButton(onPressed: widget.twitter_Onpressed(), icon: FaIcon(FontAwesomeIcons.twitter,size: 20,)),),
-                                  Container(
-                                    margin: EdgeInsets.only(right: 17),
-                                    width: 10,
-                                    child: IconButton(onPressed: widget.youtube_Onpressed(), icon: FaIcon(FontAwesomeIcons.youtube,size: 20,)),),
-                                  Container(
-                                    margin: EdgeInsets.only(right: 17),
-                                    width: 10,
-                                    child: IconButton(onPressed: widget.googlePlus_Onpressed(), icon: FaIcon(FontAwesomeIcons.googlePlus,size: 20,)),),
-                                  Container(
-                                    margin: EdgeInsets.only(right: 17),
-                                    width: 10,
-                                    child: IconButton(onPressed: widget.linkedIn_Onpressed(), icon: FaIcon(FontAwesomeIcons.linkedin,size: 20,)),),
-                                 // Container(child: IconButton(onPressed: widget.linkedIn_Onpressed(), icon: Icon(Icons.facebook,size: 20,)),),
-                                ],)
-                            ],
-                          ))
-                    ],
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: <Widget>[
+                                Container(
+                                  child: Row(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: <Widget>[
+                                      Expanded(
+                                        flex: 1,
+                                        child: Container(
+                                          // margin: EdgeInsets.only(right: 17),
+                                          // width: 10,
+                                          child: IconButton(onPressed: widget.facebook_Onpressed(), icon: Icon(Icons.facebook,size: 20,)),),
+                                      ),
+                                      Expanded(
+                                        flex: 1,
+                                        child: Container(
+                                          // margin: EdgeInsets.only(right: 17),
+                                          // width: 10,
+                                          child: IconButton(onPressed: widget.twitter_Onpressed(), icon: FaIcon(FontAwesomeIcons.twitter,size: 20,)),),
+                                      ),
+                                      Expanded(
+                                        flex: 1,
+                                        child: Container(
+                                          // margin: EdgeInsets.only(right: 17),
+                                          // width: 10,
+                                          child: IconButton(onPressed: widget.youtube_Onpressed(), icon: FaIcon(FontAwesomeIcons.youtube,size: 20,)),),
+                                      ),
+                                      Expanded(
+                                        flex: 1,
+                                        child: Container(
+                                          // margin: EdgeInsets.only(right: 17),
+                                          // width: 10,
+                                          child: IconButton(onPressed: widget.googlePlus_Onpressed(), icon: FaIcon(FontAwesomeIcons.googlePlus,size: 20,)),),
+                                      ),
+                                      Expanded(
+                                        flex: 1,
+                                        child: Container(
+                                          // margin: EdgeInsets.only(right: 17),
+                                          // width: 10,
+                                          child: IconButton(onPressed: widget.linkedIn_Onpressed(), icon: FaIcon(FontAwesomeIcons.linkedin,size: 20,)),),
+                                      ),
+                                     // Container(child: IconButton(onPressed: widget.linkedIn_Onpressed(), icon: Icon(Icons.facebook,size: 20,)),),
+                                    ],),
+                                )
+                              ],
+                            ))
+                      ],
+                    ),
                   )
                 ],
               ),
@@ -186,6 +210,151 @@ class _ContactsIconDescriptionState extends State<ContactsIconDescription> {
                 color: Colors.grey,),
             ],
           ),
+    ) : Container(
+      margin: EdgeInsets.only(top: 10),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          Container(
+            margin: EdgeInsets.only(top: 10,bottom: 10),
+            width: MediaQuery.of(context).size.width,
+            height: 2,
+            color: Colors.grey,),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Container(
+                width: MediaQuery.of(context).size.width/2.45,
+                margin: EdgeInsets.only(right: 2),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Container(
+                      margin: EdgeInsets.only(bottom: 5),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: <Widget>[
+                          Container(
+                              margin: EdgeInsets.only(right:2),
+                              child: Icon(widget.icon1,size: 17,color: Colors.amber,)),
+                          Container(
+                            margin: EdgeInsets.only(right: 2),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text(widget.icon1_H1,style: TextStyle(fontSize: 8,fontWeight: FontWeight.bold),),
+                                Text(widget.icon1_H2,),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(bottom: 5),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: <Widget>[
+                          Container(
+                              margin: EdgeInsets.only(right: 2),
+                              child: Icon(widget.icon2,size: 17,color: Colors.amber,)),
+                          Container(
+                            margin: EdgeInsets.only(right: 2),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text(widget.icon2_H1,style: TextStyle(fontSize: 8,fontWeight: FontWeight.bold),),
+                                Text(widget.icon2_H2,),
+                              ],
+                            ),
+                          ),
+
+                        ],
+                      ),
+                    ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                        Container(
+                            margin: EdgeInsets.only(right: 2),
+                            child: Icon(widget.icon3,size: 17,color: Colors.amber,)),
+                        Container(
+                          margin: EdgeInsets.only(right: 2),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text(widget.icon3_H1,style: TextStyle(fontSize: 8,fontWeight: FontWeight.bold),),
+                              Text(widget.icon3_H2,),
+                            ],
+                          ),
+                        ),
+
+                      ],
+                    ),
+                  ],),
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Container(
+                      width: MediaQuery.of(context).size.width/2.3,
+                      child: Text(widget.Description_H1,style: TextStyle(fontSize: 12,fontWeight: FontWeight.normal))),
+                  Container(
+                      width: MediaQuery.of(context).size.width/2.3,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: <Widget>[
+                          Text(widget.Description,style: TextStyle(fontWeight: FontWeight.normal),textAlign: TextAlign.justify,),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: <Widget>[
+                              Container(
+                                margin: EdgeInsets.only(right: 17),
+                                width: 10,
+                                child: IconButton(onPressed: widget.facebook_Onpressed(), icon: Icon(Icons.facebook,size: 20,)),),
+                              Container(
+                                margin: EdgeInsets.only(right: 17),
+                                width: 10,
+                                child: IconButton(onPressed: widget.twitter_Onpressed(), icon: FaIcon(FontAwesomeIcons.twitter,size: 20,)),),
+                              Container(
+                                margin: EdgeInsets.only(right: 17),
+                                width: 10,
+                                child: IconButton(onPressed: widget.youtube_Onpressed(), icon: FaIcon(FontAwesomeIcons.youtube,size: 20,)),),
+                              Container(
+                                margin: EdgeInsets.only(right: 17),
+                                width: 10,
+                                child: IconButton(onPressed: widget.googlePlus_Onpressed(), icon: FaIcon(FontAwesomeIcons.googlePlus,size: 20,)),),
+                              Container(
+                                margin: EdgeInsets.only(right: 17),
+                                width: 10,
+                                child: IconButton(onPressed: widget.linkedIn_Onpressed(), icon: FaIcon(FontAwesomeIcons.linkedin,size: 20,)),),
+                              // Container(child: IconButton(onPressed: widget.linkedIn_Onpressed(), icon: Icon(Icons.facebook,size: 20,)),),
+                            ],)
+                        ],
+                      ))
+                ],
+              )
+            ],
+          ),
+          Container(
+            margin: EdgeInsets.only(top: 10,bottom: 10),
+            width: MediaQuery.of(context).size.width,
+            height: 2,
+            color: Colors.grey,),
+        ],
+      ),
     );
   }
 }
