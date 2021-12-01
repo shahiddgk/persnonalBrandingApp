@@ -44,7 +44,7 @@ Future showAlert(BuildContext context, String message, bool isError,
         radius: BorderRadius.circular(10),
         child: Text(
           isError ? "Retry" : "Ok",
-          style: TextStyle(color: Colors.white, fontSize: 20),
+          style: TextStyle(color: Colors.black, fontSize: 20),
         ),
         onPressed: () {
           Navigator.of(context, rootNavigator: true).pop();
