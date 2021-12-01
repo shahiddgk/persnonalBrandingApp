@@ -175,6 +175,9 @@ class _MainWidgetState extends State<MainWidget> with TickerProviderStateMixin {
             'Logout',
             style: TextStyle(color: Colors.white, fontSize: 18),
           ),
+          onPressed: (){
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LogIn()));
+          },
         ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),

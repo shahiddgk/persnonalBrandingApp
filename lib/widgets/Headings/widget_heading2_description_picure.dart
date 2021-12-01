@@ -8,8 +8,9 @@ class Heading2WithDescriptionWiithImage extends StatefulWidget {
   String H2;
   String Descrition;
   String ImageUrl;
+  Function onTap;
 
-  Heading2WithDescriptionWiithImage(this.H2,this.Descrition,this.ImageUrl);
+  Heading2WithDescriptionWiithImage(this.H2,this.Descrition,this.ImageUrl,this.onTap);
 
   @override
   _Heading2WithDescriptionWiithImageState createState() => _Heading2WithDescriptionWiithImageState();
@@ -24,7 +25,11 @@ class _Heading2WithDescriptionWiithImageState extends State<Heading2WithDescript
       children: <Widget>[
         Text(widget.H2,style: TextStyle(fontSize: 28,fontWeight: FontWeight.normal)),
         Container(margin:EdgeInsets.only(top: 25,bottom: 15),child: Text(widget.Descrition,style: TextStyle(color: Colors.black87,fontSize: 18),textAlign: TextAlign.justify,)),
-        Container(margin:EdgeInsets.only(top:15,bottom: 15),child: Image.network(widget.ImageUrl)),
+        GestureDetector(
+            onTap: () {
+              widget.onTap();
+            },
+            child: Container(margin:EdgeInsets.only(top:15,bottom: 15),child: Image.network(widget.ImageUrl))),
       ],
     )) :  Container(margin:EdgeInsets.only(bottom: 15),child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,

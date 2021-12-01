@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:kf_drawer/kf_drawer.dart';
+import 'package:personal_branding/drawer.dart';
+import 'package:personal_branding/models/request/loin_request.dart';
+import 'package:personal_branding/network/http_manager.dart';
+import 'package:personal_branding/utills/utils.dart';
 import 'package:personal_branding/widgets/Buttons/widget_forgotPasswordButtong.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading1.dart';
 import 'package:personal_branding/widgets/TextFields/widget_email_field.dart';
@@ -17,7 +21,7 @@ class LogIn extends KFDrawerContent {
 class _LogInState extends State<LogIn> {
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  bool checkedValue = false;
+  bool _isLoading = false;
   TextEditingController _emailFieldController = TextEditingController();
   TextEditingController _passwordFieldController = TextEditingController();
 
@@ -79,9 +83,7 @@ class _LogInState extends State<LogIn> {
                                     hint: "Enter password",
                                     controller: _passwordFieldController,
                                   ),
-                                Button(title: "SignIn",Width: MediaQuery.of(context).size.width,onPressed: (){
-                                    _SignIn();
-                                    },
+                                Button(title: "SignIn",Width: MediaQuery.of(context).size.width,onPressed: _loginUser,
                                   ),
                                 ForgotPassword(title: "Forgot Password!",onPressed: () {},)
                               ],
@@ -99,13 +101,26 @@ class _LogInState extends State<LogIn> {
     );
   }
 
-  // ignore: non_constant_identifier_names
-  void _SignIn() {
-    if(_formKey.currentState!.validate()) {
-      print("Success");
-      // ignore: deprecated_member_use
-      Scaffold.of(context).showSnackBar(new SnackBar(
-          content: new Text("Login success")));
+  _loginUser() {
+    if (_formKey.currentState!.validate()) {
+      setState(() {
+        _isLoading = true;
+      });
+      HTTPManager()
+          .loginUser(LoginRequest(
+          email: _emailFieldController.text, password: _passwordFieldController.text))
+          .then((value) {
+        print(value);
+        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>MainWidget(title: ' ')));
+      }).catchError((e) {
+        print(e);
+        setState(() {
+          _isLoading = false;
+        });
+        showAlert(context, e.toString(), true, () {}, () {
+          _loginUser();
+        });
+      });
     }
   }
 }

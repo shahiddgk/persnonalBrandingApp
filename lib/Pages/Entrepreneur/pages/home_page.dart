@@ -14,6 +14,7 @@ import 'package:personal_branding/constants/app_constants.dart';
 import 'package:personal_branding/constants/color_constants.dart';
 import 'package:personal_branding/constants/firestore_constants.dart';
 import 'package:personal_branding/drawer.dart';
+import 'package:personal_branding/drawer.dart';
 import 'package:personal_branding/models/popup_choices.dart';
 import 'package:personal_branding/models/user_chat.dart';
 import 'package:personal_branding/providers/auth_provider.dart';
@@ -246,12 +247,10 @@ class HomePageState extends State<HomePage> {
   Future<void> handleSignOut() async {
     authProvider.handleSignOut();
 
-    Navigator.of(context).pop();
-
-    // Navigator.of(context).pushAndRemoveUntil(
-    //   MaterialPageRoute(builder: (context) => LogIn()),
-    //   (Route<dynamic> route) => false,
-    // );
+    Navigator.of(context).pushAndRemoveUntil(
+      MaterialPageRoute(builder: (context) => MainWidget(title: ' ',)),
+      (Route<dynamic> route) => false,
+    );
   }
 
   @override
