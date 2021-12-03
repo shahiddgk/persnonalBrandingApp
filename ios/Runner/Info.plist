@@ -27,6 +27,11 @@
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UISupportedInterfaceOrientations</key>
+	<array>
+    		<string>UIInterfaceOrientationPortrait</string>
+    		<string>UIInterfaceOrientationLandscapeLeft</string>
+    		<string>UIInterfaceOrientationLandscapeRight</string>
+    </array>
 	<key>CFBundleURLTypes</key>
 	<array>
     	<dict>
@@ -34,15 +39,10 @@
     		<string>Editor</string>
     		<key>CFBundleURLSchemes</key>
     		<array>
-    			<string>432743666780-oeo1oogqd55csaab24ohejvrocin3fsm.apps.googleusercontent.com</string>
+    			<string>432743666780-hvb2o1a35h7k8usbjiecftqmfo4u25f6.apps.googleusercontent.com</string>
     		</array>
     	</dict>
     </array>
-	<array>
-		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
-	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

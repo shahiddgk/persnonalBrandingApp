@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:kf_drawer/kf_drawer.dart';
+import 'package:personal_branding/Pages/Achievement/achievement.dart';
 import 'package:personal_branding/Pages/Biography/picture_detail.dart';
+import 'package:personal_branding/Pages/Future_Goals/future_goals.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading1.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading2_description_picure.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading2withdescription.dart';
@@ -11,18 +13,28 @@ class Biography extends KFDrawerContent {
   _BiographyState createState() => _BiographyState();
 }
 
-class _BiographyState extends State<Biography> {
+class _BiographyState extends State<Biography> with SingleTickerProviderStateMixin{
 
   List images = [Heading2WithDescriptionWiithImage("LIFE OF DR.AHMED", "We don’t live in the same world that we lived in at the beginning of this year… and if your business isn’t keeping up with this rapidly changing world, you risk being left behind.In this time of upheaval – during this economic winter – you can either get caught in the storm and suffer, or you can use this time to innovate, create and master your skill set to launch into a thriving and successful future.", "https://branding.ratedsolution.com/public/biography/1637939722_Tony_Robbins.png", (){}),
     Heading2WithDescriptionWiithImage("BUSINESS MASTERY", "We don’t live in the same world that we lived in at the beginning of this year… and if your business isn’t keeping up with this rapidly changing world, you risk being left behind.In this time of upheaval – during this economic winter – you can either get caught in the storm and suffer, or you can use this time to innovate, create and master your skill set to launch into a thriving and successful future.", "https://branding.ratedsolution.com/public/biography/1638002019_business-mastery.png",(){}),];
-
+  
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(onPressed:  widget.onMenuPressed, icon: Icon(Icons.menu),),
-      ),
-      body: SafeArea(
+      // appBar: AppBar(
+      //   leading: IconButton(onPressed:  widget.onMenuPressed, icon: Icon(Icons.menu),),
+      //   bottom: TabBar(
+      //     isScrollable: true,
+      //     controller: controller,
+      //     tabs: const [
+      //       Tab(text: "BIOGRAPHY",),
+      //       Tab(text: "ACHIEVEMENT",),
+      //       Tab(text: "FUTURE\n GOALS",),
+      //     ],),
+      // ),
+      body:
+      SafeArea(
         child: Center(
           child: Column(
             children: <Widget>[

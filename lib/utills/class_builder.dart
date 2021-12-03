@@ -1,6 +1,8 @@
 
-import 'package:personal_branding/Pages/about.dart';
+import 'package:personal_branding/Pages/aboutsectiontab.dart';
 import 'package:personal_branding/Pages/Achievement/achievement.dart';
+import 'package:personal_branding/Pages/careersectiontab.dart';
+import 'package:personal_branding/Pages/forms.dart';
 import 'package:personal_branding/Pages/login.dart';
 import 'package:personal_branding/Pages/register.dart';
 import 'package:personal_branding/Pages/Biography/biography.dart';
@@ -25,7 +27,7 @@ void register<T>(Constructor<T> constructor) {
 class ClassBuilder {
   static void registerClasses() {
     register<Home>(() => Home());
-    register<About>(() => About());
+    register<AboutSection>(() => AboutSection());
     register<Biography>(() => Biography());
     register<Achievement>(() => Achievement());
     register<FutureGoals>(() => FutureGoals());
@@ -34,9 +36,9 @@ class ClassBuilder {
     register<ProfessionalCoaching>(() => ProfessionalCoaching());
     register<Entrepreneur>(() => Entrepreneur());
     register<Partnership>(() => Partnership());
-    register<Career>(() => Career());
-    register<LogIn>(() => LogIn());
-    register<Register>(() => Register());
+    register<CareerSection>(() => CareerSection());
+    register<Forms>(() => Forms());
+    //register<Register>(() => Register());
     register<Contacts>(() => Contacts());
   }
 

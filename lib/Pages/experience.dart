@@ -17,9 +17,9 @@ class _ExperienceState extends State<Experience> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(onPressed:  widget.onMenuPressed, icon: Icon(Icons.menu),),
-      ),
+      // appBar: AppBar(
+      //   leading: IconButton(onPressed:  widget.onMenuPressed, icon: Icon(Icons.menu),),
+      // ),
       body: SafeArea(
         child: Center(
           child: Column(
