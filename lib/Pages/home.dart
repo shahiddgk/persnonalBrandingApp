@@ -14,9 +14,9 @@ class _HomeState extends State<Home> {
   int activeIndex = 0;
 
   final urlImages = [
-    'https://cutewallpaper.org/21/4k-wallpaper-for-android/Top-60-Most-Popular-Android-and-iPhone-4K-Wallpapers-Collection.jpg',
-    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4AnDlL3JQvBXQ_7z-xTvY5LiYoiXK-DpH5g&usqp=CAU',
-    'https://images.pexels.com/photos/1535162/pexels-photo-1535162.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'
+    'https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F20%2F2020%2F08%2F12%2Fdavid-beckham.jpg',
+    'https://media.gq.com/photos/56e85846239f13cf5b2ba1a8/master/w_1953,h_2929,c_limit/David-Beckham-Style-2015-07-09-15.jpg',
+    'https://naijasuperfans.com/wp-content/uploads/2021/10/46382923-9870415-image-a-12_1628284332538.jpg'
   ];
   @override
   Widget build(BuildContext context) {

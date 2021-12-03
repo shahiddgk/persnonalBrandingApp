@@ -14,7 +14,7 @@ import 'Pages/Future_Goals/future_goals.dart';
 import 'Pages/home.dart';
 import 'Pages/partnership.dart';
 import 'Pages/Professional_Coaching/professional_coaching.dart';
-import 'Pages/testimonials.dart';
+import 'Pages/Testimonials/testimonials.dart';
 import 'utills/class_builder.dart';
 
 class MainWidget extends StatefulWidget {
@@ -35,13 +35,13 @@ class _MainWidgetState extends State<MainWidget> with TickerProviderStateMixin {
       initialPage: Home(),
       items: [
         KFDrawerItem.initWithPage(
-          text: Text('Home', style: TextStyle(color: Colors.white, fontSize: 18)),
+          text: Text('HOME', style: TextStyle(color: Colors.white, fontSize: 18)),
           // icon: Icon(Icons.home, color: Colors.white),
           page: Home(),
         ),
         KFDrawerItem.initWithPage(
           text: Text(
-            'About',
+            'ABOUT',
             style: TextStyle(color: Colors.white, fontSize: 18),
           ),
           //  icon: Icon(Icons.account_box, color: Colors.white),
@@ -49,7 +49,7 @@ class _MainWidgetState extends State<MainWidget> with TickerProviderStateMixin {
         ),
         KFDrawerItem.initWithPage(
           text: Text(
-            'Biography',
+            'BIOGRAPHY',
             style: TextStyle(color: Colors.white, fontSize: 18),
           ),
           // icon: Icon(Icons.notifications_active, color: Colors.white),
@@ -57,23 +57,7 @@ class _MainWidgetState extends State<MainWidget> with TickerProviderStateMixin {
         ),
         KFDrawerItem.initWithPage(
           text: Text(
-            'Achievement',
-            style: TextStyle(color: Colors.white, fontSize: 18),
-          ),
-          // icon: Icon(Icons.trending_up, color: Colors.white),
-          page: Achievement(),
-        ),
-        KFDrawerItem.initWithPage(
-          text: Text(
-            'Future goals',
-            style: TextStyle(color: Colors.white, fontSize: 18),
-          ),
-          // icon: Icon(Icons.av_timer, color: Colors.white),
-          page: FutureGoals(),
-        ),
-        KFDrawerItem.initWithPage(
-          text: Text(
-            'Experience',
+            'EXPERIENCE',
             style: TextStyle(color: Colors.white, fontSize: 18),
           ),
           // icon: Icon(Icons.settings, color: Colors.white),
@@ -81,7 +65,15 @@ class _MainWidgetState extends State<MainWidget> with TickerProviderStateMixin {
         ),
         KFDrawerItem.initWithPage(
           text: Text(
-            'Testimonials',
+            'ACHIEVEMENT',
+            style: TextStyle(color: Colors.white, fontSize: 18),
+          ),
+          // icon: Icon(Icons.trending_up, color: Colors.white),
+          page: Achievement(),
+        ),
+        KFDrawerItem.initWithPage(
+          text: Text(
+            'TESTIMONIALS',
             style: TextStyle(color: Colors.white, fontSize: 18),
           ),
           // icon: Icon(Icons.settings, color: Colors.white),
@@ -89,7 +81,15 @@ class _MainWidgetState extends State<MainWidget> with TickerProviderStateMixin {
         ),
         KFDrawerItem.initWithPage(
           text: Text(
-            'Professional Coaching',
+            'FUTURE GOALS',
+            style: TextStyle(color: Colors.white, fontSize: 18),
+          ),
+          // icon: Icon(Icons.av_timer, color: Colors.white),
+          page: FutureGoals(),
+        ),
+        KFDrawerItem.initWithPage(
+          text: Text(
+            'VEDIO GALLERY',
             style: TextStyle(color: Colors.white, fontSize: 18),
           ),
           //  icon: Icon(Icons.settings, color: Colors.white),
@@ -97,23 +97,23 @@ class _MainWidgetState extends State<MainWidget> with TickerProviderStateMixin {
         ),
         KFDrawerItem.initWithPage(
           text: Text(
-            'Entrepreneur',
+            'STARTUP',
             style: TextStyle(color: Colors.white, fontSize: 18),
           ),
           // icon: Icon(Icons.settings, color: Colors.white),
           page: Entrepreneur(),
         ),
+        // KFDrawerItem.initWithPage(
+        //   text: Text(
+        //     'Partnership',
+        //     style: TextStyle(color: Colors.white, fontSize: 18),
+        //   ),
+        //   // icon: Icon(Icons.settings, color: Colors.white),
+        //   page: Partnership(),
+        // ),
         KFDrawerItem.initWithPage(
           text: Text(
-            'Partnership',
-            style: TextStyle(color: Colors.white, fontSize: 18),
-          ),
-          // icon: Icon(Icons.settings, color: Colors.white),
-          page: Partnership(),
-        ),
-        KFDrawerItem.initWithPage(
-          text: Text(
-            'Careers',
+            'CAREERS',
             style: TextStyle(color: Colors.white, fontSize: 18),
           ),
           // icon: Icon(Icons.settings, color: Colors.white),
@@ -121,7 +121,7 @@ class _MainWidgetState extends State<MainWidget> with TickerProviderStateMixin {
         ),
         KFDrawerItem.initWithPage(
           text: Text(
-            'Login Form',
+            'LOGIN',
             style: TextStyle(color: Colors.white, fontSize: 18),
           ),
           // icon: Icon(Icons.settings, color: Colors.white),
@@ -129,7 +129,7 @@ class _MainWidgetState extends State<MainWidget> with TickerProviderStateMixin {
         ),
         KFDrawerItem.initWithPage(
           text: Text(
-            'Register Form',
+            'REGISTER',
             style: TextStyle(color: Colors.white, fontSize: 18),
           ),
           // icon: Icon(Icons.settings, color: Colors.white),
@@ -137,7 +137,7 @@ class _MainWidgetState extends State<MainWidget> with TickerProviderStateMixin {
         ),
         KFDrawerItem.initWithPage(
           text: Text(
-            'Contact',
+            'CONTACT',
             style: TextStyle(color: Colors.white, fontSize: 18),
           ),
           // icon: Icon(Icons.settings, color: Colors.white),
@@ -160,11 +160,10 @@ class _MainWidgetState extends State<MainWidget> with TickerProviderStateMixin {
             width: MediaQuery.of(context).size.width * 0.3,
             height: MediaQuery.of(context).size.height * 0.1,
             child: Container(
-                  height: 50,
-                  width: 30,
-              color: Colors.amber,
+                  height: 70,
+                  width: 50,
               child: Center(
-                child: Text("Logo",style: TextStyle(color: Colors.white),),
+                child: Image.asset("images/logo2.png")
               ),
                 ),
 

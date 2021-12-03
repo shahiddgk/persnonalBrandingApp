@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:kf_drawer/kf_drawer.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading1.dart';
+import 'package:personal_branding/widgets/Headings/widget_heading2withdescription.dart';
 import 'package:personal_branding/widgets/widget_pictutre_professional_coaching.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
@@ -19,9 +20,9 @@ class _ProfessionalCoachingState extends State<ProfessionalCoaching> {
   
   // ignore: non_constant_identifier_names
   List profile_coaching = [
-    ProfessionalCoachingPictures("https://c4.wallpaperflare.com/wallpaper/974/565/254/windows-11-windows-10-minimalism-hd-wallpaper-preview.jpg", "Saturday / Nov 23,2021", "Picture Name", "Admin", "WebDesign", "Comments", "Lorem Ipsum is simply dummy text of the printing and typesetting industry.", (){}, (){}, (){},(){},(){},(){},(){},(){}),
-    ProfessionalCoachingPictures("https://c4.wallpaperflare.com/wallpaper/974/565/254/windows-11-windows-10-minimalism-hd-wallpaper-preview.jpg", "Saturday / Nov 23,2021", "Picture Name", "Admin", "WebDesign", "Comments", "Lorem Ipsum is simply dummy text of the printing and typesetting industry.", (){}, (){}, (){},(){},(){},(){},(){},(){}),
-    ProfessionalCoachingPictures("https://c4.wallpaperflare.com/wallpaper/974/565/254/windows-11-windows-10-minimalism-hd-wallpaper-preview.jpg", "Saturday / Nov 23,2021", "Picture Name", "Admin", "WebDesign", "Comments", "Lorem Ipsum is simply dummy text of the printing and typesetting industry.", (){}, (){}, (){},(){},(){},(){},(){},(){})
+    ProfessionalCoachingPictures("https://c4.wallpaperflare.com/wallpaper/974/565/254/windows-11-windows-10-minimalism-hd-wallpaper-preview.jpg", "Saturday / Nov 23,2021", "THIS IS A STANDARD POST", "Admin", (){}, (){}, (){},(){},(){}),
+    ProfessionalCoachingPictures("https://c4.wallpaperflare.com/wallpaper/974/565/254/windows-11-windows-10-minimalism-hd-wallpaper-preview.jpg", "Saturday / Nov 23,2021", "THIS IS A STANDARD POST", "Admin", (){}, (){}, (){},(){},(){}),
+    ProfessionalCoachingPictures("https://c4.wallpaperflare.com/wallpaper/974/565/254/windows-11-windows-10-minimalism-hd-wallpaper-preview.jpg", "Saturday / Nov 23,2021", "THIS IS A STANDARD POST", "Admin", (){}, (){}, (){},(){},(){})
                           ];     
   
   @override
@@ -47,7 +48,8 @@ class _ProfessionalCoachingState extends State<ProfessionalCoaching> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: <Widget>[
-                              Heading1("PROFESSIONAL COACHING"),
+                                Heading1("MY GALLERY"),
+                              Heading2WithDescription("JUST MY AWESOME SKILLS", "Lorem Ipsum is simply dummy text of the printing and typesetting industry."),
                               ResponsiveWrapper.of(context).isDesktop ?
                               Container(
                                 child: GridView.builder(

@@ -24,7 +24,7 @@ class _Heading2WithDescriptionWiithImageState extends State<Heading2WithDescript
       mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
         Text(widget.H2,style: TextStyle(fontSize: 28,fontWeight: FontWeight.normal)),
-        Container(margin:EdgeInsets.only(top: 25,bottom: 15),child: Text(widget.Descrition,style: TextStyle(color: Colors.black87,fontSize: 18),textAlign: TextAlign.justify,)),
+        Container(margin:EdgeInsets.only(top: 25,),child: Text(widget.Descrition,style: TextStyle(color: Colors.black87,fontSize: 18),textAlign: TextAlign.justify,)),
         GestureDetector(
             onTap: () {
               widget.onTap();

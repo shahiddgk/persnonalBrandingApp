@@ -3,25 +3,23 @@ import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 // ignore: must_be_immutable
-class IconDescription extends StatefulWidget {
+class testimonialPictureDetails extends StatefulWidget {
   String Imageurl;
   // ignore: non_constant_identifier_names
   String H1;
   // ignore: non_constant_identifier_names
   String H2;
   // ignore: non_constant_identifier_names
-  String H3;
-  // ignore: non_constant_identifier_names
   String Description;
 
-  IconDescription(this.Imageurl,this.H1,this.H2,this.H3,this.Description);
+  testimonialPictureDetails(this.Imageurl,this.H1,this.H2,this.Description);
 
 
   @override
-  _IconDescriptionState createState() => _IconDescriptionState();
+  _testimonialPictureDetailsState createState() => _testimonialPictureDetailsState();
 }
 
-class _IconDescriptionState extends State<IconDescription> {
+class _testimonialPictureDetailsState extends State<testimonialPictureDetails> {
   @override
   Widget build(BuildContext context) {
     return ResponsiveWrapper.of(context).isDesktop || ResponsiveWrapper.of(context).isTablet ? Column(
@@ -45,9 +43,9 @@ class _IconDescriptionState extends State<IconDescription> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Container(child: Image.network(widget.Imageurl),),
+                      Container(decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),child: CircleAvatar(radius:30,child: Image.network(widget.Imageurl)),),
                       Text(widget.H2,style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold),textAlign: TextAlign.justify,),
-                      Text(widget.H1,style: TextStyle(fontSize: 17,fontWeight: FontWeight.bold),),Text(widget.H3),
+                      Text(widget.H1,style: TextStyle(fontSize: 17,fontWeight: FontWeight.bold),),
                     ],
                   ),
                 ),
@@ -78,9 +76,9 @@ class _IconDescriptionState extends State<IconDescription> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Container(child: Image.network(widget.Imageurl),),
+                      Container(decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),child: CircleAvatar(radius: 30,child: Image.network(widget.Imageurl)),),
                       Text(widget.H2,style: TextStyle(fontSize: 10,fontWeight: FontWeight.bold),),
-                      Text(widget.H1,style: TextStyle(fontSize: 13,fontWeight: FontWeight.bold),),Text(widget.H3),
+                      Text(widget.H1,style: TextStyle(fontSize: 13,fontWeight: FontWeight.bold),),
                     ],
                   ),
                 ),

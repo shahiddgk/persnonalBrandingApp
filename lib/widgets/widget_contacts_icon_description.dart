@@ -145,8 +145,8 @@ class _ContactsIconDescriptionState extends State<ContactsIconDescription> {
                       children: <Widget>[
                         Container(
                             width: MediaQuery.of(context).size.width/2.3,
-                            child: Text(widget.Description_H1,style: TextStyle(fontSize: 20,fontWeight: FontWeight.normal))),
-                        Text(widget.Description,style: TextStyle(fontSize:18,fontWeight: FontWeight.normal),textAlign: TextAlign.justify,),
+                            child: Text(widget.Description_H1,style: TextStyle(fontSize: 22,fontWeight: FontWeight.bold))),
+                        Text(widget.Description,style: TextStyle(fontSize:14,fontWeight: FontWeight.normal),textAlign: TextAlign.justify,),
                         Container(
                           width: MediaQuery.of(context).size.width/2.3,
                             child: Column(

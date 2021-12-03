@@ -12,7 +12,7 @@ import 'package:personal_branding/Pages/Future_Goals/future_goals.dart';
 import 'package:personal_branding/Pages/home.dart';
 import 'package:personal_branding/Pages/partnership.dart';
 import 'package:personal_branding/Pages/Professional_Coaching/professional_coaching.dart';
-import 'package:personal_branding/Pages/testimonials.dart';
+import 'package:personal_branding/Pages/Testimonials/testimonials.dart';
 
 typedef T Constructor<T>();
 

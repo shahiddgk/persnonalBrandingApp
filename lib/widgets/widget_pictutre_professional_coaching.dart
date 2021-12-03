@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:responsive_framework/responsive_framework.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 // ignore: must_be_immutable
 class ProfessionalCoachingPictures extends StatefulWidget {
@@ -12,16 +13,6 @@ class ProfessionalCoachingPictures extends StatefulWidget {
   // ignore: non_constant_identifier_names
   String Description;
   String title;
-  // ignore: non_constant_identifier_names
-  String B1title;
-  // ignore: non_constant_identifier_names
-  String B2title;
-  // ignore: non_constant_identifier_names
-  String B3title;
-  // ignore: non_constant_identifier_names
-  Function B1_Onpress;
-  Function B2_Onpress;
-  Function B3_Onpress;
 
   Function facebook_Onpressed;
   Function twitter_Onpressed;
@@ -29,7 +20,7 @@ class ProfessionalCoachingPictures extends StatefulWidget {
   Function youtube_Onpressed;
   Function googlePlus_Onpressed;
 
-  ProfessionalCoachingPictures(this.imageUrl,this.Date,this.title,this.B1title,this.B2title,this.B3title,this.Description,this.B1_Onpress,this.B2_Onpress,this.B3_Onpress,this.facebook_Onpressed,this.twitter_Onpressed,this.youtube_Onpressed,this.googlePlus_Onpressed,this.linkedIn_Onpressed);
+  ProfessionalCoachingPictures(this.imageUrl,this.Date,this.title,this.Description,this.facebook_Onpressed,this.twitter_Onpressed,this.youtube_Onpressed,this.googlePlus_Onpressed,this.linkedIn_Onpressed);
 
 
   @override
@@ -61,36 +52,7 @@ class _ProfessionalCoachingPicturesState extends State<ProfessionalCoachingPictu
               Expanded(
                   flex: 1,
                   child: Text(widget.title,style: TextStyle(fontSize: 10,fontWeight: FontWeight.bold),)),
-              Expanded(
-                flex: 1,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    Expanded(
-                      flex:1,
-                      child: Container(
-                          height: 40,
-                          width: 55,
-                          child: TextButton(onPressed:widget.B1_Onpress(),child: Text(widget.B1title,style: const TextStyle(fontSize:12,color: Colors.black),))),
-                    ),
-                    Expanded(
-                      flex: 3,
-                      child: Container(
-                          height: 40,
-                          width: 80,
-                          child: TextButton(onPressed: widget.B2_Onpress(),child: Text(widget.B2title,style: TextStyle(fontSize:12,color: Colors.black),))),
-                    ),
-                    Expanded(
-                      flex: 2,
-                      child: Container(
-                          height: 40,
-                          width: 75,
-                          // ignore: prefer_const_constructors
-                          child: TextButton(onPressed:widget.B3_Onpress(),child: Text(widget.B3title,style: TextStyle(fontSize:12,color: Colors.black),))),
-                    ),
-                  ],),
-              ),
+
               Container(margin:EdgeInsets.only(top: 10,bottom: 10),height: 7,width: 90,color: Colors.amber,),
               Expanded(flex:2,
                   child: Text(widget.Description,style: TextStyle(fontWeight: FontWeight.normal),textAlign: TextAlign.justify,)),
@@ -123,28 +85,11 @@ class _ProfessionalCoachingPicturesState extends State<ProfessionalCoachingPictu
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
+              Container(),
               Container(
                     child: Image.network(widget.imageUrl)),
               Text(widget.Date),
               Text(widget.title,style: TextStyle(fontSize: 10,fontWeight: FontWeight.bold),),
-              Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    Container(
-                          height: 40,
-                          width: 55,
-                          child: TextButton(onPressed:widget.B1_Onpress(),child: Text(widget.B1title,style: const TextStyle(fontSize:12,color: Colors.black),))),
-                    Container(
-                          height: 40,
-                          width: 80,
-                          child: TextButton(onPressed: widget.B2_Onpress(),child: Text(widget.B2title,style: TextStyle(fontSize:12,color: Colors.black),))),
-                    Container(
-                          height: 40,
-                          width: 75,
-                          // ignore: prefer_const_constructors
-                          child: TextButton(onPressed:widget.B3_Onpress(),child: Text(widget.B3title,style: TextStyle(fontSize:12,color: Colors.black),))),
-                  ],),
               Container(margin:EdgeInsets.only(top: 10,bottom: 10),height: 7,width: 90,color: Colors.amber,),
               Text(widget.Description,style: TextStyle(fontWeight: FontWeight.normal),textAlign: TextAlign.justify,),
               Row(
