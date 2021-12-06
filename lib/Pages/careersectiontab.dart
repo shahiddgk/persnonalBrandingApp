@@ -40,6 +40,7 @@ class _CareerSectionState extends State<CareerSection> with SingleTickerProvider
           bottom: TabBar(
             isScrollable: true,
             controller: controller,
+            indicatorColor: Colors.black87,
             tabs: const [
               Tab(text: "CAREER",),
               Tab(text: "EXPERIENCE",),

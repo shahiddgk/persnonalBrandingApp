@@ -31,4 +31,22 @@ class ResponseHandler {
       throw FetchDataException('No Internet connection');
     }
   }
+
+  Future<GeneralResponseModel> get(String url, bool isHeaderRequired) async {
+    var head = Map<String, String>();
+    head['content-type'] = 'application/json; charset=utf-8';
+    var responseJson;
+    try {
+      final response = await http.get(Uri.parse(url), headers: head);
+      responseJson = json.decode(response.body.toString());
+      print(responseJson);
+
+      var res =
+      GeneralResponseModel.fromJson(json.decode(response.body.toString()));
+      if (!res.status) throw FetchDataException(res.message);
+      return res;
+    } on SocketException {
+      throw FetchDataException('No Internet connection');
+    }
+  }
 }

@@ -38,6 +38,7 @@ class _AboutSectionState extends State<AboutSection> with SingleTickerProviderSt
         bottom: TabBar(
           isScrollable: true,
           controller: controller,
+          indicatorColor: Colors.black87,
           tabs: const [
             Tab(text: "ABOUT",),
             Tab(text: "BIOGRAPHY",),

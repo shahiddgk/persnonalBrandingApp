@@ -61,6 +61,7 @@ dependencies:
   provider: ^6.0.1
   rflutter_alert:
   youtube_player_flutter: ^8.0.0
+  modal_bottom_sheet: ^2.0.0
 
 dev_dependencies:
   flutter_test:

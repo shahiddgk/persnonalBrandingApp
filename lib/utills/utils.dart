@@ -1,13 +1,17 @@
 export 'debouncer.dart';
 export 'utilities.dart';
 
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:personal_branding/models/response/session_user_model.dart';
 import 'package:personal_branding/utills/styles.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-// const String USER_KEY = "user_session";
-// SessionUserModel globalSessionUser;
+const String USER_KEY = "user_session";
+late SessionUserModel globalSessionUser;
 
 Future showAlert(BuildContext context, String message, bool isError,
     VoidCallback cancelCallback, VoidCallback retryCallback) async {
@@ -55,3 +59,25 @@ Future showAlert(BuildContext context, String message, bool isError,
     ],
   ).show();
 }
+
+saveUserSession(SessionUserModel sessionUserModel) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  await prefs.setString(USER_KEY, jsonEncode(sessionUserModel));
+}
+
+Future<SessionUserModel> getUserSession() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String? userSession = prefs.getString(USER_KEY);
+  if (userSession == null) {
+    return SessionUserModel(id: 0, emailVerifiedAt: '', name: '', usertype: '', updatedAt: '', createdAt: '', email: '');
+  }
+  print(SessionUserModel.fromJson(jsonDecode(userSession)));
+  return SessionUserModel.fromJson(jsonDecode(userSession));
+}
+
+logoutSessionUser() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  print(prefs);
+  prefs.clear();
+}
+

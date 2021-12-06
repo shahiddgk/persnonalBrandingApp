@@ -36,9 +36,9 @@ class ChatPageState extends State<ChatPage> {
   ChatPageState({Key? key, required this.peerId, required this.peerAvatar, required this.peerNickname});
 
   String peerId;
-  String peerAvatar;
-  String peerNickname;
-  late String currentUserId;
+  String peerAvatar="https://data.1freewallpapers.com/download/triangle-solid-black-gold-4k-abstract-1366x768.jpg";
+  String peerNickname ;
+  late String currentUserId="EufKOLTdlwQPntK8VAxkmP9iWqF2";
 
   List<QueryDocumentSnapshot> listMessage = [];
   int _limit = 20;
@@ -65,6 +65,11 @@ class ChatPageState extends State<ChatPage> {
 
     focusNode.addListener(onFocusChange);
     listScrollController.addListener(_scrollListener);
+
+    print("widget.peerId::${widget.peerId}");
+    print("widget.peerId::${widget.peerAvatar}");
+    print("widget.peerId::${widget.peerNickname}");
+
     readLocal();
   }
 
@@ -88,8 +93,13 @@ class ChatPageState extends State<ChatPage> {
   }
 
   void readLocal() {
-    if (authProvider.getUserFirebaseId()?.isNotEmpty == true) {
-      currentUserId = authProvider.getUserFirebaseId()!;
+    if (currentUserId.isNotEmpty) {
+      currentUserId = "EufKOLTdlwQPntK8VAxkmP9iWqF2";
+
+      print("PeerId::$peerId");
+      print("PeerId::$peerAvatar");
+      print("PeerId::$peerNickname");
+
     } else {
       Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(builder: (context) => LoginPage()),
@@ -439,36 +449,31 @@ class ChatPageState extends State<ChatPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          this.peerNickname,
-          style: TextStyle(color: ColorConstants.primaryColor),
-        ),
-        centerTitle: true,
-      ),
-      body: WillPopScope(
-        child: Stack(
-          children: <Widget>[
-            Column(
-              children: <Widget>[
-                // List of messages
-                buildListMessage(),
+    return WillPopScope(
+        child: Container(
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(10.0)),
+          child: Stack(
+            children: <Widget>[
+              Column(
+                  children: <Widget>[
+                    // List of messages
+                    buildListMessage(),
 
-                // Sticker
-                isShowSticker ? buildSticker() : SizedBox.shrink(),
+                    // Sticker
+                    isShowSticker ? buildSticker() : SizedBox.shrink(),
 
-                // Input content
-                buildInput(),
-              ],
-            ),
+                    // Input content
+                    buildInput(),
+                  ],
+                ),
 
-            // Loading
-            buildLoading()
-          ],
+              // Loading
+              buildLoading()
+
+            ],
+          ),
         ),
         onWillPop: onBackPress,
-      ),
     );
   }
 

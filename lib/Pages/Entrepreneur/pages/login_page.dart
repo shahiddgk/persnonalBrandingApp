@@ -49,7 +49,7 @@ class LoginPageState extends State<LoginPage> {
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => HomePage(),
+                        builder: (context) => ChatPage(peerId: 'ur7q0EfMa4ZwICPPyZbngj7QkfH3', peerAvatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRa9UI1y4Shr253ibETjPCOWNBWWpKgQsVKaw&usqp=CAU', peerNickname: 'test',),
                       ),
                     );
                   }

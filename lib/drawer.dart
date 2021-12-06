@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kf_drawer/kf_drawer.dart';
 import 'package:personal_branding/Pages/careersectiontab.dart';
+import 'package:personal_branding/utills/utils.dart';
 import 'Pages/aboutsectiontab.dart';
 import 'Pages/Achievement/achievement.dart';
 import 'Pages/forms.dart';
@@ -177,7 +178,8 @@ class _MainWidgetState extends State<MainWidget> with TickerProviderStateMixin {
             style: TextStyle(color: Colors.white, fontSize: 18),
           ),
           onPressed: (){
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LogIn()));
+            logoutSessionUser();
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>MainWidget(title: " ")));
           },
         ),
         decoration: BoxDecoration(

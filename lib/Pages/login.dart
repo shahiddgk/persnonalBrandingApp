@@ -1,7 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:kf_drawer/kf_drawer.dart';
+import 'package:personal_branding/Pages/Entrepreneur/pages/chat_page.dart';
+import 'package:personal_branding/constants/constants.dart';
 import 'package:personal_branding/drawer.dart';
 import 'package:personal_branding/models/request/loin_request.dart';
+import 'package:personal_branding/models/response/general_response_model.dart';
+import 'package:personal_branding/models/response/session_user_model.dart';
 import 'package:personal_branding/network/http_manager.dart';
 import 'package:personal_branding/utills/utils.dart';
 import 'package:personal_branding/widgets/Buttons/widget_forgotPasswordButtong.dart';
@@ -24,6 +30,7 @@ class _LogInState extends State<LogIn> {
   bool _isLoading = false;
   TextEditingController _emailFieldController = TextEditingController();
   TextEditingController _passwordFieldController = TextEditingController();
+  late SessionUserModel sessionUserModel;
 
   @override
   Widget build(BuildContext context) {
@@ -110,8 +117,19 @@ class _LogInState extends State<LogIn> {
           .loginUser(LoginRequest(
           email: _emailFieldController.text, password: _passwordFieldController.text))
           .then((value) {
-        print(value);
-        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>MainWidget(title: ' ')));
+        sessionUserModel = value;
+        print("sessionUserModel:::${sessionUserModel.name}");
+
+        FirebaseFirestore.instance.collection(FirestoreConstants.pathUserCollection).doc("${sessionUserModel.id}").set(
+            {
+              FirestoreConstants.nickname: sessionUserModel.name,
+              FirestoreConstants.photoUrl: '',
+              FirestoreConstants.id: sessionUserModel.id,
+              'createdAt': DateTime.now().millisecondsSinceEpoch.toString(),
+              FirestoreConstants.chattingWith: null
+            });
+        saveUserSession(value);
+        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>MainWidget(title: " ")));
       }).catchError((e) {
         print(e);
         setState(() {
