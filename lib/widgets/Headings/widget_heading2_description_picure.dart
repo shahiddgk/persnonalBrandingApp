@@ -38,7 +38,7 @@ class _Heading2WithDescriptionWiithImageState extends State<Heading2WithDescript
         Text(widget.H2,style: TextStyle(fontSize: 20,fontWeight: FontWeight.normal)),
         Container(margin:EdgeInsets.only(top: 25),child: Text(widget.Descrition,style: TextStyle(color: Colors.black87),textAlign: TextAlign.justify,)),
 
-        Image.network(widget.ImageUrl),
+        if(widget.ImageUrl.isNotEmpty) Image.network(widget.ImageUrl),
 
       ],
     ));

@@ -1,47 +1,67 @@
 class BiographyReadResponse {
-  BiographyReadResponse({
-    required this.title,
-    required this.body,
-    required this.cover,
-    required this.images,
-    required this.video,
-  });
+  String title = '';
+  String body = '';
+  String cover = '';
+  List<Images> images = [];
+  String video = '';
 
-  String title;
-  String body;
-  String cover;
-  List<Image> images;
-  String video;
+  BiographyReadResponse(
+      {required this.title,
+      required this.body,
+      required this.cover,
+      required this.images,
+      required this.video});
 
-  factory BiographyReadResponse.fromJson(Map<String, dynamic> json) => BiographyReadResponse(
-    title: json["title"] ?? '',
-    body: json["body"] ?? '',
-    cover: json["cover"] ?? '',
-    images: List<Image>.from(json["images"]==[] ? [{"img": " "}] : json["images"].map((x) => Image.fromJson(x)) ),
-    video: json["video"] ?? '',
-  );
+  BiographyReadResponse.fromJson(Map<String, dynamic> json) {
+    title = json['title'];
+    body = json['body'];
+    cover = json['cover'];
+    if (json['images'] != null) {
+      json['images'].forEach((v) {
+        images.add(new Images.fromJson(v));
+      });
+    }
+    video = json['video'];
+  }
 
-  Map<String, dynamic> toJson() => {
-    "title": title,
-    "body": body,
-    "cover": cover,
-    "images": List<Image>.from(images.map((x) => x.toJson())),
-    "video": video,
-  };
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['title'] = this.title;
+    data['body'] = this.body;
+    data['cover'] = this.cover;
+    if (this.images != null) {
+      data['images'] = this.images.map((v) => v.toJson()).toList();
+    }
+    data['video'] = this.video;
+    return data;
+  }
 }
 
-class Image {
-  Image({
-    required this.img,
-  });
+class Images {
+  String img = '';
 
-  String img;
+  Images({required this.img});
 
-  factory Image.fromJson(Map<String, dynamic> json) => Image(
-    img: json["img"] ?? "",
-  );
+  Images.fromJson(Map<String, dynamic> json) {
+    img = json['img'];
+  }
 
-  Map<String, dynamic> toJson() => {
-    "img": img,
-  };
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['img'] = this.img;
+    return data;
+  }
+}
+
+class BiographyListResponse {
+  List<BiographyReadResponse> biographyList = [];
+
+  BiographyListResponse();
+
+  BiographyListResponse.fromJson(List<dynamic> jsonObject) {
+    for (var area in jsonObject) {
+      BiographyReadResponse model = BiographyReadResponse.fromJson(area);
+      this.biographyList.add(model);
+    }
+  }
 }
