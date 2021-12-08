@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:kf_drawer/kf_drawer.dart';
+import 'package:personal_branding/models/response/future_goals_response_list.dart';
+import 'package:personal_branding/network/http_manager.dart';
+import 'package:personal_branding/utills/utils.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading1.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading2_description_picure.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading2withdescription.dart';
@@ -17,6 +20,37 @@ class _FutureGoalsState extends State<FutureGoals> {
 
   List images = [Heading2WithDescriptionWiithImage("Dream Big and Bold", "As Tony Robbins says, Goals are like magnets. They’ll attract the things that make them come true.Create a vision and never let the environment, other people’s beliefs, or the limits of what has been done in the past shape your decisions.", "https://branding.ratedsolution.com/public/futuregoal/1637941282_future-goals.png", (){}),
     Heading2WithDescriptionWiithImage("Dream Big and Bold", "As Tony Robbins says, Goals are like magnets. They’ll attract the things that make them come true.Create a vision and never let the environment, other people’s beliefs, or the limits of what has been done in the past shape your decisions.", "https://branding.ratedsolution.com/public/biography/1637939722_Tony_Robbins.png", (){}),];
+
+  late FutureGoalsReadResponse futureGoalsReadResponse;
+
+  String api_response = "";
+  bool _isLoading = true;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _getFutureGoalsList();
+  }
+
+  _getFutureGoalsList() {
+    HTTPManager().futureGoals().then((value) {
+      setState(() {
+        _isLoading = false;
+        print(value);
+        futureGoalsReadResponse = value;
+      });
+    }).catchError((e) {
+      print(e);
+      showAlert(context, e.toString(), true, (){
+        setState(() {
+          _isLoading = false;
+        });
+      }, (){
+        _getFutureGoalsList();
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

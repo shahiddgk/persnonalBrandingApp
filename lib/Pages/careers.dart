@@ -1,13 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kf_drawer/kf_drawer.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading1.dart';
-import 'package:personal_branding/widgets/Headings/widget_heading2.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading2withdescription.dart';
-import 'package:personal_branding/widgets/TextFields/widget_email_field.dart';
-import 'package:personal_branding/widgets/TextFields/widget_message_field.dart';
-import 'package:personal_branding/widgets/TextFields/widget_name_field.dart';
-import 'package:personal_branding/widgets/Buttons/widget_button.dart';
-import 'package:personal_branding/widgets/widget_contacts_icon_description.dart';
 import 'package:personal_branding/widgets/widget_icon_with_description.dart';
 
 // ignore: must_be_immutable
@@ -69,8 +63,8 @@ class _CareerState extends State<Career> {
 
                               Heading2WithDescription("LET KEEP IN TOUCH","Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."),
 
-                              IconDescription("https://branding.ratedsolution.com/public/images/20211127071232.png", "Executive &amp; Entrepreneur", "Sophia Antipolis innovative ecosystem", "October 2007 – November 2014","Lorem Ipsum is simply dummy text of the printing and typesetting industry."),
-                              IconDescription("https://branding.ratedsolution.com/public/images/20211127071554.png", "Business Development Consultant", "Cara Group", "May 2007 – Septrmber 2014","Lorem Ipsum is simply dummy text of the printing and typesetting industry."),
+                              // IconDescription("https://branding.ratedsolution.com/public/images/20211127071232.png", "Executive &amp; Entrepreneur", "Sophia Antipolis innovative ecosystem", "October 2007 – November 2014","Lorem Ipsum is simply dummy text of the printing and typesetting industry."),
+                              // IconDescription("https://branding.ratedsolution.com/public/images/20211127071554.png", "Business Development Consultant", "Cara Group", "May 2007 – Septrmber 2014","Lorem Ipsum is simply dummy text of the printing and typesetting industry."),
                             ],
                           ),),)
                     ],

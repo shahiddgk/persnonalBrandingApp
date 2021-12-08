@@ -49,4 +49,5 @@ class ResponseHandler {
       throw FetchDataException('No Internet connection');
     }
   }
+
 }

@@ -1,6 +1,13 @@
+import 'package:personal_branding/Pages/Biography/biography.dart';
 import 'package:personal_branding/models/request/loin_request.dart';
+import 'package:personal_branding/models/response/about_response_model.dart';
+import 'package:personal_branding/models/response/achievement_response_list.dart';
+import 'package:personal_branding/models/response/biography_response_model.dart';
+import 'package:personal_branding/models/response/experience_response_list.dart';
+import 'package:personal_branding/models/response/future_goals_response_list.dart';
 import 'package:personal_branding/models/response/general_response_model.dart';
 import 'package:personal_branding/models/response/session_user_model.dart';
+import 'package:personal_branding/models/response/testimonials_response_list.dart';
 import 'package:personal_branding/network/api_urls.dart';
 import 'package:personal_branding/network/response_handler.dart';
 
@@ -17,6 +24,47 @@ class HTTPManager{
     return sessionUserModel;
   }
 
+ Future<AboutReadResponse> about() async {
+    final url = ApplicationURLs.API_ABOUT;
+    final GeneralResponseModel response = await _handler.get(url, true);
+    AboutReadResponse aboutReadResponse = AboutReadResponse.fromJson(response.data);
+    return aboutReadResponse;
+ }
+
+  Future<BiographyReadResponse> Biography() async {
+    final url = ApplicationURLs.API_BIOGRAPHY;
+    final GeneralResponseModel response = await _handler.get(url, true);
+    BiographyReadResponse biographyReadResponse = BiographyReadResponse.fromJson(response.data);
+    return biographyReadResponse;
+  }
+
+ Future<ExperienceReadResponse> experience() async {
+    final url = ApplicationURLs.API_EXPERIENCE;
+    final GeneralResponseModel response = await _handler.get(url, true);
+    ExperienceReadResponse experienceReadResponse = ExperienceReadResponse.fromJson(response.data);
+    return experienceReadResponse;
+ }
+
+  Future<TestimonialsReadResponse> testimonials() async {
+    final url = ApplicationURLs.API_TESTIMONIALS;
+    final GeneralResponseModel response = await _handler.get(url, true);
+    TestimonialsReadResponse testimonialsReadResponse = TestimonialsReadResponse.fromJson(response.data);
+    return testimonialsReadResponse;
+  }
+
+  Future<AchievementReadResponse> achievement() async {
+    final url = ApplicationURLs.API_ACHIEVEMENT;
+    final GeneralResponseModel response = await _handler.get(url, true);
+    AchievementReadResponse achievementReadResponse = AchievementReadResponse.fromJson(response.data);
+    return achievementReadResponse;
+  }
+
+  Future<FutureGoalsReadResponse> futureGoals() async {
+    final url = ApplicationURLs.API_FUTURE_GOALS;
+    final GeneralResponseModel response = await _handler.get(url, true);
+    FutureGoalsReadResponse futureGoalsReadResponse = FutureGoalsReadResponse.fromJson(response.data);
+    return futureGoalsReadResponse;
+  }
 
 
 }

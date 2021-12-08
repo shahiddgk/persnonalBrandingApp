@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:kf_drawer/kf_drawer.dart';
 import 'package:personal_branding/Pages/Testimonials/new_idea.dart';
-import 'package:personal_branding/widgets/Buttons/widget_button.dart';
-import 'package:personal_branding/widgets/Headings/widget_description_text.dart';
+import 'package:personal_branding/models/response/testimonials_response_list.dart';
+import 'package:personal_branding/network/http_manager.dart';
+import 'package:personal_branding/utills/utils.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading1.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading2withdescription.dart';
-import 'package:personal_branding/widgets/Headings/widget_text_partnership.dart';
-import 'package:personal_branding/widgets/TextFields/widget_industry_fields.dart';
-import 'package:personal_branding/widgets/TextFields/widget_message_field.dart';
-import 'package:personal_branding/widgets/TextFields/widget_title_field.dart';
-import 'package:personal_branding/widgets/widget_icon_with_description.dart';
 import 'package:personal_branding/widgets/widget_testimonial_picture_details.dart';
 
 // ignore: must_be_immutable
@@ -24,6 +20,41 @@ class _TestimonialsState extends State<Testimonials> {
   TextEditingController _organizatonController = new TextEditingController();
   TextEditingController _targetIndustryController = new TextEditingController();
   TextEditingController _messageController = new TextEditingController();
+
+  late TestimonialsReadResponse testimonialsReadResponse;
+
+  String api_response = "";
+  bool _isLoading = true;
+
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    _getTestimonialsList();
+  }
+
+
+  _getTestimonialsList() {
+    HTTPManager().testimonials().then((value) {
+      setState(() {
+        _isLoading = false;
+        print(value);
+        testimonialsReadResponse = value;
+      });
+    }).catchError((e) {
+      print(e);
+      showAlert(context, e.toString(), true, (){
+        setState(() {
+          _isLoading = false;
+        });
+      }, (){
+        _getTestimonialsList();
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,9 +102,9 @@ class _TestimonialsState extends State<Testimonials> {
                             Align(alignment: Alignment.centerRight,child: TextButton(child:Text("YOUR THOUGHTS",style: TextStyle(color: Colors.grey),) ,onPressed: (){
                               Navigator.push(context, MaterialPageRoute(builder: (context)=>NewIdea()));
                             },)),
-                            testimonialPictureDetails("https://branding.ratedsolution.com/public/images/20211127071232.png", "SENIOR DESIGNER", "Sophia Antipolis innovative ecosystem", "Lorem Ipsum is simply dummy text of the printing and typesetting industry"),
-                            testimonialPictureDetails("https://branding.ratedsolution.com/public/images/20211127071232.png", "SENIOR DESIGNER", "Sophia Antipolis innovative ecosystem", "Lorem Ipsum is simply dummy text of the printing and typesetting industry"),
-                          ],
+                          //   testimonialPictureDetails("https://branding.ratedsolution.com/public/images/20211127071232.png", "SENIOR DESIGNER", "Sophia Antipolis innovative ecosystem", "Lorem Ipsum is simply dummy text of the printing and typesetting industry"),
+                          //   testimonialPictureDetails("https://branding.ratedsolution.com/public/images/20211127071232.png", "SENIOR DESIGNER", "Sophia Antipolis innovative ecosystem", "Lorem Ipsum is simply dummy text of the printing and typesetting industry"),
+                           ],
                         ),
                       ),
                       ),
