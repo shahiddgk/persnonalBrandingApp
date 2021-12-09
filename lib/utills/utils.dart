@@ -69,7 +69,7 @@ Future<SessionUserModel> getUserSession() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String? userSession = prefs.getString(USER_KEY);
   if (userSession == null) {
-    return SessionUserModel(id: 0, emailVerifiedAt: '', name: '', usertype: '', updatedAt: '', createdAt: '', email: '');
+    return SessionUserModel(id: 0, emailVerifiedAt: '', name: '', usertype: '', updatedAt: '', createdAt: '', email: '', status: '');
   }
   print(SessionUserModel.fromJson(jsonDecode(userSession)));
   return SessionUserModel.fromJson(jsonDecode(userSession));

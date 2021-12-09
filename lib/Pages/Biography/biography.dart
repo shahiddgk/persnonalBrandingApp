@@ -97,7 +97,7 @@ class _BiographyState extends State<Biography>
                                 padding: EdgeInsets.only(
                                     top: MediaQuery.of(context).size.height *
                                         1 /
-                                        70,
+                                        20,
                                     left: 20,
                                     right: 20,
                                     bottom: MediaQuery.of(context).size.height *
@@ -106,54 +106,51 @@ class _BiographyState extends State<Biography>
                                 child: Align(
                                   alignment: Alignment.centerLeft,
                                   child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: <Widget>[
-                                      Heading1("BIOGRAPHY"),
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      children: <Widget>[
+                                        Heading1("BIOGRAPHY"),
 
-                                      // Heading2WithDescription(biographyReadResponse.title,"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."),
-
-                                      Container(
-                                        child: ListView.builder(
-                                          itemCount:
-                                              biographyReadResponse.length,
-                                          shrinkWrap: true,
-                                          scrollDirection: Axis.vertical,
-                                          itemBuilder: (context, index) {
-                                            return GestureDetector(
-                                              onTap: () {
-                                                Navigator.of(context).push(
-                                                    MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            PictureDetails()));
-                                              },
-                                              child: Container(
-                                                width: MediaQuery.of(context)
-                                                    .size
-                                                    .width,
-                                                child: Heading2WithDescriptionWiithImage(
-                                                    biographyReadResponse[index]
-                                                        .title,
-                                                    biographyReadResponse[index]
-                                                        .body,
-                                                    biographyReadResponse[index]
-                                                                .images
-                                                                .length >
-                                                            0
-                                                        ? biographyReadResponse[
-                                                                index]
-                                                            .images[0]
-                                                            .img
-                                                        : "",
-                                                    () {}),
-                                              ),
-                                            );
-                                          },
+                                        // Heading2WithDescription(biographyReadResponse.title,"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."),
+                                    ListView.builder(
+                                      physics: const NeverScrollableScrollPhysics(),
+                                            itemCount:
+                                                biographyReadResponse.length,
+                                            shrinkWrap: true,
+                                            itemBuilder: (context, index) {
+                                              return GestureDetector(
+                                                onTap: () {
+                                                  Navigator.of(context).push(
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              PictureDetails()));
+                                                },
+                                                child: Container(
+                                                  width: MediaQuery.of(context)
+                                                      .size
+                                                      .width,
+                                                  child: Heading2WithDescriptionWiithImage(
+                                                      biographyReadResponse[index]
+                                                          .title,
+                                                      biographyReadResponse[index]
+                                                          .body,
+                                                      biographyReadResponse[index]
+                                                                  .images
+                                                                  .length >
+                                                              0
+                                                          ? biographyReadResponse[
+                                                                  index]
+                                                              .images[0]
+                                                              .img
+                                                          : "",
+                                                      () {}),
+                                                ),
+                                              );
+                                            },
                                         ),
-                                      ),
-                                    ],
-                                  ),
+                                      ],
+                                    ),
                                 ),
                               ),
                             ],

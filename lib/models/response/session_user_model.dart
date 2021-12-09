@@ -6,6 +6,7 @@ class SessionUserModel {
   String emailVerifiedAt='';
   String createdAt='';
   String updatedAt='';
+  String status = '';
 
   SessionUserModel(
       {required this.id,
@@ -14,7 +15,8 @@ class SessionUserModel {
         required this.usertype,
         required this.emailVerifiedAt,
         required this.createdAt,
-        required this.updatedAt});
+        required this.updatedAt,
+      required this.status});
 
   SessionUserModel.fromJson(Map<String, dynamic> json) {
     id = json['id'] == null ? 0 : json['id'];
@@ -24,6 +26,7 @@ class SessionUserModel {
      emailVerifiedAt = json['email_verified_at'] == null ? "" : json['email_verified_at'];
     createdAt = json['created_at'] == null ? "" : json['created_at'];
     updatedAt = json['updated_at'] == null ? "" : json['updated_at'];
+    status = json['status'] == null ? "" : json['status'];
   }
 
   Map<String, dynamic> toJson() {
@@ -35,6 +38,7 @@ class SessionUserModel {
     data['email_verified_at'] = this.emailVerifiedAt;
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
+    data['status'] = this.status;
     return data;
   }
 }

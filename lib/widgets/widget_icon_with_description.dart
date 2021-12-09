@@ -85,7 +85,7 @@ class _IconDescriptionState extends State<IconDescription> {
                   ),
                 ),
               ),
-              Expanded(flex:1,child: Container(width:MediaQuery.of(context).size.width/2,child: Text(widget.Description,textAlign: TextAlign.justify,))),
+              Expanded(flex:2,child: Container(width:MediaQuery.of(context).size.width/2,child: Text(widget.Description,textAlign: TextAlign.justify,))),
             ],
           ),
         )

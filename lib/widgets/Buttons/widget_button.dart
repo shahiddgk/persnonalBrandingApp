@@ -19,7 +19,7 @@ class _ButtonState extends State<Button> {
       margin:EdgeInsets.only(top: 25,right: 10),
       width: widget.Width,
       decoration: BoxDecoration(border: Border.all(color: Colors.amber,width: 3)),
-      child: MaterialButton(
+      child: RaisedButton(
         onPressed:() {
           widget.onPressed();
         },//since this is only a UI app
@@ -31,10 +31,8 @@ class _ButtonState extends State<Button> {
             fontWeight: FontWeight.bold,
           ),
         ),
-        color: Colors.amber,
+        color: Colors.white,
         elevation: 0,
-        minWidth: 400,
-        height: 50,
         textColor: Colors.white,
       ),
     );

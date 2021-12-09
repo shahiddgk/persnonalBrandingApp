@@ -29,11 +29,9 @@ class _RegisterState extends State<Register> {
       //   leading: IconButton(onPressed:  widget.onMenuPressed, icon: Icon(Icons.menu),),
       // ),
       body: SafeArea(
-        child: SingleChildScrollView(
-          scrollDirection: Axis.vertical,
-          child: Container(
+        child: Container(
             height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
             child: Column(
                 children: <Widget>[
                   // Row(
@@ -57,52 +55,54 @@ class _RegisterState extends State<Register> {
                   Expanded(
                     child: Form(
                       key: _formKey,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: <Widget>[
-                          Container(
-                            width: MediaQuery.of(context).size.width,
-                            margin: EdgeInsets.only(top: MediaQuery.of(context).size.height*1/70,left: 20,right: 20),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color: Colors.white,
-                            ),
-                            child: ListView(
-                                  shrinkWrap: true,
-                                  scrollDirection: Axis.vertical,
-                                  children: <Widget>[
-                                    Heading1("REGISTER"),
-                                    Container(
-                                        child: NameField(
-                                          hint: "Enter Name",
-                                          controller: _nameFieldController,
-                                        )
-                                      ),
-                                    Container(
-                                        child: EmailField(
-                                          hint: "Enter Email",
-                                          controller: _emailFieldController,
-                                        )
-                                      ),
-                                    Container(
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.vertical,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: <Widget>[
+                            Container(
+                              width: MediaQuery.of(context).size.width,
+                              margin: EdgeInsets.only(top: MediaQuery.of(context).size.height*1/20,left: 20,right: 20),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: Colors.white,
+                              ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Heading1("REGISTER"),
+                                  Container(
+                                      child: NameField(
+                                        hint: "Enter Name",
+                                        controller: _nameFieldController,
+                                      )
+                                  ),
+                                  Container(
+                                      child: EmailField(
+                                        hint: "Enter Email",
+                                        controller: _emailFieldController,
+                                      )
+                                  ),
+                                  Container(
                                       child: PasswordField(hint: "Enter Password",
-                                      controller: _passwordFieldController,)
-                                    ),
-                                   Button(title: "SIGN UP",Width: MediaQuery.of(context).size.width,onPressed: (){
-                                        _SignUp();
-                                        },
-                                      ),
-                                    ForgotPassword(title: "Forgot Password!",onPressed: () {},)
-                                  ],
-                                ),
-                          )
-                        ],
+                                        controller: _passwordFieldController,)
+                                  ),
+                                  Button(title: "SIGN UP",Width: MediaQuery.of(context).size.width,onPressed: (){
+                                    _SignUp();
+                                  },
+                                  ),
+                                  ForgotPassword(title: "Forgot Password!",onPressed: () {},)
+                                ],
+                              )
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   ),
                 ],
               ),
-          ),
         ),
       ),
     );

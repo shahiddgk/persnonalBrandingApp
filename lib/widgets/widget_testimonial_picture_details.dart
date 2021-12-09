@@ -83,7 +83,7 @@ class _testimonialPictureDetailsState extends State<testimonialPictureDetails> {
                   ),
                 ),
               ),
-              Expanded(flex:1,child: Container(width:MediaQuery.of(context).size.width/2,child: Text(widget.Description,textAlign: TextAlign.justify,))),
+              Expanded(flex:3,child: Container(width:MediaQuery.of(context).size.width/2,child: Text(widget.Description,textAlign: TextAlign.justify,))),
             ],
           ),
         )

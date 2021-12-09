@@ -39,35 +39,35 @@ class HTTPManager {
     return biographyReadResponse.biographyList;
   }
 
-  Future<ExperienceReadResponse> experience() async {
+  Future<List<ExperienceReadResponse>> Experience() async {
     final url = ApplicationURLs.API_EXPERIENCE;
     final GeneralResponseModel response = await _handler.get(url, true);
-    ExperienceReadResponse experienceReadResponse =
-        ExperienceReadResponse.fromJson(response.data);
-    return experienceReadResponse;
+    ExperienceListResponse experienceListResponse =
+    ExperienceListResponse.fromJson(response.data);
+    return experienceListResponse.experienceList;
   }
 
-  Future<TestimonialsReadResponse> testimonials() async {
+  Future<List<TestimonialsReadResponse>> Testimonials() async {
     final url = ApplicationURLs.API_TESTIMONIALS;
     final GeneralResponseModel response = await _handler.get(url, true);
-    TestimonialsReadResponse testimonialsReadResponse =
-        TestimonialsReadResponse.fromJson(response.data);
-    return testimonialsReadResponse;
+    TestimonialsListResponse testimonialsListResponse =
+    TestimonialsListResponse.fromJson(response.data);
+    return testimonialsListResponse.testimonialsList;
   }
 
-  Future<AchievementReadResponse> achievement() async {
+  Future<List<AchievementsReadResponse>> Achievement() async {
     final url = ApplicationURLs.API_ACHIEVEMENT;
     final GeneralResponseModel response = await _handler.get(url, true);
-    AchievementReadResponse achievementReadResponse =
-        AchievementReadResponse.fromJson(response.data);
-    return achievementReadResponse;
+    AchievementsListResponse achievementsListResponse =
+    AchievementsListResponse.fromJson(response.data);
+    return achievementsListResponse.achievementList;
   }
 
-  Future<FutureGoalsReadResponse> futureGoals() async {
+  Future<List<FutureGoalsReadResponse>> FutureGoals() async {
     final url = ApplicationURLs.API_FUTURE_GOALS;
     final GeneralResponseModel response = await _handler.get(url, true);
-    FutureGoalsReadResponse futureGoalsReadResponse =
-        FutureGoalsReadResponse.fromJson(response.data);
-    return futureGoalsReadResponse;
+    FutureGoalsListResponse futureGoalsListResponse =
+    FutureGoalsListResponse.fromJson(response.data);
+    return futureGoalsListResponse.futureGoalsList;
   }
 }

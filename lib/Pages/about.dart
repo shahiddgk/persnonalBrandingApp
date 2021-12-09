@@ -87,7 +87,7 @@ class _AboutState extends State<About> {
 
                       Align(alignment:Alignment.centerRight,child: Image.asset("images/mes.jpg",fit: BoxFit.cover,)),
 
-                      Padding(padding: EdgeInsets.only(top:MediaQuery.of(context).size.height*1/70,left: 20,right: 20,bottom: MediaQuery.of(context).size.height*1/70),
+                      Padding(padding: EdgeInsets.only(top:MediaQuery.of(context).size.height*1/20,left: 20,right: 20,bottom: MediaQuery.of(context).size.height*1/70),
                         child: Align(alignment: Alignment.centerLeft,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,

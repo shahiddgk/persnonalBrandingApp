@@ -42,6 +42,7 @@ class _EntrepreneurState extends State<Entrepreneur> {
   int _radioValue = 0;
   bool isVisible = false;
   bool _isCheckingSession = true;
+  bool _isLoading = true;
 
 
    _handleRadioValueChange(int value) {
@@ -108,12 +109,13 @@ class _EntrepreneurState extends State<Entrepreneur> {
       appBar: AppBar(
         leading: IconButton(onPressed:  widget.onMenuPressed, icon: Icon(Icons.menu),),
       ),
+        resizeToAvoidBottomInset: true,
       floatingActionButton: FloatingActionButton(onPressed: () {
         _BottomSheet(context,globalSessionUser.id);
       },
         child: Icon(Icons.message),
       ),
-      body: SafeArea(
+      body: _isLoading == false ? SafeArea(
         child: Center(
           child: Column(
             children: <Widget>[
@@ -142,7 +144,7 @@ class _EntrepreneurState extends State<Entrepreneur> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Padding(padding: EdgeInsets.only(top:MediaQuery.of(context).size.height*1/70,left: 20,right: 20,bottom:MediaQuery.of(context).size.height*1/70,),
+                      Padding(padding: EdgeInsets.only(top:MediaQuery.of(context).size.height*1/20,left: 20,right: 20,bottom:MediaQuery.of(context).size.height*1/70,),
                         child: Align(alignment: Alignment.centerLeft,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -162,84 +164,90 @@ class _EntrepreneurState extends State<Entrepreneur> {
                                   TextButton(onPressed: (){}, child: Text("NEW IDEA",style: TextStyle(color: Colors.grey),))
                               ],),
                             ),
-                           //globalSessionUser == null ?
-                           Column(children: [
-                              GestureDetector(
-                                onTap: (){
-                                  setState(() {
-                                    isVisible = !isVisible;
-                                    //isVisible==true ? _BottomSheet(context):null;
-                                  });
-                                },
-                                child: Container(
-                                  color: Colors.black,
-                                  height: 40,
-                                  width: MediaQuery.of(context).size.width,
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: <Widget>[
-                                      Container(margin:const EdgeInsets.only(left: 10),child: const Text("Provisional title idea",style: TextStyle(color: Colors.white),)),
-                                      isVisible?Container(margin:const EdgeInsets.only(right: 10),child: const Text("-",style: TextStyle(color: Colors.white),)):
-                                      Container(margin:const EdgeInsets.only(right: 10),child: const Text("+",style: TextStyle(color: Colors.white),))
-                                    ],
+                           globalSessionUser == null ?
+                           Container(
+                             margin: EdgeInsets.only(bottom: 10),
+                             child: Column(children: [
+                                GestureDetector(
+                                  onTap: (){
+                                    setState(() {
+                                      isVisible = !isVisible;
+                                      //isVisible==true ? _BottomSheet(context):null;
+                                    });
+                                  },
+                                  child: Container(
+                                    color: Colors.black,
+                                    height: 40,
+                                    width: MediaQuery.of(context).size.width,
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: <Widget>[
+                                        Container(margin:const EdgeInsets.only(left: 10),child: const Text("Provisional title idea",style: TextStyle(color: Colors.white),)),
+                                        isVisible?Container(margin:const EdgeInsets.only(right: 10),child: const Text("-",style: TextStyle(color: Colors.white),)):
+                                        Container(margin:const EdgeInsets.only(right: 10),child: const Text("+",style: TextStyle(color: Colors.white),))
+                                      ],
+                                    ),
                                   ),
                                 ),
-                              ),
-                              Visibility(
-                                visible: isVisible,
-                                child: Container(
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                      Heading2WithDescription("Description", "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."),
-                                      Heading2("Related Document"),
-                                      Text("add more documents"),
-                                      Button(title: 'Browse',onPressed: (){}, Width: 100,),
-                                      Container(
-                                        child: Text("Document list here"),
-                                      )
-                                    ],
+                                Visibility(
+                                  visible: isVisible,
+                                  child: Container(
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        Container(
+                                          margin: EdgeInsets.only(top: 10),
+                                            child: Heading2WithDescription("Description", "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.")),
+                                        Heading2("Related Document"),
+                                        Container(margin:EdgeInsets.only(top: 5),child: Text("add more documents")),
+                                        Button(title: 'Browse',onPressed: (){}, Width: 100,),
+                                        Container(
+                                          margin: EdgeInsets.only(top: 10),
+                                          child: Text("Document list here"),
+                                        )
+                                      ],
+                                    ),
                                   ),
                                 ),
-                              ),
+                              ],),
+                           )
+                               :
+                            Column(children: [
+                              IndustryTitle(hint: "Title",controller: _nameFieldController,),
+
+                              Industry(hint: "Target Industry",controller: _nameFieldController,),
+
+                              MessageField(hint: "Description",controller: _messageFieldController,),
+
+                              Industry(hint: "Date Picker Here",controller: _nameFieldController,),
+
+                              Button(title: "Browse", onPressed: (){}, Width: 90),
+
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Radio(value: 0, groupValue: _radioValue, onChanged: _handleRadioValueChange(0)),
+                                  Text("Partnership",style: TextStyle(color: Colors.black87),),
+                                  Radio(value: 1, groupValue: _radioValue, onChanged: _handleRadioValueChange(1)),
+                                  Text("Investment Plan",style: TextStyle(color: Colors.black87),)
+
+                                ],),
+
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+
+                                  Button(title: "REGISTER",Width: 110,onPressed: (){ Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Register()));},),
+                                  Button(title: "LOGIN",Width: 90,onPressed: () {
+
+                                    Navigator.of(context).push(MaterialPageRoute(builder: (context)=>LogIn()));
+
+                                  },),
+
+                                ],),
+                              PartnerShipText()
                             ],)
-                               //:
-                            // Column(children: [
-                            //   IndustryTitle(hint: "Title",controller: _nameFieldController,),
-                            //
-                            //   Industry(hint: "Target Industry",controller: _nameFieldController,),
-                            //
-                            //   MessageField(hint: "Description",controller: _messageFieldController,),
-                            //
-                            //   Industry(hint: "Date Picker Here",controller: _nameFieldController,),
-                            //
-                            //   Button(title: "Browse", onPressed: (){}, Width: 90),
-                            //
-                            //   Row(
-                            //     mainAxisAlignment: MainAxisAlignment.center,
-                            //     children: [
-                            //       Radio(value: 0, groupValue: _radioValue, onChanged: _handleRadioValueChange(0)),
-                            //       Text("Partnership",style: TextStyle(color: Colors.black87),),
-                            //       Radio(value: 1, groupValue: _radioValue, onChanged: _handleRadioValueChange(1)),
-                            //       Text("Investment Plan",style: TextStyle(color: Colors.black87),)
-                            //
-                            //     ],),
-                            //
-                            //   Row(
-                            //     mainAxisAlignment: MainAxisAlignment.center,
-                            //     children: <Widget>[
-                            //
-                            //       Button(title: "REGISTER",Width: 110,onPressed: (){ Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Register()));},),
-                            //       Button(title: "LOGIN",Width: 90,onPressed: () {
-                            //
-                            //         Navigator.of(context).push(MaterialPageRoute(builder: (context)=>LogIn()));
-                            //
-                            //       },),
-                            //
-                            //     ],),
-                            //   PartnerShipText()
-                            // ],)
 
                           ],
                         ),),)
@@ -250,7 +258,11 @@ class _EntrepreneurState extends State<Entrepreneur> {
             ],
           ),
         ),
-      ),
+      ) : Container(
+        child: Center(
+          child: CircularProgressIndicator(),
+        ),
+      )
     );
   }
 
@@ -260,12 +272,14 @@ class _EntrepreneurState extends State<Entrepreneur> {
         {
           setState(() {
             _isCheckingSession = false;
+            _isLoading = false;
           })
         }
       else
         {
           setState(() {
             globalSessionUser = value;
+            _isLoading = false;
           }),
         }
     });
@@ -279,12 +293,15 @@ void _BottomSheet(BuildContext context, int id) {
         borderRadius: BorderRadius.circular(30.0),
       ),  context: context,
       builder: (context) {
-        return Container(
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(30)),
-          height: MediaQuery.of(context).size.height*0.85,
-          width: MediaQuery.of(context).size.width,
-          child: ChatPage(peerNickname: ' '
-              'Dr.Ahmed Hassan', peerAvatar: 'https://pixelz.cc/wp-content/uploads/2016/11/windows-10-uhd-4k-wallpaper.jpg', peerId: "$id",)
+        return Padding(
+          padding: MediaQuery.of(context).viewInsets,
+          child: Container(
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(30)),
+            height: MediaQuery.of(context).size.height*0.75,
+            width: MediaQuery.of(context).size.width,
+            child: ChatPage(peerNickname: ' '
+                'Dr.Ahmed Hassan', peerAvatar: 'https://pixelz.cc/wp-content/uploads/2016/11/windows-10-uhd-4k-wallpaper.jpg', peerId: "$id",)
+          ),
         );
       }
   );

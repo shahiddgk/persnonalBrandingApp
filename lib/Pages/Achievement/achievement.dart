@@ -18,10 +18,10 @@ class Achievement extends KFDrawerContent {
 
 class _AchievementState extends State<Achievement> {
 
-  List images = [Heading2WithDescriptionWiithImage("LIFE OF DR.AHMED", "We don’t live in the same world that we lived in at the beginning of this year… and if your business isn’t keeping up with this rapidly changing world, you risk being left behind.In this time of upheaval – during this economic winter – you can either get caught in the storm and suffer, or you can use this time to innovate, create and master your skill set to launch into a thriving and successful future.", "https://branding.ratedsolution.com/public/biography/1637939722_Tony_Robbins.png", (){}),
-    Heading2WithDescriptionWiithImage("BUSINESS MASTERY", "We don’t live in the same world that we lived in at the beginning of this year… and if your business isn’t keeping up with this rapidly changing world, you risk being left behind.In this time of upheaval – during this economic winter – you can either get caught in the storm and suffer, or you can use this time to innovate, create and master your skill set to launch into a thriving and successful future.", "https://branding.ratedsolution.com/public/biography/1638002019_business-mastery.png",(){}),];
+  // List images = [Heading2WithDescriptionWiithImage("LIFE OF DR.AHMED", "We don’t live in the same world that we lived in at the beginning of this year… and if your business isn’t keeping up with this rapidly changing world, you risk being left behind.In this time of upheaval – during this economic winter – you can either get caught in the storm and suffer, or you can use this time to innovate, create and master your skill set to launch into a thriving and successful future.", "https://branding.ratedsolution.com/public/biography/1637939722_Tony_Robbins.png", (){}),
+  //   Heading2WithDescriptionWiithImage("BUSINESS MASTERY", "We don’t live in the same world that we lived in at the beginning of this year… and if your business isn’t keeping up with this rapidly changing world, you risk being left behind.In this time of upheaval – during this economic winter – you can either get caught in the storm and suffer, or you can use this time to innovate, create and master your skill set to launch into a thriving and successful future.", "https://branding.ratedsolution.com/public/biography/1638002019_business-mastery.png",(){}),];
 
-  late AchievementReadResponse achievementReadResponse;
+  late List<AchievementsReadResponse> achievementReadResponse;
 
   String api_response = "";
   bool _isLoading = true;
@@ -35,7 +35,7 @@ class _AchievementState extends State<Achievement> {
   }
 
   _getAchievementList() {
-    HTTPManager().achievement().then((value) {
+    HTTPManager().Achievement().then((value) {
       setState(() {
         _isLoading = false;
         print(value);
@@ -43,11 +43,11 @@ class _AchievementState extends State<Achievement> {
       });
     }).catchError((e) {
       print(e);
-      showAlert(context, e.toString(), true, (){
+      showAlert(context, e.toString(), true, () {
         setState(() {
           _isLoading = false;
         });
-      }, (){
+      }, () {
         _getAchievementList();
       });
     });
@@ -59,7 +59,7 @@ class _AchievementState extends State<Achievement> {
       // appBar: AppBar(
       //   leading: IconButton(onPressed:  widget.onMenuPressed, icon: Icon(Icons.menu),),
       // ),
-      body: SafeArea(
+      body:_isLoading==false ? SafeArea(
         child: Center(
           child: Column(
             children: <Widget>[
@@ -88,7 +88,7 @@ class _AchievementState extends State<Achievement> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
-                      Padding(padding: EdgeInsets.only(top:MediaQuery.of(context).size.height*1/70,left: 20,right: 20),
+                      Padding(padding: EdgeInsets.only(top:MediaQuery.of(context).size.height*1/20,left: 20,right: 20),
                         child:
                       Align(alignment: Alignment.centerLeft,
                         child: Column(
@@ -99,22 +99,40 @@ class _AchievementState extends State<Achievement> {
 
                             Heading2WithDescription("OUR PORTFOLIO","Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."),
 
-                            // Container(
-                            //   child: ListView.builder(itemCount: images.length,
-                            //     shrinkWrap: true,
-                            //     scrollDirection: Axis.vertical,
-                            //     itemBuilder: (context, index) {
-                            //       return GestureDetector(
-                            //         onTap: () {
-                            //           Navigator.of(context).push(MaterialPageRoute(builder: (context)=>AchievementPictureDetails()));
-                            //         },
-                            //         child: Container(
-                            //           width: MediaQuery.of(context).size.width,
-                            //           child: images[index],
-                            //         ),
-                            //       );
-                            //     },),
-                            // )
+                            Container(
+                              child: ListView.builder(
+                                physics: const NeverScrollableScrollPhysics(),
+                                itemCount: achievementReadResponse.length,
+                                shrinkWrap: true,
+                                scrollDirection: Axis.vertical,
+                                itemBuilder: (context, index) {
+                                  return GestureDetector(
+                                    onTap: () {
+                                      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>AchievementPictureDetails()));
+                                    },
+                                    child: Container(
+                                      width: MediaQuery.of(context)
+                                          .size
+                                          .width,
+                                      child: Heading2WithDescriptionWiithImage(
+                                          achievementReadResponse[index]
+                                              .title,
+                                          achievementReadResponse[index]
+                                              .body,
+                                          achievementReadResponse[index]
+                                              .images
+                                              .length >
+                                              0
+                                              ? achievementReadResponse[
+                                          index]
+                                              .images[0]
+                                              .img
+                                              : "",
+                                              () {}),
+                                    ),
+                                  );
+                                },),
+                            )
                           ],
                         ),
                       ),
@@ -126,7 +144,11 @@ class _AchievementState extends State<Achievement> {
             ],
           ),
         ),
-      ),
+      ) : Container(
+        child: const Center(
+          child: CircularProgressIndicator(),
+        ),
+      )
     );
   }
 }

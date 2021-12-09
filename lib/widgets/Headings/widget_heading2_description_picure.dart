@@ -36,7 +36,7 @@ class _Heading2WithDescriptionWiithImageState extends State<Heading2WithDescript
       mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
         Text(widget.H2,style: TextStyle(fontSize: 20,fontWeight: FontWeight.normal)),
-        Container(margin:EdgeInsets.only(top: 25),child: Text(widget.Descrition,style: TextStyle(color: Colors.black87),textAlign: TextAlign.justify,)),
+        Container(margin:EdgeInsets.only(top: 25,bottom: 10),child: Text(widget.Descrition,style: TextStyle(color: Colors.black87),textAlign: TextAlign.justify,)),
 
         if(widget.ImageUrl.isNotEmpty) Image.network(widget.ImageUrl),
 

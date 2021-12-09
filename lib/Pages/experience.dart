@@ -7,6 +7,7 @@ import 'package:personal_branding/network/http_manager.dart';
 import 'package:personal_branding/utills/utils.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading1.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading2withdescription.dart';
+import 'package:personal_branding/widgets/widget_icon_with_description.dart';
 
 
 // ignore: must_be_immutable
@@ -19,7 +20,7 @@ class Experience extends KFDrawerContent {
 
 class _ExperienceState extends State<Experience> {
 
-  late ExperienceReadResponse experienceReadResponse;
+  late List<ExperienceReadResponse> experienceReadResponse;
 
   String api_response = "";
   bool _isLoading = true;
@@ -32,7 +33,7 @@ class _ExperienceState extends State<Experience> {
   }
 
   _getExperienceList() {
-    HTTPManager().experience().then((value) {
+    HTTPManager().Experience().then((value) {
       setState(() {
         _isLoading = false;
         print(value);
@@ -40,16 +41,15 @@ class _ExperienceState extends State<Experience> {
       });
     }).catchError((e) {
       print(e);
-      showAlert(context, e.toString(), true, (){
+      showAlert(context, e.toString(), true, () {
         setState(() {
           _isLoading = false;
         });
-      }, (){
+      }, () {
         _getExperienceList();
       });
     });
   }
-
 
 
   @override
@@ -58,7 +58,7 @@ class _ExperienceState extends State<Experience> {
       // appBar: AppBar(
       //   leading: IconButton(onPressed:  widget.onMenuPressed, icon: Icon(Icons.menu),),
       // ),
-      body: SafeArea(
+      body:_isLoading == false ? SafeArea(
         child: Center(
           child: Column(
             children: <Widget>[
@@ -87,7 +87,7 @@ class _ExperienceState extends State<Experience> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
-                      Padding(padding: EdgeInsets.only(top:MediaQuery.of(context).size.height*1/70,left: 20,right: 20,bottom: MediaQuery.of(context).size.height*1/70),child:
+                      Padding(padding: EdgeInsets.only(top:MediaQuery.of(context).size.height*1/20,left: 20,right: 20,bottom: MediaQuery.of(context).size.height*1/70),child:
                       Align(alignment: Alignment.centerLeft,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -97,13 +97,16 @@ class _ExperienceState extends State<Experience> {
 
                           Heading2WithDescription("14 YEARS EXPERIENCE","Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."),
 
-                          // ListView.builder(
-                          //     itemBuilder: (context,index) {
-                          //       final experience = experienceReadResponse.data[index];
-                          //       return IconDescription(experience, experience.profession, experience.companyName, experience.duration, experience.description);
-                          //     },
-                          //     itemCount: experienceReadResponse.data.length,
-                          // ),
+                          Container(
+                            child: ListView.builder(
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                                itemBuilder: (context,index) {
+                                  return IconDescription(experienceReadResponse[index].image, experienceReadResponse[index].profession, experienceReadResponse[index].companyName, experienceReadResponse[index].duration, experienceReadResponse[index].description);
+                                },
+                                itemCount: experienceReadResponse.length,
+                            ),
+                          ),
                           // IconDescription("https://branding.ratedsolution.com/public/images/20211127071232.png", "Executive &amp; Entrepreneur", "Sophia Antipolis innovative ecosystem", "October 2007 – November 2014","Lorem Ipsum is simply dummy text of the printing and typesetting industry."),
                           // IconDescription("https://branding.ratedsolution.com/public/images/20211127071554.png", "Business Development Consultant", "Cara Group", "May 2007 – Septrmber 2014","Lorem Ipsum is simply dummy text of the printing and typesetting industry."),
                            ],
@@ -117,7 +120,11 @@ class _ExperienceState extends State<Experience> {
             ],
           ),
         ),
-      ),
+      ) : Container(
+        child: const Center(
+          child: CircularProgressIndicator(),
+        ),
+      )
     );
   }
 }

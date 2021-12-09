@@ -25,3 +25,16 @@ class TestimonialsReadResponse {
     "image": image,
   };
 }
+
+class TestimonialsListResponse {
+  List<TestimonialsReadResponse> testimonialsList = [];
+
+  TestimonialsListResponse();
+
+  TestimonialsListResponse.fromJson(List<dynamic> jsonObject) {
+    for (var area in jsonObject) {
+      TestimonialsReadResponse model = TestimonialsReadResponse.fromJson(area);
+      this.testimonialsList.add(model);
+    }
+  }
+}

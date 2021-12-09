@@ -29,3 +29,16 @@ class ExperienceReadResponse {
     "image": image,
   };
 }
+
+class ExperienceListResponse {
+  List<ExperienceReadResponse> experienceList = [];
+
+  ExperienceListResponse();
+
+  ExperienceListResponse.fromJson(List<dynamic> jsonObject) {
+    for (var area in jsonObject) {
+     ExperienceReadResponse model = ExperienceReadResponse.fromJson(area);
+      this.experienceList.add(model);
+    }
+  }
+}

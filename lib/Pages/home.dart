@@ -22,26 +22,44 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        //backgroundColor: Colors.transparent,
         leading: IconButton(onPressed:  widget.onMenuPressed, icon: Icon(Icons.menu),),
       ),
-      body: Container(
-                  width: MediaQuery.of(context).size.width,
-                  height:  MediaQuery.of(context).size.height,
-                  child: CarouselSlider.builder(
-                    itemCount: urlImages.length,
-                    itemBuilder: (context, index, realIndex){
-                      final  urlImage = urlImages[index];
-                      return buildImage(urlImage,index);
-                    },
-                    options: CarouselOptions(
-                      height: MediaQuery.of(context).size.height,
-                      autoPlay: true,
-                      viewportFraction: 1,
-                      autoPlayInterval: Duration(seconds: 4),
-                      onPageChanged: (index, reason) => setState(()=>activeIndex = index),
-                    ),
-                  ),
-                ),
+      body: Stack(
+        children: [
+          Container(
+            width: MediaQuery.of(context).size.width,
+            height:  MediaQuery.of(context).size.height,
+            child: CarouselSlider.builder(
+              itemCount: urlImages.length,
+              itemBuilder: (context, index, realIndex){
+                final  urlImage = urlImages[index];
+                return buildImage(urlImage,index);
+              },
+              options: CarouselOptions(
+                height: MediaQuery.of(context).size.height,
+                autoPlay: true,
+                viewportFraction: 1,
+                autoPlayInterval: Duration(seconds: 4),
+                onPageChanged: (index, reason) => setState(()=>activeIndex = index),
+              ),
+            ),
+          ),
+
+          Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+
+                Align(alignment:Alignment.bottomLeft,child: Container(child: Text("Hello, I'M",style: TextStyle(color: Colors.white,fontSize: 22),))),
+                Align(alignment:Alignment.bottomLeft,child: Container(child: Text("DR.AHMED HUSSAIN",style: TextStyle(color: Colors.white,fontSize: 22),))),
+                Align(alignment:Alignment.bottomLeft,child: Container(child: Text("ENTREPRENUR/INFLUENCER",style: TextStyle(color: Colors.white,fontSize: 10),))),
+
+              ],
+            ),
+          Align(alignment: Alignment.bottomCenter,child: buildIndicator()),
+        ],
+      )
     );
   }
 
@@ -57,11 +75,6 @@ class _HomeState extends State<Home> {
         )),child: Column(
       mainAxisAlignment: MainAxisAlignment.end,
       crossAxisAlignment: CrossAxisAlignment.end,
-      children: <Widget>[
-        Align(alignment:Alignment.bottomLeft,child: Container(child: Text("Hello, I'M",style: TextStyle(color: Colors.white,fontSize: 22),))),
-        Align(alignment:Alignment.bottomLeft,child: Container(child: Text("DR.AHMED HUSSAIN",style: TextStyle(color: Colors.white,fontSize: 22),))),
-        Align(alignment:Alignment.bottomLeft,child: Container(child: Text("ENTREPRENUR/INFLUENCER",style: TextStyle(color: Colors.white,fontSize: 12),))),
-      ],
     )),
   );
 
@@ -69,6 +82,7 @@ class _HomeState extends State<Home> {
     activeIndex: activeIndex,
     count: urlImages.length,
     effect: JumpingDotEffect(
+      dotColor: Colors.white,
       dotWidth: 10,dotHeight: 10,
     ),
   );

@@ -21,7 +21,7 @@ class _TestimonialsState extends State<Testimonials> {
   TextEditingController _targetIndustryController = new TextEditingController();
   TextEditingController _messageController = new TextEditingController();
 
-  late TestimonialsReadResponse testimonialsReadResponse;
+  late List<TestimonialsReadResponse> testimonialsReadResponse;
 
   String api_response = "";
   bool _isLoading = true;
@@ -37,7 +37,7 @@ class _TestimonialsState extends State<Testimonials> {
 
 
   _getTestimonialsList() {
-    HTTPManager().testimonials().then((value) {
+    HTTPManager().Testimonials().then((value) {
       setState(() {
         _isLoading = false;
         print(value);
@@ -45,11 +45,11 @@ class _TestimonialsState extends State<Testimonials> {
       });
     }).catchError((e) {
       print(e);
-      showAlert(context, e.toString(), true, (){
+      showAlert(context, e.toString(), true, () {
         setState(() {
           _isLoading = false;
         });
-      }, (){
+      }, () {
         _getTestimonialsList();
       });
     });
@@ -61,7 +61,7 @@ class _TestimonialsState extends State<Testimonials> {
       // appBar: AppBar(
       //   leading: IconButton(onPressed:  widget.onMenuPressed, icon: Icon(Icons.menu),),
       // ),
-      body: SafeArea(
+      body: _isLoading == false ? SafeArea(
         child: Center(
           child: Column(
             children: <Widget>[
@@ -90,7 +90,7 @@ class _TestimonialsState extends State<Testimonials> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
-                      Padding(padding: EdgeInsets.only(top:MediaQuery.of(context).size.height*1/70,left: 20,right: 20,bottom: MediaQuery.of(context).size.height*1/70),child:
+                      Padding(padding: EdgeInsets.only(top:MediaQuery.of(context).size.height*1/20,left: 20,right: 20,bottom: MediaQuery.of(context).size.height*1/70),child:
                       Align(alignment: Alignment.centerLeft,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -102,6 +102,15 @@ class _TestimonialsState extends State<Testimonials> {
                             Align(alignment: Alignment.centerRight,child: TextButton(child:Text("YOUR THOUGHTS",style: TextStyle(color: Colors.grey),) ,onPressed: (){
                               Navigator.push(context, MaterialPageRoute(builder: (context)=>NewIdea()));
                             },)),
+                          
+                            ListView.builder(
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemCount: testimonialsReadResponse.length,
+                              itemBuilder: (context,index) {
+                                return testimonialPictureDetails(testimonialsReadResponse[index].image, testimonialsReadResponse[index].profession, testimonialsReadResponse[index].companyName, testimonialsReadResponse[index].description);
+                              },
+                            )
                           //   testimonialPictureDetails("https://branding.ratedsolution.com/public/images/20211127071232.png", "SENIOR DESIGNER", "Sophia Antipolis innovative ecosystem", "Lorem Ipsum is simply dummy text of the printing and typesetting industry"),
                           //   testimonialPictureDetails("https://branding.ratedsolution.com/public/images/20211127071232.png", "SENIOR DESIGNER", "Sophia Antipolis innovative ecosystem", "Lorem Ipsum is simply dummy text of the printing and typesetting industry"),
                            ],
@@ -115,7 +124,11 @@ class _TestimonialsState extends State<Testimonials> {
             ],
           ),
         ),
-      ),
+      ) : Container(
+        child: const Center(
+          child: CircularProgressIndicator(),
+        ),
+      )
     );
   }
 }
