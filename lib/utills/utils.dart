@@ -5,13 +5,17 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:personal_branding/models/response/general_response_model.dart';
 import 'package:personal_branding/models/response/session_user_model.dart';
 import 'package:personal_branding/utills/styles.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 const String USER_KEY = "user_session";
+const String token = "token";
+
 late SessionUserModel globalSessionUser;
+late GeneralResponseModel generalResponseModel;
 
 Future showAlert(BuildContext context, String message, bool isError,
     VoidCallback cancelCallback, VoidCallback retryCallback) async {
@@ -65,14 +69,29 @@ saveUserSession(SessionUserModel sessionUserModel) async {
   await prefs.setString(USER_KEY, jsonEncode(sessionUserModel));
 }
 
+saveUserToken(GeneralResponseModel generalResponseModel) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  await prefs.setString(token, jsonEncode(generalResponseModel));
+}
+
 Future<SessionUserModel> getUserSession() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String? userSession = prefs.getString(USER_KEY);
   if (userSession == null) {
-    return SessionUserModel(id: 0, emailVerifiedAt: '', name: '', usertype: '', updatedAt: '', createdAt: '', email: '', status: '');
+    return SessionUserModel(id: 0, emailVerifiedAt: "", name: '', usertype: '', updatedAt: '', createdAt: '', email: '', status: '');
   }
   print(SessionUserModel.fromJson(jsonDecode(userSession)));
   return SessionUserModel.fromJson(jsonDecode(userSession));
+}
+
+Future<GeneralResponseModel> getUserSessionToken() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String? userSession = prefs.getString(token);
+  if (userSession == null) {
+    return GeneralResponseModel(message: ' ', status: false);
+  }
+  print(GeneralResponseModel.fromJson(jsonDecode(userSession)));
+  return GeneralResponseModel.fromJson(jsonDecode(userSession));
 }
 
 logoutSessionUser() async {

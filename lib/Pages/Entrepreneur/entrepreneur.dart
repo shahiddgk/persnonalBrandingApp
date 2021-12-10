@@ -8,6 +8,10 @@ import 'package:personal_branding/Pages/Entrepreneur/pages/splash_page.dart';
 import 'package:personal_branding/Pages/Entrepreneur/project_Description_chat_screen.dart';
 import 'package:personal_branding/Pages/login.dart';
 import 'package:personal_branding/drawer.dart';
+import 'package:personal_branding/models/request/user_save_start_up_request.dart';
+import 'package:personal_branding/models/request/user_start_up_request.dart';
+import 'package:personal_branding/models/response/startup_response_model.dart';
+import 'package:personal_branding/network/http_manager.dart';
 import 'package:personal_branding/providers/auth_provider.dart';
 import 'package:personal_branding/utills/utils.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading1.dart';
@@ -43,6 +47,8 @@ class _EntrepreneurState extends State<Entrepreneur> {
   bool isVisible = false;
   bool _isCheckingSession = true;
   bool _isLoading = true;
+  late List<StartUpReadResponse> startUpReadResponse;
+
 
 
    _handleRadioValueChange(int value) {
@@ -64,11 +70,33 @@ class _EntrepreneurState extends State<Entrepreneur> {
     super.initState();
 
     _checkedLogin();
+    _getStartUpList();
 
     Future.delayed(Duration(seconds: 1), () {
       // just delay for showing this slash page clearer because it too fast
       //checkSignedIn();
     });
+  }
+
+  _getStartUpList() {
+       HTTPManager()
+           .StartUp(_isCheckingSession==false ? generalResponseModel.token : ' ', StartUpRequest(id: globalSessionUser.id))
+           .then((value) {
+         setState(() {
+           _isLoading = false;
+           print(value);
+           startUpReadResponse = value;
+         });
+       }).catchError((e) {
+         print(e);
+         showAlert(context, e.toString(), true, () {
+           setState(() {
+             _isLoading = false;
+           });
+         }, () {
+           _getStartUpList();
+         });
+       });
   }
 
   // void checkSignedIn() async {
@@ -110,11 +138,11 @@ class _EntrepreneurState extends State<Entrepreneur> {
         leading: IconButton(onPressed:  widget.onMenuPressed, icon: Icon(Icons.menu),),
       ),
         resizeToAvoidBottomInset: true,
-      floatingActionButton: FloatingActionButton(onPressed: () {
+      floatingActionButton: _isLoading == false ? globalSessionUser == null || globalSessionUser.id != 0 ? FloatingActionButton(onPressed: () {
         _BottomSheet(context,globalSessionUser.id);
       },
         child: Icon(Icons.message),
-      ),
+      ) : null : null,
       body: _isLoading == false ? SafeArea(
         child: Center(
           child: Column(
@@ -164,7 +192,7 @@ class _EntrepreneurState extends State<Entrepreneur> {
                                   TextButton(onPressed: (){}, child: Text("NEW IDEA",style: TextStyle(color: Colors.grey),))
                               ],),
                             ),
-                           globalSessionUser == null ?
+                            globalSessionUser == null || globalSessionUser.id != 0 ?
                            Container(
                              margin: EdgeInsets.only(bottom: 10),
                              child: Column(children: [
@@ -271,7 +299,6 @@ class _EntrepreneurState extends State<Entrepreneur> {
       if (value.id == null)
         {
           setState(() {
-            _isCheckingSession = false;
             _isLoading = false;
           })
         }
@@ -280,6 +307,24 @@ class _EntrepreneurState extends State<Entrepreneur> {
           setState(() {
             globalSessionUser = value;
             _isLoading = false;
+          }),
+        }
+    });
+  }
+
+  Future _checkedToken() async {
+    await getUserSessionToken().then((value) => {
+      if (value.token == null)
+        {
+          setState(() {
+            _isCheckingSession = false;
+          })
+        }
+      else
+        {
+          setState(() {
+            generalResponseModel = value;
+            _isCheckingSession = false;
           }),
         }
     });

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kf_drawer/kf_drawer.dart';
-import 'package:personal_branding/widgets/Buttons/widget_forgotPasswordButtong.dart';
+import 'package:personal_branding/widgets/Buttons/widget_forgotpasswordbuttong.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading1.dart';
 import 'package:personal_branding/widgets/TextFields/widget_email_field.dart';
 import 'package:personal_branding/widgets/TextFields/widget_name_field.dart';

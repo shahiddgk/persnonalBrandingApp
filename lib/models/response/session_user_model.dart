@@ -23,7 +23,7 @@ class SessionUserModel {
     name = json['name'] == null ? "" : json['name'];
     email = json['email'] == null ? "" : json['email'];
     usertype = json['usertype'] == null ? "" : json['usertype'];
-     emailVerifiedAt = json['email_verified_at'] == null ? "" : json['email_verified_at'];
+    emailVerifiedAt = json['email_verified_at'] == null ? "" : json['email_verified_at'];
     createdAt = json['created_at'] == null ? "" : json['created_at'];
     updatedAt = json['updated_at'] == null ? "" : json['updated_at'];
     status = json['status'] == null ? "" : json['status'];

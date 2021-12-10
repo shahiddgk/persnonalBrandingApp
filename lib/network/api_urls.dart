@@ -17,4 +17,10 @@ class ApplicationURLs{
   // ignore: constant_identifier_names
   static const API_FUTURE_GOALS = BASE_URL + "futuregoals";
 
+  static const API_STARTUP_LIST = BASE_URL + "user-data";
+
+  static const API_SAVE_STARTUP = BASE_URL + "store-data";
+
+  static const API_LOGOUT = BASE_URL + "logout";
+
 }

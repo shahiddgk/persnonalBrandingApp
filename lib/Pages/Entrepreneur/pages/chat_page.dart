@@ -455,6 +455,7 @@ class ChatPageState extends State<ChatPage> {
           child: Stack(
             children: <Widget>[
               Column(
+                mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     // List of messages
                     buildListMessage(),

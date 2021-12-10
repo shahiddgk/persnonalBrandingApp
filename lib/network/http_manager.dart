@@ -1,4 +1,6 @@
 import 'package:personal_branding/models/request/loin_request.dart';
+import 'package:personal_branding/models/request/user_save_start_up_request.dart';
+import 'package:personal_branding/models/request/user_start_up_request.dart';
 import 'package:personal_branding/models/response/about_response_model.dart';
 import 'package:personal_branding/models/response/achievement_response_list.dart';
 import 'package:personal_branding/models/response/biography_response_model.dart';
@@ -6,9 +8,12 @@ import 'package:personal_branding/models/response/experience_response_list.dart'
 import 'package:personal_branding/models/response/future_goals_response_list.dart';
 import 'package:personal_branding/models/response/general_response_model.dart';
 import 'package:personal_branding/models/response/session_user_model.dart';
+import 'package:personal_branding/models/response/start_up_save_response.dart';
+import 'package:personal_branding/models/response/startup_response_model.dart';
 import 'package:personal_branding/models/response/testimonials_response_list.dart';
 import 'package:personal_branding/network/api_urls.dart';
 import 'package:personal_branding/network/response_handler.dart';
+import 'package:personal_branding/utills/utils.dart';
 
 class HTTPManager {
   static bool internetCheck = true;
@@ -18,9 +23,19 @@ class HTTPManager {
     final url = ApplicationURLs.API_LOGIN;
     final GeneralResponseModel response =
         await _handler.post(url, loginRequest.toJson(), false);
+    saveUserToken(response);
+    print(response.token);
     SessionUserModel sessionUserModel =
-        SessionUserModel.fromJson(response.data);
+        SessionUserModel.fromJson(response.user);
     return sessionUserModel;
+  }
+
+  Future<GeneralResponseModel> logoutuser(token) async {
+
+    print("token:::$token");
+    final url = ApplicationURLs.API_LOGOUT;
+    final GeneralResponseModel response = await _handler.postt(url,token,true);
+    return response;
   }
 
   Future<AboutReadResponse> about() async {
@@ -41,6 +56,7 @@ class HTTPManager {
 
   Future<List<ExperienceReadResponse>> Experience() async {
     final url = ApplicationURLs.API_EXPERIENCE;
+
     final GeneralResponseModel response = await _handler.get(url, true);
     ExperienceListResponse experienceListResponse =
     ExperienceListResponse.fromJson(response.data);
@@ -70,4 +86,23 @@ class HTTPManager {
     FutureGoalsListResponse.fromJson(response.data);
     return futureGoalsListResponse.futureGoalsList;
   }
+
+  Future<List<StartUpReadResponse>> StartUp(String token,StartUpRequest startUpRequest) async {
+    final url = ApplicationURLs.API_STARTUP_LIST;
+    final GeneralResponseModel response = await _handler.gett(url,token, true);
+    StartUpListResponse startUpListResponse =
+    StartUpListResponse.fromJson(response.data);
+    return startUpListResponse.startUpList;
+  }
+
+  Future<SaveStartUpReadResponse> savestartUpUser(String token,SaveStartUpRequest startUpRequest) async {
+    final url = ApplicationURLs.API_SAVE_STARTUP;
+    final GeneralResponseModel response =
+    await _handler.posttt(url, token,startUpRequest.toJson(),true);
+    print(response.token);
+    SaveStartUpReadResponse startUpReadResponse =
+    SaveStartUpReadResponse.fromJson(response.user);
+    return startUpReadResponse;
+  }
+
 }

@@ -10,7 +10,7 @@ import 'package:personal_branding/models/response/general_response_model.dart';
 import 'package:personal_branding/models/response/session_user_model.dart';
 import 'package:personal_branding/network/http_manager.dart';
 import 'package:personal_branding/utills/utils.dart';
-import 'package:personal_branding/widgets/Buttons/widget_forgotPasswordButtong.dart';
+import 'package:personal_branding/widgets/Buttons/widget_forgotpasswordbuttong.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading1.dart';
 import 'package:personal_branding/widgets/TextFields/widget_email_field.dart';
 import 'package:personal_branding/widgets/TextFields/widget_password_field.dart';
@@ -121,8 +121,6 @@ class _LogInState extends State<LogIn> {
           email: _emailFieldController.text, password: _passwordFieldController.text))
           .then((value) {
         sessionUserModel = value;
-        print("sessionUserModel:::${sessionUserModel.name}");
-
         FirebaseFirestore.instance.collection(FirestoreConstants.pathUserCollection).doc("${sessionUserModel.id}").set(
             {
               FirestoreConstants.nickname: sessionUserModel.name,
@@ -132,6 +130,7 @@ class _LogInState extends State<LogIn> {
               FirestoreConstants.chattingWith: null
             });
         saveUserSession(value);
+        print(saveUserSession(value));
         Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>MainWidget(title: " ")));
       }).catchError((e) {
         print(e);

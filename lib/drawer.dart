@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kf_drawer/kf_drawer.dart';
 import 'package:personal_branding/Pages/careersectiontab.dart';
+import 'package:personal_branding/network/http_manager.dart';
 import 'package:personal_branding/utills/utils.dart';
 import 'Pages/aboutsectiontab.dart';
 import 'Pages/Achievement/achievement.dart';
@@ -30,10 +31,16 @@ class MainWidget extends StatefulWidget {
 
 class _MainWidgetState extends State<MainWidget> with TickerProviderStateMixin {
   late KFDrawerController _drawerController;
+  bool _isCheckingSession = true;
+  bool _isLoading = true;
+  bool _isToken = true;
+  String Token = '';
 
   @override
   void initState() {
     super.initState();
+    _checkedLogin();
+    _checkToken();
     _drawerController = KFDrawerController(
       initialPage: Home(),
       items: [
@@ -122,7 +129,7 @@ class _MainWidgetState extends State<MainWidget> with TickerProviderStateMixin {
         //   // icon: Icon(Icons.settings, color: Colors.white),
         //   page: Partnership(),
         // ),
-        KFDrawerItem.initWithPage(
+       KFDrawerItem.initWithPage(
           text: const Text(
             'FORM',
             style: TextStyle(color: Colors.white, fontSize: 18),
@@ -150,6 +157,44 @@ class _MainWidgetState extends State<MainWidget> with TickerProviderStateMixin {
     );
   }
 
+  Future _checkedLogin() async {
+    await getUserSession().then((value) => {
+      if (value.id == null)
+        {
+          setState(() {
+            _isCheckingSession = false;
+            _isLoading = false;
+          })
+        }
+      else
+        {
+          setState(() {
+            globalSessionUser = value;
+            _isLoading = false;
+          }),
+        }
+    });
+  }
+
+  Future _checkToken() async {
+    await getUserSessionToken().then((value) => {
+      if (value.token == null)
+        {
+          setState(() {
+            _isCheckingSession = false;
+            _isToken = false;
+          })
+        }
+      else
+        {
+          setState(() {
+            generalResponseModel = value;
+            _isToken = false;
+          }),
+        }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -172,16 +217,30 @@ class _MainWidgetState extends State<MainWidget> with TickerProviderStateMixin {
 
           ),
         ),
-        footer: KFDrawerItem(
+        footer: _isLoading == false && _isToken== false ? globalSessionUser.id != 0 ? KFDrawerItem(
           text: const Text(
             'Logout',
             style: TextStyle(color: Colors.white, fontSize: 18),
           ),
           onPressed: (){
+            setState(() {
+              Token = generalResponseModel.token;
+              print(Token);
+            });
             logoutSessionUser();
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>MainWidget(title: " ")));
+            HTTPManager().logoutuser(Token).then((value) {
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>MainWidget(title: " ")));
+            }
+            ).catchError((e) {
+              print(e);
+              setState(() {
+                _isLoading = false;
+              });
+              showAlert(context, e.toString(), true, () {}, () {});
+            });
+
           },
-        ),
+        ) : null : null,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
           gradient: const LinearGradient(

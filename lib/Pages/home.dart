@@ -46,18 +46,21 @@ class _HomeState extends State<Home> {
             ),
           ),
 
-          Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
+          Padding(
+            padding: EdgeInsets.only(left: 10,bottom: 20),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
 
-                Align(alignment:Alignment.bottomLeft,child: Container(child: Text("Hello, I'M",style: TextStyle(color: Colors.white,fontSize: 22),))),
-                Align(alignment:Alignment.bottomLeft,child: Container(child: Text("DR.AHMED HUSSAIN",style: TextStyle(color: Colors.white,fontSize: 22),))),
-                Align(alignment:Alignment.bottomLeft,child: Container(child: Text("ENTREPRENUR/INFLUENCER",style: TextStyle(color: Colors.white,fontSize: 10),))),
+                  Align(alignment:Alignment.bottomLeft,child: Container(child: Text("Hello, I'M",style: TextStyle(color: Colors.white,fontSize: 22),))),
+                  Align(alignment:Alignment.bottomLeft,child: Container(child: Text("DR.AHMED HUSSAIN",style: TextStyle(color: Colors.white,fontSize: 22),))),
+                  Align(alignment:Alignment.bottomLeft,child: Container(child: Text("ENTREPRENUR/INFLUENCER",style: TextStyle(color: Colors.white,fontSize: 10),))),
 
-              ],
-            ),
-          Align(alignment: Alignment.bottomCenter,child: buildIndicator()),
+                ],
+              ),
+          ),
+          Padding(padding:EdgeInsets.only(bottom: 10),child: Align(alignment: Alignment.bottomCenter,child: buildIndicator())),
         ],
       )
     );

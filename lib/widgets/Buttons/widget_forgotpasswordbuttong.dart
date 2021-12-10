@@ -3,6 +3,7 @@
 // ignore: file_names
 // ignore: file_names
 // ignore: file_names
+// ignore: file_names
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -23,7 +24,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
       margin: EdgeInsets.only(top: 20),
       // ignore: file_names
       child: TextButton(onPressed: () { widget.onPressed; },
-      child: Text(widget.title,style: TextStyle(color: Colors.black),)),
+      child: Text(widget.title,style: TextStyle(decoration:TextDecoration.underline,color: Colors.blue,),)),
     );
   }
 }
