@@ -1,15 +1,15 @@
+import 'dart:async';
+
+import 'package:http/http.dart' as http;
+
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:intl/intl.dart';
 import 'package:kf_drawer/kf_drawer.dart';
-import 'package:personal_branding/Pages/Biography/picture_detail.dart';
 import 'package:personal_branding/Pages/Entrepreneur/pages/chat_page.dart';
-import 'package:personal_branding/Pages/Entrepreneur/pages/home_page.dart';
-import 'package:personal_branding/Pages/Entrepreneur/pages/splash_page.dart';
-import 'package:personal_branding/Pages/Entrepreneur/project_Description_chat_screen.dart';
 import 'package:personal_branding/Pages/login.dart';
-import 'package:personal_branding/drawer.dart';
 import 'package:personal_branding/models/request/user_save_start_up_request.dart';
-import 'package:personal_branding/models/request/user_start_up_request.dart';
+import 'package:personal_branding/models/request/widget_upload_file.dart';
 import 'package:personal_branding/models/response/startup_response_model.dart';
 import 'package:personal_branding/network/http_manager.dart';
 import 'package:personal_branding/providers/auth_provider.dart';
@@ -18,13 +18,13 @@ import 'package:personal_branding/widgets/Headings/widget_heading1.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading2.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading2withdescription.dart';
 import 'package:personal_branding/widgets/Headings/widget_text_partnership.dart';
-import 'package:personal_branding/widgets/TextFields/widget_email_field.dart';
 import 'package:personal_branding/widgets/TextFields/widget_industry_fields.dart';
 import 'package:personal_branding/widgets/TextFields/widget_message_field.dart';
-import 'package:personal_branding/widgets/TextFields/widget_name_field.dart';
 import 'package:personal_branding/widgets/Buttons/widget_button.dart';
 import 'package:personal_branding/widgets/TextFields/widget_title_field.dart';
-import 'package:personal_branding/widgets/widget_project_idea.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:personal_branding/widgets/widget_date_picker.dart';
+
 import 'package:provider/src/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -39,15 +39,23 @@ class Entrepreneur extends KFDrawerContent {
 
 class _EntrepreneurState extends State<Entrepreneur> {
 
-  TextEditingController _nameFieldController = TextEditingController();
-  TextEditingController _emailFieldController = TextEditingController();
+  TextEditingController _titleFieldController = TextEditingController();
+  TextEditingController _industryFieldController = TextEditingController();
   TextEditingController _messageFieldController = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  TextEditingController _dateFieldController = TextEditingController();
 
   int _radioValue = 0;
   bool isVisible = false;
+  bool isNewVisible = true;
   bool _isCheckingSession = true;
   bool _isLoading = true;
   late List<StartUpReadResponse> startUpReadResponse;
+  String date = "";
+  DateTime selectedDate = DateTime.now();
+  String selectValue = "Investment";
+  String FileName = ' ';
+  var file;
 
 
 
@@ -70,7 +78,10 @@ class _EntrepreneurState extends State<Entrepreneur> {
     super.initState();
 
     _checkedLogin();
+    _checkedToken();
     _getStartUpList();
+
+    startTimer();
 
     Future.delayed(Duration(seconds: 1), () {
       // just delay for showing this slash page clearer because it too fast
@@ -80,7 +91,7 @@ class _EntrepreneurState extends State<Entrepreneur> {
 
   _getStartUpList() {
        HTTPManager()
-           .StartUp(_isCheckingSession==false ? generalResponseModel.token : ' ', StartUpRequest(id: globalSessionUser.id))
+           .StartUp(_isCheckingSession==false && _isLoading == false ? " " : generalResponseModel.token, globalSessionUser.id)
            .then((value) {
          setState(() {
            _isLoading = false;
@@ -115,6 +126,34 @@ class _EntrepreneurState extends State<Entrepreneur> {
   //   // );
   // }
 
+   dynamic _timer;
+  int _start = 5;
+
+  void startTimer() {
+    const oneSec = const Duration(seconds: 1);
+    _timer = new Timer.periodic(
+      oneSec,
+          (Timer timer) {
+        if (_start == 0) {
+          setState(() {
+            timer.cancel();
+          });
+        } else {
+          setState(() {
+            _start--;
+          });
+        }
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _timer.cancel();
+  }
+
   @override
   Widget build(BuildContext context) {
 
@@ -143,7 +182,7 @@ class _EntrepreneurState extends State<Entrepreneur> {
       },
         child: Icon(Icons.message),
       ) : null : null,
-      body: _isLoading == false ? SafeArea(
+      body: _isLoading == false && _isCheckingSession == false && _timer!=0 ? SafeArea(
         child: Center(
           child: Column(
             children: <Widget>[
@@ -189,93 +228,242 @@ class _EntrepreneurState extends State<Entrepreneur> {
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
                                   Text("YOUR STRPS TO CHNAGE THE WORLD",style: TextStyle(fontSize: 10),),
-                                  TextButton(onPressed: (){}, child: Text("NEW IDEA",style: TextStyle(color: Colors.grey),))
+                                  TextButton(onPressed: globalSessionUser.id != 0 ? (){
+
+                                    showDialog(context: context, builder: (context) => AlertDialog(
+                                      title: Text("Select A Plan"),
+                                      content: Container(
+                                        width: MediaQuery.of(context).size.width,
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          children: [
+
+                                            Radio<String>(value: "Partnership", groupValue: selectValue, onChanged: (Value){
+                                              setState(() {
+                                                print(Value);
+                                              });
+                                            }),
+                                            Text("Partnership",style: TextStyle(fontSize: 12),),
+                                            Radio<String>(value: "Investment", groupValue: selectValue, onChanged: (Value){
+                                              setState(() {
+                                               print(Value);
+                                              });
+                                            }),
+                                            Text("Investment",style: TextStyle(fontSize: 12),),
+
+                                          ],
+
+                                        ),
+                                      ),
+                                    ));
+                                    setState(() {
+                                      isNewVisible = !isNewVisible;
+                                    });
+
+                                    //Navigator.of(context).push(MaterialPageRoute(builder: (context)=>NewProjectIdea()));
+                                    } : (){}, child: Text("NEW IDEA",style: TextStyle(color: Colors.grey),))
                               ],),
                             ),
                             globalSessionUser == null || globalSessionUser.id != 0 ?
-                           Container(
-                             margin: EdgeInsets.only(bottom: 10),
-                             child: Column(children: [
-                                GestureDetector(
-                                  onTap: (){
-                                    setState(() {
-                                      isVisible = !isVisible;
-                                      //isVisible==true ? _BottomSheet(context):null;
-                                    });
-                                  },
-                                  child: Container(
-                                    color: Colors.black,
-                                    height: 40,
-                                    width: MediaQuery.of(context).size.width,
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: <Widget>[
-                                        Container(margin:const EdgeInsets.only(left: 10),child: const Text("Provisional title idea",style: TextStyle(color: Colors.white),)),
-                                        isVisible?Container(margin:const EdgeInsets.only(right: 10),child: const Text("-",style: TextStyle(color: Colors.white),)):
-                                        Container(margin:const EdgeInsets.only(right: 10),child: const Text("+",style: TextStyle(color: Colors.white),))
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Visibility(
-                                  visible: isVisible,
-                                  child: Container(
-                                    child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: <Widget>[
-                                        Container(
-                                          margin: EdgeInsets.only(top: 10),
-                                            child: Heading2WithDescription("Description", "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.")),
-                                        Heading2("Related Document"),
-                                        Container(margin:EdgeInsets.only(top: 5),child: Text("add more documents")),
-                                        Button(title: 'Browse',onPressed: (){}, Width: 100,),
-                                        Container(
-                                          margin: EdgeInsets.only(top: 10),
-                                          child: Text("Document list here"),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ],),
-                           )
-                               :
-                            Column(children: [
-                              IndustryTitle(hint: "Title",controller: _nameFieldController,),
+                           ListView.builder(
+                           itemCount: startUpReadResponse.length,
+                             physics: const NeverScrollableScrollPhysics(),
+                             shrinkWrap: true,
+                             itemBuilder: (context,index) {
+                             return Visibility(
+                               visible: isNewVisible,
+                               child: Container(
+                                 margin: EdgeInsets.only(bottom: 10),
+                                 child: Column(children: [
+                                   GestureDetector(
+                                     onTap: (){
+                                       visibility(startUpReadResponse[index]);
+                                     },
+                                     child: Container(
+                                       color: Colors.black,
+                                       height: 40,
+                                       width: MediaQuery.of(context).size.width,
+                                       child: Row(
+                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                         children: <Widget>[
+                                           Container(margin:const EdgeInsets.only(left: 10),child: Text(startUpReadResponse[index].title,style: TextStyle(color: Colors.white),)),
+                                           isVisible?Container(margin:const EdgeInsets.only(right: 10),child: Text("-",style: TextStyle(color: Colors.white),)):
+                                           Container(margin:const EdgeInsets.only(right: 10),child:  Text("+",style: TextStyle(color: Colors.white),))
+                                         ],
+                                       ),
+                                     ),
+                                   ),
+                                   Visibility(
+                                     visible: isVisible,
+                                     child: Container(
+                                       child: Column(
+                                         mainAxisAlignment: MainAxisAlignment.start,
+                                         crossAxisAlignment: CrossAxisAlignment.start,
+                                         children: <Widget>[
+                                           Container(
+                                               margin: EdgeInsets.only(top: 10),
+                                               child: Heading2WithDescription("Description", startUpReadResponse[index].message)),
+                                           Heading2("Related Document"),
+                                           //Container(margin:EdgeInsets.only(top: 5),child: Text("add more documents")),
+                                           Container(
+                                             margin: EdgeInsets.only(top: 10),
+                                             child: ListView.builder(
+                                                 physics: const NeverScrollableScrollPhysics(),
+                                                 shrinkWrap: true,
+                                                 itemCount: startUpReadResponse[index].partnerFiles.length,
+                                                 itemBuilder: (context,count){
+                                                   return Container(
+                                                     margin: EdgeInsets.only(bottom: 10),
+                                                     width: MediaQuery.of(context).size.width,
+                                                     child: SingleChildScrollView(
+                                                       scrollDirection: Axis.horizontal,
+                                                       child: Column(
+                                                         mainAxisSize: MainAxisSize.min,
+                                                         children: [
 
-                              Industry(hint: "Target Industry",controller: _nameFieldController,),
+                                                           // Row(
+                                                           //   children: [
+                                                           //     Button(title: 'Browse',onPressed: () async {
+                                                           //
+                                                           //       FilePickerResult? result = await FilePicker.platform.pickFiles();
+                                                           //
+                                                           //       if(result == null) return;
+                                                           //
+                                                           //       setState(() {
+                                                           //         file = result.files.first.bytes;
+                                                           //         FileName = result.files.single.name;
+                                                           //       });
+                                                           //
+                                                           //
+                                                           //       // openFile(file);
+                                                           //
+                                                           //     }, Width: 100,),
+                                                           //
+                                                           //    Container(
+                                                           //      child: Text("$FileName"),
+                                                           //    )
+                                                           //   ],
+                                                           // ),
+                                                           //
+                                                           //
+                                                           //
+                                                           // Button(title: "Submit", onPressed: (){
+                                                           //   uploadFile(file,startUpReadResponse[index].partnerFiles[count].Partnershipid);
+                                                           //
+                                                           // }, Width: 90),
 
-                              MessageField(hint: "Description",controller: _messageFieldController,),
+                                                           Row(
+                                                             mainAxisAlignment: MainAxisAlignment.start,
+                                                             crossAxisAlignment: CrossAxisAlignment.start,
+                                                             mainAxisSize: MainAxisSize.min,
+                                                             children: [
+                                                               Icon(Icons.remove_red_eye,size: 15,),
+                                                               Text("${startUpReadResponse[index].partnerFiles[count].fileInput}",style: TextStyle(fontSize: 10),)
+                                                             ],),
+                                                         ],
+                                                       )
+                                                     ),
+                                                   );
+                                                 }),
+                                           )
+                                         ],
+                                       ),
+                                     ),
+                                   ),
+                                 ],),
+                               ),
+                             );
+                             },
+                           ) :
+                              Visibility(
+                                visible:globalSessionUser.id != 0 ? !isNewVisible : isNewVisible,
+                                child: Column(children: [
+                                  IndustryTitle(hint: "Title",controller: _titleFieldController,),
 
-                              Industry(hint: "Date Picker Here",controller: _nameFieldController,),
+                                  Industry(hint: "Target Industry",controller: _industryFieldController,),
 
-                              Button(title: "Browse", onPressed: (){}, Width: 90),
+                                  MessageField(hint: "Description",controller: _messageFieldController,),
 
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Radio(value: 0, groupValue: _radioValue, onChanged: _handleRadioValueChange(0)),
-                                  Text("Partnership",style: TextStyle(color: Colors.black87),),
-                                  Radio(value: 1, groupValue: _radioValue, onChanged: _handleRadioValueChange(1)),
-                                  Text("Investment Plan",style: TextStyle(color: Colors.black87),)
-
-                                ],),
-
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-
-                                  Button(title: "REGISTER",Width: 110,onPressed: (){ Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Register()));},),
-                                  Button(title: "LOGIN",Width: 90,onPressed: () {
-
-                                    Navigator.of(context).push(MaterialPageRoute(builder: (context)=>LogIn()));
-
+                                  DateField(hint: "Date Picker Here",controller: _dateFieldController, onTap: (){
+                                    _selectDate(context);
                                   },),
 
+                                  Button(title: "Browse", onPressed: (){}, Width: 90),
+
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Radio(value: 0, groupValue: _radioValue, onChanged: _handleRadioValueChange(0)),
+                                      Text("Partnership",style: TextStyle(color: Colors.black87),),
+                                      Radio(value: 1, groupValue: _radioValue, onChanged: _handleRadioValueChange(1)),
+                                      Text("Investment Plan",style: TextStyle(color: Colors.black87),)
+
+                                    ],),
+
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+
+                                      Button(title: "REGISTER",Width: 110,onPressed: (){ Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Register()));},),
+                                      Button(title: "LOGIN",Width: 90,onPressed: () {
+
+                                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>LogIn()));
+
+                                      },),
+
+                                    ],),
+                                  PartnerShipText()
                                 ],),
-                              PartnerShipText()
-                            ],)
+                              ),
+
+                            Visibility(
+                              visible:!isNewVisible,
+                              child: Form(
+                                key: _formKey,
+                                child: Column(children: [
+                                  IndustryTitle(hint: "Title",controller: _titleFieldController,),
+
+                                  Industry(hint: "Target Industry",controller: _industryFieldController,),
+
+                                  MessageField(hint: "Description",controller: _messageFieldController,),
+
+                                  DateField(hint: "Date Picker Here",controller: _dateFieldController, onTap: (){
+                                    _selectDate(context);
+                                  },),
+
+                                  Button(title: "Browse", onPressed: (){}, Width: 90),
+
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Radio(value: 0, groupValue: _radioValue, onChanged: _handleRadioValueChange(0)),
+                                      Text("Partnership",style: TextStyle(color: Colors.black87),),
+                                      Radio(value: 1, groupValue: _radioValue, onChanged: _handleRadioValueChange(1)),
+                                      Text("Investment Plan",style: TextStyle(color: Colors.black87),)
+
+                                    ],),
+                                  
+                                  Button(title: "SUBMIT", onPressed: (){
+                                    newIdea();
+                                  }, Width: 90),
+
+                                  // Row(
+                                  //   mainAxisAlignment: MainAxisAlignment.center,
+                                  //   children: <Widget>[
+                                  //
+                                  //     Button(title: "REGISTER",Width: 110,onPressed: (){ Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Register()));},),
+                                  //     Button(title: "LOGIN",Width: 90,onPressed: () {
+                                  //
+                                  //       Navigator.of(context).push(MaterialPageRoute(builder: (context)=>LogIn()));
+                                  //
+                                  //     },),
+                                  //
+                                  //   ],),
+                                  PartnerShipText()
+                                ],),
+                              ),
+                            ),
 
                           ],
                         ),),)
@@ -329,8 +517,89 @@ class _EntrepreneurState extends State<Entrepreneur> {
         }
     });
   }
-}
 
+  void visibility(StartUpReadResponse startUpReadResponse) {
+    setState(() {
+      isVisible = !isVisible;
+      //isVisible==true ? _BottomSheet(context):null;
+    });
+  }
+
+  _selectDate(BuildContext context) async {
+    final DateTime? selected = await showDatePicker(
+      context: context,
+      initialDate: selectedDate,
+      firstDate: DateTime(2010),
+      lastDate: DateTime(2025),
+    );
+    if (selected != null && selected != selectedDate)
+      setState(() {
+        selectedDate = selected;
+
+        _dateFieldController.text = new DateFormat("yyyy-MM-dd").format(selectedDate);
+
+        // _dateFieldController.text = "${selectedDate}";
+      });
+  }
+
+   newIdea() {
+     if (_formKey.currentState!.validate())
+       {
+         setState(() {
+           _isLoading = true;
+         });
+         print(generalResponseModel.token,);
+         print(_titleFieldController.text);
+         print(_industryFieldController.text);
+         print(_messageFieldController.text);
+         print(_dateFieldController.text);
+         print(selectValue);
+         print(globalSessionUser.id);
+
+         HTTPManager().savestartUpUser(generalResponseModel.token, SaveStartUpRequest(
+             title: _titleFieldController.text,
+             industry: _industryFieldController.text,
+             message: _messageFieldController.text,
+             date: _dateFieldController.text,
+             purpose: selectValue,
+             userid: "${globalSessionUser.id}")).then((value) {
+               setState(() {
+                 _isLoading = false;
+                 isNewVisible = !isNewVisible;
+               });
+         }).catchError((e) {
+           print(e);
+           setState(() {
+             _isLoading = false;
+           });
+           showAlert(context, e.toString(), true, () {}, () {
+             newIdea();
+           });
+         });
+       }
+   }
+
+   uploadFile(file, int partnershipid) {
+
+     HTTPManager().uploadFile(
+         generalResponseModel.token, UploadFile(
+         project_id: partnershipid, more_files: file
+     )).then((value) {
+       print(value);
+     }).catchError((e) {
+       print(e);
+       setState(() {
+         _isLoading = false;
+       });
+       showAlert(context, e.toString(), true, () {}, () {});
+     });
+
+   }
+
+  // void openFile(PlatformFile file) {
+  //    OpenFile.open(file.path!);
+  // }
+}
 void _BottomSheet(BuildContext context, int id) {
   showModalBottomSheet(
     isScrollControlled: true,

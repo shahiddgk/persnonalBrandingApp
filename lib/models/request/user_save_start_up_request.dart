@@ -6,7 +6,7 @@ class SaveStartUpRequest {
   String message = '';
   String date = '';
   String purpose = '';
-  int userid = 0;
+  String userid = '';
 
   SaveStartUpRequest({required this.title,required this.industry,required this.message,required this.date,required this.purpose,required this.userid});
 

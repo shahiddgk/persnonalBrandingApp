@@ -62,6 +62,8 @@ dependencies:
   rflutter_alert:
   youtube_player_flutter: ^8.0.0
   modal_bottom_sheet: ^2.0.0
+  file_picker: ^4.2.7
+  open_file: ^3.2.1
 
 dev_dependencies:
   flutter_test:

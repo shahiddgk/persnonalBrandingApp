@@ -27,15 +27,15 @@ class StartUpReadResponse {
       });
 
   StartUpReadResponse.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    user_id = json['user_id'];
-    title = json['title'];
-    industry = json['industry'];
-    message = json['message'];
-    Date = json['date'];
-    purpose = json['purpose'];
-    created_at = json['created_at'];
-    updated_at = json['updated_at'];
+    id = json['id'] == null ? '' : json['id'];
+    user_id = json['user_id'] == null ? '' : json['user_id'];
+    title = json['title'] == null ? '' : json['title'];
+    industry = json['industry'] == null ? '' : json['industry'];
+    message = json['message'] == null ? '' : json['message'];
+    Date = json['date'] == null ? '' : json['date'];
+    purpose = json['purpose'] == null ? '' : json['purpose'];
+    created_at = json['created_at'] == null ? '' : json['created_at'];
+    updated_at = json['updated_at'] == null ? '' : json['updated_at'];
     if (json['partnerfiles'] != null) {
       json['partnerfiles'].forEach((v) {
         partnerFiles.add(new PartnerFiles.fromJson(v));
@@ -74,8 +74,8 @@ class PartnerFiles {
     id = json['id'];
     fileInput = json['fileinput'];
     Partnershipid = json['partnership_id'];
-    created_at = json['created_at'];
-    updated_at = json['updated_at'];
+    created_at = json['created_at'] == null ? '' : json['created_at'];
+    updated_at = json['updated_at'] == null ? '' : json['updated_at'];
   }
 
   Map<String, dynamic> toJson() {

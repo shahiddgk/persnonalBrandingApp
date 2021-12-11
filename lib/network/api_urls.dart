@@ -21,6 +21,8 @@ class ApplicationURLs{
 
   static const API_SAVE_STARTUP = BASE_URL + "store-data";
 
+  static const API_UPLOAD_FILE = BASE_URL + "add-more-files";
+
   static const API_LOGOUT = BASE_URL + "logout";
 
 }

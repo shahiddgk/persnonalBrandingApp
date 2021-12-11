@@ -1,11 +1,11 @@
 class GeneralResponseModel {
-  bool status = false;
-  String message = '';
+  dynamic status ;
+  dynamic message;
   dynamic data;
   dynamic user;
   dynamic token;
 
-  GeneralResponseModel({required this.status, required this.message, this.user,this.data,this.token});
+  GeneralResponseModel({ this.status, this.message, this.user,this.data,this.token});
 
   GeneralResponseModel.fromJson(Map<String, dynamic> json) {
     status = json['success'];

@@ -88,7 +88,7 @@ Future<GeneralResponseModel> getUserSessionToken() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String? userSession = prefs.getString(token);
   if (userSession == null) {
-    return GeneralResponseModel(message: ' ', status: false);
+    return GeneralResponseModel();
   }
   print(GeneralResponseModel.fromJson(jsonDecode(userSession)));
   return GeneralResponseModel.fromJson(jsonDecode(userSession));

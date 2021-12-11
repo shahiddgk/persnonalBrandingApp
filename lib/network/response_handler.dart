@@ -38,12 +38,14 @@ class ResponseHandler {
   }
 
   Future<GeneralResponseModel> postt(String url,String token, bool isHeaderRequired,) async {
-    var head = Map<String, String>();
-    head['content-type'] = 'application/x-www-form-urlencoded';
-    head['Authorization'] = token;
+
+
+    // var head = Map<String, String>();
+    // head['content-type'] = 'application/x-www-form-urlencoded';
+    // head['Authorization'] = token;
     var responseJson;
     try {
-      final response = await http.post(Uri.parse(url), headers: head);
+      final response = await http.post(Uri.parse(url), headers: {HttpHeaders.contentTypeHeader: 'application/x-www-form-urlencoded',HttpHeaders.authorizationHeader:'Bearer ${token}'});
       responseJson = json.decode(response.body.toString());
       print(responseJson);
       var res =
@@ -56,12 +58,9 @@ class ResponseHandler {
   }
 
   Future<GeneralResponseModel> posttt(String url,String token, Map<String, dynamic> params, bool isHeaderRequired,) async {
-    var head = Map<String, String>();
-    head['content-type'] = 'application/x-www-form-urlencoded';
-    head['Authorization'] = token;
     var responseJson;
     try {
-      final response = await http.post(Uri.parse(url), headers: head);
+      final response = await http.post(Uri.parse(url),body: params ,headers: {HttpHeaders.contentTypeHeader: 'application/x-www-form-urlencoded',HttpHeaders.authorizationHeader:'Bearer ${token}'});
       responseJson = json.decode(response.body.toString());
       print(responseJson);
       var res =
@@ -93,12 +92,10 @@ class ResponseHandler {
   }
 
   Future<GeneralResponseModel> gett(String url,String token, bool isHeaderRequired) async {
-    var head = Map<String, String>();
-    head['content-type'] = 'application/json; charset=utf-8';
-    head['Authorization'] = token;
+
     var responseJson;
     try {
-      final response = await http.get(Uri.parse(url), headers: head);
+      final response = await http.get(Uri.parse(url), headers: {HttpHeaders.contentTypeHeader: 'application/x-www-form-urlencoded',HttpHeaders.authorizationHeader:'Bearer ${token}'});
       responseJson = json.decode(response.body.toString());
       print(responseJson);
 

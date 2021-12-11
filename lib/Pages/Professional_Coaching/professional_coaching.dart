@@ -5,6 +5,7 @@ import 'package:personal_branding/widgets/Headings/widget_heading1.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading2withdescription.dart';
 import 'package:personal_branding/widgets/widget_pictutre_professional_coaching.dart';
 import 'package:responsive_framework/responsive_framework.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import 'details_page.dart';
 
@@ -23,7 +24,17 @@ class _ProfessionalCoachingState extends State<ProfessionalCoaching> {
     ProfessionalCoachingPictures("https://c4.wallpaperflare.com/wallpaper/974/565/254/windows-11-windows-10-minimalism-hd-wallpaper-preview.jpg", "Saturday / Nov 23,2021", "THIS IS A STANDARD POST", "Admin", (){}, (){}, (){},(){},(){}),
     ProfessionalCoachingPictures("https://c4.wallpaperflare.com/wallpaper/974/565/254/windows-11-windows-10-minimalism-hd-wallpaper-preview.jpg", "Saturday / Nov 23,2021", "THIS IS A STANDARD POST", "Admin", (){}, (){}, (){},(){},(){}),
     ProfessionalCoachingPictures("https://c4.wallpaperflare.com/wallpaper/974/565/254/windows-11-windows-10-minimalism-hd-wallpaper-preview.jpg", "Saturday / Nov 23,2021", "THIS IS A STANDARD POST", "Admin", (){}, (){}, (){},(){},(){})
-                          ];     
+  ];
+
+  // late YoutubePlayerController _controller;
+  // String? url = "https://www.youtube.com/watch?v=K1QICrgxTjA";
+  //
+  // void runYoutubeplayer(){
+  //   _controller = YoutubePlayerController(
+  //       initialVideoId: YoutubePlayer.convertUrlToId(url!,trimWhitespaces: true),
+  //   );
+  //
+  // }
   
   @override
   Widget build(BuildContext context) {
@@ -78,6 +89,9 @@ class _ProfessionalCoachingState extends State<ProfessionalCoaching> {
                                         child: profile_coaching[index],
                                       );
                                     } ),
+                              ),
+                              Container(
+
                               )
                             ],
                           ),),

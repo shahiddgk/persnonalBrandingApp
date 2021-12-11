@@ -30,7 +30,7 @@ class _IndustryState extends State<Industry> {
             controller: widget.controller,
             validator: (value){
               if(value!.isEmpty) {
-                return "Name is required";
+                return "Industry is required";
               }
               return null;
             },

@@ -32,7 +32,7 @@ class _MessageFieldState extends State<MessageField> {
             controller: widget.controller,
             validator: (value){
               if(value!.isEmpty) {
-                return "Message is required";
+                return "Description is required";
               }
               return null;
             },

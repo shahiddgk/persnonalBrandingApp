@@ -1,6 +1,8 @@
+import 'package:fluttericon/mfg_labs_icons.dart';
 import 'package:personal_branding/models/request/loin_request.dart';
 import 'package:personal_branding/models/request/user_save_start_up_request.dart';
 import 'package:personal_branding/models/request/user_start_up_request.dart';
+import 'package:personal_branding/models/request/widget_upload_file.dart';
 import 'package:personal_branding/models/response/about_response_model.dart';
 import 'package:personal_branding/models/response/achievement_response_list.dart';
 import 'package:personal_branding/models/response/biography_response_model.dart';
@@ -87,8 +89,12 @@ class HTTPManager {
     return futureGoalsListResponse.futureGoalsList;
   }
 
-  Future<List<StartUpReadResponse>> StartUp(String token,StartUpRequest startUpRequest) async {
-    final url = ApplicationURLs.API_STARTUP_LIST;
+  Future<List<StartUpReadResponse>> StartUp(String token,int id) async {
+    print(token);
+   print(id);
+   String userid;
+    final url = ApplicationURLs.API_STARTUP_LIST + "?userid=$id";
+    print(url);
     final GeneralResponseModel response = await _handler.gett(url,token, true);
     StartUpListResponse startUpListResponse =
     StartUpListResponse.fromJson(response.data);
@@ -96,13 +102,30 @@ class HTTPManager {
   }
 
   Future<SaveStartUpReadResponse> savestartUpUser(String token,SaveStartUpRequest startUpRequest) async {
+
+    print(startUpRequest.title);
+    print(startUpRequest.message);
+    print(startUpRequest.industry);
+    print(startUpRequest.purpose);
+    print(startUpRequest.date);
+    print(startUpRequest.userid);
+    print(token);
+
     final url = ApplicationURLs.API_SAVE_STARTUP;
     final GeneralResponseModel response =
     await _handler.posttt(url, token,startUpRequest.toJson(),true);
     print(response.token);
     SaveStartUpReadResponse startUpReadResponse =
-    SaveStartUpReadResponse.fromJson(response.user);
+    SaveStartUpReadResponse.fromJson(response.data);
     return startUpReadResponse;
+  }
+
+  Future uploadFile(String token,UploadFile uploadFile) async {
+
+    final url = ApplicationURLs.API_SAVE_STARTUP;
+    final GeneralResponseModel response =
+    await _handler.posttt(url, token,uploadFile.toJson(),true);
+    print(response.token);
   }
 
 }
