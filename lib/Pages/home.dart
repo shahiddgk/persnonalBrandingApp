@@ -14,7 +14,7 @@ class _HomeState extends State<Home> {
   int activeIndex = 0;
 
   final urlImages = [
-    "images/1.JPG","images/2.JPG","images/3.JPG"
+    "images/1.JPG","images/2.JPG","images/5.JPG"
   ];
   @override
   Widget build(BuildContext context) {
@@ -71,7 +71,7 @@ class _HomeState extends State<Home> {
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(image: DecorationImage(
-            image: AssetImage("images/5.JPG"),
+            image: AssetImage(urlImages[index]),
             fit: BoxFit.cover
         )
        ),

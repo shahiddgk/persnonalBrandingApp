@@ -7,12 +7,13 @@ import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 // ignore: must_be_immutable
 class ProfessionalCoachingPictures extends StatefulWidget {
 
-  String imageUrl;
   // ignore: non_constant_identifier_names
   String Date;
   // ignore: non_constant_identifier_names
   String Description;
   String title;
+
+  String url;
 
   Function facebook_Onpressed;
   Function twitter_Onpressed;
@@ -20,7 +21,7 @@ class ProfessionalCoachingPictures extends StatefulWidget {
   Function youtube_Onpressed;
   Function googlePlus_Onpressed;
 
-  ProfessionalCoachingPictures(this.imageUrl,this.Date,this.title,this.Description,this.facebook_Onpressed,this.twitter_Onpressed,this.youtube_Onpressed,this.googlePlus_Onpressed,this.linkedIn_Onpressed);
+  ProfessionalCoachingPictures(this.url,this.Date,this.title,this.Description,this.facebook_Onpressed,this.twitter_Onpressed,this.youtube_Onpressed,this.googlePlus_Onpressed,this.linkedIn_Onpressed);
 
 
   @override
@@ -40,11 +41,22 @@ class _ProfessionalCoachingPicturesState extends State<ProfessionalCoachingPictu
           child: ResponsiveWrapper.of(context).isDesktop || ResponsiveWrapper.of(context).isTablet ? Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               Expanded(
                 flex: 20,
                 child: Container(
-                    child: Image.network(widget.imageUrl,fit: BoxFit.cover,)),
+                    child: YoutubePlayer(
+                      controller: YoutubePlayerController(
+                        initialVideoId: widget.url,
+                        flags: YoutubePlayerFlags(
+                          autoPlay: false,
+                          mute: false,
+                        ),
+                      ),
+                      liveUIColor: Colors.yellow,
+                      showVideoProgressIndicator: true,
+                    )),
               ),
               Expanded(
                   flex: 1 ,
@@ -84,10 +96,21 @@ class _ProfessionalCoachingPicturesState extends State<ProfessionalCoachingPictu
             ],) : Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              Container(),
               Container(
-                    child: Image.network(widget.imageUrl)),
+                margin: EdgeInsets.only(top: 1/9000),
+                  child: YoutubePlayer(
+                    controller: YoutubePlayerController(
+                      initialVideoId: widget.url,
+                      flags: YoutubePlayerFlags(
+                        autoPlay: false,
+                        mute: false,
+                      ),
+                    ),
+                    liveUIColor: Colors.yellow,
+                    showVideoProgressIndicator: true,
+                  )),
               Text(widget.Date),
               Text(widget.title,style: TextStyle(fontSize: 10,fontWeight: FontWeight.bold),),
               Container(margin:EdgeInsets.only(top: 10,bottom: 10),height: 7,width: 90,color: Colors.amber,),

@@ -1,34 +1,33 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class Button extends StatefulWidget {
+class SmallButton extends StatefulWidget {
   final String title;
   final Function onPressed;
   double Width;
 
-   Button({required this.title, required this.onPressed,required this.Width});
+  SmallButton({required this.title, required this.onPressed,required this.Width});
 
   @override
-  _ButtonState createState() => _ButtonState();
+  _SmallButtonState createState() => _SmallButtonState();
 }
 
-class _ButtonState extends State<Button> {
+class _SmallButtonState extends State<SmallButton> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(left: 5),
-      margin:EdgeInsets.only(top: 25),
-      width: widget.Width,
-
+      width: 80,
+      height: 40,
+      margin: EdgeInsets.only(right: 10),
       decoration: BoxDecoration(
-          //color: Colors.amber,
+        //color: Colors.amber,
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
-        color: Colors.white,width: 3,)),
+            color: Colors.white,width: 3,)),
       child: ElevatedButton(
         onPressed:() {
           widget.onPressed();
-        }, //since this is only a UI app
+        },//since this is only a UI app
         style: ElevatedButton.styleFrom(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12), // <-- Radius
@@ -36,13 +35,12 @@ class _ButtonState extends State<Button> {
         ),
         child: Text(widget.title,
           style: TextStyle(
-            fontSize: 15,
+            fontSize: 10,
             color: Colors.black,
             fontFamily: 'SFUIDisplay',
             fontWeight: FontWeight.bold,
           ),
         ),
-
       ),
     );
   }

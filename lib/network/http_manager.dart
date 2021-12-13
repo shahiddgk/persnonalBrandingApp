@@ -122,7 +122,7 @@ class HTTPManager {
 
   Future uploadFile(String token,UploadFile uploadFile) async {
 
-    final url = ApplicationURLs.API_SAVE_STARTUP;
+    final url = ApplicationURLs.API_UPLOAD_FILE;
     final GeneralResponseModel response =
     await _handler.posttt(url, token,uploadFile.toJson(),true);
     print(response.token);

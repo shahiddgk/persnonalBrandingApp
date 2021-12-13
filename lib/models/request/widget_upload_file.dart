@@ -3,10 +3,10 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 
 class UploadFile {
-  int project_id=0;
-  dynamic more_files;
+  String project_id= '';
+  dynamic more_files = '';
 
-  UploadFile({required this.project_id, this.more_files});
+  UploadFile({required this.project_id, required this.more_files});
 
   UploadFile.fromJson(Map<String, dynamic> json) {
     project_id = json['project_id'];

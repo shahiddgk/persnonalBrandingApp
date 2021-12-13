@@ -18,24 +18,24 @@ class ProfessionalCoaching extends KFDrawerContent {
 }
 
 class _ProfessionalCoachingState extends State<ProfessionalCoaching> {
+
+  static String? videoID = YoutubePlayer.convertUrlToId("https://www.youtube.com/watch?v=linlz7-Pnvw");
+
+  final YoutubePlayerController _controller = YoutubePlayerController(
+    initialVideoId: videoID!,
+    flags: YoutubePlayerFlags(
+      autoPlay: false,
+      mute: false,
+    ),
+  );
+
   
   // ignore: non_constant_identifier_names
   List profile_coaching = [
-    ProfessionalCoachingPictures("https://c4.wallpaperflare.com/wallpaper/974/565/254/windows-11-windows-10-minimalism-hd-wallpaper-preview.jpg", "Saturday / Nov 23,2021", "THIS IS A STANDARD POST", "Admin", (){}, (){}, (){},(){},(){}),
-    ProfessionalCoachingPictures("https://c4.wallpaperflare.com/wallpaper/974/565/254/windows-11-windows-10-minimalism-hd-wallpaper-preview.jpg", "Saturday / Nov 23,2021", "THIS IS A STANDARD POST", "Admin", (){}, (){}, (){},(){},(){}),
-    ProfessionalCoachingPictures("https://c4.wallpaperflare.com/wallpaper/974/565/254/windows-11-windows-10-minimalism-hd-wallpaper-preview.jpg", "Saturday / Nov 23,2021", "THIS IS A STANDARD POST", "Admin", (){}, (){}, (){},(){},(){})
-  ];
+    ProfessionalCoachingPictures(videoID!, "Saturday / Nov 23,2021", "THIS IS A STANDARD POST", "Lorem Ipsum is simply dummy text of the printing and typesetting industry.", (){}, (){}, (){},(){},(){}),
+    ];
 
-  // late YoutubePlayerController _controller;
-  // String? url = "https://www.youtube.com/watch?v=K1QICrgxTjA";
-  //
-  // void runYoutubeplayer(){
-  //   _controller = YoutubePlayerController(
-  //       initialVideoId: YoutubePlayer.convertUrlToId(url!,trimWhitespaces: true),
-  //   );
-  //
-  // }
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,7 +53,7 @@ class _ProfessionalCoachingState extends State<ProfessionalCoaching> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
-                      Padding(padding: EdgeInsets.only(top:MediaQuery.of(context).size.height*1/20,left: 20,right: 20,bottom: MediaQuery.of(context).size.height*1/70),
+                      Padding(padding: EdgeInsets.only(top:MediaQuery.of(context).size.height*1/20,left: 20,right: 20,),
                         child: Align(alignment: Alignment.centerLeft,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -61,38 +61,37 @@ class _ProfessionalCoachingState extends State<ProfessionalCoaching> {
                             children: <Widget>[
                                 Heading1("MY GALLERY"),
                               Heading2WithDescription("JUST MY AWESOME SKILLS", "Lorem Ipsum is simply dummy text of the printing and typesetting industry."),
-                              ResponsiveWrapper.of(context).isDesktop ?
-                              Container(
-                                child: GridView.builder(
-                                    shrinkWrap:true,
-                                    gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(childAspectRatio: 3/2,crossAxisSpacing: 10,mainAxisSpacing: 10, maxCrossAxisExtent: 800),
-                                    itemCount: profile_coaching.length,
-                                    itemBuilder: (context,index) {
-                                      return GestureDetector(
-                                        onTap: (){
-                                          Navigator.of(context).push(MaterialPageRoute(builder: (context)=>PictureDetails()));
-                                        },
-                                        child: profile_coaching[index],
-                                      );
-                                    }),
-                              ) :
-                              Container(
-                                child: ListView.builder(
-                                    scrollDirection: Axis.vertical,
-                                    shrinkWrap: true,
-                                    itemCount: profile_coaching.length,
-                                    itemBuilder:(context, index) {
-                                      return GestureDetector(
-                                        onTap: (){
-                                          Navigator.of(context).push(MaterialPageRoute(builder: (context)=>PictureDetails()));
-                                        },
-                                        child: profile_coaching[index],
-                                      );
-                                    } ),
-                              ),
-                              Container(
-
-                              )
+                              // ResponsiveWrapper.of(context).isDesktop ?
+                              // Container(
+                              //   child: GridView.builder(
+                              //       shrinkWrap:true,
+                              //       gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(childAspectRatio: 3/2,crossAxisSpacing: 10,mainAxisSpacing: 10, maxCrossAxisExtent: 800),
+                              //       itemCount: profile_coaching.length,
+                              //       itemBuilder: (context,index) {
+                              //         return GestureDetector(
+                              //           onTap: (){
+                              //             Navigator.of(context).push(MaterialPageRoute(builder: (context)=>PictureDetails()));
+                              //           },
+                              //           child: profile_coaching[index],
+                              //         );
+                              //       }),
+                              // ) :
+                              // Container(
+                              //   child: ListView.builder(
+                              //     physics: NeverScrollableScrollPhysics(),
+                              //       scrollDirection: Axis.vertical,
+                              //       shrinkWrap: true,
+                              //       itemCount: profile_coaching.length,
+                              //       itemBuilder:(context, index) {
+                              //         return GestureDetector(
+                              //           onTap: (){
+                              //             Navigator.of(context).push(MaterialPageRoute(builder: (context)=>PictureDetails()));
+                              //           },
+                              //           child: profile_coaching[index],
+                              //         );
+                              //       } ),
+                              // ),
+                              ProfessionalCoachingPictures(videoID!, "Saturday / Nov 23,2021", "THIS IS A STANDARD POST", "Lorem Ipsum is simply dummy text of the printing and typesetting industry.", (){}, (){}, (){},(){},(){}),
                             ],
                           ),),
                       ),

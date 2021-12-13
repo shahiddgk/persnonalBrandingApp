@@ -1,5 +1,7 @@
 import 'dart:async';
+import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:flutter/material.dart';
@@ -14,6 +16,7 @@ import 'package:personal_branding/models/response/startup_response_model.dart';
 import 'package:personal_branding/network/http_manager.dart';
 import 'package:personal_branding/providers/auth_provider.dart';
 import 'package:personal_branding/utills/utils.dart';
+import 'package:personal_branding/widgets/Buttons/widget_small_button.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading1.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading2.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading2withdescription.dart';
@@ -50,12 +53,14 @@ class _EntrepreneurState extends State<Entrepreneur> {
   bool isNewVisible = true;
   bool _isCheckingSession = true;
   bool _isLoading = true;
+  bool _isLogInSession = true;
   late List<StartUpReadResponse> startUpReadResponse;
   String date = "";
   DateTime selectedDate = DateTime.now();
   String selectValue = "Investment";
   String FileName = ' ';
-  var file;
+  late File? file;
+  int indexx = -1;
 
 
 
@@ -81,7 +86,7 @@ class _EntrepreneurState extends State<Entrepreneur> {
     _checkedToken();
     _getStartUpList();
 
-    startTimer();
+    //startTimer();
 
     Future.delayed(Duration(seconds: 1), () {
       // just delay for showing this slash page clearer because it too fast
@@ -91,7 +96,7 @@ class _EntrepreneurState extends State<Entrepreneur> {
 
   _getStartUpList() {
        HTTPManager()
-           .StartUp(_isCheckingSession==false && _isLoading == false ? " " : generalResponseModel.token, globalSessionUser.id)
+           .StartUp(_isCheckingSession==false && _isLogInSession == false ? " " : generalResponseModel.token, globalSessionUser.id)
            .then((value) {
          setState(() {
            _isLoading = false;
@@ -110,49 +115,18 @@ class _EntrepreneurState extends State<Entrepreneur> {
        });
   }
 
-  // void checkSignedIn() async {
-  //   AuthProvider authProvider = context.read<AuthProvider>();
-  //   bool isLoggedIn = await authProvider.isLoggedIn();
-  //   if (isLoggedIn) {
-  //     Navigator.push(
-  //       context,
-  //       MaterialPageRoute(builder: (context) => ChatPage(peerId: 'ur7q0EfMa4ZwICPPyZbngj7QkfH3', peerAvatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRa9UI1y4Shr253ibETjPCOWNBWWpKgQsVKaw&usqp=CAU', peerNickname: 'test',
-  //     )));
-  //     return;
-  //   }
-  //   // Navigator.pushReplacement(
-  //   //   context,
-  //   //   MaterialPageRoute(builder: (context) => Entrepreneur()),
-  //   // );
-  // }
-
-   dynamic _timer;
-  int _start = 5;
-
-  void startTimer() {
-    const oneSec = const Duration(seconds: 1);
-    _timer = new Timer.periodic(
-      oneSec,
-          (Timer timer) {
-        if (_start == 0) {
-          setState(() {
-            timer.cancel();
-          });
-        } else {
-          setState(() {
-            _start--;
-          });
-        }
-      },
-    );
+  Future selectFile(int id) async {
+     print(id);
+    final result = await FilePicker.platform.pickFiles(allowMultiple: true);
+    if(result == null) return;
+    final path = result.files.single.path!;
+    setState(() {
+      file = File(path);
+      indexx = id;
+      FileName = result.files.single.name;
+    });
   }
 
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-    _timer.cancel();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -177,12 +151,12 @@ class _EntrepreneurState extends State<Entrepreneur> {
         leading: IconButton(onPressed:  widget.onMenuPressed, icon: Icon(Icons.menu),),
       ),
         resizeToAvoidBottomInset: true,
-      floatingActionButton: _isLoading == false ? globalSessionUser == null || globalSessionUser.id != 0 ? FloatingActionButton(onPressed: () {
+      floatingActionButton: _isLoading==false && _isCheckingSession==false && _isLogInSession == false ? globalSessionUser == null || globalSessionUser.id != 0 ? FloatingActionButton(onPressed: () {
         _BottomSheet(context,globalSessionUser.id);
       },
         child: Icon(Icons.message),
       ) : null : null,
-      body: _isLoading == false && _isCheckingSession == false && _timer!=0 ? SafeArea(
+      body: _isLoading == false? SafeArea(
         child: Center(
           child: Column(
             children: <Widget>[
@@ -280,97 +254,169 @@ class _EntrepreneurState extends State<Entrepreneur> {
                                      onTap: (){
                                        visibility(startUpReadResponse[index]);
                                      },
-                                     child: Container(
-                                       color: Colors.black,
-                                       height: 40,
-                                       width: MediaQuery.of(context).size.width,
-                                       child: Row(
-                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                         children: <Widget>[
-                                           Container(margin:const EdgeInsets.only(left: 10),child: Text(startUpReadResponse[index].title,style: TextStyle(color: Colors.white),)),
-                                           isVisible?Container(margin:const EdgeInsets.only(right: 10),child: Text("-",style: TextStyle(color: Colors.white),)):
-                                           Container(margin:const EdgeInsets.only(right: 10),child:  Text("+",style: TextStyle(color: Colors.white),))
-                                         ],
+                                     child: ExpansionTile(
+                                       collapsedTextColor: Colors.black,
+                                       collapsedIconColor: Colors.white,
+                                       iconColor: Colors.black,
+                                       collapsedBackgroundColor: Colors.black,
+                                       title: Text(startUpReadResponse[index].title,style: TextStyle(color: Colors.white),
                                        ),
-                                     ),
-                                   ),
-                                   Visibility(
-                                     visible: isVisible,
-                                     child: Container(
-                                       child: Column(
-                                         mainAxisAlignment: MainAxisAlignment.start,
-                                         crossAxisAlignment: CrossAxisAlignment.start,
-                                         children: <Widget>[
-                                           Container(
-                                               margin: EdgeInsets.only(top: 10),
-                                               child: Heading2WithDescription("Description", startUpReadResponse[index].message)),
-                                           Heading2("Related Document"),
-                                           //Container(margin:EdgeInsets.only(top: 5),child: Text("add more documents")),
-                                           Container(
+                                      expandedCrossAxisAlignment: CrossAxisAlignment.start,
+                                       expandedAlignment: Alignment.centerLeft,
+                                       children: [
+
+                                         Container(
                                              margin: EdgeInsets.only(top: 10),
-                                             child: ListView.builder(
-                                                 physics: const NeverScrollableScrollPhysics(),
-                                                 shrinkWrap: true,
-                                                 itemCount: startUpReadResponse[index].partnerFiles.length,
-                                                 itemBuilder: (context,count){
-                                                   return Container(
+                                             child: Heading2WithDescription("Description", startUpReadResponse[index].message)),
+                                         Heading2("Related Document"),
+                                         Container(margin:EdgeInsets.only(top: 5),child: Text("add more documents")),
+                                         Container(
+
+                                           alignment: Alignment.centerLeft,
+                                           decoration: BoxDecoration(
+                                             border: Border.all(color: indexx == startUpReadResponse[index].id ? Colors.black :  Colors.white)
+                                           ),
+                                           child: Row(
+                                             children: [
+                                               SmallButton(title: 'Browse',onPressed: () async {
+
+                                                 selectFile(startUpReadResponse[index].id);
+
+                                               }, Width: 100,),
+
+                                               Visibility(
+                                                 visible: indexx == startUpReadResponse[index].id ? true : false,
+                                                 child: Container(
+                                                   child: Text("$FileName"),
+                                                 ),
+                                               )
+                                             ],
+                                           ),
+                                         ),
+                                         Visibility(
+                                           visible: indexx == startUpReadResponse[index].id ? true : false,
+                                           child: SmallButton(title: "Submit", onPressed: (){
+
+                                             // if(file==null)return;
+                                             uploadFile(file,startUpReadResponse[index].id);
+
+                                           }, Width: 90),
+                                         ),
+
+
+                                         Container(
+                                           margin: EdgeInsets.only(top: 10),
+                                           child: ListView.builder(
+                                               physics: const NeverScrollableScrollPhysics(),
+                                               shrinkWrap: true,
+                                               itemCount: startUpReadResponse[index].partnerFiles.length,
+                                               itemBuilder: (context,count){
+                                                 return GestureDetector(
+                                                   child: Container(
                                                      margin: EdgeInsets.only(bottom: 10),
                                                      width: MediaQuery.of(context).size.width,
                                                      child: SingleChildScrollView(
-                                                       scrollDirection: Axis.horizontal,
-                                                       child: Column(
-                                                         mainAxisSize: MainAxisSize.min,
-                                                         children: [
-
-                                                           // Row(
-                                                           //   children: [
-                                                           //     Button(title: 'Browse',onPressed: () async {
-                                                           //
-                                                           //       FilePickerResult? result = await FilePicker.platform.pickFiles();
-                                                           //
-                                                           //       if(result == null) return;
-                                                           //
-                                                           //       setState(() {
-                                                           //         file = result.files.first.bytes;
-                                                           //         FileName = result.files.single.name;
-                                                           //       });
-                                                           //
-                                                           //
-                                                           //       // openFile(file);
-                                                           //
-                                                           //     }, Width: 100,),
-                                                           //
-                                                           //    Container(
-                                                           //      child: Text("$FileName"),
-                                                           //    )
-                                                           //   ],
-                                                           // ),
-                                                           //
-                                                           //
-                                                           //
-                                                           // Button(title: "Submit", onPressed: (){
-                                                           //   uploadFile(file,startUpReadResponse[index].partnerFiles[count].Partnershipid);
-                                                           //
-                                                           // }, Width: 90),
-
-                                                           Row(
-                                                             mainAxisAlignment: MainAxisAlignment.start,
-                                                             crossAxisAlignment: CrossAxisAlignment.start,
-                                                             mainAxisSize: MainAxisSize.min,
-                                                             children: [
-                                                               Icon(Icons.remove_red_eye,size: 15,),
-                                                               Text("${startUpReadResponse[index].partnerFiles[count].fileInput}",style: TextStyle(fontSize: 10),)
-                                                             ],),
-                                                         ],
-                                                       )
+                                                         scrollDirection: Axis.horizontal,
+                                                         child: Column(
+                                                           mainAxisSize: MainAxisSize.min,
+                                                           children: [
+                                                             Row(
+                                                               mainAxisAlignment: MainAxisAlignment.start,
+                                                               crossAxisAlignment: CrossAxisAlignment.start,
+                                                               mainAxisSize: MainAxisSize.min,
+                                                               children: [
+                                                                 Icon(Icons.remove_red_eye,size: 15,),
+                                                                 Text("${startUpReadResponse[index].partnerFiles[count].fileInput}",style: TextStyle(fontSize: 10),)
+                                                               ],),
+                                                           ],
+                                                         )
                                                      ),
-                                                   );
-                                                 }),
-                                           )
-                                         ],
-                                       ),
+                                                   ),
+                                                 );
+                                               }),
+                                         )
+                                       ],
                                      ),
+                                     // Container(
+                                     //   color: Colors.black,
+                                     //   height: 40,
+                                     //   width: MediaQuery.of(context).size.width,
+                                     //   child: Row(
+                                     //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                     //     children: <Widget>[
+                                     //       Container(margin:const EdgeInsets.only(left: 10),child: Text(startUpReadResponse[index].title,style: TextStyle(color: Colors.white),)),
+                                     //       isVisible?Container(margin:const EdgeInsets.only(right: 10),child: Text("-",style: TextStyle(color: Colors.white),)):
+                                     //       Container(margin:const EdgeInsets.only(right: 10),child:  Text("+",style: TextStyle(color: Colors.white),))
+                                     //     ],
+                                     //   ),
+                                     // ),
                                    ),
+                                   // Visibility(
+                                   //   visible: isVisible,
+                                   //   child: Container(
+                                   //     child: Column(
+                                   //       mainAxisAlignment: MainAxisAlignment.start,
+                                   //       crossAxisAlignment: CrossAxisAlignment.start,
+                                   //       children: <Widget>[
+                                   //         Container(
+                                   //             margin: EdgeInsets.only(top: 10),
+                                   //             child: Heading2WithDescription("Description", startUpReadResponse[index].message)),
+                                   //         Heading2("Related Document"),
+                                   //         Container(margin:EdgeInsets.only(top: 5),child: Text("add more documents")),
+                                   //         Row(
+                                   //           children: [
+                                   //             SmallButton(title: 'Browse',onPressed: () async {
+                                   //
+                                   //               selectFile();
+                                   //
+                                   //             }, Width: 100,),
+                                   //
+                                   //             Container(
+                                   //               child: Text("$FileName"),
+                                   //             )
+                                   //           ],
+                                   //         ),
+                                   //         SmallButton(title: "Submit", onPressed: (){
+                                   //
+                                   //           // if(file==null)return;
+                                   //           uploadFile(file,startUpReadResponse[index].id);
+                                   //
+                                   //           }, Width: 90),
+                                   //
+                                   //
+                                   //         Container(
+                                   //           margin: EdgeInsets.only(top: 10),
+                                   //           child: ListView.builder(
+                                   //               physics: const NeverScrollableScrollPhysics(),
+                                   //               shrinkWrap: true,
+                                   //               itemCount: startUpReadResponse[index].partnerFiles.length,
+                                   //               itemBuilder: (context,count){
+                                   //                 return Container(
+                                   //                   margin: EdgeInsets.only(bottom: 10),
+                                   //                   width: MediaQuery.of(context).size.width,
+                                   //                   child: SingleChildScrollView(
+                                   //                     scrollDirection: Axis.horizontal,
+                                   //                     child: Column(
+                                   //                       mainAxisSize: MainAxisSize.min,
+                                   //                       children: [
+                                   //                         Row(
+                                   //                           mainAxisAlignment: MainAxisAlignment.start,
+                                   //                           crossAxisAlignment: CrossAxisAlignment.start,
+                                   //                           mainAxisSize: MainAxisSize.min,
+                                   //                           children: [
+                                   //                             Icon(Icons.remove_red_eye,size: 15,),
+                                   //                             Text("${startUpReadResponse[index].partnerFiles[count].fileInput}",style: TextStyle(fontSize: 10),)
+                                   //                           ],),
+                                   //                       ],
+                                   //                     )
+                                   //                   ),
+                                   //                 );
+                                   //               }),
+                                   //         )
+                                   //       ],
+                                   //     ),
+                                   //   ),
+                                   // ),
                                  ],),
                                ),
                              );
@@ -487,14 +533,14 @@ class _EntrepreneurState extends State<Entrepreneur> {
       if (value.id == null)
         {
           setState(() {
-            _isLoading = false;
+            _isLogInSession = false;
           })
         }
       else
         {
           setState(() {
             globalSessionUser = value;
-            _isLoading = false;
+            _isLogInSession = false;
           }),
         }
     });
@@ -580,10 +626,11 @@ class _EntrepreneurState extends State<Entrepreneur> {
    }
 
    uploadFile(file, int partnershipid) {
-
+    print("file::${file}");
+    print("partnershipid::${partnershipid}");
      HTTPManager().uploadFile(
          generalResponseModel.token, UploadFile(
-         project_id: partnershipid, more_files: file
+         project_id: "${partnershipid}", more_files: file
      )).then((value) {
        print(value);
      }).catchError((e) {
@@ -591,7 +638,9 @@ class _EntrepreneurState extends State<Entrepreneur> {
        setState(() {
          _isLoading = false;
        });
-       showAlert(context, e.toString(), true, () {}, () {});
+       showAlert(context, e.toString(), true, () {}, () {
+         uploadFile(file, partnershipid);
+       });
      });
 
    }
@@ -619,4 +668,12 @@ void _BottomSheet(BuildContext context, int id) {
         );
       }
   );
+}
+
+class fileList {
+  String imageName;
+  File imageFile;
+
+  fileList(this.imageName, this.imageFile);
+
 }
