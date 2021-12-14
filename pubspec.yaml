@@ -64,6 +64,8 @@ dependencies:
   modal_bottom_sheet: ^2.0.0
   file_picker: ^4.2.7
   open_file: ^3.2.1
+  group_radio_button: ^1.1.0
+  custom_radio_grouped_button: ^2.1.1
 
 dev_dependencies:
   flutter_test:

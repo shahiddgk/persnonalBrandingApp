@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 
 class UploadFile {
   String project_id= '';
-  dynamic more_files = '';
+  late List more_files ;
 
   UploadFile({required this.project_id, required this.more_files});
 

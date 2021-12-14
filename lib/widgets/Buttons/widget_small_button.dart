@@ -4,9 +4,8 @@ import 'package:flutter/material.dart';
 class SmallButton extends StatefulWidget {
   final String title;
   final Function onPressed;
-  double Width;
 
-  SmallButton({required this.title, required this.onPressed,required this.Width});
+  SmallButton({required this.title, required this.onPressed,});
 
   @override
   _SmallButtonState createState() => _SmallButtonState();
@@ -18,12 +17,13 @@ class _SmallButtonState extends State<SmallButton> {
     return Container(
       width: 80,
       height: 40,
-      margin: EdgeInsets.only(right: 10),
+      margin: EdgeInsets.only(right: 10,bottom: 5,top: 5),
       decoration: BoxDecoration(
         //color: Colors.amber,
           borderRadius: BorderRadius.circular(12),
-          border: Border.all(
-            color: Colors.white,width: 3,)),
+          // border: Border.all(
+          //   color: Colors.white,width: 3,)
+      ),
       child: ElevatedButton(
         onPressed:() {
           widget.onPressed();

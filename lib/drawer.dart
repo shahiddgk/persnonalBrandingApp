@@ -217,7 +217,7 @@ class _MainWidgetState extends State<MainWidget> with TickerProviderStateMixin {
 
           ),
         ),
-        footer: _isLoading == false && _isToken== false ? globalSessionUser.id != 0 ? globalSessionUser.status == "Token is Expired" ?logoutSessionUser() : KFDrawerItem(
+        footer: _isLoading == false && _isToken== false ? globalSessionUser.id != 0 ? generalResponseModel.status == "Token is Expired" ?logoutSessionUser() : KFDrawerItem(
           text: const Text(
             'Logout',
             style: TextStyle(color: Colors.white, fontSize: 18),

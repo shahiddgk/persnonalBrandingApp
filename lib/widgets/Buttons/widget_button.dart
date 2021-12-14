@@ -16,15 +16,17 @@ class _ButtonState extends State<Button> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(left: 5),
+      padding: EdgeInsets.only(left: 5,right: 5),
       margin:EdgeInsets.only(top: 25),
       width: widget.Width,
 
       decoration: BoxDecoration(
           //color: Colors.amber,
           borderRadius: BorderRadius.circular(12),
-          border: Border.all(
-        color: Colors.white,width: 3,)),
+        //   border: Border.all(
+        // //color: Colors.white,
+        //     width: 3,)
+      ),
       child: ElevatedButton(
         onPressed:() {
           widget.onPressed();

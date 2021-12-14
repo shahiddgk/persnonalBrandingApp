@@ -1,11 +1,14 @@
 import 'dart:async';
 import 'dart:io';
+import 'dart:typed_data';
 
+import 'package:custom_radio_grouped_button/custom_radio_grouped_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:kf_drawer/kf_drawer.dart';
 import 'package:personal_branding/Pages/Entrepreneur/pages/chat_page.dart';
@@ -27,6 +30,7 @@ import 'package:personal_branding/widgets/Buttons/widget_button.dart';
 import 'package:personal_branding/widgets/TextFields/widget_title_field.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:personal_branding/widgets/widget_date_picker.dart';
+import 'package:group_radio_button/group_radio_button.dart';
 
 import 'package:provider/src/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -57,11 +61,14 @@ class _EntrepreneurState extends State<Entrepreneur> {
   late List<StartUpReadResponse> startUpReadResponse;
   String date = "";
   DateTime selectedDate = DateTime.now();
-  String selectValue = "Investment";
+  dynamic selectValue = "Partnership";
   String FileName = ' ';
   late File? file;
+  //late List<File> files;
   int indexx = -1;
-
+  dynamic selectValue1 = " ";
+  List files = [];
+  late Map<int, dynamic> filesMap;
 
 
    _handleRadioValueChange(int value) {
@@ -115,16 +122,34 @@ class _EntrepreneurState extends State<Entrepreneur> {
        });
   }
 
-  Future selectFile(int id) async {
+  Future selectFile(int id, ImageSource gallery) async {
      print(id);
-    final result = await FilePicker.platform.pickFiles(allowMultiple: true);
-    if(result == null) return;
-    final path = result.files.single.path!;
-    setState(() {
-      file = File(path);
-      indexx = id;
-      FileName = result.files.single.name;
-    });
+
+     FilePickerResult? result = await FilePicker.platform.pickFiles(allowMultiple: true);
+
+     if (result != null) {
+       setState(() {
+         files = result.paths.map((path) => File(path!)).toList();
+         indexx = id;
+         print("Files::${files}");
+         FileName = result.files.first.name;
+       });
+     } else {
+       // User canceled the picker
+     }
+
+
+    // final result = await FilePicker.platform.pickFiles(allowMultiple: true);
+    // if(result == null) return;
+    // final path = result.files.single.path!;
+    // setState(() {
+    //   file = File(path);
+    //   indexx = id;
+    //   files.add(file);
+    //   filesMap = files.asMap();
+    //   print("filesMap::${filesMap}");
+    //   FileName = result.files.single.name;
+    // });
   }
 
 
@@ -203,34 +228,49 @@ class _EntrepreneurState extends State<Entrepreneur> {
                                 children: <Widget>[
                                   Text("YOUR STRPS TO CHNAGE THE WORLD",style: TextStyle(fontSize: 10),),
                                   TextButton(onPressed: globalSessionUser.id != 0 ? (){
-
+                                    isNewVisible == true ?
                                     showDialog(context: context, builder: (context) => AlertDialog(
                                       title: Text("Select A Plan"),
                                       content: Container(
                                         width: MediaQuery.of(context).size.width,
                                         child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          crossAxisAlignment: CrossAxisAlignment.center,
-                                          children: [
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            crossAxisAlignment: CrossAxisAlignment.center,
+                                            children: [
+                                              CustomRadioButton(
+                                                elevation: 0,
+                                                unSelectedColor: Theme.of(context).canvasColor,
+                                                buttonLables: const [
+                                                  'Partnership',
+                                                  'investment',
+                                                ],
+                                                enableShape: true,
+                                                buttonValues: const [
+                                                  'Partnership',
+                                                  'investment',
+                                                ],
+                                                buttonTextStyle: const ButtonTextStyle(
+                                                    selectedColor: Colors.white,
+                                                    unSelectedColor: Colors.black,
+                                                    textStyle: TextStyle(fontSize: 12)),
+                                                radioButtonValue: (value) {
+                                                  selectValue = value;
+                                                  selectValue1 = selectValue;
+                                                  setState(() {
 
-                                            Radio<String>(value: "Partnership", groupValue: selectValue, onChanged: (Value){
-                                              setState(() {
-                                                print(Value);
-                                              });
-                                            }),
-                                            Text("Partnership",style: TextStyle(fontSize: 12),),
-                                            Radio<String>(value: "Investment", groupValue: selectValue, onChanged: (Value){
-                                              setState(() {
-                                               print(Value);
-                                              });
-                                            }),
-                                            Text("Investment",style: TextStyle(fontSize: 12),),
+                                                  });
+                                                  Navigator.of(context).pop();
+                                                  print(selectValue);
+                                                },
+                                                defaultSelected: selectValue,
+                                                selectedColor: Theme.of(context).accentColor,
+                                              ),
 
-                                          ],
+                                            ],
 
-                                        ),
+                                          ),
                                       ),
-                                    ));
+                                    )) : null;
                                     setState(() {
                                       isNewVisible = !isNewVisible;
                                     });
@@ -255,11 +295,12 @@ class _EntrepreneurState extends State<Entrepreneur> {
                                        visibility(startUpReadResponse[index]);
                                      },
                                      child: ExpansionTile(
-                                       collapsedTextColor: Colors.black,
+                                       collapsedTextColor: Colors.white,
                                        collapsedIconColor: Colors.white,
                                        iconColor: Colors.black,
+                                       textColor: Colors.black,
                                        collapsedBackgroundColor: Colors.black,
-                                       title: Text(startUpReadResponse[index].title,style: TextStyle(color: Colors.white),
+                                       title: Text(startUpReadResponse[index].title,
                                        ),
                                       expandedCrossAxisAlignment: CrossAxisAlignment.start,
                                        expandedAlignment: Alignment.centerLeft,
@@ -280,9 +321,9 @@ class _EntrepreneurState extends State<Entrepreneur> {
                                              children: [
                                                SmallButton(title: 'Browse',onPressed: () async {
 
-                                                 selectFile(startUpReadResponse[index].id);
+                                                 selectFile(startUpReadResponse[index].id,ImageSource.gallery);
 
-                                               }, Width: 100,),
+                                               },),
 
                                                Visibility(
                                                  visible: indexx == startUpReadResponse[index].id ? true : false,
@@ -298,9 +339,9 @@ class _EntrepreneurState extends State<Entrepreneur> {
                                            child: SmallButton(title: "Submit", onPressed: (){
 
                                              // if(file==null)return;
-                                             uploadFile(file,startUpReadResponse[index].id);
+                                             uploadFile(files,startUpReadResponse[index].id);
 
-                                           }, Width: 90),
+                                           },),
                                          ),
 
 
@@ -337,94 +378,12 @@ class _EntrepreneurState extends State<Entrepreneur> {
                                          )
                                        ],
                                      ),
-                                     // Container(
-                                     //   color: Colors.black,
-                                     //   height: 40,
-                                     //   width: MediaQuery.of(context).size.width,
-                                     //   child: Row(
-                                     //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                     //     children: <Widget>[
-                                     //       Container(margin:const EdgeInsets.only(left: 10),child: Text(startUpReadResponse[index].title,style: TextStyle(color: Colors.white),)),
-                                     //       isVisible?Container(margin:const EdgeInsets.only(right: 10),child: Text("-",style: TextStyle(color: Colors.white),)):
-                                     //       Container(margin:const EdgeInsets.only(right: 10),child:  Text("+",style: TextStyle(color: Colors.white),))
-                                     //     ],
-                                     //   ),
-                                     // ),
                                    ),
-                                   // Visibility(
-                                   //   visible: isVisible,
-                                   //   child: Container(
-                                   //     child: Column(
-                                   //       mainAxisAlignment: MainAxisAlignment.start,
-                                   //       crossAxisAlignment: CrossAxisAlignment.start,
-                                   //       children: <Widget>[
-                                   //         Container(
-                                   //             margin: EdgeInsets.only(top: 10),
-                                   //             child: Heading2WithDescription("Description", startUpReadResponse[index].message)),
-                                   //         Heading2("Related Document"),
-                                   //         Container(margin:EdgeInsets.only(top: 5),child: Text("add more documents")),
-                                   //         Row(
-                                   //           children: [
-                                   //             SmallButton(title: 'Browse',onPressed: () async {
-                                   //
-                                   //               selectFile();
-                                   //
-                                   //             }, Width: 100,),
-                                   //
-                                   //             Container(
-                                   //               child: Text("$FileName"),
-                                   //             )
-                                   //           ],
-                                   //         ),
-                                   //         SmallButton(title: "Submit", onPressed: (){
-                                   //
-                                   //           // if(file==null)return;
-                                   //           uploadFile(file,startUpReadResponse[index].id);
-                                   //
-                                   //           }, Width: 90),
-                                   //
-                                   //
-                                   //         Container(
-                                   //           margin: EdgeInsets.only(top: 10),
-                                   //           child: ListView.builder(
-                                   //               physics: const NeverScrollableScrollPhysics(),
-                                   //               shrinkWrap: true,
-                                   //               itemCount: startUpReadResponse[index].partnerFiles.length,
-                                   //               itemBuilder: (context,count){
-                                   //                 return Container(
-                                   //                   margin: EdgeInsets.only(bottom: 10),
-                                   //                   width: MediaQuery.of(context).size.width,
-                                   //                   child: SingleChildScrollView(
-                                   //                     scrollDirection: Axis.horizontal,
-                                   //                     child: Column(
-                                   //                       mainAxisSize: MainAxisSize.min,
-                                   //                       children: [
-                                   //                         Row(
-                                   //                           mainAxisAlignment: MainAxisAlignment.start,
-                                   //                           crossAxisAlignment: CrossAxisAlignment.start,
-                                   //                           mainAxisSize: MainAxisSize.min,
-                                   //                           children: [
-                                   //                             Icon(Icons.remove_red_eye,size: 15,),
-                                   //                             Text("${startUpReadResponse[index].partnerFiles[count].fileInput}",style: TextStyle(fontSize: 10),)
-                                   //                           ],),
-                                   //                       ],
-                                   //                     )
-                                   //                   ),
-                                   //                 );
-                                   //               }),
-                                   //         )
-                                   //       ],
-                                   //     ),
-                                   //   ),
-                                   // ),
                                  ],),
                                ),
                              );
                              },
-                           ) :
-                              Visibility(
-                                visible:globalSessionUser.id != 0 ? !isNewVisible : isNewVisible,
-                                child: Column(children: [
+                           ) : Column(children: [
                                   IndustryTitle(hint: "Title",controller: _titleFieldController,),
 
                                   Industry(hint: "Target Industry",controller: _industryFieldController,),
@@ -435,7 +394,7 @@ class _EntrepreneurState extends State<Entrepreneur> {
                                     _selectDate(context);
                                   },),
 
-                                  Button(title: "Browse", onPressed: (){}, Width: 90),
+                                  Button(title: "Browse", onPressed: (){}, Width: 100),
 
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
@@ -451,8 +410,8 @@ class _EntrepreneurState extends State<Entrepreneur> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: <Widget>[
 
-                                      Button(title: "REGISTER",Width: 110,onPressed: (){ Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Register()));},),
-                                      Button(title: "LOGIN",Width: 90,onPressed: () {
+                                      Button(title: "REGISTER",Width: 115,onPressed: (){ Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Register()));},),
+                                      Button(title: "LOGIN",Width: 100,onPressed: () {
 
                                         Navigator.of(context).push(MaterialPageRoute(builder: (context)=>LogIn()));
 
@@ -461,7 +420,6 @@ class _EntrepreneurState extends State<Entrepreneur> {
                                     ],),
                                   PartnerShipText()
                                 ],),
-                              ),
 
                             Visibility(
                               visible:!isNewVisible,
@@ -478,21 +436,38 @@ class _EntrepreneurState extends State<Entrepreneur> {
                                     _selectDate(context);
                                   },),
 
-                                  Button(title: "Browse", onPressed: (){}, Width: 90),
+                                  Button(title: "Browse", onPressed: (){}, Width: 100),
+                                  if(selectValue1!=' ')
+                                  CustomRadioButton(
+                                    elevation: 0,
+                                    unSelectedColor: Theme.of(context).canvasColor,
+                                    buttonLables: const [
+                                      'Partnership',
+                                      'investment',
+                                    ],
+                                    enableShape: true,
+                                    buttonValues: const [
+                                      'Partnership',
+                                      'investment',
+                                    ],
+                                    buttonTextStyle: const ButtonTextStyle(
+                                        selectedColor: Colors.white,
+                                        unSelectedColor: Colors.black,
+                                        textStyle: TextStyle(fontSize: 12)),
+                                    radioButtonValue: (value) {
+                                      selectValue = value;
+                                     setState(() {
 
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Radio(value: 0, groupValue: _radioValue, onChanged: _handleRadioValueChange(0)),
-                                      Text("Partnership",style: TextStyle(color: Colors.black87),),
-                                      Radio(value: 1, groupValue: _radioValue, onChanged: _handleRadioValueChange(1)),
-                                      Text("Investment Plan",style: TextStyle(color: Colors.black87),)
-
-                                    ],),
+                                     });
+                                      print(selectValue);
+                                    },
+                                    defaultSelected: selectValue1,
+                                    selectedColor: Theme.of(context).accentColor,
+                                  ),
                                   
                                   Button(title: "SUBMIT", onPressed: (){
                                     newIdea();
-                                  }, Width: 90),
+                                  }, Width: 100),
 
                                   // Row(
                                   //   mainAxisAlignment: MainAxisAlignment.center,
@@ -534,6 +509,7 @@ class _EntrepreneurState extends State<Entrepreneur> {
         {
           setState(() {
             _isLogInSession = false;
+            _isLoading = false;
           })
         }
       else
@@ -552,6 +528,8 @@ class _EntrepreneurState extends State<Entrepreneur> {
         {
           setState(() {
             _isCheckingSession = false;
+            _isLoading = false;
+            generalResponseModel.token = value.token;
           })
         }
       else
@@ -626,7 +604,7 @@ class _EntrepreneurState extends State<Entrepreneur> {
    }
 
    uploadFile(file, int partnershipid) {
-    print("file::${file}");
+    print("file::${files}");
     print("partnershipid::${partnershipid}");
      HTTPManager().uploadFile(
          generalResponseModel.token, UploadFile(
