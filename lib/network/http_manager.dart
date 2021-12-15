@@ -25,10 +25,8 @@ class HTTPManager {
     final url = ApplicationURLs.API_LOGIN;
     final GeneralResponseModel response =
         await _handler.post(url, loginRequest.toJson(), false);
-    saveUserToken(response);
-    print(response.token);
     SessionUserModel sessionUserModel =
-        SessionUserModel.fromJson(response.user);
+        SessionUserModel.fromJson(response.data);
     return sessionUserModel;
   }
 
