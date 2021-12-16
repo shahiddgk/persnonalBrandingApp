@@ -12,6 +12,7 @@ import 'package:personal_branding/constants/firestore_constants.dart';
 import 'package:personal_branding/models/message_chat.dart';
 import 'package:personal_branding/providers/auth_provider.dart';
 import 'package:personal_branding/providers/chat_provider.dart';
+import 'package:personal_branding/utills/utils.dart';
 import 'package:personal_branding/widgets/loading_view.dart';
 import 'package:provider/provider.dart';
 
@@ -93,8 +94,8 @@ class ChatPageState extends State<ChatPage> {
   }
 
   void readLocal() {
-    if (currentUserId.isNotEmpty) {
-      currentUserId = "EufKOLTdlwQPntK8VAxkmP9iWqF2";
+    if (currentUserId.isNotEmpty && globalSessionUser.usertype !="Admin") {
+      currentUserId = "1";
 
       print("PeerId::$peerId");
       print("PeerId::$peerAvatar");
@@ -450,28 +451,31 @@ class ChatPageState extends State<ChatPage> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-        child: Container(
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(10.0)),
-          child: Stack(
-            children: <Widget>[
-              Column(
-                mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    // List of messages
-                    buildListMessage(),
+        child: Scaffold(
 
-                    // Sticker
-                    isShowSticker ? buildSticker() : SizedBox.shrink(),
+          body: Container(
+            //decoration: BoxDecoration(borderRadius: BorderRadius.circular(10.0)),
+            child: Stack(
+              children: <Widget>[
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      // List of messages
+                      buildListMessage(),
 
-                    // Input content
-                    buildInput(),
-                  ],
-                ),
+                      // Sticker
+                      isShowSticker ? buildSticker() : SizedBox.shrink(),
 
-              // Loading
-              buildLoading()
+                      // Input content
+                      buildInput(),
+                    ],
+                  ),
 
-            ],
+                // Loading
+                buildLoading()
+
+              ],
+            ),
           ),
         ),
         onWillPop: onBackPress,

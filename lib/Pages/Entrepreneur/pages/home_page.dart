@@ -21,6 +21,7 @@ import 'package:personal_branding/providers/auth_provider.dart';
 import 'package:personal_branding/providers/home_provider.dart';
 import 'package:personal_branding/utills/debouncer.dart';
 import 'package:personal_branding/utills/utilities.dart';
+import 'package:personal_branding/utills/utils.dart';
 import 'package:personal_branding/widgets/loading_view.dart';
 import 'package:provider/provider.dart';
 
@@ -38,16 +39,18 @@ class HomePageState extends State<HomePage> {
 
   final FirebaseMessaging firebaseMessaging = FirebaseMessaging.instance;
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-  final GoogleSignIn googleSignIn = GoogleSignIn();
+ // final GoogleSignIn googleSignIn = GoogleSignIn();
   final ScrollController listScrollController = ScrollController();
 
   int _limit = 20;
   int _limitIncrement = 20;
   String _textSearch = "";
-  bool isLoading = false;
+  bool _isCheckingSession = true;
+  bool _isLoading = false;
+  bool _isLogInSession = true;
 
-  late AuthProvider authProvider;
-  late String currentUserId;
+  //late AuthProvider authProvider;
+  late String currentUserId = "1";
   late HomeProvider homeProvider;
   Debouncer searchDebouncer = Debouncer(milliseconds: 300);
   StreamController<bool> btnClearController = StreamController<bool>();
@@ -61,17 +64,17 @@ class HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    authProvider = context.read<AuthProvider>();
+    //authProvider = context.read<AuthProvider>();
     homeProvider = context.read<HomeProvider>();
 
-    if (authProvider.getUserFirebaseId()?.isNotEmpty == true) {
-      currentUserId = authProvider.getUserFirebaseId()!;
-    } else {
-      Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (context) => LoginPage()),
-        (Route<dynamic> route) => false,
-      );
-    }
+   // if (_isLoading == false && _isCheckingSession == false && _isLogInSession == false) {
+      currentUserId = "${globalSessionUser.id}";
+    // } else {
+    //   Navigator.of(context).pushAndRemoveUntil(
+    //     MaterialPageRoute(builder: (context) => LoginPage()),
+    //     (Route<dynamic> route) => false,
+    //   );
+    // }
     registerNotification();
     configLocalNotification();
     listScrollController.addListener(scrollListener);
@@ -121,13 +124,13 @@ class HomePageState extends State<HomePage> {
     }
   }
 
-  void onItemMenuPress(PopupChoices choice) {
-    if (choice.title == 'Log out') {
-      handleSignOut();
-    } else {
-      Navigator.push(context, MaterialPageRoute(builder: (context) => SettingsPage()));
-    }
-  }
+  // void onItemMenuPress(PopupChoices choice) {
+  //   if (choice.title == 'Log out') {
+  //     handleSignOut();
+  //   } else {
+  //     Navigator.push(context, MaterialPageRoute(builder: (context) => SettingsPage()));
+  //   }
+  // }
 
   void showNotification(RemoteNotification remoteNotification) async {
     AndroidNotificationDetails androidPlatformChannelSpecifics = AndroidNotificationDetails(
@@ -244,14 +247,14 @@ class HomePageState extends State<HomePage> {
   //   }
   // }
 
-  Future<void> handleSignOut() async {
-    authProvider.handleSignOut();
-
-    Navigator.of(context).pushAndRemoveUntil(
-      MaterialPageRoute(builder: (context) => MainWidget(title: ' ',)),
-      (Route<dynamic> route) => false,
-    );
-  }
+  // Future<void> handleSignOut() async {
+  //   authProvider.handleSignOut();
+  //
+  //   Navigator.of(context).pushAndRemoveUntil(
+  //     MaterialPageRoute(builder: (context) => MainWidget(title: ' ',)),
+  //     (Route<dynamic> route) => false,
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -261,7 +264,7 @@ class HomePageState extends State<HomePage> {
           AppConstants.homeTitle,
           style: TextStyle(color: ColorConstants.primaryColor),
         ),
-        actions: <Widget>[buildPopupMenu()],
+       // actions: <Widget>[buildPopupMenu()],
       ),
       body: WillPopScope(
         child: Stack(
@@ -302,7 +305,7 @@ class HomePageState extends State<HomePage> {
 
             // Loading
             Positioned(
-              child: isLoading ? LoadingView() : SizedBox.shrink(),
+              child: _isLoading ? LoadingView() : SizedBox.shrink(),
             )
           ],
         ),
@@ -371,32 +374,32 @@ class HomePageState extends State<HomePage> {
     );
   }
 
-  Widget buildPopupMenu() {
-    return PopupMenuButton<PopupChoices>(
-      onSelected: onItemMenuPress,
-      itemBuilder: (BuildContext context) {
-        return choices.map((PopupChoices choice) {
-          return PopupMenuItem<PopupChoices>(
-              value: choice,
-              child: Row(
-                children: <Widget>[
-                  Icon(
-                    choice.icon,
-                    color: ColorConstants.primaryColor,
-                  ),
-                  Container(
-                    width: 10,
-                  ),
-                  Text(
-                    choice.title,
-                    style: TextStyle(color: ColorConstants.primaryColor),
-                  ),
-                ],
-              ));
-        }).toList();
-      },
-    );
-  }
+  // Widget buildPopupMenu() {
+  //   return PopupMenuButton<PopupChoices>(
+  //     onSelected: onItemMenuPress,
+  //     itemBuilder: (BuildContext context) {
+  //       return choices.map((PopupChoices choice) {
+  //         return PopupMenuItem<PopupChoices>(
+  //             value: choice,
+  //             child: Row(
+  //               children: <Widget>[
+  //                 Icon(
+  //                   choice.icon,
+  //                   color: ColorConstants.primaryColor,
+  //                 ),
+  //                 Container(
+  //                   width: 10,
+  //                 ),
+  //                 Text(
+  //                   choice.title,
+  //                   style: TextStyle(color: ColorConstants.primaryColor),
+  //                 ),
+  //               ],
+  //             ));
+  //       }).toList();
+  //     },
+  //   );
+  // }
 
   Widget buildItem(BuildContext context, DocumentSnapshot? document) {
     if (document != null) {

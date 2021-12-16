@@ -10,6 +10,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:kf_drawer/kf_drawer.dart';
 import 'package:personal_branding/Pages/Entrepreneur/pages/chat_page.dart';
+import 'package:personal_branding/Pages/Entrepreneur/pages/home_page.dart';
 import 'package:personal_branding/Pages/login.dart';
 import 'package:personal_branding/models/request/user_save_start_up_request.dart';
 import 'package:personal_branding/models/request/widget_upload_file.dart';
@@ -163,13 +164,21 @@ class _EntrepreneurState extends State<Entrepreneur> {
                 _isCheckingSession == false &&
                 _isLogInSession == false
             ? globalSessionUser == null || globalSessionUser.id != 0
-                ? FloatingActionButton(
-                    onPressed: () {
-                      _BottomSheet(context, globalSessionUser.id);
-                    },
-                    child: Icon(Icons.message),
-                  )
-                : null
+                ? null
+                : FloatingActionButton(
+          onPressed: () {
+            if(globalSessionUser.usertype == "admin") {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => HomePage()),
+              );
+            }
+            else{
+              _BottomSheet(context, globalSessionUser.id);
+            }
+          },
+          child: Icon(Icons.message),
+        )
             : null,
         body: _isLoading == false
             ? SafeArea(
