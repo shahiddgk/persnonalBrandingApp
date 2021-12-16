@@ -26,7 +26,7 @@ class LogIn extends KFDrawerContent {
 
 class _LogInState extends State<LogIn> {
 
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  static final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool _isLoading = false;
   TextEditingController _emailFieldController = TextEditingController();
   TextEditingController _passwordFieldController = TextEditingController();

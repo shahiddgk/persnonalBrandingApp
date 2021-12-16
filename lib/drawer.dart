@@ -56,7 +56,7 @@ class _MainWidgetState extends State<MainWidget> with TickerProviderStateMixin {
       body: KFDrawer(
         scrollable: true,
         controller: KFDrawerController(
-          initialPage: Home(),
+          initialPage: Entrepreneur(),
           items: [
             KFDrawerItem.initWithPage(
               text: Text('HOME',

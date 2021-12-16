@@ -42,7 +42,7 @@ dependencies:
   font_awesome_flutter: ^9.2.0
   google_fonts: ^2.1.0
   emoji_picker_flutter: ^1.0.7
-  flutter_keyboard_visibility: ^5.1.0
+#  flutter_keyboard_visibility: ^5.1.0
   fluttericon: ^2.0.0
   responsive_framework: ^0.1.5
   page_transition: ^2.0.4

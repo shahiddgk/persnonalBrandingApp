@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:io';
 
 import 'package:custom_radio_grouped_button/custom_radio_grouped_button.dart';
@@ -6,7 +5,6 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:kf_drawer/kf_drawer.dart';
 import 'package:personal_branding/Pages/Entrepreneur/pages/chat_page.dart';
@@ -49,9 +47,9 @@ class _EntrepreneurState extends State<Entrepreneur> {
   bool isVisible = false;
   bool isNewVisible = true;
   bool _isCheckingSession = true;
-  bool _isLoading = false;
+  bool _isLoading = true;
   bool _isLogInSession = true;
-  late List<StartUpReadResponse> startUpReadResponse;
+  List<StartUpReadResponse> startUpReadResponse = [];
   String date = "";
   DateTime selectedDate = DateTime.now();
   dynamic selectValue = "Partnership";
@@ -61,8 +59,9 @@ class _EntrepreneurState extends State<Entrepreneur> {
   //late List<File> files;
   int indexx = -1;
   dynamic selectValue1 = " ";
-  List files = [];
   late Map<int, dynamic> filesMap;
+
+  List<File> files = [];
 
   _handleRadioValueChange(int value) {
     setState(() {
@@ -81,6 +80,10 @@ class _EntrepreneurState extends State<Entrepreneur> {
     super.initState();
     if (globalSessionUser.token != "") {
       _getStartUpList();
+    } else {
+      setState(() {
+        _isLoading = false;
+      });
     }
   }
 
@@ -107,33 +110,21 @@ class _EntrepreneurState extends State<Entrepreneur> {
     });
   }
 
-  Future selectFile(int id, ImageSource gallery) async {
-    FilePickerResult? result =
-        await FilePicker.platform.pickFiles(allowMultiple: true);
-
-    if (result != null) {
-      setState(() {
-        files = result.paths.map((path) => File(path!)).toList();
-        indexx = id;
-        print("Files::${files}");
-        FileName = result.files.first.name;
-      });
-    } else {
-      // User canceled the picker
-    }
-
-    // final result = await FilePicker.platform.pickFiles(allowMultiple: true);
-    // if(result == null) return;
-    // final path = result.files.single.path!;
-    // setState(() {
-    //   file = File(path);
-    //   indexx = id;
-    //   files.add(file);
-    //   filesMap = files.asMap();
-    //   print("filesMap::${filesMap}");
-    //   FileName = result.files.single.name;
-    // });
-  }
+  // Future selectFile(int id, ImageSource gallery) async {
+  //   FilePickerResult? result =
+  //       await FilePicker.platform.pickFiles(allowMultiple: true);
+  //
+  //   if (result != null) {
+  //     setState(() {
+  //       files = result.paths.map((path) => File(path!)).toList();
+  //       indexx = id;
+  //       print("Files::${files}");
+  //       FileName = result.files.first.name;
+  //     });
+  //   } else {
+  //     // User canceled the picker
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -160,49 +151,30 @@ class _EntrepreneurState extends State<Entrepreneur> {
           ),
         ),
         resizeToAvoidBottomInset: true,
-        floatingActionButton: _isLoading == false &&
-                _isCheckingSession == false &&
-                _isLogInSession == false
+        floatingActionButton: !_isLoading &&
+                !_isCheckingSession &&
+                !_isLogInSession
             ? globalSessionUser == null || globalSessionUser.id != 0
                 ? null
                 : FloatingActionButton(
-          onPressed: () {
-            if(globalSessionUser.usertype == "admin") {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => HomePage()),
-              );
-            }
-            else{
-              _BottomSheet(context, globalSessionUser.id);
-            }
-          },
-          child: Icon(Icons.message),
-        )
+                    onPressed: () {
+                      if (globalSessionUser.usertype == "admin") {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(builder: (context) => HomePage()),
+                        );
+                      } else {
+                        _BottomSheet(context, globalSessionUser.id);
+                      }
+                    },
+                    child: Icon(Icons.message),
+                  )
             : null,
-        body: _isLoading == false
+        body: !_isLoading
             ? SafeArea(
                 child: Center(
                   child: Column(
                     children: <Widget>[
-                      // Row(
-                      //   children: <Widget>[
-                      //     ClipRRect(
-                      //       borderRadius: BorderRadius.all(Radius.circular(32.0)),
-                      //       child: Material(
-                      //         shadowColor: Colors.transparent,
-                      //         color: Colors.transparent,
-                      //         child: IconButton(
-                      //           icon: Icon(
-                      //             Icons.menu,
-                      //             color: Colors.black,
-                      //           ),
-                      //           onPressed: widget.onMenuPressed,
-                      //         ),
-                      //       ),
-                      //     ),
-                      //   ],
-                      // ),
                       Expanded(
                         child: SingleChildScrollView(
                           scrollDirection: Axis.vertical,
@@ -308,8 +280,9 @@ class _EntrepreneurState extends State<Entrepreneur> {
                                           ],
                                         ),
                                       ),
-                                      globalSessionUser == null ||
-                                              globalSessionUser.id != 0
+                                      globalSessionUser.id != 0 &&
+                                              !_isLoading &&
+                                              startUpReadResponse != null
                                           ? ListView.builder(
                                               itemCount:
                                                   startUpReadResponse.length,
@@ -388,9 +361,9 @@ class _EntrepreneurState extends State<Entrepreneur> {
                                                                           'Browse',
                                                                       onPressed:
                                                                           () async {
-                                                                        selectFile(
-                                                                            startUpReadResponse[index].id,
-                                                                            ImageSource.gallery);
+                                                                        // selectFile(
+                                                                        //     startUpReadResponse[index].id,
+                                                                        //     ImageSource.gallery);
                                                                       },
                                                                     ),
                                                                     Visibility(
@@ -420,10 +393,10 @@ class _EntrepreneurState extends State<Entrepreneur> {
                                                                   onPressed:
                                                                       () {
                                                                     // if(file==null)return;
-                                                                    uploadFile(
-                                                                        files,
-                                                                        startUpReadResponse[index]
-                                                                            .id);
+                                                                    // uploadFile(
+                                                                    //     files,
+                                                                    //     startUpReadResponse[index]
+                                                                    //         .id);
                                                                   },
                                                                 ),
                                                               ),
@@ -511,7 +484,9 @@ class _EntrepreneurState extends State<Entrepreneur> {
                                                 ),
                                                 Button(
                                                     title: "Browse",
-                                                    onPressed: () {},
+                                                    onPressed: () {
+                                                      print("browse clicked");
+                                                    },
                                                     Width: 100),
                                                 Row(
                                                   mainAxisAlignment:
@@ -609,7 +584,10 @@ class _EntrepreneurState extends State<Entrepreneur> {
 
                                               Button(
                                                   title: "Browse",
-                                                  onPressed: () {},
+                                                  onPressed: () {
+                                                    print(
+                                                        "browse clicked line 589");
+                                                  },
                                                   Width: 100),
                                               if (selectValue1 != ' ')
                                                 CustomRadioButton(
@@ -648,7 +626,7 @@ class _EntrepreneurState extends State<Entrepreneur> {
                                               Button(
                                                   title: "SUBMIT",
                                                   onPressed: () {
-                                                    newIdea();
+                                                    newIdeaSubmit();
                                                   },
                                                   Width: 100),
 
@@ -710,7 +688,22 @@ class _EntrepreneurState extends State<Entrepreneur> {
       });
   }
 
-  newIdea() {
+  _selectFiles(BuildContext context) async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+        allowMultiple: true,
+        type: FileType.custom,
+        allowedExtensions: ['png', 'jpg', 'pdf', 'doc']);
+
+    if (result != null) {
+      setState(() {
+        files = result.paths.map((path) => File(path!)).toList();
+      });
+    } else {
+      // User canceled the picker
+    }
+  }
+
+  newIdeaSubmit() {
     if (_formKey.currentState!.validate()) {
       setState(() {
         _isLoading = true;
@@ -736,7 +729,7 @@ class _EntrepreneurState extends State<Entrepreneur> {
           _isLoading = false;
         });
         showAlert(context, e.toString(), true, () {}, () {
-          newIdea();
+          newIdeaSubmit();
         });
       });
     }

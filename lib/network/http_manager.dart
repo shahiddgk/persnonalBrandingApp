@@ -34,7 +34,7 @@ class HTTPManager {
 
     print("token:::$token");
     final url = ApplicationURLs.API_LOGOUT;
-    final GeneralResponseModel response = await _handler.postt(url,token,true);
+    final GeneralResponseModel response = await _handler.post_with_token(url,token,true);
     return response;
   }
 
@@ -93,7 +93,7 @@ class HTTPManager {
    String userid;
     final url = ApplicationURLs.API_STARTUP_LIST + "?userid=$id";
     print(url);
-    final GeneralResponseModel response = await _handler.gett(url,token, true);
+    final GeneralResponseModel response = await _handler.get_with_token(url,token, true);
     StartUpListResponse startUpListResponse =
     StartUpListResponse.fromJson(response.data);
     return startUpListResponse.startUpList;
@@ -111,7 +111,7 @@ class HTTPManager {
 
     final url = ApplicationURLs.API_SAVE_STARTUP;
     final GeneralResponseModel response =
-    await _handler.posttt(url, token,startUpRequest.toJson(),true);
+    await _handler.post_with_token_params(url, token,startUpRequest.toJson(),true);
     print(response.token);
     SaveStartUpReadResponse startUpReadResponse =
     SaveStartUpReadResponse.fromJson(response.data);
@@ -122,7 +122,7 @@ class HTTPManager {
 
     final url = ApplicationURLs.API_UPLOAD_FILE;
     final GeneralResponseModel response =
-    await _handler.posttt(url, token,uploadFile.toJson(),true);
+    await _handler.post_with_token_params(url, token,uploadFile.toJson(),true);
     print(response.token);
   }
 
