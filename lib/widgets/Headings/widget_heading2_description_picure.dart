@@ -29,8 +29,10 @@ class _Heading2WithDescriptionWiithImageState extends State<Heading2WithDescript
             onTap: () {
               widget.onTap();
             },
-            child: Container(margin:EdgeInsets.only(top:15,bottom: 15),child: Image.network(widget.ImageUrl))),
-      ],
+            child: Container(margin:EdgeInsets.only(top:15,bottom: 15),child: AspectRatio(
+                aspectRatio: 3/3,
+                child: Image.network(widget.ImageUrl))),
+        )],
     )) :  Container(margin:EdgeInsets.only(bottom: 15),child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
@@ -38,7 +40,11 @@ class _Heading2WithDescriptionWiithImageState extends State<Heading2WithDescript
         Text(widget.H2,style: TextStyle(fontSize: 20,fontWeight: FontWeight.normal)),
         Container(margin:EdgeInsets.only(top: 25,bottom: 10),child: Text(widget.Descrition,style: TextStyle(color: Colors.black87),textAlign: TextAlign.justify,)),
 
-        if(widget.ImageUrl.isNotEmpty) Image.network(widget.ImageUrl),
+        // if(widget.ImageUrl.isNotEmpty) AspectRatio(
+        //     aspectRatio: 2/2,
+        //     child:
+            Image.network("https://branding.ratedsolution.com/public/biography/1639227041_0.jpg")
+       // ),
 
       ],
     ));

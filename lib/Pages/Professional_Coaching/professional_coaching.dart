@@ -61,6 +61,30 @@ class _ProfessionalCoachingState extends State<ProfessionalCoaching> {
                             children: <Widget>[
                                 Heading1("MY GALLERY"),
                               Heading2WithDescription("JUST MY AWESOME SKILLS", "Lorem Ipsum is simply dummy text of the printing and typesetting industry."),
+
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  YoutubePlayer(
+                                    controller: YoutubePlayerController(
+                                      initialVideoId: videoID!,
+                                      flags: YoutubePlayerFlags(
+                                        autoPlay: false,
+                                        mute: false,
+                                      ),
+                                    ),
+                                    liveUIColor: Colors.yellow,
+                                    showVideoProgressIndicator: true,
+                                  ),
+                                  Text("Saturday / Nov 23,2021"),
+                                  Text("This is Standard Post",style: TextStyle(fontSize: 10,fontWeight: FontWeight.bold),),
+                                  Container(margin:EdgeInsets.only(top: 10,bottom: 10),height: 7,width: 90,color: Colors.amber,),
+                                  Text("Lorem Ipsum is simply dummy text of the printing and typesetting industry.",style: TextStyle(fontWeight: FontWeight.normal),textAlign: TextAlign.justify,),
+
+                                ],
+                              )
+
                               // ResponsiveWrapper.of(context).isDesktop ?
                               // Container(
                               //   child: GridView.builder(
@@ -91,7 +115,7 @@ class _ProfessionalCoachingState extends State<ProfessionalCoaching> {
                               //         );
                               //       } ),
                               // ),
-                              ProfessionalCoachingPictures(videoID!, "Saturday / Nov 23,2021", "THIS IS A STANDARD POST", "Lorem Ipsum is simply dummy text of the printing and typesetting industry.", (){}, (){}, (){},(){},(){}),
+                             // ProfessionalCoachingPictures(videoID!, "Saturday / Nov 23,2021", "THIS IS A STANDARD POST", "Lorem Ipsum is simply dummy text of the printing and typesetting industry.", (){}, (){}, (){},(){},(){}),
                             ],
                           ),),
                       ),

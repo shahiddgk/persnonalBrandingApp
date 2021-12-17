@@ -85,7 +85,7 @@ class _AboutState extends State<About> {
 
                       //  Image.network("https://www.nicepng.com/png/detail/365-3655520_cristiano-ronaldo-render-cristiano-ronaldo-white-background.png"),
 
-                      Align(alignment:Alignment.centerRight,child: Image.asset("images/5.JPG",fit: BoxFit.cover,)),
+                      Align(alignment:Alignment.topLeft,child: Image.asset("images/about.png",)),
 
                       Padding(padding: EdgeInsets.only(top:MediaQuery.of(context).size.height*1/20,left: 20,right: 20,bottom: MediaQuery.of(context).size.height*1/70),
                         child: Align(alignment: Alignment.centerLeft,
@@ -99,7 +99,7 @@ class _AboutState extends State<About> {
 
                               Heading2WithDescription("PROFESSIONAL PROFILE",aboutReadResponse.statement),
 
-                              Image.asset("images/sss.png"),
+                             // Image.asset("images/sign.png"),
 
                               // Button(title: "Download Resume as PDF",onPressed: (){},)
                             ],

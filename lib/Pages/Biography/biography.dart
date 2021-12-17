@@ -121,10 +121,10 @@ class _BiographyState extends State<Biography>
                                             itemBuilder: (context, index) {
                                               return GestureDetector(
                                                 onTap: () {
-                                                  Navigator.of(context).push(
-                                                      MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              PictureDetails()));
+                                                  // Navigator.of(context).push(
+                                                  //     MaterialPageRoute(
+                                                  //         builder: (context) =>
+                                                  //             PictureDetails()));
                                                 },
                                                 child: Container(
                                                   width: MediaQuery.of(context)

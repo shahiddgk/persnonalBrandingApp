@@ -104,7 +104,7 @@ class _FutureGoalsState extends State<FutureGoals> {
                                   itemBuilder: (context, index) {
                                     return GestureDetector(
                                       onTap: () {
-                                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>FutureGoalsPictureDetails()));
+                                        //Navigator.of(context).push(MaterialPageRoute(builder: (context)=>FutureGoalsPictureDetails()));
                                       },
                                       child: Container(
                                         width: MediaQuery.of(context).size.width,

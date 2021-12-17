@@ -17,6 +17,7 @@ import 'package:personal_branding/network/http_manager.dart';
 import 'package:personal_branding/providers/auth_provider.dart';
 import 'package:personal_branding/utills/utils.dart';
 import 'package:personal_branding/widgets/Buttons/widget_button.dart';
+import 'package:personal_branding/widgets/Buttons/widget_buttons_row.dart';
 import 'package:personal_branding/widgets/Buttons/widget_small_button.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading1.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading2.dart';
@@ -26,6 +27,10 @@ import 'package:personal_branding/widgets/TextFields/widget_industry_fields.dart
 import 'package:personal_branding/widgets/TextFields/widget_message_field.dart';
 import 'package:personal_branding/widgets/TextFields/widget_title_field.dart';
 import 'package:personal_branding/widgets/widget_date_picker.dart';
+import 'package:personal_branding/widgets/widget_expansion_tile_detail.dart';
+import 'package:personal_branding/widgets/widget_new_idea_form.dart';
+import 'package:personal_branding/widgets/widget_radio_buttons.dart';
+import 'package:personal_branding/widgets/widget_startup_list_tile.dart';
 import 'package:provider/src/provider.dart';
 
 import '../register.dart';
@@ -54,7 +59,7 @@ class _EntrepreneurState extends State<Entrepreneur> {
   DateTime selectedDate = DateTime.now();
   dynamic selectValue = "Partnership";
   String FileName = ' ';
-  late File? file;
+  File? file;
 
   //late List<File> files;
   int indexx = -1;
@@ -110,21 +115,19 @@ class _EntrepreneurState extends State<Entrepreneur> {
     });
   }
 
-  // Future selectFile(int id, ImageSource gallery) async {
-  //   FilePickerResult? result =
-  //       await FilePicker.platform.pickFiles(allowMultiple: true);
-  //
-  //   if (result != null) {
-  //     setState(() {
-  //       files = result.paths.map((path) => File(path!)).toList();
-  //       indexx = id;
-  //       print("Files::${files}");
-  //       FileName = result.files.first.name;
-  //     });
-  //   } else {
-  //     // User canceled the picker
-  //   }
-  // }
+  Future selectFile(int id) async {
+    FilePickerResult? result =
+        await FilePicker.platform.pickFiles(allowMultiple: true);
+
+    if (result != null) {
+      setState(() {
+        files = result.paths.map((path) => File(path!)).toList();
+        indexx = id;
+        print("Files::${files}");
+        FileName = result.files.first.name;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -214,8 +217,8 @@ class _EntrepreneurState extends State<Entrepreneur> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: <Widget>[
-                                            Text(
-                                              "YOUR STRPS TO CHNAGE THE WORLD",
+                                            const Text(
+                                              "YOUR STEPS TO CHANGE THE WORLD",
                                               style: TextStyle(fontSize: 10),
                                             ),
                                             TextButton(
@@ -232,35 +235,42 @@ class _EntrepreneurState extends State<Entrepreneur> {
                                                                               title: Text("Select A Plan"),
                                                                               content: Container(
                                                                                 width: MediaQuery.of(context).size.width,
-                                                                                child: Row(
-                                                                                  mainAxisAlignment: MainAxisAlignment.center,
-                                                                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                                                                  children: [
-                                                                                    CustomRadioButton(
-                                                                                      elevation: 0,
-                                                                                      unSelectedColor: Theme.of(context).canvasColor,
-                                                                                      buttonLables: const [
-                                                                                        'Partnership',
-                                                                                        'investment',
-                                                                                      ],
-                                                                                      enableShape: true,
-                                                                                      buttonValues: const [
-                                                                                        'Partnership',
-                                                                                        'investment',
-                                                                                      ],
-                                                                                      buttonTextStyle: const ButtonTextStyle(selectedColor: Colors.white, unSelectedColor: Colors.black, textStyle: TextStyle(fontSize: 12)),
-                                                                                      radioButtonValue: (value) {
-                                                                                        selectValue = value;
-                                                                                        selectValue1 = selectValue;
-                                                                                        setState(() {});
-                                                                                        Navigator.of(context).pop();
-                                                                                        print(selectValue);
-                                                                                      },
-                                                                                      defaultSelected: selectValue,
-                                                                                      selectedColor: Theme.of(context).accentColor,
-                                                                                    ),
-                                                                                  ],
-                                                                                ),
+                                                                                child:
+                                                                                RadioButtons(RadioValue: const ['Partnership', 'investment',], selectedValue: selectValue, radioButtonValue: (value) {
+                                                                                  selectValue = value;
+                                                                                  setState(() {});
+                                                                                  print(selectValue);
+                                                                                },),
+
+                                                                                // Row(
+                                                                                //   mainAxisAlignment: MainAxisAlignment.center,
+                                                                                //   crossAxisAlignment: CrossAxisAlignment.center,
+                                                                                //   children: [
+                                                                                //     CustomRadioButton(
+                                                                                //       elevation: 0,
+                                                                                //       unSelectedColor: Theme.of(context).canvasColor,
+                                                                                //       buttonLables: const [
+                                                                                //         'Partnership',
+                                                                                //         'investment',
+                                                                                //       ],
+                                                                                //       enableShape: true,
+                                                                                //       buttonValues: const [
+                                                                                //         'Partnership',
+                                                                                //         'investment',
+                                                                                //       ],
+                                                                                //       buttonTextStyle: const ButtonTextStyle(selectedColor: Colors.white, unSelectedColor: Colors.black, textStyle: TextStyle(fontSize: 12)),
+                                                                                //       radioButtonValue: (value) {
+                                                                                //         selectValue = value;
+                                                                                //         selectValue1 = selectValue;
+                                                                                //         setState(() {});
+                                                                                //         Navigator.of(context).pop();
+                                                                                //         print(selectValue);
+                                                                                //       },
+                                                                                //       defaultSelected: selectValue,
+                                                                                //       selectedColor: Theme.of(context).accentColor,
+                                                                                //     ),
+                                                                                //   ],
+                                                                                // ),
                                                                               ),
                                                                             ))
                                                                 : null;
@@ -272,7 +282,7 @@ class _EntrepreneurState extends State<Entrepreneur> {
                                                             //Navigator.of(context).push(MaterialPageRoute(builder: (context)=>NewProjectIdea()));
                                                           }
                                                         : () {},
-                                                child: Text(
+                                                child: const Text(
                                                   "NEW IDEA",
                                                   style: TextStyle(
                                                       color: Colors.grey),
@@ -293,7 +303,7 @@ class _EntrepreneurState extends State<Entrepreneur> {
                                                 return Visibility(
                                                   visible: isNewVisible,
                                                   child: Container(
-                                                    margin: EdgeInsets.only(
+                                                    margin: const EdgeInsets.only(
                                                         bottom: 10),
                                                     child: Column(
                                                       children: [
@@ -326,25 +336,8 @@ class _EntrepreneurState extends State<Entrepreneur> {
                                                                 Alignment
                                                                     .centerLeft,
                                                             children: [
-                                                              Container(
-                                                                  margin: EdgeInsets
-                                                                      .only(
-                                                                          top:
-                                                                              10),
-                                                                  child: Heading2WithDescription(
-                                                                      "Description",
-                                                                      startUpReadResponse[
-                                                                              index]
-                                                                          .message)),
-                                                              Heading2(
-                                                                  "Related Document"),
-                                                              Container(
-                                                                  margin: EdgeInsets
-                                                                      .only(
-                                                                          top:
-                                                                              5),
-                                                                  child: Text(
-                                                                      "add more documents")),
+
+                                                              ExpansionTileDetail(Description: startUpReadResponse[index].message,),
                                                               Container(
                                                                 alignment: Alignment
                                                                     .centerLeft,
@@ -361,9 +354,8 @@ class _EntrepreneurState extends State<Entrepreneur> {
                                                                           'Browse',
                                                                       onPressed:
                                                                           () async {
-                                                                        // selectFile(
-                                                                        //     startUpReadResponse[index].id,
-                                                                        //     ImageSource.gallery);
+                                                                        selectFile(
+                                                                            startUpReadResponse[index].id,);
                                                                       },
                                                                     ),
                                                                     Visibility(
@@ -392,16 +384,16 @@ class _EntrepreneurState extends State<Entrepreneur> {
                                                                       "Submit",
                                                                   onPressed:
                                                                       () {
-                                                                    // if(file==null)return;
-                                                                    // uploadFile(
-                                                                    //     files,
-                                                                    //     startUpReadResponse[index]
-                                                                    //         .id);
+                                                                    if(file==null)return;
+                                                                    uploadFile(
+                                                                        files,
+                                                                        startUpReadResponse[index]
+                                                                            .id);
                                                                   },
                                                                 ),
                                                               ),
                                                               Container(
-                                                                margin: EdgeInsets
+                                                                margin: const EdgeInsets
                                                                     .only(
                                                                         top:
                                                                             10),
@@ -417,35 +409,7 @@ class _EntrepreneurState extends State<Entrepreneur> {
                                                                         itemBuilder:
                                                                             (context,
                                                                                 count) {
-                                                                          return GestureDetector(
-                                                                            child:
-                                                                                Container(
-                                                                              margin: EdgeInsets.only(bottom: 10),
-                                                                              width: MediaQuery.of(context).size.width,
-                                                                              child: SingleChildScrollView(
-                                                                                  scrollDirection: Axis.horizontal,
-                                                                                  child: Column(
-                                                                                    mainAxisSize: MainAxisSize.min,
-                                                                                    children: [
-                                                                                      Row(
-                                                                                        mainAxisAlignment: MainAxisAlignment.start,
-                                                                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                                                                        mainAxisSize: MainAxisSize.min,
-                                                                                        children: [
-                                                                                          Icon(
-                                                                                            Icons.remove_red_eye,
-                                                                                            size: 15,
-                                                                                          ),
-                                                                                          Text(
-                                                                                            "${startUpReadResponse[index].partnerFiles[count].fileInput}",
-                                                                                            style: TextStyle(fontSize: 10),
-                                                                                          )
-                                                                                        ],
-                                                                                      ),
-                                                                                    ],
-                                                                                  )),
-                                                                            ),
-                                                                          );
+                                                                          return  StartUplistTileDetail(fileInput: startUpReadResponse[index].partnerFiles[count].fileInput, onTap: (){},);
                                                                         }),
                                                               )
                                                             ],
@@ -459,93 +423,59 @@ class _EntrepreneurState extends State<Entrepreneur> {
                                             )
                                           : Column(
                                               children: [
-                                                IndustryTitle(
-                                                  hint: "Title",
-                                                  controller:
-                                                      _titleFieldController,
-                                                ),
-                                                Industry(
-                                                  hint: "Target Industry",
-                                                  controller:
-                                                      _industryFieldController,
-                                                ),
-                                                MessageField(
-                                                  hint: "Description",
-                                                  controller:
-                                                      _messageFieldController,
-                                                ),
-                                                DateField(
-                                                  hint: "Date Picker Here",
-                                                  controller:
-                                                      _dateFieldController,
-                                                  onTap: () {
-                                                    _selectDate(context);
-                                                  },
-                                                ),
+                                                NewIdeaField(titleFieldController: _titleFieldController, industryFieldController: _industryFieldController, messageFieldController: _messageFieldController, dateFieldController: _dateFieldController, onTap: (){_selectDate(context);},),
                                                 Button(
                                                     title: "Browse",
                                                     onPressed: () {
                                                       print("browse clicked");
                                                     },
                                                     Width: 100),
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: [
-                                                    Radio(
-                                                        value: 0,
-                                                        groupValue: _radioValue,
-                                                        onChanged:
-                                                            _handleRadioValueChange(
-                                                                0)),
-                                                    Text(
-                                                      "Partnership",
-                                                      style: TextStyle(
-                                                          color:
-                                                              Colors.black87),
-                                                    ),
-                                                    Radio(
-                                                        value: 1,
-                                                        groupValue: _radioValue,
-                                                        onChanged:
-                                                            _handleRadioValueChange(
-                                                                1)),
-                                                    Text(
-                                                      "Investment Plan",
-                                                      style: TextStyle(
-                                                          color:
-                                                              Colors.black87),
-                                                    )
+                                                CustomRadioButton(
+                                                  elevation: 0,
+                                                  unSelectedColor:
+                                                  Theme.of(context)
+                                                      .canvasColor,
+                                                  buttonLables: const [
+                                                    'Partnership',
+                                                    'investment',
                                                   ],
-                                                ),
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: <Widget>[
-                                                    Button(
-                                                      title: "REGISTER",
-                                                      Width: 115,
-                                                      onPressed: () {
-                                                        Navigator.of(context).push(
-                                                            MaterialPageRoute(
-                                                                builder:
-                                                                    (context) =>
-                                                                        Register()));
-                                                      },
-                                                    ),
-                                                    Button(
-                                                      title: "LOGIN",
-                                                      Width: 100,
-                                                      onPressed: () {
-                                                        Navigator.of(context).push(
-                                                            MaterialPageRoute(
-                                                                builder:
-                                                                    (context) =>
-                                                                        LogIn()));
-                                                      },
-                                                    ),
+                                                  enableShape: true,
+                                                  buttonValues: const [
+                                                    'Partnership',
+                                                    'investment',
                                                   ],
+                                                  buttonTextStyle:
+                                                  const ButtonTextStyle(
+                                                      selectedColor:
+                                                      Colors.white,
+                                                      unSelectedColor:
+                                                      Colors.black,
+                                                      textStyle: TextStyle(
+                                                          fontSize: 12)),
+                                                  radioButtonValue: (value) {
+                                                    selectValue = value;
+                                                    setState(() {});
+                                                    print(selectValue);
+                                                  },
+                                                  defaultSelected: selectValue,
+                                                  selectedColor:
+                                                  Theme.of(context)
+                                                      .accentColor,
                                                 ),
+
+                                                ButtonsRow(RegisterClick: (){
+                                                  Navigator.of(context).push(
+                                                      MaterialPageRoute(
+                                                          builder:
+                                                              (context) =>
+                                                              Register()));
+                                                }, LoginClick: (){
+                                                  Navigator.of(context).push(
+                                                      MaterialPageRoute(
+                                                          builder:
+                                                              (context) =>
+                                                              LogIn()));
+                                                },),
                                                 PartnerShipText()
                                               ],
                                             ),
@@ -555,33 +485,7 @@ class _EntrepreneurState extends State<Entrepreneur> {
                                           key: _formKey,
                                           child: Column(
                                             children: [
-                                              IndustryTitle(
-                                                hint: "Title",
-                                                controller:
-                                                    _titleFieldController,
-                                              ),
-
-                                              Industry(
-                                                hint: "Target Industry",
-                                                controller:
-                                                    _industryFieldController,
-                                              ),
-
-                                              MessageField(
-                                                hint: "Description",
-                                                controller:
-                                                    _messageFieldController,
-                                              ),
-
-                                              DateField(
-                                                hint: "Date Picker Here",
-                                                controller:
-                                                    _dateFieldController,
-                                                onTap: () {
-                                                  _selectDate(context);
-                                                },
-                                              ),
-
+                                              NewIdeaField(titleFieldController: _titleFieldController, industryFieldController: _industryFieldController, messageFieldController: _messageFieldController, dateFieldController: _dateFieldController, onTap: (){_selectDate(context);},),
                                               Button(
                                                   title: "Browse",
                                                   onPressed: () {
@@ -590,6 +494,13 @@ class _EntrepreneurState extends State<Entrepreneur> {
                                                   },
                                                   Width: 100),
                                               if (selectValue1 != ' ')
+
+                                                // RadioButtons(RadioValue: const ['Partnership', 'investment',], selectedValue: selectValue1, radioButtonValue: (value) {
+                                                //   selectValue = value;
+                                                //   setState(() {});
+                                                //   print(selectValue);
+                                                // },),
+
                                                 CustomRadioButton(
                                                   elevation: 0,
                                                   unSelectedColor:
@@ -629,19 +540,6 @@ class _EntrepreneurState extends State<Entrepreneur> {
                                                     newIdeaSubmit();
                                                   },
                                                   Width: 100),
-
-                                              // Row(
-                                              //   mainAxisAlignment: MainAxisAlignment.center,
-                                              //   children: <Widget>[
-                                              //
-                                              //     Button(title: "REGISTER",Width: 110,onPressed: (){ Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Register()));},),
-                                              //     Button(title: "LOGIN",Width: 90,onPressed: () {
-                                              //
-                                              //       Navigator.of(context).push(MaterialPageRoute(builder: (context)=>LogIn()));
-                                              //
-                                              //     },),
-                                              //
-                                              //   ],),
                                               PartnerShipText()
                                             ],
                                           ),

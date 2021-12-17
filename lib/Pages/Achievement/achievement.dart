@@ -108,7 +108,7 @@ class _AchievementState extends State<Achievement> {
                                 itemBuilder: (context, index) {
                                   return GestureDetector(
                                     onTap: () {
-                                      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>AchievementPictureDetails()));
+                                     // Navigator.of(context).push(MaterialPageRoute(builder: (context)=>AchievementPictureDetails()));
                                     },
                                     child: Container(
                                       width: MediaQuery.of(context)
