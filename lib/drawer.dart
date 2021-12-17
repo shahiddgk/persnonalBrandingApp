@@ -84,14 +84,14 @@ class _MainWidgetState extends State<MainWidget> with TickerProviderStateMixin {
               ),
               page: ProfessionalCoaching(),
             ),
-            // KFDrawerItem.initWithPage(
-            //   text: const Text(
-            //     'STARTUP',
-            //     style: TextStyle(color: Colors.white, fontSize: 18),
-            //   ),
-            //   // icon: Icon(Icons.settings, color: Colors.white),
-            //   page: Entrepreneur(),
-            // ),
+            KFDrawerItem.initWithPage(
+              text: const Text(
+                'STARTUP',
+                style: TextStyle(color: Colors.white, fontSize: 18),
+              ),
+              // icon: Icon(Icons.settings, color: Colors.white),
+              page: Entrepreneur(),
+            ),
             KFDrawerItem.initWithPage(
               text: const Text(
                 'CONTACT',
@@ -100,34 +100,34 @@ class _MainWidgetState extends State<MainWidget> with TickerProviderStateMixin {
               // icon: Icon(Icons.settings, color: Colors.white),
               page: Contacts(),
             ),
-            // _isLoading == false &&
-            //         _isCheckingSession == false &&
-            //         globalSessionUser.token != ""
-            //     ? KFDrawerItem(
-            //         text: const Text(
-            //           'LOGOUT',
-            //           style: TextStyle(color: Colors.white, fontSize: 18),
-            //         ),
-            //         onPressed: () {
-            //           setState(() {
-            //             _isLoading = true;
-            //           });
-            //           logoutSessionUser().then((value) => {
-            //                 setState(() {
-            //                   globalSessionUser = value;
-            //                   _isLoading = false;
-            //                 })
-            //               });
-            //         },
-            //       )
-            //     : KFDrawerItem.initWithPage(
-            //         text: const Text(
-            //           'LOGIN',
-            //           style: TextStyle(color: Colors.white, fontSize: 18),
-            //         ),
-            //         // icon: Icon(Icons.settings, color: Colors.white),
-            //         page: Forms(),
-            //       ),
+            _isLoading == false &&
+                    _isCheckingSession == false &&
+                    globalSessionUser.token != ""
+                ? KFDrawerItem(
+                    text: const Text(
+                      'LOGOUT',
+                      style: TextStyle(color: Colors.white, fontSize: 18),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _isLoading = true;
+                      });
+                      logoutSessionUser().then((value) => {
+                            setState(() {
+                              globalSessionUser = value;
+                              _isLoading = false;
+                            })
+                          });
+                    },
+                  )
+                : KFDrawerItem.initWithPage(
+                    text: const Text(
+                      'LOGIN',
+                      style: TextStyle(color: Colors.white, fontSize: 18),
+                    ),
+                    // icon: Icon(Icons.settings, color: Colors.white),
+                    page: Forms(),
+                  ),
           ],
         ),
         header: Align(
