@@ -94,18 +94,17 @@ class ChatPageState extends State<ChatPage> {
   }
 
   void readLocal() {
-    if (currentUserId.isNotEmpty && globalSessionUser.usertype !="Admin") {
-      currentUserId = "1";
+    if (currentUserId.isNotEmpty && globalSessionUser.usertype =="user") {
+      peerId = "1";
+      currentUserId = "${globalSessionUser.id}";
 
       print("PeerId::$peerId");
       print("PeerId::$peerAvatar");
       print("PeerId::$peerNickname");
 
     } else {
-      Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (context) => LoginPage()),
-        (Route<dynamic> route) => false,
-      );
+      peerId = "${widget.peerId}";
+      currentUserId = "1";
     }
     if (currentUserId.compareTo(peerId) > 0) {
       groupChatId = '$currentUserId-$peerId';

@@ -154,24 +154,22 @@ class _EntrepreneurState extends State<Entrepreneur> {
           ),
         ),
         resizeToAvoidBottomInset: true,
-        floatingActionButton: !_isLoading &&
-                !_isCheckingSession &&
-                !_isLogInSession
-            ? globalSessionUser == null || globalSessionUser.id != 0
-                ? null
-                : FloatingActionButton(
-                    onPressed: () {
-                      if (globalSessionUser.usertype == "admin") {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(builder: (context) => HomePage()),
-                        );
-                      } else {
-                        _BottomSheet(context, globalSessionUser.id);
-                      }
-                    },
-                    child: Icon(Icons.message),
-                  )
+        floatingActionButton: !_isLoading
+            ? globalSessionUser.id != 0
+                ? FloatingActionButton(
+          onPressed: () {
+            if (globalSessionUser.usertype == "admin") {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => HomePage()),
+              );
+            } else {
+              _BottomSheet(context, globalSessionUser.id);
+            }
+          },
+          child: Icon(Icons.message),
+        )
+                : null
             : null,
         body: !_isLoading
             ? SafeArea(
@@ -236,41 +234,41 @@ class _EntrepreneurState extends State<Entrepreneur> {
                                                                               content: Container(
                                                                                 width: MediaQuery.of(context).size.width,
                                                                                 child:
-                                                                                RadioButtons(RadioValue: const ['Partnership', 'investment',], selectedValue: selectValue, radioButtonValue: (value) {
-                                                                                  selectValue = value;
-                                                                                  setState(() {});
-                                                                                  print(selectValue);
-                                                                                },),
+                                                                                // RadioButtons(RadioValue: const ['Partnership', 'investment',], selectedValue: selectValue, radioButtonValue: (value) {
+                                                                                //   selectValue = value;
+                                                                                //   setState(() {});
+                                                                                //   print(selectValue);
+                                                                                // },),
 
-                                                                                // Row(
-                                                                                //   mainAxisAlignment: MainAxisAlignment.center,
-                                                                                //   crossAxisAlignment: CrossAxisAlignment.center,
-                                                                                //   children: [
-                                                                                //     CustomRadioButton(
-                                                                                //       elevation: 0,
-                                                                                //       unSelectedColor: Theme.of(context).canvasColor,
-                                                                                //       buttonLables: const [
-                                                                                //         'Partnership',
-                                                                                //         'investment',
-                                                                                //       ],
-                                                                                //       enableShape: true,
-                                                                                //       buttonValues: const [
-                                                                                //         'Partnership',
-                                                                                //         'investment',
-                                                                                //       ],
-                                                                                //       buttonTextStyle: const ButtonTextStyle(selectedColor: Colors.white, unSelectedColor: Colors.black, textStyle: TextStyle(fontSize: 12)),
-                                                                                //       radioButtonValue: (value) {
-                                                                                //         selectValue = value;
-                                                                                //         selectValue1 = selectValue;
-                                                                                //         setState(() {});
-                                                                                //         Navigator.of(context).pop();
-                                                                                //         print(selectValue);
-                                                                                //       },
-                                                                                //       defaultSelected: selectValue,
-                                                                                //       selectedColor: Theme.of(context).accentColor,
-                                                                                //     ),
-                                                                                //   ],
-                                                                                // ),
+                                                                                Row(
+                                                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                                                                  children: [
+                                                                                    CustomRadioButton(
+                                                                                      elevation: 0,
+                                                                                      unSelectedColor: Theme.of(context).canvasColor,
+                                                                                      buttonLables: const [
+                                                                                        'Partnership',
+                                                                                        'investment',
+                                                                                      ],
+                                                                                      enableShape: true,
+                                                                                      buttonValues: const [
+                                                                                        'Partnership',
+                                                                                        'investment',
+                                                                                      ],
+                                                                                      buttonTextStyle: const ButtonTextStyle(selectedColor: Colors.white, unSelectedColor: Colors.black, textStyle: TextStyle(fontSize: 12)),
+                                                                                      radioButtonValue: (value) {
+                                                                                        selectValue = value;
+                                                                                        selectValue1 = selectValue;
+                                                                                        setState(() {});
+                                                                                        Navigator.of(context).pop();
+                                                                                        print(selectValue);
+                                                                                      },
+                                                                                      defaultSelected: selectValue,
+                                                                                      selectedColor: Theme.of(context).accentColor,
+                                                                                    ),
+                                                                                  ],
+                                                                                ),
                                                                               ),
                                                                             ))
                                                                 : null;

@@ -43,7 +43,7 @@ class _Heading2WithDescriptionWiithImageState extends State<Heading2WithDescript
         // if(widget.ImageUrl.isNotEmpty) AspectRatio(
         //     aspectRatio: 2/2,
         //     child:
-            Image.network("https://branding.ratedsolution.com/public/biography/1639227041_0.jpg")
+            Image.network(widget.ImageUrl)
        // ),
 
       ],

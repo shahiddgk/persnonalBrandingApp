@@ -112,7 +112,17 @@ class _BiographyState extends State<Biography>
                                       children: <Widget>[
                                         Heading1("BIOGRAPHY"),
 
-                                        // Heading2WithDescription(biographyReadResponse.title,"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."),
+                                        //  Heading2WithDescriptionWiithImage(
+                                        //     "Life Of Dr. Ahmed",
+                                        //     "Dr. Ahemd is an Entrepreneur and a great  leader who helps Business, Big organizations, Individuals and  startups to build and get dreams true.Before Stating business, Kate spent six years as a Bank Teller and Virtual Assistant for financial companies in the U.S. and U.K. After a successful career helping small banks and real estate agencies, Katie now helps them write marketing copy for their products and services.Kate enjoys trying new sports (archery, anyone?) and managing a small property rental business.Kate’s available for marketing and writing projects, as well as private consultations. You can reach Kate at kate@domain.com.",
+                                        //      "https://branding.ratedsolution.com/public/biography/1639227041_0.jpg",
+                                        //         () {}),
+                                        // Heading2WithDescriptionWiithImage(
+                                        //     "BUSINESS MASTERY",
+                                        //     "Dr. Ahemd is an Entrepreneur and a great  leader who helps Business, Big organizations, Individuals and  startups to build and get dreams true.Before Stating business, Kate spent six years as a Bank Teller and Virtual Assistant for financial companies in the U.S. and U.K. After a successful career helping small banks and real estate agencies, Katie now helps them write marketing copy for their products and services.Kate enjoys trying new sports (archery, anyone?) and managing a small property rental business.Kate’s available for marketing and writing projects, as well as private consultations. You can reach Kate at kate@domain.com.",
+                                        //     "https://branding.ratedsolution.com/public/biography/1639227126_BQBB7030.JPG",
+                                        //         () {}),
+
                                     ListView.builder(
                                       physics: const NeverScrollableScrollPhysics(),
                                             itemCount:
