@@ -451,7 +451,7 @@ class ChatPageState extends State<ChatPage> {
   Widget build(BuildContext context) {
     return WillPopScope(
         child: Scaffold(
-
+          appBar: currentUserId == "1"?AppBar(title: Text(widget.peerNickname),): null,
           body: Container(
             //decoration: BoxDecoration(borderRadius: BorderRadius.circular(10.0)),
             child: Stack(
