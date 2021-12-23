@@ -36,7 +36,7 @@ class _StartUplistTileDetailState extends State<StartUplistTileDetail> {
                       size: 15,
                     ),
                     Text(
-                      widget.fileInput,
+                      " ${widget.fileInput}",
                       style: TextStyle(fontSize: 10),
                     )
                   ],

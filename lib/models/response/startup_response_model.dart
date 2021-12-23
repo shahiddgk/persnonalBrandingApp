@@ -2,42 +2,33 @@ import 'package:personal_branding/widgets/widget_testimonial_picture_details.dar
 
 class StartUpReadResponse {
   int id = 0;
-  int user_id = 0;
   String title = '';
   String industry = '';
   String message = '';
-  String Date = '';
-  String purpose = '';
-  String created_at = '';
-  String updated_at = '';
   List<PartnerFiles> partnerFiles = [];
+  String date = '';
+  String purpose = '';
 
   StartUpReadResponse(
       {
         required this.id,
-        required this.user_id,
         required this.title,
         required this.industry,
         required this.message,
-        required this.Date,
+        required this.date,
         required this.purpose,
-        required this.created_at,
-        required this.updated_at,
         required this.partnerFiles,
       });
 
   StartUpReadResponse.fromJson(Map<String, dynamic> json) {
     id = json['id'] == null ? '' : json['id'];
-    user_id = json['user_id'] == null ? '' : json['user_id'];
     title = json['title'] == null ? '' : json['title'];
     industry = json['industry'] == null ? '' : json['industry'];
     message = json['message'] == null ? '' : json['message'];
-    Date = json['date'] == null ? '' : json['date'];
+    date = json['date'] == null ? '' : json['date'];
     purpose = json['purpose'] == null ? '' : json['purpose'];
-    created_at = json['created_at'] == null ? '' : json['created_at'];
-    updated_at = json['updated_at'] == null ? '' : json['updated_at'];
-    if (json['partnerfiles'] != null) {
-      json['partnerfiles'].forEach((v) {
+    if (json['files'] != null) {
+      json['files'].forEach((v) {
         partnerFiles.add(new PartnerFiles.fromJson(v));
       });
     }
@@ -46,45 +37,38 @@ class StartUpReadResponse {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
-    data['user_id'] = this.user_id;
     data['title'] = this.title;
     data['industry'] = this.industry;
     data['message'] = this.message;
-    data['date'] = this.Date;
+    data['date'] = this.date;
     data['purpose'] = this.purpose;
-    data['created_at'] = this.created_at;
-    data['updated_at'] = this.updated_at;
     if (this.partnerFiles != null) {
-      data['partnerfiles'] = this.partnerFiles.map((v) => v.toJson()).toList();
+      data['files'] = this.partnerFiles.map((v) => v.toJson()).toList();
     }
     return data;
   }
 }
 
 class PartnerFiles {
-  int id = 0;
-  String fileInput = '';
-  int Partnershipid = 0;
-  String created_at = '';
-  String updated_at = '';
 
-  PartnerFiles({required this.id,required this.fileInput,required this.Partnershipid});
+  String fileInput = '';
+  String image = '';
+
+
+  PartnerFiles({required this.fileInput,required this.image});
 
   PartnerFiles.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    fileInput = json['fileinput'];
-    Partnershipid = json['partnership_id'];
-    created_at = json['created_at'] == null ? '' : json['created_at'];
-    updated_at = json['updated_at'] == null ? '' : json['updated_at'];
+
+    fileInput = json['filename'];
+    image = json['img'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['fileinput'] = this.fileInput;
-    data['partnership_id'] = this.Partnershipid;
-    data['created_at'] = this.created_at;
-    data['updated_at'] = this.updated_at;
+
+    data['filename'] = this.fileInput;
+    data['img'] = this.image;
+
     return data;
   }
 }

@@ -41,27 +41,32 @@ class ResponseHandler {
       Map<String, String> params,
       List<File> files,
       bool isHeaderRequired,
-      String message) async {
+      String token) async {
     var head = Map<String, String>();
     head['content-type'] = 'application/x-www-form-urlencoded';
     var res;
     try {
-      final request = http.MultipartRequest('POST', Uri.parse(url));
-      // if (files.length > 0) {
-      //   final file = await http.MultipartFile.fromPath(
-      //       'image',
-      //       image
-      //           .path); //,contentType: MediaType(mimeTypeData[0], mimeTypeData[1])
-      //   request.files.addAll(files);
-      // }
+      final request = http.MultipartRequest('POST', Uri.parse(url),);
+      request.headers.addAll({"Authorization": 'Bearer ${token}'});
+      if (files.length > 0) {
+        files.forEach((element) async {
+          final file = await http.MultipartFile.fromPath(
+              'more_files[]',
+              element
+                  .path); //,contentType: MediaType(mimeTypeData[0], mimeTypeData[1])
+          request.files.add(file);
+
+        });
+
+      }
       request.fields.addAll(params);
       await request.send().then((response) {
         if (response.statusCode == 200) print("Uploaded!");
         res = GeneralResponseModel(
             status: response.statusCode == 200,
-            message: response.statusCode == 200
-                ? "User $message"
-                : "User Not $message",
+            // message: response.statusCode == 200
+            //     ? "User $message"
+            //     : "User Not $message",
             data: null);
       });
       return res;

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kf_drawer/kf_drawer.dart';
+import 'package:personal_branding/Drawer/widget_menu_widget.dart';
 import 'package:personal_branding/Pages/Achievement/achievement.dart';
 import 'package:personal_branding/Pages/Biography/biography.dart';
 import 'package:personal_branding/Pages/Future_Goals/future_goals.dart';
@@ -34,8 +35,8 @@ class _AboutSectionState extends State<AboutSection> with SingleTickerProviderSt
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(onPressed:  widget.onMenuPressed, icon: Icon(Icons.menu),),
-        bottom: TabBar(
+        leading: MenuWidget(),
+         bottom: TabBar(
           isScrollable: true,
           controller: controller,
           indicatorColor: Colors.black87,

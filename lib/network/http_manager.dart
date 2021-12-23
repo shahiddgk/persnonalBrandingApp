@@ -1,3 +1,5 @@
+import 'package:http/http.dart' as http;
+
 import 'package:fluttericon/mfg_labs_icons.dart';
 import 'package:personal_branding/models/request/loin_request.dart';
 import 'package:personal_branding/models/request/user_save_start_up_request.dart';
@@ -118,11 +120,11 @@ class HTTPManager {
     return startUpReadResponse;
   }
 
-  Future uploadFile(String token,UploadFile uploadFile) async {
+  Future uploadFile(String token,Map<String, String> id,files) async {
 
     final url = ApplicationURLs.API_UPLOAD_FILE;
     final GeneralResponseModel response =
-    await _handler.post_with_token_params(url, token,uploadFile.toJson(),true);
+    await _handler.postWithFile(url,id,files,true,token);
     print(response.token);
   }
 

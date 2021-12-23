@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:custom_radio_grouped_button/custom_radio_grouped_button.dart';
 import 'package:file_picker/file_picker.dart';
@@ -7,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:kf_drawer/kf_drawer.dart';
+import 'package:open_file/open_file.dart';
+import 'package:personal_branding/Drawer/widget_menu_widget.dart';
 import 'package:personal_branding/Pages/Entrepreneur/pages/chat_page.dart';
 import 'package:personal_branding/Pages/Entrepreneur/pages/home_page.dart';
 import 'package:personal_branding/Pages/login.dart';
@@ -32,6 +35,7 @@ import 'package:personal_branding/widgets/widget_new_idea_form.dart';
 import 'package:personal_branding/widgets/widget_radio_buttons.dart';
 import 'package:personal_branding/widgets/widget_startup_list_tile.dart';
 import 'package:provider/src/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../register.dart';
 
@@ -42,7 +46,7 @@ class Entrepreneur extends KFDrawerContent {
 }
 
 class _EntrepreneurState extends State<Entrepreneur> {
-  TextEditingController _titleFieldController = TextEditingController();
+  final TextEditingController _titleFieldController = TextEditingController();
   TextEditingController _industryFieldController = TextEditingController();
   TextEditingController _messageFieldController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -60,11 +64,14 @@ class _EntrepreneurState extends State<Entrepreneur> {
   dynamic selectValue = "Partnership";
   String FileName = ' ';
   File? file;
+  Uint8List? fileBytes;
 
   //late List<File> files;
   int indexx = -1;
   dynamic selectValue1 = " ";
   late Map<int, dynamic> filesMap;
+
+  late Map<String, String> project_id;
 
   List<File> files = [];
 
@@ -148,10 +155,7 @@ class _EntrepreneurState extends State<Entrepreneur> {
 
     return Scaffold(
         appBar: AppBar(
-          leading: IconButton(
-            onPressed: widget.onMenuPressed,
-            icon: Icon(Icons.menu),
-          ),
+          leading: MenuWidget(),
         ),
         resizeToAvoidBottomInset: true,
         floatingActionButton: !_isLoading
@@ -358,7 +362,7 @@ class _EntrepreneurState extends State<Entrepreneur> {
                                                                     ),
                                                                     Visibility(
                                                                       visible: indexx ==
-                                                                              startUpReadResponse[index].id
+                                                                              startUpReadResponse[index].id && FileName != ' '
                                                                           ? true
                                                                           : false,
                                                                       child:
@@ -382,7 +386,7 @@ class _EntrepreneurState extends State<Entrepreneur> {
                                                                       "Submit",
                                                                   onPressed:
                                                                       () {
-                                                                    if(file==null)return;
+                                                                    if(files==null)return;
                                                                     uploadFile(
                                                                         files,
                                                                         startUpReadResponse[index]
@@ -407,7 +411,9 @@ class _EntrepreneurState extends State<Entrepreneur> {
                                                                         itemBuilder:
                                                                             (context,
                                                                                 count) {
-                                                                          return  StartUplistTileDetail(fileInput: startUpReadResponse[index].partnerFiles[count].fileInput, onTap: (){},);
+                                                                          return  StartUplistTileDetail(fileInput: startUpReadResponse[index].partnerFiles[count].fileInput, onTap: (){
+                                                                            _launchURL(startUpReadResponse[index].partnerFiles[count].image);
+                                                                          },);
                                                                         }),
                                                               )
                                                             ],
@@ -484,13 +490,13 @@ class _EntrepreneurState extends State<Entrepreneur> {
                                           child: Column(
                                             children: [
                                               NewIdeaField(titleFieldController: _titleFieldController, industryFieldController: _industryFieldController, messageFieldController: _messageFieldController, dateFieldController: _dateFieldController, onTap: (){_selectDate(context);},),
-                                              Button(
-                                                  title: "Browse",
-                                                  onPressed: () {
-                                                    print(
-                                                        "browse clicked line 589");
-                                                  },
-                                                  Width: 100),
+                                              // Button(
+                                              //     title: "Browse",
+                                              //     onPressed: () {
+                                              //       print(
+                                              //           "browse clicked line 589");
+                                              //     },
+                                              //     Width: 100),
                                               if (selectValue1 != ' ')
 
                                                 // RadioButtons(RadioValue: const ['Partnership', 'investment',], selectedValue: selectValue1, radioButtonValue: (value) {
@@ -575,27 +581,12 @@ class _EntrepreneurState extends State<Entrepreneur> {
       firstDate: DateTime(2010),
       lastDate: DateTime(2025),
     );
-    if (selected != null && selected != selectedDate)
+    if (selected != null && selected != selectedDate) {
       setState(() {
         selectedDate = selected;
-
         _dateFieldController.text =
             new DateFormat("yyyy-MM-dd").format(selectedDate);
       });
-  }
-
-  _selectFiles(BuildContext context) async {
-    FilePickerResult? result = await FilePicker.platform.pickFiles(
-        allowMultiple: true,
-        type: FileType.custom,
-        allowedExtensions: ['png', 'jpg', 'pdf', 'doc']);
-
-    if (result != null) {
-      setState(() {
-        files = result.paths.map((path) => File(path!)).toList();
-      });
-    } else {
-      // User canceled the picker
     }
   }
 
@@ -632,22 +623,36 @@ class _EntrepreneurState extends State<Entrepreneur> {
   }
 
   uploadFile(file, int partnershipid) {
-    print("file::${files}");
-    print("partnershipid::${partnershipid}");
+
+    project_id = {'project_id':"$partnershipid"};
+    print(project_id);
+
     HTTPManager()
-        .uploadFile(globalSessionUser.token,
-            UploadFile(project_id: "${partnershipid}", more_files: file))
+        .uploadFile(globalSessionUser.token, project_id,files)
         .then((value) {
+          setState(() {
+            FileName == ' ';
+          });
       print(value);
     }).catchError((e) {
       print(e);
       setState(() {
         _isLoading = false;
+        indexx == 0;
       });
       showAlert(context, e.toString(), true, () {}, () {
         uploadFile(file, partnershipid);
       });
     });
+  }
+
+  _launchURL(String url) async {
+     url = url; // you can use your url
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Unable to open url : $url';
+    }
   }
 }
 
