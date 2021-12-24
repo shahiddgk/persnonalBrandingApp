@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 import 'dart:typed_data';
 
@@ -5,6 +6,7 @@ import 'package:custom_radio_grouped_button/custom_radio_grouped_button.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:kf_drawer/kf_drawer.dart';
@@ -52,6 +54,7 @@ class _EntrepreneurState extends State<Entrepreneur> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   TextEditingController _dateFieldController = TextEditingController();
 
+  Timer? _timer;
   int _radioValue = 0;
   bool isVisible = false;
   bool isNewVisible = true;
@@ -97,6 +100,14 @@ class _EntrepreneurState extends State<Entrepreneur> {
         _isLoading = false;
       });
     }
+
+    EasyLoading.addStatusCallback((status) {
+      print('EasyLoading Status $status');
+      if (status == EasyLoadingStatus.dismiss) {
+        _timer?.cancel();
+      }
+    });
+
   }
 
   _getStartUpList() {

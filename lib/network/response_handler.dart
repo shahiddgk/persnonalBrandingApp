@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:http/http.dart' as http;
 import 'package:personal_branding/models/response/general_response_model.dart';
 
@@ -55,15 +56,22 @@ class ResponseHandler {
               element
                   .path); //,contentType: MediaType(mimeTypeData[0], mimeTypeData[1])
           request.files.add(file);
+          EasyLoading.show(status: "Uploading...");
 
         });
 
       }
       request.fields.addAll(params);
       await request.send().then((response) {
-        if (response.statusCode == 200) print("Uploaded!");
+        if (response.statusCode == 200)
+          {
+            print("Uploaded!");
+            EasyLoading.showSuccess("Successful");
+            EasyLoading.dismiss(animation: true);
+          }
         res = GeneralResponseModel(
             status: response.statusCode == 200,
+
             // message: response.statusCode == 200
             //     ? "User $message"
             //     : "User Not $message",

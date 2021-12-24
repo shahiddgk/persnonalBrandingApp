@@ -28,7 +28,7 @@ class HTTPManager {
     final GeneralResponseModel response =
         await _handler.post(url, loginRequest.toJson(), false);
     SessionUserModel sessionUserModel =
-        SessionUserModel.fromJson(response.data);
+        SessionUserModel.fromJson(response.user);
     return sessionUserModel;
   }
 
