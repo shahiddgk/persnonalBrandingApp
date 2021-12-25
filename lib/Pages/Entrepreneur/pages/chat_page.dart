@@ -450,10 +450,10 @@ class ChatPageState extends State<ChatPage> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-        child: Scaffold(
-          appBar: currentUserId == "1"?AppBar(title: Text(widget.peerNickname),): null,
+        child: currentUserId == "1" ? Scaffold(
+          appBar: currentUserId == "1"? AppBar(title: Text(widget.peerNickname),): null,
           body: Container(
-            //decoration: BoxDecoration(borderRadius: BorderRadius.circular(10.0)),
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(10.0)),
             child: Stack(
               children: <Widget>[
                 Column(
@@ -475,6 +475,29 @@ class ChatPageState extends State<ChatPage> {
 
               ],
             ),
+          ),
+        ) : Container(
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(10.0)),
+          child: Stack(
+            children: <Widget>[
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  // List of messages
+                  buildListMessage(),
+
+                  // Sticker
+                  isShowSticker ? buildSticker() : SizedBox.shrink(),
+
+                  // Input content
+                  buildInput(),
+                ],
+              ),
+
+              // Loading
+              buildLoading()
+
+            ],
           ),
         ),
         onWillPop: onBackPress,

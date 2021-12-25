@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 import 'dart:typed_data';
+import 'package:http/http.dart';
 
 import 'package:custom_radio_grouped_button/custom_radio_grouped_button.dart';
 import 'package:file_picker/file_picker.dart';
@@ -17,6 +18,7 @@ import 'package:personal_branding/Pages/Entrepreneur/pages/home_page.dart';
 import 'package:personal_branding/Pages/login.dart';
 import 'package:personal_branding/models/request/user_save_start_up_request.dart';
 import 'package:personal_branding/models/request/widget_upload_file.dart';
+import 'package:personal_branding/models/response/session_user_model.dart';
 import 'package:personal_branding/models/response/startup_response_model.dart';
 import 'package:personal_branding/network/http_manager.dart';
 import 'package:personal_branding/providers/auth_provider.dart';
@@ -122,14 +124,28 @@ class _EntrepreneurState extends State<Entrepreneur> {
         startUpReadResponse = value;
       });
     }).catchError((e) {
-      print(e);
-      showAlert(context, e.toString(), true, () {
-        setState(() {
-          _isLoading = false;
+      print("e::$e");
+      print(e.toString());
+      if(e.toString() == "Error: Token is Expired")
+      {
+        logoutSessionUser();
+
+        showAlert(context, e.toString(), true, () {
+          setState(() {
+            _isLoading = false;
+          });
+        }, () {
+          Entrepreneur();
         });
-      }, () {
-        _getStartUpList();
-      });
+
+      }
+        showAlert(context, e.toString(), true, () {
+          setState(() {
+            _isLoading = false;
+          });
+        }, () {
+          _getStartUpList();
+        });
     });
   }
 
@@ -621,6 +637,7 @@ class _EntrepreneurState extends State<Entrepreneur> {
           _isLoading = false;
           isNewVisible = !isNewVisible;
         });
+        _getStartUp();
       }).catchError((e) {
         print(e);
         setState(() {
@@ -644,6 +661,7 @@ class _EntrepreneurState extends State<Entrepreneur> {
           setState(() {
             FileName == ' ';
           });
+          _getStartUp();
       print(value);
     }).catchError((e) {
       print(e);
@@ -653,6 +671,31 @@ class _EntrepreneurState extends State<Entrepreneur> {
       });
       showAlert(context, e.toString(), true, () {}, () {
         uploadFile(file, partnershipid);
+      });
+    });
+  }
+
+
+  _getStartUp() {
+    setState(() {
+      _isLoading = false;
+    });
+    HTTPManager()
+        .StartUp(globalSessionUser.token, globalSessionUser.id)
+        .then((value) {
+      setState(() {
+        _isLoading = false;
+        startUpReadResponse = value;
+      });
+    }).catchError((e) {
+      print("e::$e");
+      print(e.toString());
+      showAlert(context, e.toString(), true, () {
+        setState(() {
+          _isLoading = false;
+        });
+      }, () {
+        _getStartUpList();
       });
     });
   }
