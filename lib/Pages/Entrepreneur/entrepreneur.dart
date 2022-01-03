@@ -236,7 +236,7 @@ class _EntrepreneurState extends State<Entrepreneur> {
                                           "LET'S CHANGE THE WORLD TOGETHER"),
                                       Heading2WithDescription(
                                           "DREAM,EXPLORE,DISCOVER",
-                                          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."),
+                                          "Twenty years from now you will be more disappointed by the things that you didn’t do than by the ones you did do. So throw off the bowlines. Sail away from the safe harbor. Catch the trade winds in your sails."),
                                       Container(
                                         width:
                                             MediaQuery.of(context).size.width,

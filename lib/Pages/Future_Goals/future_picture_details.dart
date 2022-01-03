@@ -26,7 +26,7 @@ class _FutureGoalsPictureDetailsState extends State<FutureGoalsPictureDetails> {
           children: <Widget>[
             Padding(padding: EdgeInsets.only(left: 20,right: 20,bottom: MediaQuery.of(context).size.height*1/70),child:Align(alignment: Alignment.centerLeft,child: Column(crossAxisAlignment: CrossAxisAlignment.start,mainAxisAlignment: MainAxisAlignment.start,children: <Widget>[
 
-                PictureDetailsDescription("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.", "Picture Name", "Desgin and developemnt"),
+                PictureDetailsDescription("As Tony Robbins says, ““Goals are like magnets. They’ll attract the things that make them come true.”“Create a vision and never let the environment, other people’s beliefs, or the limits of what has been done in the past shape your decisions.”", "Picture Name", "Desgin and developemnt"),
 
              Image.network("https://images.pexels.com/photos/1072179/pexels-photo-1072179.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"),
             ],),) ,),

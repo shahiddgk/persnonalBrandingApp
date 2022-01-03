@@ -61,7 +61,7 @@ class _ProfessionalCoachingState extends State<ProfessionalCoaching> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: <Widget>[
                                 Heading1("MY GALLERY"),
-                              Heading2WithDescription("JUST MY AWESOME SKILLS", "Lorem Ipsum is simply dummy text of the printing and typesetting industry."),
+                              Heading2WithDescription("JUST MY AWESOME SKILLS", "As Tony Robbins says, ““Goals are like magnets. They’ll attract the things that make them come true.”“Create a vision and never let the environment, other people’s beliefs, or the limits of what has been done in the past shape your decisions.”"),
 
                               Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
@@ -81,7 +81,7 @@ class _ProfessionalCoachingState extends State<ProfessionalCoaching> {
                                   Text("Saturday / Nov 23,2021"),
                                   Text("This is Standard Post",style: TextStyle(fontSize: 10,fontWeight: FontWeight.bold),),
                                   Container(margin:EdgeInsets.only(top: 10,bottom: 10),height: 7,width: 90,color: Colors.amber,),
-                                  Text("Lorem Ipsum is simply dummy text of the printing and typesetting industry.",style: TextStyle(fontWeight: FontWeight.normal),textAlign: TextAlign.justify,),
+                                  Text("As Tony Robbins says, ““Goals are like magnets. They’ll attract the things that make them come true.”",style: TextStyle(fontWeight: FontWeight.normal),textAlign: TextAlign.justify,),
 
                                 ],
                               )
