@@ -9,6 +9,8 @@ import 'package:personal_branding/widgets/Headings/widget_heading1.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading2withdescription.dart';
 import 'package:personal_branding/widgets/widget_about_section_details.dart';
 
+import '../drawer.dart';
+
 // ignore: must_be_immutable
 class About extends KFDrawerContent {
   @override
@@ -50,7 +52,9 @@ class _AboutState extends State<About> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return WillPopScope(
+        onWillPop: _onWillPop,
+        child:Scaffold(
       // appBar: AppBar(
       //   leading: IconButton(onPressed:  widget.onMenuPressed, icon: Icon(Icons.menu),),
       // ),
@@ -83,9 +87,13 @@ class _AboutState extends State<About> {
                     alignment: Alignment.topLeft,
                     children: <Widget>[
 
-                      //  Image.network("https://www.nicepng.com/png/detail/365-3655520_cristiano-ronaldo-render-cristiano-ronaldo-white-background.png"),
+                      const Padding(padding: EdgeInsets.only(right: 10,top: 10),
+                      child: Align(
+                          alignment:Alignment.topRight,
+                          child: CircleAvatar(backgroundImage: AssetImage("images/2.JPG",),
+                            radius: 60,)),
+                      ),
 
-                      Align(alignment:Alignment.topLeft,child: Image.asset("images/about.png",)),
 
                       Padding(padding: EdgeInsets.only(top:MediaQuery.of(context).size.height*1/20,left: 20,right: 20,bottom: MediaQuery.of(context).size.height*1/70),
                         child: Align(alignment: Alignment.centerLeft,
@@ -99,7 +107,7 @@ class _AboutState extends State<About> {
 
                               Heading2WithDescription("PROFESSIONAL PROFILE",aboutReadResponse.statement),
 
-                             // Image.asset("images/sign.png"),
+                              Image.asset("images/sign.png"),
 
                               // Button(title: "Download Resume as PDF",onPressed: (){},)
                             ],
@@ -114,6 +122,10 @@ class _AboutState extends State<About> {
           ),
         ),
       ) : Container(child: Center(child: CircularProgressIndicator(),),)
-    );
+    ));
+  }
+
+  Future<bool> _onWillPop() async {
+    return (await Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>MainWidget(title: ' '))));
   }
 }

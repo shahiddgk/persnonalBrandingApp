@@ -2,6 +2,9 @@
 import 'package:flutter/material.dart';
 import 'package:kf_drawer/kf_drawer.dart';
 import 'package:personal_branding/Drawer/widget_menu_widget.dart';
+import 'package:personal_branding/Pages/home.dart';
+import 'package:personal_branding/drawer.dart';
+import 'package:personal_branding/utills/utils.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading1.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading2withdescription.dart';
 import 'package:personal_branding/widgets/widget_pictutre_professional_coaching.dart';
@@ -22,6 +25,9 @@ class _ProfessionalCoachingState extends State<ProfessionalCoaching> {
 
   static String? videoID = YoutubePlayer.convertUrlToId("https://www.youtube.com/watch?v=linlz7-Pnvw");
 
+  bool _isCheckingSession = true;
+  bool _isLoading = true;
+
   final YoutubePlayerController _controller = YoutubePlayerController(
     initialVideoId: videoID!,
     flags: YoutubePlayerFlags(
@@ -36,11 +42,44 @@ class _ProfessionalCoachingState extends State<ProfessionalCoaching> {
     ProfessionalCoachingPictures(videoID!, "Saturday / Nov 23,2021", "THIS IS A STANDARD POST", "Lorem Ipsum is simply dummy text of the printing and typesetting industry.", (){}, (){}, (){},(){},(){}),
     ];
 
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _checkedLogin();
+  }
+
+  Future _checkedLogin() async {
+    await getUserSession().then((value) => {
+      if (value.id == 0)
+        {
+          setState(() {
+            _isCheckingSession = false;
+            _isLoading = false;
+          })
+        }
+      else
+        {
+          setState(() {
+            _isCheckingSession = false;
+            globalSessionUser = value;
+            _isLoading = false;
+          }),
+        }
+    });
+  }
+
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return WillPopScope(
+        onWillPop: _onWillPop,
+        child:Scaffold(
       appBar: AppBar(
+        centerTitle: true,
+        title: _isLoading == false &&
+            _isCheckingSession == false &&
+            globalSessionUser.token != ""? Text(globalSessionUser.name) : null,
         leading: MenuWidget(),
       ),
       body: SafeArea(
@@ -128,7 +167,11 @@ class _ProfessionalCoachingState extends State<ProfessionalCoaching> {
           ),
         ),
       ),
-    );
+    ));
+  }
+
+  Future<bool> _onWillPop() async {
+    return (await Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>MainWidget(title: ' '))));
   }
 }
 

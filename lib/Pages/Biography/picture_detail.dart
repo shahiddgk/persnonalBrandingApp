@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:personal_branding/widgets/widget_picture_details_decription.dart';
 
+import '../../drawer.dart';
+
 class PictureDetails extends StatefulWidget {
 
   @override
@@ -11,7 +13,9 @@ class PictureDetails extends StatefulWidget {
 class _PictureDetailsState extends State<PictureDetails> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return WillPopScope(
+        onWillPop: _onWillPop,
+        child:Scaffold(
       appBar: AppBar(
         title: Text("Details"),
       ),
@@ -30,6 +34,10 @@ class _PictureDetailsState extends State<PictureDetails> {
           ],
         ),
       ),
-    );
+    ));
+  }
+
+  Future<bool> _onWillPop() async {
+    return (await Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>MainWidget(title: ' '))));
   }
 }

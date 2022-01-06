@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:kf_drawer/kf_drawer.dart';
 import 'package:personal_branding/Drawer/widget_menu_widget.dart';
+import 'package:personal_branding/utills/utils.dart';
+import 'package:personal_branding/widgets/Buttons/widget_button_with_widthn.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading1.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading2.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading2withdescription.dart';
@@ -9,6 +11,8 @@ import 'package:personal_branding/widgets/TextFields/widget_message_field.dart';
 import 'package:personal_branding/widgets/TextFields/widget_name_field.dart';
 import 'package:personal_branding/widgets/Buttons/widget_button.dart';
 import 'package:personal_branding/widgets/widget_contacts_icon_description.dart';
+
+import '../drawer.dart';
 
 // ignore: must_be_immutable
 class Contacts extends KFDrawerContent {
@@ -23,11 +27,46 @@ class _ContactsState extends State<Contacts> {
   TextEditingController _nameFieldController = TextEditingController();
   TextEditingController _emailFieldController = TextEditingController();
   TextEditingController _messageFieldController = TextEditingController();
+  bool _isCheckingSession = true;
+  bool _isLoading = true;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _checkedLogin();
+  }
+
+  Future _checkedLogin() async {
+    await getUserSession().then((value) => {
+      if (value.id == 0)
+        {
+          setState(() {
+            _isCheckingSession = false;
+            _isLoading = false;
+          })
+        }
+      else
+        {
+          setState(() {
+            _isCheckingSession = false;
+            globalSessionUser = value;
+            _isLoading = false;
+          }),
+        }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return WillPopScope(
+        onWillPop: _onWillPop,
+        child:Scaffold(
       appBar: AppBar(
+        centerTitle: true,
+        title: _isLoading == false &&
+            _isCheckingSession == false &&
+            globalSessionUser.token != ""? Text(globalSessionUser.name) : null,
         leading: MenuWidget(),
       ),
       body: SafeArea(
@@ -79,7 +118,7 @@ class _ContactsState extends State<Contacts> {
 
                               MessageField(hint: "Enter Message", controller: _messageFieldController,),
 
-                              Button(title: "SAY HELLO",Width: MediaQuery.of(context).size.width,onPressed: (){},),
+                              ButtonWithWidth(title: "SAY HELLO",Width: MediaQuery.of(context).size.width,onPressed: (){},),
                             ],
                           ),),)
                     ],
@@ -90,6 +129,10 @@ class _ContactsState extends State<Contacts> {
           ),
         ),
       ),
-    );
+    ));
+  }
+
+  Future<bool> _onWillPop() async {
+    return (await Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>MainWidget(title: ' '))));
   }
 }

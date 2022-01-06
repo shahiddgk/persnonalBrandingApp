@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kf_drawer/kf_drawer.dart';
+import 'package:personal_branding/widgets/Buttons/widget_button_with_widthn.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading1.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading2.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading2withdescription.dart';
@@ -7,6 +8,8 @@ import 'package:personal_branding/widgets/TextFields/widget_email_field.dart';
 import 'package:personal_branding/widgets/TextFields/widget_message_field.dart';
 import 'package:personal_branding/widgets/TextFields/widget_name_field.dart';
 import 'package:personal_branding/widgets/Buttons/widget_button.dart';
+
+import '../drawer.dart';
 
 // ignore: must_be_immutable
 class Partnership extends KFDrawerContent {
@@ -24,7 +27,9 @@ class _PartnershipState extends State<Partnership> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return WillPopScope(
+        onWillPop: _onWillPop,
+        child:Scaffold(
       appBar: AppBar(
         leading: IconButton(onPressed:  widget.onMenuPressed, icon: Icon(Icons.menu),),
       ),
@@ -75,7 +80,7 @@ class _PartnershipState extends State<Partnership> {
 
                               MessageField(hint: "Enter Message", controller: _messageFieldController,),
 
-                              Button(title: "SAY HELLO",Width: MediaQuery.of(context).size.width,onPressed: (){},),
+                              ButtonWithWidth(title: "SAY HELLO",Width: MediaQuery.of(context).size.width,onPressed: (){},),
                             ],
                           ),),)
                     ],
@@ -86,6 +91,10 @@ class _PartnershipState extends State<Partnership> {
           ),
         ),
       ),
-    );
+    ));
+  }
+
+  Future<bool> _onWillPop() async {
+    return (await Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>MainWidget(title: ' '))));
   }
 }

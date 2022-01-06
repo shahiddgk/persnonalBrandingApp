@@ -4,6 +4,8 @@ import 'package:personal_branding/widgets/Headings/widget_heading1.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading2withdescription.dart';
 import 'package:personal_branding/widgets/widget_picture_details_decription.dart';
 
+import '../../drawer.dart';
+
 class AchievementPictureDetails extends StatefulWidget {
 
   @override
@@ -13,7 +15,9 @@ class AchievementPictureDetails extends StatefulWidget {
 class _AchievementPictureDetailsState extends State<AchievementPictureDetails> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return WillPopScope(
+        onWillPop: _onWillPop,
+        child:Scaffold(
       appBar: AppBar(
         title: Text("Details"),
       ),
@@ -36,6 +40,10 @@ class _AchievementPictureDetailsState extends State<AchievementPictureDetails> {
           ],
         ),
       ),
-    );
+    ));
+  }
+
+  Future<bool> _onWillPop() async {
+    return (await Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>MainWidget(title: ' '))));
   }
 }

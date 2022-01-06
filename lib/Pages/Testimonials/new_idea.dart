@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:personal_branding/widgets/Buttons/widget_button.dart';
+import 'package:personal_branding/widgets/Buttons/widget_button_with_widthn.dart';
 import 'package:personal_branding/widgets/Headings/widget_text_partnership.dart';
 import 'package:personal_branding/widgets/TextFields/widget_industry_fields.dart';
 import 'package:personal_branding/widgets/TextFields/widget_message_field.dart';
@@ -34,14 +35,14 @@ class _NewIdeaState extends State<NewIdea> {
 
               MessageField(hint: "Your Message",controller: _messageController,),
 
-              Align(alignment:Alignment.centerLeft,child: Button(title: "Browse", onPressed: (){}, Width: 90)),
+              Align(alignment:Alignment.centerLeft,child: ButtonWithWidth(title: "Browse", onPressed: (){}, Width: 90)),
 
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
 
-                  Button(title: "REGISTER",Width: 110,onPressed: (){},),
-                  Button(title: "LOGIN",Width: 90,onPressed: () {},),
+                  ButtonWithWidth(title: "SIGN UP",Width: 110,onPressed: (){},),
+                  ButtonWithWidth(title: "SIGN IN",Width: 90,onPressed: () {},),
 
                 ],),
               PartnerShipText(),

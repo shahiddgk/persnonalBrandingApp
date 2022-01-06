@@ -1,26 +1,28 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class Button extends StatefulWidget {
+class ButtonWithWidth extends StatefulWidget {
   final String title;
   final Function onPressed;
+  double Width;
 
-   Button({required this.title, required this.onPressed,});
+  ButtonWithWidth({required this.title, required this.onPressed,required this.Width});
 
   @override
-  _ButtonState createState() => _ButtonState();
+  _ButtonWithWidthState createState() => _ButtonWithWidthState();
 }
 
-class _ButtonState extends State<Button> {
+class _ButtonWithWidthState extends State<ButtonWithWidth> {
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(left: 5,right: 5),
       margin:EdgeInsets.only(top: 25),
+      width: widget.Width,
 
       decoration: BoxDecoration(
-          //color: Colors.amber,
-          borderRadius: BorderRadius.circular(12),
+        //color: Colors.amber,
+        borderRadius: BorderRadius.circular(12),
         //   border: Border.all(
         // //color: Colors.white,
         //     width: 3,)

@@ -8,6 +8,8 @@ import 'package:personal_branding/widgets/Headings/widget_heading1.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading2withdescription.dart';
 import 'package:personal_branding/widgets/widget_testimonial_picture_details.dart';
 
+import '../../drawer.dart';
+
 // ignore: must_be_immutable
 class Testimonials extends KFDrawerContent {
 
@@ -57,7 +59,9 @@ class _TestimonialsState extends State<Testimonials> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return WillPopScope(
+        onWillPop: _onWillPop,
+        child:Scaffold(
       // appBar: AppBar(
       //   leading: IconButton(onPressed:  widget.onMenuPressed, icon: Icon(Icons.menu),),
       // ),
@@ -102,7 +106,7 @@ class _TestimonialsState extends State<Testimonials> {
                             Align(alignment: Alignment.centerRight,child: TextButton(child:Text("YOUR THOUGHTS",style: TextStyle(color: Colors.grey),) ,onPressed: (){
                               Navigator.push(context, MaterialPageRoute(builder: (context)=>NewIdea()));
                             },)),
-                          
+
                             ListView.builder(
                               shrinkWrap: true,
                               physics: const NeverScrollableScrollPhysics(),
@@ -129,6 +133,10 @@ class _TestimonialsState extends State<Testimonials> {
           child: CircularProgressIndicator(),
         ),
       )
-    );
+    ));
+  }
+
+  Future<bool> _onWillPop() async {
+    return (await Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>MainWidget(title: ' '))));
   }
 }

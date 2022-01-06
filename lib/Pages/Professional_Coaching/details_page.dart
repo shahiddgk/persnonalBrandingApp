@@ -5,6 +5,8 @@ import 'package:personal_branding/widgets/widget_buttons_row.dart';
 import 'package:personal_branding/widgets/widget_comment_section.dart';
 import 'package:personal_branding/widgets/widget_socialmedia_tags_professional.dart';
 
+import '../../drawer.dart';
+
 class PictureDetails extends StatefulWidget {
   const PictureDetails({Key? key}) : super(key: key);
 
@@ -15,7 +17,9 @@ class PictureDetails extends StatefulWidget {
 class _PictureDetailsState extends State<PictureDetails> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return WillPopScope(
+        onWillPop: _onWillPop,
+        child:Scaffold(
       appBar: AppBar(title: Text("Details"),),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
@@ -43,6 +47,10 @@ class _PictureDetailsState extends State<PictureDetails> {
           ),
         ),
       ),
-    );
+    ));
+  }
+
+  Future<bool> _onWillPop() async {
+    return (await Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>MainWidget(title: ' '))));
   }
 }

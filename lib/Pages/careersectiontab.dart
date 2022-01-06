@@ -8,6 +8,7 @@ import 'package:personal_branding/Pages/Testimonials/testimonials.dart';
 import 'package:personal_branding/Pages/about.dart';
 import 'package:personal_branding/Pages/careers.dart';
 import 'package:personal_branding/Pages/experience.dart';
+import 'package:personal_branding/utills/utils.dart';
 
 // ignore: must_be_immutable
 class CareerSection extends KFDrawerContent {
@@ -18,12 +19,34 @@ class CareerSection extends KFDrawerContent {
 class _CareerSectionState extends State<CareerSection> with SingleTickerProviderStateMixin {
 
   late TabController controller;
+  bool _isCheckingSession = true;
+  bool _isLoading = true;
 
   @override
   void initState() {
     super.initState();
-
+    _checkedLogin();
     controller = TabController(length: 3, vsync: this);
+  }
+
+  Future _checkedLogin() async {
+    await getUserSession().then((value) => {
+      if (value.id == 0)
+        {
+          setState(() {
+            _isCheckingSession = false;
+            _isLoading = false;
+          })
+        }
+      else
+        {
+          setState(() {
+            _isCheckingSession = false;
+            globalSessionUser = value;
+            _isLoading = false;
+          }),
+        }
+    });
   }
 
   @override
@@ -37,6 +60,10 @@ class _CareerSectionState extends State<CareerSection> with SingleTickerProvider
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          centerTitle: true,
+          title: _isLoading == false &&
+              _isCheckingSession == false &&
+              globalSessionUser.token != ""? Text(globalSessionUser.name) : null,
           leading: MenuWidget(),
           bottom: TabBar(
             isScrollable: true,

@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:kf_drawer/kf_drawer.dart';
+import 'package:personal_branding/widgets/Buttons/widget_button_with_widthn.dart';
 import 'package:personal_branding/widgets/Buttons/widget_forgotpasswordbuttong.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading1.dart';
 import 'package:personal_branding/widgets/TextFields/widget_email_field.dart';
 import 'package:personal_branding/widgets/TextFields/widget_name_field.dart';
 import 'package:personal_branding/widgets/TextFields/widget_password_field.dart';
 import 'package:personal_branding/widgets/Buttons/widget_button.dart';
+
+import '../drawer.dart';
 
 // ignore: must_be_immutable
 class Register extends KFDrawerContent {
@@ -24,10 +27,12 @@ class _RegisterState extends State<Register> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      // appBar: AppBar(
-      //   leading: IconButton(onPressed:  widget.onMenuPressed, icon: Icon(Icons.menu),),
-      // ),
+    return WillPopScope(
+        onWillPop: _onWillPop,
+        child:Scaffold(
+      appBar: AppBar(
+
+      ),
       body: SafeArea(
         child: Container(
             height: MediaQuery.of(context).size.height,
@@ -88,7 +93,7 @@ class _RegisterState extends State<Register> {
                                       child: PasswordField(hint: "Enter Password",
                                         controller: _passwordFieldController,)
                                   ),
-                                  Button(title: "SIGN UP",Width: MediaQuery.of(context).size.width,onPressed: (){
+                                  ButtonWithWidth(title: "SIGN UP",Width: MediaQuery.of(context).size.width,onPressed: (){
                                     _SignUp();
                                   },
                                   ),
@@ -105,7 +110,7 @@ class _RegisterState extends State<Register> {
               ),
         ),
       ),
-    );
+    ));
   }
 
   // ignore: non_constant_identifier_names
@@ -116,5 +121,9 @@ class _RegisterState extends State<Register> {
       Scaffold.of(context).showSnackBar(new SnackBar(
           content: new Text("SignUp success")));
     }
+  }
+
+  Future<bool> _onWillPop() async {
+    return (await Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>MainWidget(title: ' '))));
   }
 }

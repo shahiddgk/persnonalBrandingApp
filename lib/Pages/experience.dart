@@ -9,6 +9,8 @@ import 'package:personal_branding/widgets/Headings/widget_heading1.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading2withdescription.dart';
 import 'package:personal_branding/widgets/widget_icon_with_description.dart';
 
+import '../drawer.dart';
+
 
 // ignore: must_be_immutable
 class Experience extends KFDrawerContent {
@@ -54,7 +56,9 @@ class _ExperienceState extends State<Experience> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return WillPopScope(
+        onWillPop: _onWillPop,
+        child:Scaffold(
       // appBar: AppBar(
       //   leading: IconButton(onPressed:  widget.onMenuPressed, icon: Icon(Icons.menu),),
       // ),
@@ -125,6 +129,10 @@ class _ExperienceState extends State<Experience> {
           child: CircularProgressIndicator(),
         ),
       )
-    );
+    ));
+  }
+
+  Future<bool> _onWillPop() async {
+    return (await Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>MainWidget(title: ' '))));
   }
 }

@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:personal_branding/Pages/login.dart';
 import 'package:personal_branding/widgets/Buttons/widget_button.dart';
+import 'package:personal_branding/widgets/Buttons/widget_button_with_widthn.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading2.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading2withdescription.dart';
 import 'package:personal_branding/widgets/Headings/widget_related_topics.dart';
@@ -59,7 +60,7 @@ class _NewProjectIdeaState extends State<NewProjectIdea> {
                         _selectDate(context);
                       },),
 
-                      Button(title: "Browse", onPressed: (){}, Width: 90),
+                      ButtonWithWidth(title: "Browse", onPressed: (){}, Width: 90),
 
                       // Row(
                       //   mainAxisAlignment: MainAxisAlignment.center,
@@ -75,8 +76,8 @@ class _NewProjectIdeaState extends State<NewProjectIdea> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
 
-                          Button(title: "REGISTER",Width: 110,onPressed: (){ Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Register()));},),
-                          Button(title: "LOGIN",Width: 90,onPressed: () {
+                          ButtonWithWidth(title: "SIGN UP",Width: 110,onPressed: (){ Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Register()));},),
+                          ButtonWithWidth(title: "SIGN IN",Width: 90,onPressed: () {
 
                             Navigator.of(context).push(MaterialPageRoute(builder: (context)=>LogIn()));
 

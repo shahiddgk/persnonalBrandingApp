@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 import 'Buttons/widget_button.dart';
+import 'Buttons/widget_button_with_widthn.dart';
 import 'Headings/widget_heading2.dart';
 
 class CommentsSection extends StatefulWidget {
@@ -56,7 +57,7 @@ class _CommentsSectionState extends State<CommentsSection> {
                             ],)
                         ],),
 
-                      Align(alignment:Alignment.bottomCenter,child: Button(onPressed: (){widget.Reply_Button_OnPressed();}, title: "Reply", Width: 85,)),
+                      Align(alignment:Alignment.bottomCenter,child: ButtonWithWidth(onPressed: (){widget.Reply_Button_OnPressed();}, title: "Reply", Width: 85,)),
 
                     ],),
                 ),
@@ -107,7 +108,7 @@ class _CommentsSectionState extends State<CommentsSection> {
                           ],)
                       ],),
 
-                    Button(onPressed: (){widget.Reply_Button_OnPressed();}, title: "Reply", Width: 85,),
+                    ButtonWithWidth(onPressed: (){widget.Reply_Button_OnPressed();}, title: "Reply", Width: 85,),
 
                     Container(height: 2,
                       color: Colors.grey,

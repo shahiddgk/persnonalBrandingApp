@@ -7,6 +7,9 @@ import 'package:personal_branding/utills/utils.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading1.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading2_description_picure.dart';
 
+import '../../drawer.dart';
+import '../home.dart';
+
 // ignore: must_be_immutable
 class Biography extends KFDrawerContent {
   @override
@@ -51,7 +54,9 @@ class _BiographyState extends State<Biography>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return WillPopScope(
+      onWillPop: _onWillPop,
+        child:Scaffold(
         // appBar: AppBar(
         //   leading: IconButton(onPressed:  widget.onMenuPressed, icon: Icon(Icons.menu),),
         //   bottom: TabBar(
@@ -164,6 +169,10 @@ class _BiographyState extends State<Biography>
                 child: const Center(
                   child: CircularProgressIndicator(),
                 ),
-              ));
+              )));
+  }
+
+  Future<bool> _onWillPop() async {
+    return (await Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>MainWidget(title: ' '))));
   }
 }

@@ -4,6 +4,7 @@ import 'package:personal_branding/widgets/Buttons/widget_button.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading2.dart';
 import 'package:responsive_framework/responsive_wrapper.dart';
 
+import 'Buttons/widget_button_with_widthn.dart';
 import 'Headings/widget_heading2withdescription.dart';
 
 class NewIdea extends StatefulWidget {
@@ -65,7 +66,7 @@ class _NewIdeaState extends State<NewIdea> {
 
                 ResponsiveWrapper.of(context).isTablet || ResponsiveWrapper.of(context).isDesktop ? Text(widget.H2,style: TextStyle(fontSize: 24,fontWeight: FontWeight.normal)) : Text(widget.H2,style: TextStyle(fontSize: 20,fontWeight: FontWeight.normal)),
                 Text("add more documents"),
-                Button(title: 'Browse',onPressed: (){
+                ButtonWithWidth(title: 'Browse',onPressed: (){
                   widget.BrowseButtonOnPressed();
                 }, Width: 100,),
                 Container(

@@ -21,15 +21,13 @@ class _ButtonsRowState extends State<ButtonsRow> {
       MainAxisAlignment.center,
       children: <Widget>[
         Button(
-          title: "REGISTER",
-          Width: 115,
+          title: "SIGN UP",
           onPressed: () {
             widget.RegisterClick();
           },
         ),
         Button(
-          title: "LOGIN",
-          Width: 100,
+          title: "SIGN IN",
           onPressed: () {
            widget.LoginClick();
           },

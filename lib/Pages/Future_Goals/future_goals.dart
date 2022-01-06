@@ -7,6 +7,8 @@ import 'package:personal_branding/widgets/Headings/widget_heading1.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading2_description_picure.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading2withdescription.dart';
 
+import '../../drawer.dart';
+import '../home.dart';
 import 'future_picture_details.dart';
 
 // ignore: must_be_immutable
@@ -53,7 +55,9 @@ class _FutureGoalsState extends State<FutureGoals> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return WillPopScope(
+        onWillPop: _onWillPop,
+        child:Scaffold(
       // appBar: AppBar(
       //   leading: IconButton(onPressed:  widget.onMenuPressed, icon: Icon(Icons.menu),),
       // ),
@@ -129,6 +133,10 @@ class _FutureGoalsState extends State<FutureGoals> {
           child: CircularProgressIndicator(),
         ),
       )
-    );
+    ));
+  }
+
+  Future<bool> _onWillPop() async {
+    return (await Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>MainWidget(title: ' '))));
   }
 }

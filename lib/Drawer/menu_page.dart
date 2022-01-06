@@ -63,6 +63,29 @@ class _MenuPageState extends State<MenuPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // Container(
+              //     child:  _isLoading == false &&
+              //         _isCheckingSession == false &&
+              //         globalSessionUser.token != ""
+              //         ? Row(
+              //       children: [
+              //         TextButton(onPressed: (){}, child: Text(globalSessionUser.name,style: TextStyle(color: Colors.white),)),
+              //         TextButton(child: const Text('  Logout',style: TextStyle(color: Colors.white),),onPressed: (){
+              //           setState(() {
+              //             _isLoading = true;
+              //           });
+              //           logoutSessionUser().then((value) => {
+              //             setState(() {
+              //               globalSessionUser = value;
+              //               _isLoading = false;
+              //             })
+              //           });
+              //         },)
+              //       ],
+              //     ): TextButton(child:  const Text('  Login',style: TextStyle(color: Colors.white),),onPressed: (){
+              //       Navigator.of(context).push(MaterialPageRoute(builder: (context)=>LogIn()));
+              //     },)
+              // ),
               Spacer(),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -77,24 +100,6 @@ class _MenuPageState extends State<MenuPage> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: MenuItems.all.map(buildMenuItem).toList(),
-              ),
-              Container(
-                  child:  _isLoading == false &&
-                      _isCheckingSession == false &&
-                      globalSessionUser.token != ""
-                      ? TextButton(child: const Text('  Logout',style: TextStyle(color: Colors.white),),onPressed: (){
-                    setState(() {
-                      _isLoading = true;
-                    });
-                    logoutSessionUser().then((value) => {
-                      setState(() {
-                        globalSessionUser = value;
-                        _isLoading = false;
-                      })
-                    });
-                  },): TextButton(child:  const Text('  Login',style: TextStyle(color: Colors.white),),onPressed: (){
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context)=>LogIn()));
-                  },)
               ),
               Spacer(flex: 2,)
             ],

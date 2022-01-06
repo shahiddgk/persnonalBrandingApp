@@ -24,6 +24,7 @@ import 'package:personal_branding/network/http_manager.dart';
 import 'package:personal_branding/providers/auth_provider.dart';
 import 'package:personal_branding/utills/utils.dart';
 import 'package:personal_branding/widgets/Buttons/widget_button.dart';
+import 'package:personal_branding/widgets/Buttons/widget_button_with_widthn.dart';
 import 'package:personal_branding/widgets/Buttons/widget_buttons_row.dart';
 import 'package:personal_branding/widgets/Buttons/widget_small_button.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading1.dart';
@@ -41,6 +42,8 @@ import 'package:personal_branding/widgets/widget_startup_list_tile.dart';
 import 'package:provider/src/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../drawer.dart';
+import '../home.dart';
 import '../register.dart';
 
 // ignore: must_be_immutable
@@ -95,6 +98,7 @@ class _EntrepreneurState extends State<Entrepreneur> {
   @override
   void initState() {
     super.initState();
+    _checkedLogin();
     if (globalSessionUser.token != "") {
       _getStartUpList();
     } else {
@@ -110,6 +114,26 @@ class _EntrepreneurState extends State<Entrepreneur> {
       }
     });
 
+  }
+
+  Future _checkedLogin() async {
+    await getUserSession().then((value) => {
+      if (value.id == 0)
+        {
+          setState(() {
+            _isCheckingSession = false;
+            _isLoading = false;
+          })
+        }
+      else
+        {
+          setState(() {
+            _isCheckingSession = false;
+            globalSessionUser = value;
+            _isLoading = false;
+          }),
+        }
+    });
   }
 
   _getStartUpList() {
@@ -180,8 +204,14 @@ class _EntrepreneurState extends State<Entrepreneur> {
         break;
     }
 
-    return Scaffold(
+    return WillPopScope(
+        onWillPop: _onWillPop,
+        child: Scaffold(
         appBar: AppBar(
+          centerTitle: true,
+          title: _isLoading == false &&
+              _isCheckingSession == false &&
+              globalSessionUser.id != 0 ? Text(globalSessionUser.name) : null,
           leading: MenuWidget(),
         ),
         resizeToAvoidBottomInset: true,
@@ -455,7 +485,7 @@ class _EntrepreneurState extends State<Entrepreneur> {
                                           : Column(
                                               children: [
                                                 NewIdeaField(titleFieldController: _titleFieldController, industryFieldController: _industryFieldController, messageFieldController: _messageFieldController, dateFieldController: _dateFieldController, onTap: (){_selectDate(context);},),
-                                                Button(
+                                                ButtonWithWidth(
                                                     title: "Browse",
                                                     onPressed: () {
                                                       print("browse clicked");
@@ -495,11 +525,11 @@ class _EntrepreneurState extends State<Entrepreneur> {
                                                 ),
 
                                                 ButtonsRow(RegisterClick: (){
-                                                  Navigator.of(context).push(
-                                                      MaterialPageRoute(
-                                                          builder:
-                                                              (context) =>
-                                                              Register()));
+                                                  // Navigator.of(context).push(
+                                                  //     MaterialPageRoute(
+                                                  //         builder:
+                                                  //             (context) =>
+                                                  //             Register()));
                                                 }, LoginClick: (){
                                                   Navigator.of(context).push(
                                                       MaterialPageRoute(
@@ -510,6 +540,7 @@ class _EntrepreneurState extends State<Entrepreneur> {
                                                 PartnerShipText()
                                               ],
                                             ),
+                                      if(globalSessionUser.id!=0)
                                       Visibility(
                                         visible: !isNewVisible,
                                         child: Form(
@@ -565,7 +596,7 @@ class _EntrepreneurState extends State<Entrepreneur> {
                                                           .accentColor,
                                                 ),
 
-                                              Button(
+                                              ButtonWithWidth(
                                                   title: "SUBMIT",
                                                   onPressed: () {
                                                     newIdeaSubmit();
@@ -592,7 +623,7 @@ class _EntrepreneurState extends State<Entrepreneur> {
                 child: Center(
                   child: CircularProgressIndicator(),
                 ),
-              ));
+              )));
   }
 
   void visibility(StartUpReadResponse startUpReadResponse) {
@@ -707,6 +738,10 @@ class _EntrepreneurState extends State<Entrepreneur> {
     } else {
       throw 'Unable to open url : $url';
     }
+  }
+
+  Future<bool> _onWillPop() async {
+    return (await Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>MainWidget(title: ' '))));
   }
 }
 

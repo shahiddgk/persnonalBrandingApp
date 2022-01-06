@@ -11,6 +11,7 @@ import 'package:personal_branding/models/response/general_response_model.dart';
 import 'package:personal_branding/models/response/session_user_model.dart';
 import 'package:personal_branding/network/http_manager.dart';
 import 'package:personal_branding/utills/utils.dart';
+import 'package:personal_branding/widgets/Buttons/widget_button_with_widthn.dart';
 import 'package:personal_branding/widgets/Buttons/widget_forgotpasswordbuttong.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading1.dart';
 import 'package:personal_branding/widgets/TextFields/widget_email_field.dart';
@@ -35,12 +36,14 @@ class _LogInState extends State<LogIn> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return WillPopScope(
+        onWillPop: _onWillPop,
+        child:Scaffold(
       appBar: AppBar(
-        leading: IconButton(onPressed: (){
-          Navigator.of(context).pop();
-          }, icon: const Icon(Icons.menu)
-        ),
+        // leading: IconButton(onPressed: (){
+        //   Navigator.of(context).pop();
+        //   }, icon: const Icon(Icons.menu)
+        // ),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -96,7 +99,7 @@ class _LogInState extends State<LogIn> {
                                     hint: "Enter password",
                                     controller: _passwordFieldController,
                                   ),
-                                  Button(title: "SignIn",Width: MediaQuery.of(context).size.width,onPressed: _loginUser,
+                                  ButtonWithWidth(title: "SignIn",Width: MediaQuery.of(context).size.width,onPressed: _loginUser,
                                   ),
                                   ForgotPassword(title: "Forgot Password!",onPressed: () {},)
                                 ],
@@ -112,7 +115,7 @@ class _LogInState extends State<LogIn> {
           ),
         ),
       ),
-    );
+    ));
   }
 
   _loginUser() {
@@ -146,5 +149,9 @@ class _LogInState extends State<LogIn> {
         });
       });
     }
+  }
+
+  Future<bool> _onWillPop() async {
+    return (await Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>MainWidget(title: ' '))));
   }
 }

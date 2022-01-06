@@ -134,9 +134,9 @@ class HomePageState extends State<HomePage> {
 
   void showNotification(RemoteNotification remoteNotification) async {
     AndroidNotificationDetails androidPlatformChannelSpecifics = AndroidNotificationDetails(
-      Platform.isAndroid ? 'com.dfa.flutterchatdemo' : 'com.duytq.flutterchatdemo',
-      'Flutter chat demo',
-      'your channel description',
+      Platform.isAndroid ? 'com.ratedsolution.personal_branding' : 'com.example.personalBranding',
+      'Ahmed Hussein',
+      'New Message recieved',
       playSound: true,
       enableVibration: true,
       importance: Importance.max,

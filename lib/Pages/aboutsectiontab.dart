@@ -5,6 +5,7 @@ import 'package:personal_branding/Pages/Achievement/achievement.dart';
 import 'package:personal_branding/Pages/Biography/biography.dart';
 import 'package:personal_branding/Pages/Future_Goals/future_goals.dart';
 import 'package:personal_branding/Pages/about.dart';
+import 'package:personal_branding/utills/utils.dart';
 
 
 // ignore: must_be_immutable
@@ -16,11 +17,14 @@ class AboutSection extends KFDrawerContent {
 class _AboutSectionState extends State<AboutSection> with SingleTickerProviderStateMixin {
 
   late TabController controller;
+  bool _isCheckingSession = true;
+  bool _isLoading = true;
 
   @override
   void initState() {
     super.initState();
 
+    _checkedLogin();
     controller = TabController(length: 4, vsync: this);
   }
 
@@ -31,10 +35,34 @@ class _AboutSectionState extends State<AboutSection> with SingleTickerProviderSt
     controller.dispose();
   }
 
+  Future _checkedLogin() async {
+    await getUserSession().then((value) => {
+      if (value.id == 0)
+        {
+          setState(() {
+            _isCheckingSession = false;
+            _isLoading = false;
+          })
+        }
+      else
+        {
+          setState(() {
+            _isCheckingSession = false;
+            globalSessionUser = value;
+            _isLoading = false;
+          }),
+        }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
+        title: _isLoading == false &&
+            _isCheckingSession == false &&
+            globalSessionUser.token != ""? Text(globalSessionUser.name) : null,
         leading: MenuWidget(),
          bottom: TabBar(
           isScrollable: true,
