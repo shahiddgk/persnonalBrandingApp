@@ -125,8 +125,8 @@ class _EntrepreneurState extends State<Entrepreneur> {
       }
     });
 
-    // registerNotification();
-    // configLocalNotification();
+    registerNotification();
+    configLocalNotification();
 
   }
 

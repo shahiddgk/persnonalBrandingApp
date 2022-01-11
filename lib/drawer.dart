@@ -39,12 +39,12 @@ class _MainWidgetState extends State<MainWidget> with TickerProviderStateMixin {
     super.initState();
     _checkedLogin();
 
-    if(_isLoading == false
-        && _isCheckingSession == false
-        && globalSessionUser.id != 0 ) {
-      registerNotification();
-      configLocalNotification();
-    }
+    // if(_isLoading == false
+    //     && _isCheckingSession == false
+    //     && globalSessionUser.id != 0 ) {
+    //   registerNotification();
+    //   configLocalNotification();
+    // }
 
 
     // FirebaseMessaging.onMessage.listen((RemoteMessage message) {
@@ -94,7 +94,7 @@ class _MainWidgetState extends State<MainWidget> with TickerProviderStateMixin {
       return;
     });
 
-  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHnadler);
+  // FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHnadler);
 
     firebaseMessaging.getToken().then((token) {
       print(globalSessionUser.id);
