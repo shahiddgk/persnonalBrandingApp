@@ -30,7 +30,7 @@ class _NameFieldState extends State<NameField> {
             controller: widget.controller,
             validator: (value){
               if(value!.isEmpty) {
-                return "Name is required";
+                return "Please Enter your Name";
               }
               return null;
             },

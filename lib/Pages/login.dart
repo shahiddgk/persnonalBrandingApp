@@ -152,6 +152,6 @@ class _LogInState extends State<LogIn> {
   }
 
   Future<bool> _onWillPop() async {
-    return (await Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>MainWidget(title: ' '))));
+    return (await Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>MainWidget(title: '')), (route) => false));
   }
 }

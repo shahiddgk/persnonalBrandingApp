@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:kf_drawer/kf_drawer.dart';
+import 'package:personal_branding/models/request/register_request.dart';
+import 'package:personal_branding/network/http_manager.dart';
+import 'package:personal_branding/utills/utils.dart';
 import 'package:personal_branding/widgets/Buttons/widget_button_with_widthn.dart';
 import 'package:personal_branding/widgets/Buttons/widget_forgotpasswordbuttong.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading1.dart';
 import 'package:personal_branding/widgets/TextFields/widget_email_field.dart';
 import 'package:personal_branding/widgets/TextFields/widget_name_field.dart';
+import 'package:personal_branding/widgets/TextFields/widget_password_and_confirm_password_fields.dart';
 import 'package:personal_branding/widgets/TextFields/widget_password_field.dart';
 import 'package:personal_branding/widgets/Buttons/widget_button.dart';
 
@@ -21,9 +25,12 @@ class Register extends KFDrawerContent {
 class _RegisterState extends State<Register> {
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  TextEditingController _nameFieldController = TextEditingController();
-  TextEditingController _emailFieldController = TextEditingController();
-  TextEditingController _passwordFieldController = TextEditingController();
+  final TextEditingController _nameFieldController = TextEditingController();
+  final TextEditingController _emailFieldController = TextEditingController();
+  final TextEditingController _passwordFieldController = TextEditingController();
+  final TextEditingController _confirmPasswordFieldController = TextEditingController();
+
+  bool _isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -89,13 +96,15 @@ class _RegisterState extends State<Register> {
                                         controller: _emailFieldController,
                                       )
                                   ),
-                                  Container(
-                                      child: PasswordField(hint: "Enter Password",
-                                        controller: _passwordFieldController,)
+
+                                  PasswordFieldAndConfirmPasswordField(
+                                      password_hint: "Enter Password",
+                                      confirm_password_hint: "Confirm Password",
+                                      password_controller: _passwordFieldController,
+                                      confirm_password_controller: _confirmPasswordFieldController
                                   ),
-                                  ButtonWithWidth(title: "SIGN UP",Width: MediaQuery.of(context).size.width,onPressed: (){
-                                    _SignUp();
-                                  },
+
+                                  ButtonWithWidth(title: "SIGN UP",Width: MediaQuery.of(context).size.width,onPressed:_registerUser,
                                   ),
                                   ForgotPassword(title: "Forgot Password!",onPressed: () {},)
                                 ],
@@ -114,16 +123,28 @@ class _RegisterState extends State<Register> {
   }
 
   // ignore: non_constant_identifier_names
-  void _SignUp() {
-    if(_formKey.currentState!.validate()){
-      print("Success");
-      // ignore: deprecated_member_use
-      Scaffold.of(context).showSnackBar(new SnackBar(
-          content: new Text("SignUp success")));
+  _registerUser() {
+    if (_formKey.currentState!.validate()) {
+      setState(() {
+        _isLoading = true;
+      });
+      HTTPManager()
+          .registerUser(RegisterRequest(email: _emailFieldController.text, password: _passwordFieldController.text, passwordConfirmation: _confirmPasswordFieldController.text, name: _nameFieldController.text))
+          .then((value) {
+        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>MainWidget(title: " ")));
+      }).catchError((e) {
+        print(e);
+        setState(() {
+          _isLoading = false;
+        });
+        showAlert(context, e.toString(), true, () {}, () {
+          _registerUser();
+        });
+      });
     }
   }
 
   Future<bool> _onWillPop() async {
-    return (await Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>MainWidget(title: ' '))));
+    return (await Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>MainWidget(title: '')), (route) => false));
   }
 }

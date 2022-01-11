@@ -1,10 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
  import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:personal_branding/providers/auth_provider.dart';
 import 'package:personal_branding/providers/chat_provider.dart';
@@ -18,10 +20,34 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'drawer.dart';
 
+// const AndroidNotificationChannel channel = AndroidNotificationChannel(
+//     "high_importance_channel",
+//     "High_Importance_Notification",
+//     "This channel is used for importance notification.",importance: Importance.high,playSound: true);
+//
+// final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+//
+
+// Future<void> _firebaseMessagingBackgroundHnadler(RemoteMessage message) async {
+//   await Firebase.initializeApp();
+//   print('You got new : ${message.senderId}');
+// }
+
 Future<void> main() async {
   ClassBuilder.registerClasses();
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  // FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHnadler);
+  //
+  // await flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
+  //     ?.createNotificationChannel(channel);
+  //
+  // await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
+  //   alert: true,
+  //   badge: true,
+  //   sound: true,
+  // );
+
   SharedPreferences prefs = await SharedPreferences.getInstance();
   runApp(MyApp(prefs: prefs));
   configLoading();
@@ -51,7 +77,6 @@ class MyApp extends StatelessWidget {
   final FirebaseStorage firebaseStorage = FirebaseStorage.instance;
 
   MyApp({required this.prefs});
-
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {

@@ -1,6 +1,9 @@
 import 'dart:async';
 import 'dart:io';
 import 'dart:typed_data';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:http/http.dart';
 
 import 'package:custom_radio_grouped_button/custom_radio_grouped_button.dart';
@@ -16,12 +19,14 @@ import 'package:personal_branding/Drawer/widget_menu_widget.dart';
 import 'package:personal_branding/Pages/Entrepreneur/pages/chat_page.dart';
 import 'package:personal_branding/Pages/Entrepreneur/pages/home_page.dart';
 import 'package:personal_branding/Pages/login.dart';
+import 'package:personal_branding/constants/firestore_constants.dart';
 import 'package:personal_branding/models/request/user_save_start_up_request.dart';
 import 'package:personal_branding/models/request/widget_upload_file.dart';
 import 'package:personal_branding/models/response/session_user_model.dart';
 import 'package:personal_branding/models/response/startup_response_model.dart';
 import 'package:personal_branding/network/http_manager.dart';
 import 'package:personal_branding/providers/auth_provider.dart';
+import 'package:personal_branding/providers/home_provider.dart';
 import 'package:personal_branding/utills/utils.dart';
 import 'package:personal_branding/widgets/Buttons/widget_button.dart';
 import 'package:personal_branding/widgets/Buttons/widget_button_with_widthn.dart';
@@ -74,11 +79,17 @@ class _EntrepreneurState extends State<Entrepreneur> {
   File? file;
   Uint8List? fileBytes;
 
+  final FirebaseMessaging firebaseMessaging = FirebaseMessaging.instance;
+  final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+
   //late List<File> files;
   int indexx = -1;
   dynamic selectValue1 = " ";
   late Map<int, dynamic> filesMap;
+  late SessionUserModel sessionUserModel;
 
+  late String currentUserId = "1";
+ // late HomeProvider homeProvider;
   late Map<String, String> project_id;
 
   List<File> files = [];
@@ -114,6 +125,70 @@ class _EntrepreneurState extends State<Entrepreneur> {
       }
     });
 
+    // registerNotification();
+    // configLocalNotification();
+
+  }
+
+  void registerNotification() {
+    firebaseMessaging.requestPermission();
+
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      print('onMessage: $message');
+      if (message.notification != null) {
+        showNotification(message.notification!);
+      }
+      return;
+    });
+
+    firebaseMessaging.getToken().then((token) {
+      print(globalSessionUser.id);
+      print('push token: $token');
+      if (token != null) {
+        FirebaseFirestore.instance.collection(FirestoreConstants.pathUserCollection).doc(_isLoading == false && _isCheckingSession == false && globalSessionUser.id != 0 ? "${globalSessionUser.id}":'').update({'pushToken': token});
+        //homeProvider.updateDataFirestore(FirestoreConstants.pathUserCollection, _isLoading == false && _isCheckingSession == false && globalSessionUser.id != 0 ? "${globalSessionUser.id}":'', {'pushToken': token});
+      }
+    }).catchError((err) {
+      showAlert(context, err.toString(), true, () {
+        setState(() {
+          _isLoading = false;
+        });
+      }, () {
+      });
+    });
+  }
+
+  void configLocalNotification() {
+    AndroidInitializationSettings initializationSettingsAndroid = AndroidInitializationSettings('app_icon');
+    IOSInitializationSettings initializationSettingsIOS = IOSInitializationSettings();
+    InitializationSettings initializationSettings =
+    InitializationSettings(android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
+    flutterLocalNotificationsPlugin.initialize(initializationSettings);
+  }
+
+  void showNotification(RemoteNotification remoteNotification) async {
+    AndroidNotificationDetails androidPlatformChannelSpecifics = AndroidNotificationDetails(
+      Platform.isAndroid ? 'Branding' : 'com.ratedsolution.personalBranding',
+      'Ahmed Hussein',
+      'New Message received',
+      playSound: true,
+      enableVibration: true,
+      importance: Importance.max,
+      priority: Priority.high,
+    );
+    IOSNotificationDetails iOSPlatformChannelSpecifics = IOSNotificationDetails();
+    NotificationDetails platformChannelSpecifics =
+    NotificationDetails(android: androidPlatformChannelSpecifics, iOS: iOSPlatformChannelSpecifics);
+
+    print(remoteNotification);
+
+    await flutterLocalNotificationsPlugin.show(
+      0,
+      remoteNotification.title,
+      remoteNotification.body,
+      platformChannelSpecifics,
+      payload: null,
+    );
   }
 
   Future _checkedLogin() async {
@@ -208,10 +283,42 @@ class _EntrepreneurState extends State<Entrepreneur> {
         onWillPop: _onWillPop,
         child: Scaffold(
         appBar: AppBar(
+          actions: [
+            _isLoading == false
+                && _isCheckingSession == false
+                && globalSessionUser.id != 0 ?
+            IconButton(onPressed: (){
+              setState(() {
+                _isLoading = true;
+              });
+              logoutSessionUser().then((value) => {
+                setState(() {
+                  globalSessionUser = value;
+                  _isLoading = false;
+                })
+              });
+            },icon: const Icon(Icons.logout),) :
+            Row(
+              children: <Widget>[
+                Container(
+                  height: 35,
+                  child: TextButton(onPressed: (){Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Register()));}, child: const Text("SIGN UP ",style: TextStyle(color: Colors.black),),
+                  ),
+                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(30),border: Border.all(color: Colors.black)),),
+                const Text(" | ",style: TextStyle(color: Colors.black,fontSize: 25,fontWeight: FontWeight.bold),),
+                Container(
+                  alignment: Alignment.center,
+                  margin: const EdgeInsets.only(right: 5),
+                  height: 35,
+                  child: TextButton(onPressed: (){Navigator.of(context).push(MaterialPageRoute(builder: (context)=>LogIn()));}, child: const Text("SIGN IN ",style: TextStyle(color: Colors.black),),
+                  ),
+                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(30),border: Border.all(color: Colors.black)),),
+              ],)
+          ],
           centerTitle: true,
           title: _isLoading == false &&
               _isCheckingSession == false &&
-              globalSessionUser.id != 0 ? Text(globalSessionUser.name) : null,
+              globalSessionUser.id != 0 ? Text("Welcome ${globalSessionUser.name}") : null,
           leading: MenuWidget(),
         ),
         resizeToAvoidBottomInset: true,

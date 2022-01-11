@@ -15,8 +15,6 @@ class _SmallButtonState extends State<SmallButton> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 80,
-      height: 40,
       margin: EdgeInsets.only(right: 10,bottom: 5,top: 5),
       decoration: BoxDecoration(
         //color: Colors.amber,

@@ -2,6 +2,7 @@ import 'package:http/http.dart' as http;
 
 import 'package:fluttericon/mfg_labs_icons.dart';
 import 'package:personal_branding/models/request/loin_request.dart';
+import 'package:personal_branding/models/request/register_request.dart';
 import 'package:personal_branding/models/request/user_save_start_up_request.dart';
 import 'package:personal_branding/models/request/user_start_up_request.dart';
 import 'package:personal_branding/models/request/widget_upload_file.dart';
@@ -22,6 +23,15 @@ import 'package:personal_branding/utills/utils.dart';
 class HTTPManager {
   static bool internetCheck = true;
   ResponseHandler _handler = ResponseHandler();
+
+  Future<GeneralResponseModel> registerUser(RegisterRequest registerRequest) async {
+    final url = ApplicationURLs.API_REGISTER;
+    final GeneralResponseModel response =
+    await _handler.post(url, registerRequest.toJson(), false);
+    // SessionUserModel sessionUserModel =
+    // SessionUserModel.fromJson(response.user);
+     return response;
+  }
 
   Future<SessionUserModel> loginUser(LoginRequest loginRequest) async {
     final url = ApplicationURLs.API_LOGIN;

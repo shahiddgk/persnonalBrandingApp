@@ -2,7 +2,10 @@ class ApplicationURLs{
   static const BASE_URL = "https://branding.ratedsolution.com/api/";
 
   //Authentication
+  // ignore: constant_identifier_names
   static const API_LOGIN = BASE_URL + "login";
+  // ignore: constant_identifier_names
+  static const API_REGISTER = BASE_URL + "register";
 
   // ignore: constant_identifier_names
   static const API_ABOUT = BASE_URL + "about";
@@ -17,12 +20,16 @@ class ApplicationURLs{
   // ignore: constant_identifier_names
   static const API_FUTURE_GOALS = BASE_URL + "futuregoals";
 
+  // ignore: constant_identifier_names
   static const API_STARTUP_LIST = BASE_URL + "user-data";
 
+  // ignore: constant_identifier_names
   static const API_SAVE_STARTUP = BASE_URL + "store-data";
 
+  // ignore: constant_identifier_names
   static const API_UPLOAD_FILE = BASE_URL + "add-more-files";
 
+  // ignore: constant_identifier_names
   static const API_LOGOUT = BASE_URL + "logout";
 
 }
