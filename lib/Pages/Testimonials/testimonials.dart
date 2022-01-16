@@ -102,10 +102,10 @@ class _TestimonialsState extends State<Testimonials> {
                           children: <Widget>[
                             Heading1("TESTIMONIAL"),
 
-                            Heading2WithDescription("JUST MY EDUCATION","As Tony Robbins says, ““Goals are like magnets. They’ll attract the things that make them come true.”“Create a vision and never let the environment, other people’s beliefs, or the limits of what has been done in the past shape your decisions.”"),
-                            Align(alignment: Alignment.centerRight,child: TextButton(child:Text("YOUR THOUGHTS",style: TextStyle(color: Colors.grey),) ,onPressed: (){
-                              Navigator.push(context, MaterialPageRoute(builder: (context)=>NewIdea()));
-                            },)),
+                            Heading2WithDescription("TRUSTED PERSONALITIES AROUND THE WORLD","Dr.Ahmed Hussein have decades of experience in Pediatrics and Neonatology. He has an outstanding track record as clinician as well as business leader. Manages three subsidiaries - Pyramids Health Services, Ability Pediatric Rehabilitation Medical Center, Pyramids Dialysis Center."),
+                            // Align(alignment: Alignment.centerRight,child: TextButton(child:Text("YOUR THOUGHTS",style: TextStyle(color: Colors.grey),) ,onPressed: (){
+                            //   Navigator.push(context, MaterialPageRoute(builder: (context)=>NewIdea()));
+                            // },)),
 
                             ListView.builder(
                               shrinkWrap: true,

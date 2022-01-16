@@ -1,5 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:kf_drawer/kf_drawer.dart';
 import 'package:personal_branding/Drawer/widget_menu_widget.dart';
 import 'package:personal_branding/Pages/login.dart';
@@ -22,6 +24,8 @@ class _HomeState extends State<Home> {
   final urlImages = [
     "images/1.JPG","images/2.JPG","images/5.JPG"
   ];
+
+  final GoogleSignIn googleSignIn = GoogleSignIn();
 
   @override
   void initState() {
@@ -69,6 +73,9 @@ class _HomeState extends State<Home> {
             setState(() {
               _isLoading = true;
             });
+            googleSignIn.signOut();
+            googleSignIn.disconnect();
+            FacebookAuth.i.logOut();
             logoutSessionUser().then((value) => {
               setState(() {
                 globalSessionUser = value;

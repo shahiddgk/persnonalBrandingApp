@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "432743666780",
+    "firebase_url": "https://chatapptest-d8b3f-default-rtdb.firebaseio.com",
     "project_id": "chatapptest-d8b3f",
     "storage_bucket": "chatapptest-d8b3f.appspot.com"
   },
@@ -14,11 +15,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "432743666780-oeo1oogqd55csaab24ohejvrocin3fsm.apps.googleusercontent.com",
+          "client_id": "432743666780-kqq6mhe9rt306a47s3c375lrh3tqgepm.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.ratedsolution.personal_branding",
-            "certificate_hash": "c0d67d9b455adb2633bdc664a1c6e9f3a3f22f84"
+            "certificate_hash": "9dfa9de7fd940023e26484b8ff403f1045e09913"
           }
         },
         {
@@ -37,6 +38,13 @@
             {
               "client_id": "432743666780-6a9k2j27brmgnne29bbc289cquih1se7.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "432743666780-hvb2o1a35h7k8usbjiecftqmfo4u25f6.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.ratedsolution.personalBranding"
+              }
             }
           ]
         }

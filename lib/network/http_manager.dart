@@ -3,12 +3,14 @@ import 'package:http/http.dart' as http;
 import 'package:fluttericon/mfg_labs_icons.dart';
 import 'package:personal_branding/models/request/loin_request.dart';
 import 'package:personal_branding/models/request/register_request.dart';
+import 'package:personal_branding/models/request/social_login_request.dart';
 import 'package:personal_branding/models/request/user_save_start_up_request.dart';
 import 'package:personal_branding/models/request/user_start_up_request.dart';
 import 'package:personal_branding/models/request/widget_upload_file.dart';
 import 'package:personal_branding/models/response/about_response_model.dart';
 import 'package:personal_branding/models/response/achievement_response_list.dart';
 import 'package:personal_branding/models/response/biography_response_model.dart';
+import 'package:personal_branding/models/response/career_response_list.dart';
 import 'package:personal_branding/models/response/experience_response_list.dart';
 import 'package:personal_branding/models/response/future_goals_response_list.dart';
 import 'package:personal_branding/models/response/general_response_model.dart';
@@ -31,6 +33,15 @@ class HTTPManager {
     // SessionUserModel sessionUserModel =
     // SessionUserModel.fromJson(response.user);
      return response;
+  }
+
+  Future<SessionUserModel> registerUserWithSocialAccount(SocialLoginRequest socialLoginRequest) async {
+    final url =  ApplicationURLs.SOCIAL_URL;
+    final GeneralResponseModel response =
+    await _handler.post(url, socialLoginRequest.toJson(), false);
+    SessionUserModel sessionUserModel =
+    SessionUserModel.fromJson(response.user);
+    return sessionUserModel;
   }
 
   Future<SessionUserModel> loginUser(LoginRequest loginRequest) async {
@@ -81,6 +92,14 @@ class HTTPManager {
     TestimonialsListResponse testimonialsListResponse =
     TestimonialsListResponse.fromJson(response.data);
     return testimonialsListResponse.testimonialsList;
+  }
+
+  Future<List<CareerReadResponse>> Careers() async {
+    final url = ApplicationURLs.API_CAREER;
+    final GeneralResponseModel response = await _handler.get(url, true);
+    CareerListResponse careerListResponse =
+    CareerListResponse.fromJson(response.data);
+    return careerListResponse.careerList;
   }
 
   Future<List<AchievementsReadResponse>> Achievement() async {

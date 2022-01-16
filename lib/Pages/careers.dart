@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:kf_drawer/kf_drawer.dart';
+import 'package:personal_branding/models/response/career_response_list.dart';
+import 'package:personal_branding/network/http_manager.dart';
+import 'package:personal_branding/utills/utils.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading1.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading2withdescription.dart';
 import 'package:personal_branding/widgets/widget_icon_with_description.dart';
@@ -20,6 +23,38 @@ class _CareerState extends State<Career> {
   TextEditingController _emailFieldController = TextEditingController();
   TextEditingController _messageFieldController = TextEditingController();
 
+  late List<CareerReadResponse> careerReadResponse;
+
+  String api_response = "";
+  bool _isLoading = true;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    _getCareersList();
+  }
+
+  _getCareersList() {
+    HTTPManager().Careers().then((value) {
+      setState(() {
+        _isLoading = false;
+        print(value);
+        careerReadResponse = value;
+      });
+    }).catchError((e) {
+      print(e);
+      showAlert(context, e.toString(), true, () {
+        setState(() {
+          _isLoading = false;
+        });
+      }, () {
+        _getCareersList();
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -28,7 +63,7 @@ class _CareerState extends State<Career> {
       // appBar: AppBar(
       //   leading: IconButton(onPressed:  widget.onMenuPressed, icon: Icon(Icons.menu),),
       // ),
-      body: SafeArea(
+      body: _isLoading == false ? SafeArea(
         child: Center(
           child: Column(
             children: <Widget>[
@@ -67,8 +102,14 @@ class _CareerState extends State<Career> {
 
                               Heading2WithDescription("LET KEEP IN TOUCH","Direct all organizational operations, policies, and objectives to maximize productivity and returns.Analyze complex scenarios and use creative problem-solving to turn challenges into profitable opportunities.Interview, appoint, train, and assign responsibilities to department managers.Monitor cost-effectiveness of operations and personnel using quantitative data, offering feedback and making cuts where necessaryCoordinate and approve budgets for product development, marketing, overhead, and growth. "),
 
-                              // IconDescription("https://branding.ratedsolution.com/public/images/20211127071232.png", "Executive &amp; Entrepreneur", "Sophia Antipolis innovative ecosystem", "October 2007 – November 2014","Lorem Ipsum is simply dummy text of the printing and typesetting industry."),
-                              // IconDescription("https://branding.ratedsolution.com/public/images/20211127071554.png", "Business Development Consultant", "Cara Group", "May 2007 – Septrmber 2014","Lorem Ipsum is simply dummy text of the printing and typesetting industry."),
+                              ListView.builder(
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                itemCount: careerReadResponse.length,
+                                itemBuilder: (context,index) {
+                                  return IconDescription(careerReadResponse[index].image,careerReadResponse[index].profession,careerReadResponse[index].companyName,careerReadResponse[index].duration,careerReadResponse[index].description);
+                                },
+                              )
                             ],
                           ),),)
                     ],
@@ -78,7 +119,11 @@ class _CareerState extends State<Career> {
             ],
           ),
         ),
-      ),
+      ) : Container(
+        child: const Center(
+          child: CircularProgressIndicator(),
+        ),
+      )
     ));
   }
 

@@ -94,7 +94,7 @@ class _MenuPageState extends State<MenuPage> {
                 child: Container(
                   height: 70,
                   width: 50,
-                  child: Center(child: Image.asset("images/logo2.png")),
+                  child: Center(child: Image.asset("images/logo3.jpg")),
                 ),
               ),
               Column(

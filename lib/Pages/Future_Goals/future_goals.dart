@@ -112,7 +112,9 @@ class _FutureGoalsState extends State<FutureGoals> {
                                       },
                                       child: Container(
                                         width: MediaQuery.of(context).size.width,
-                                        child: Heading2WithDescriptionWiithImage(futureGoalsReadResponse[index].title, futureGoalsReadResponse[index].body, futureGoalsReadResponse[index].images.length>0?futureGoalsReadResponse[index].images[0].img:"",() {}),
+                                        child: Heading2WithDescriptionWiithImage(futureGoalsReadResponse[index].title, futureGoalsReadResponse[index].body, futureGoalsReadResponse[index].images.length>0?futureGoalsReadResponse[index].cover:"",() {
+
+                                        }),
                                       ),
                                     );
                                   },),

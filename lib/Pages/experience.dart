@@ -99,7 +99,7 @@ class _ExperienceState extends State<Experience> {
                         children: <Widget>[
                           Heading1("EXPERIENCE"),
 
-                          Heading2WithDescription("14 YEARS EXPERIENCE","Direct all organizational operations, policies, and objectives to maximize productivity and returns.Analyze complex scenarios and use creative problem-solving to turn challenges into profitable opportunities"),
+                          Heading2WithDescription("14 YEARS EXPERIENCE","Dr.Ahmed Hussein have decades of experience in Pediatrics and Neonatology. He has an outstanding track record as clinician as well as business leader. Manages three subsidiaries - Pyramids Health Services, Ability Pediatric Rehabilitation Medical Center, Pyramids Dialysis Center."),
 
                           Container(
                             child: ListView.builder(

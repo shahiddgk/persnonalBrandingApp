@@ -125,8 +125,14 @@ class _EntrepreneurState extends State<Entrepreneur> {
       }
     });
 
-    registerNotification();
-    configLocalNotification();
+    _isLoading == false
+        && _isCheckingSession == false
+        && globalSessionUser.id != 0 ?
+    registerNotification() : null;
+    _isLoading == false
+        && _isCheckingSession == false
+        && globalSessionUser.id != 0 ?
+    configLocalNotification(): null;
 
   }
 

@@ -1,6 +1,15 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:flutter_login_facebook/flutter_login_facebook.dart';
+import 'package:flutter_signin_button/flutter_signin_button.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:kf_drawer/kf_drawer.dart';
+import 'package:personal_branding/constants/firestore_constants.dart';
 import 'package:personal_branding/models/request/register_request.dart';
+import 'package:personal_branding/models/request/social_login_request.dart';
+import 'package:personal_branding/models/response/session_user_model.dart';
 import 'package:personal_branding/network/http_manager.dart';
 import 'package:personal_branding/utills/utils.dart';
 import 'package:personal_branding/widgets/Buttons/widget_button_with_widthn.dart';
@@ -29,6 +38,20 @@ class _RegisterState extends State<Register> {
   final TextEditingController _emailFieldController = TextEditingController();
   final TextEditingController _passwordFieldController = TextEditingController();
   final TextEditingController _confirmPasswordFieldController = TextEditingController();
+
+  //final GoogleSignIn _googleSignIn = GoogleSignIn();
+  final GoogleSignIn googleSignIn = GoogleSignIn();
+  late SessionUserModel sessionUserModel;
+  Map _userObj = {};
+
+  // late FacebookLogin plugin;
+  // final fb = FacebookLogin();
+  // String? _sdkVersion;
+  // FacebookAccessToken? _token;
+  // FacebookUserProfile? _profile;
+  // String? _email;
+  // String? _imageUrl;
+
 
   bool _isLoading = false;
 
@@ -106,10 +129,26 @@ class _RegisterState extends State<Register> {
 
                                   ButtonWithWidth(title: "SIGN UP",Width: MediaQuery.of(context).size.width,onPressed:_registerUser,
                                   ),
-                                  ForgotPassword(title: "Forgot Password!",onPressed: () {},)
+
+                                  // Row(
+                                  //   children: <Widget>[
+                                  //
+                                  //     Expanded(
+                                  //       flex:1,
+                                  //       child:ButtonWithWidth(title: "SIGN UP WITH GOOGLE",Width: MediaQuery.of(context).size.width,onPressed:_registerUserWithGmail,
+                                  //     ),),
+                                  //     Expanded(
+                                  //       flex: 1,
+                                  //       child:ButtonWithWidth(title: "SIGN UP WITH FACEBOOK",Width: MediaQuery.of(context).size.width,onPressed:_registerUserWithFacebook
+                                  //       //_registerUserWithFacebook,
+                                  //     ),
+                                  //     ),
+                                  //
+                                  //   ],
+                                  // ),
                                 ],
                               )
-                            )
+                            ),
                           ],
                         ),
                       ),
@@ -120,6 +159,97 @@ class _RegisterState extends State<Register> {
         ),
       ),
     ));
+  }
+
+  _registerUserWithGmail() async {
+
+    final GoogleSignInAccount? googleSignInAccount = await googleSignIn.signIn();
+    if (googleSignInAccount != null) {
+      final GoogleSignInAuthentication googleSignInAuthentication =
+          await googleSignInAccount.authentication;
+
+
+      print("googleSignInAccount:::${googleSignInAccount}");
+      print("googleSignInAccountAuthAccessToken:::${googleSignInAuthentication.accessToken}");
+      print("googleSignInAccountAuthIdToken:::${googleSignInAuthentication.idToken}");
+      print("googleSignInAccountAuthServerAuthCode:::${googleSignInAuthentication.serverAuthCode}");
+
+      setState(() {
+        _isLoading = true;
+      });
+
+      HTTPManager().registerUserWithSocialAccount(SocialLoginRequest(name: googleSignInAccount.displayName!,email: googleSignInAccount.email, id: googleSignInAccount.id, provider: "google")).then((value) {
+
+        sessionUserModel = value;
+        FirebaseFirestore.instance.collection(FirestoreConstants.pathUserCollection).doc("${sessionUserModel.id}").set(
+            {
+              FirestoreConstants.nickname: sessionUserModel.name,
+              FirestoreConstants.photoUrl: '',
+              FirestoreConstants.id: sessionUserModel.id,
+              'createdAt': DateTime.now().millisecondsSinceEpoch.toString(),
+              FirestoreConstants.chattingWith: null
+            });
+        saveUserSession(value);
+        print(saveUserSession(value));
+        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>MainWidget(title: " ")));
+
+      }).catchError((e) {
+        print(e);
+        setState(() {
+          _isLoading =false;
+        });
+        showAlert(context, e.toString(), true, () {}, () {
+          _registerUserWithGmail();
+        });
+      });
+    }
+
+  }
+
+  _registerUserWithFacebook() async {
+
+    final fb = FacebookLogin();
+    final response = await fb.logIn(permissions: [
+      FacebookPermission.publicProfile,
+      FacebookPermission.email,
+    ]).then((value) {
+      FacebookAuth.instance.getUserData().then((value) {
+        setState(() {
+          _userObj = value;
+          print("value:::${_userObj}");
+          print("Name:::${_userObj["name"]}");
+          print("email:::${_userObj["email"]}");
+          print("id:::${_userObj["id"]}");
+
+          HTTPManager().registerUserWithSocialAccount(SocialLoginRequest(name: _userObj["name"], email: _userObj["email"], id: _userObj["id"], provider: "facebook")).then((value) {
+
+            sessionUserModel = value;
+            FirebaseFirestore.instance.collection(FirestoreConstants.pathUserCollection).doc("${sessionUserModel.id}").set(
+                {
+                  FirestoreConstants.nickname: sessionUserModel.name,
+                  FirestoreConstants.photoUrl: '',
+                  FirestoreConstants.id: sessionUserModel.id,
+                  'createdAt': DateTime.now().millisecondsSinceEpoch.toString(),
+                  FirestoreConstants.chattingWith: null
+                });
+            saveUserSession(value);
+            print(saveUserSession(value));
+            Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>MainWidget(title: " ")));
+
+          }).catchError((e) {
+            print(e);
+            setState(() {
+              _isLoading =false;
+            });
+            showAlert(context, e.toString(), true, () {}, () {
+              _registerUserWithFacebook();
+            });
+          });
+
+
+        });
+      });
+    });
   }
 
   // ignore: non_constant_identifier_names
@@ -147,4 +277,27 @@ class _RegisterState extends State<Register> {
   Future<bool> _onWillPop() async {
     return (await Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>MainWidget(title: '')), (route) => false));
   }
+
+  // Future<void> _updateLoginInfo(res) async {
+  //
+  //   final token = await res.accessToken;
+  //   FacebookUserProfile? profile;
+  //   String? email;
+  //   String? imageUrl;
+  //
+  //   if (token != null) {
+  //     profile = await res.getUserProfile();
+  //     if (token.permissions.contains(FacebookPermission.email.name)) {
+  //       email = await res.getUserEmail();
+  //     }
+  //     imageUrl = await res.getProfileImageUrl(width: 100);
+  //   }
+  //
+  //   setState(() {
+  //     _token = token;
+  //     _profile = profile;
+  //     _email = email;
+  //     _imageUrl = imageUrl;
+  //   });
+  // }
 }

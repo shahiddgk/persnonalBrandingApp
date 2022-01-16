@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kf_drawer/kf_drawer.dart';
+import 'package:personal_branding/Pages/Biography/biography_images_list.dart';
 import 'package:personal_branding/Pages/Biography/picture_detail.dart';
 import 'package:personal_branding/models/response/biography_response_model.dart';
 import 'package:personal_branding/network/http_manager.dart';
@@ -144,11 +145,17 @@ class _BiographyState extends State<Biography>
                                                                   .length >
                                                               0
                                                           ? biographyReadResponse[
-                                                                  index]
-                                                              .images[0]
-                                                              .img
+                                                                  index].cover
                                                           : "",
-                                                      () {}),
+                                                      () {
+                                                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>BiographyImagesList(biographyReadResponse[index]
+                                                            .images
+                                                            .length >
+                                                            0
+                                                            ? biographyReadResponse[
+                                                        index].images
+                                                            : [],)));
+                                                      }),
                                                 ),
                                               );
                                             },

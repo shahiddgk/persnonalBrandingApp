@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kf_drawer/kf_drawer.dart';
+import 'package:personal_branding/Pages/Achievement/achievement_image_list.dart';
 import 'package:personal_branding/Pages/home.dart';
 import 'package:personal_branding/models/response/achievement_response_list.dart';
 import 'package:personal_branding/network/http_manager.dart';
@@ -121,9 +122,6 @@ class _AchievementState extends State<Achievement> {
                                 scrollDirection: Axis.vertical,
                                 itemBuilder: (context, index) {
                                   return GestureDetector(
-                                    onTap: () {
-                                     // Navigator.of(context).push(MaterialPageRoute(builder: (context)=>AchievementPictureDetails()));
-                                    },
                                     child: Container(
                                       width: MediaQuery.of(context)
                                           .size
@@ -138,11 +136,17 @@ class _AchievementState extends State<Achievement> {
                                               .length >
                                               0
                                               ? achievementReadResponse[
-                                          index]
-                                              .images[0]
-                                              .img
+                                          index].cover
                                               : "",
-                                              () {}),
+                                              () {
+                                            Navigator.of(context).push(MaterialPageRoute(builder: (context)=>AchievementImagesList(achievementReadResponse[index]
+                                                .images
+                                                .length >
+                                                0
+                                                ? achievementReadResponse[
+                                            index].images
+                                                : [],)));
+                                              }),
                                     ),
                                   );
                                 },),
