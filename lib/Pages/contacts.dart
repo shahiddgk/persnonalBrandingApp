@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kf_drawer/kf_drawer.dart';
 import 'package:personal_branding/Drawer/widget_menu_widget.dart';
@@ -26,6 +27,7 @@ class Contacts extends KFDrawerContent {
 
 class _ContactsState extends State<Contacts> {
 
+  static final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   TextEditingController _nameFieldController = TextEditingController();
   TextEditingController _emailFieldController = TextEditingController();
   TextEditingController _messageFieldController = TextEditingController();
@@ -140,19 +142,28 @@ class _ContactsState extends State<Contacts> {
                             children: <Widget>[
                               Heading1("CONTACTS"),
 
-                              Heading2WithDescription("LET KEEP IN TOUCH","Direct all organizational operations, policies, and objectives to maximize productivity and returns.Analyze complex scenarios and use creative problem-solving to turn challenges into profitable opportunities"),
+                              Heading2WithDescription("LET KEEP IN TOUCH","Feel free to send me direct email.I am open to suggestions and communicative about ideas and bringing something new & big change this world. Let's make it worth a while we live in this world."),
 
-                              ContactsIconDescription(Icons.location_on_sharp, "ANDREW SMITH", "Peshawer Pakistan",Icons.email, "Email", "abc@gmail.com", Icons.phone, "Phone", "123456789", "I'm also on Social Networks","Lorem Ipsum is simply dummy text of the printing and typesetting industry.",(){},(){},(){},(){},(){}),
+                              ContactsIconDescription(Icons.location_on_sharp, "Dr. Ahmed Hussein", "PO Box 73515 - Abu Dhabi," ,"United Arab Emirates.",Icons.email, "Email", "ahmed@drahmed.ae", Icons.phone, "Phone", "+123-456-7890", "I'm also on Social Networks"," We can connect through social meida platforms as well.",(){},(){},(){},(){},(){}),
 
                               Heading2("DROP ME A LINE"),
 
-                              NameField(hint: "Your Name",controller: _nameFieldController,),
+                              Form(
+                                key: _formKey,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    NameField(hint: "Your Name",controller: _nameFieldController,),
 
-                              EmailField(hint: "Your Email",controller: _emailFieldController,),
+                                    EmailField(hint: "Your Email",controller: _emailFieldController,),
 
-                              MessageField(hint: "Enter Message", controller: _messageFieldController,),
+                                    MessageField(hint: "Enter Message", controller: _messageFieldController,),
 
-                              ButtonWithWidth(title: "SAY HELLO",Width: MediaQuery.of(context).size.width,onPressed: (){},),
+                                    Button(title: "SAY HELLO",onPressed: _sendContact,),
+                                  ],
+                                ),)
+
                             ],
                           ),),)
                     ],
@@ -168,5 +179,12 @@ class _ContactsState extends State<Contacts> {
 
   Future<bool> _onWillPop() async {
     return (await Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>MainWidget(title: ' '))));
+  }
+
+  _sendContact() {
+    if (_formKey.currentState!.validate())
+    {
+      print(_emailFieldController.text);
+    }
   }
 }

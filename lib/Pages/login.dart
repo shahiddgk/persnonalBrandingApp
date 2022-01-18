@@ -41,6 +41,7 @@ class _LogInState extends State<LogIn> {
   final GoogleSignIn googleSignIn = GoogleSignIn();
   late SessionUserModel sessionUserModel;
   Map _userObj = {};
+  late String name;
 
   @override
   Widget build(BuildContext context) {
@@ -99,6 +100,7 @@ class _LogInState extends State<LogIn> {
                                 crossAxisAlignment: CrossAxisAlignment.start ,
                                 children: <Widget>[
                                   Heading1("LOGIN"),
+
                                   EmailField(
                                     hint: "Enter email",
                                     controller: _emailFieldController,
@@ -157,17 +159,19 @@ class _LogInState extends State<LogIn> {
       final GoogleSignInAuthentication googleSignInAuthentication =
       await googleSignInAccount.authentication;
 
-
+      print("googleSignInAccountName:::${googleSignInAccount.displayName}");
       print("googleSignInAccount:::${googleSignInAccount}");
       print("googleSignInAccountAuthAccessToken:::${googleSignInAuthentication.accessToken}");
       print("googleSignInAccountAuthIdToken:::${googleSignInAuthentication.idToken}");
       print("googleSignInAccountAuthServerAuthCode:::${googleSignInAuthentication.serverAuthCode}");
 
       setState(() {
+        name = googleSignInAccount.displayName!;
+        print("googleSignInAccountName:::${name}");
         _isLoading = true;
       });
 
-      HTTPManager().registerUserWithSocialAccount(SocialLoginRequest(name: googleSignInAccount.displayName!,email: googleSignInAccount.email, id: googleSignInAccount.id, provider: "google")).then((value) {
+      HTTPManager().registerUserWithSocialAccount(SocialLoginRequest(name: name,email: googleSignInAccount.email, id: googleSignInAccount.id, provider: "google")).then((value) {
 
         sessionUserModel = value;
         FirebaseFirestore.instance.collection(FirestoreConstants.pathUserCollection).doc("${sessionUserModel.id}").set(
@@ -184,10 +188,11 @@ class _LogInState extends State<LogIn> {
 
       }).catchError((e) {
         print(e);
-        setState(() {
-          _isLoading =false;
-        });
-        showAlert(context, e.toString(), true, () {}, () {
+        showAlert(context, e.toString(), true, () {
+          setState(() {
+            _isLoading =false;
+          });
+        }, () {
           _registerUserWithGmail();
         });
       });
@@ -264,10 +269,11 @@ class _LogInState extends State<LogIn> {
         Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>MainWidget(title: " ")));
       }).catchError((e) {
         print(e);
-        setState(() {
-          _isLoading = false;
-        });
-        showAlert(context, e.toString(), true, () {}, () {
+        showAlert(context, e.toString(), true, () {
+          setState(() {
+            _isLoading = false;
+          });
+        }, () {
           _loginUser();
         });
       });

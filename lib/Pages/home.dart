@@ -22,7 +22,7 @@ class _HomeState extends State<Home> {
   bool _isLoading = true;
 
   final urlImages = [
-    "images/1.JPG","images/2.JPG","images/5.JPG"
+    "images/profile1.jpg","images/profile3.jpg","images/profile2.jpg"
   ];
 
   final GoogleSignIn googleSignIn = GoogleSignIn();

@@ -8,6 +8,9 @@ class ContactsIconDescription extends StatefulWidget {
   IconData icon1;
   // ignore: non_constant_identifier_names
   String icon1_H2;
+
+  // ignore: non_constant_identifier_names
+  String icon1_H3;
   // ignore: non_constant_identifier_names
   String icon1_H1;
 
@@ -32,7 +35,7 @@ class ContactsIconDescription extends StatefulWidget {
   String Description_H1;
   String Description;
 
-  ContactsIconDescription(this.icon1,this.icon1_H1,this.icon1_H2,this.icon2,this.icon2_H1,this.icon2_H2,this.icon3,this.icon3_H1,this.icon3_H2, this.Description_H1,this.Description,this.facebook_Onpressed,this.twitter_Onpressed,this.youtube_Onpressed,this.googlePlus_Onpressed,this.linkedIn_Onpressed);
+  ContactsIconDescription(this.icon1,this.icon1_H1,this.icon1_H2,this.icon1_H3,this.icon2,this.icon2_H1,this.icon2_H2,this.icon3,this.icon3_H1,this.icon3_H2, this.Description_H1,this.Description,this.facebook_Onpressed,this.twitter_Onpressed,this.youtube_Onpressed,this.googlePlus_Onpressed,this.linkedIn_Onpressed);
 
 
   @override
@@ -83,6 +86,7 @@ class _ContactsIconDescriptionState extends State<ContactsIconDescription> {
                                   children: <Widget>[
                                     Text(widget.icon1_H1,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
                                     Text(widget.icon1_H2,style: TextStyle(fontSize: 16),),
+                                    Text(widget.icon1_H3,style: TextStyle(fontSize: 16),),
                                   ],
                                 ),
                               ),
@@ -163,35 +167,45 @@ class _ContactsIconDescriptionState extends State<ContactsIconDescription> {
                                         child: Container(
                                           // margin: EdgeInsets.only(right: 17),
                                           // width: 10,
-                                          child: IconButton(onPressed: widget.facebook_Onpressed(), icon: Icon(Icons.facebook,size: 20,)),),
+                                          child: IconButton(onPressed: () {
+                                            widget.facebook_Onpressed();
+                                          }, icon: Icon(Icons.facebook,size: 20,)),),
                                       ),
                                       Expanded(
                                         flex: 1,
                                         child: Container(
                                           // margin: EdgeInsets.only(right: 17),
                                           // width: 10,
-                                          child: IconButton(onPressed: widget.twitter_Onpressed(), icon: FaIcon(FontAwesomeIcons.twitter,size: 20,)),),
+                                          child: IconButton(onPressed: () {
+                                            widget.twitter_Onpressed();
+                                          }, icon: FaIcon(FontAwesomeIcons.twitter,size: 20,)),),
                                       ),
                                       Expanded(
                                         flex: 1,
                                         child: Container(
                                           // margin: EdgeInsets.only(right: 17),
                                           // width: 10,
-                                          child: IconButton(onPressed: widget.youtube_Onpressed(), icon: FaIcon(FontAwesomeIcons.youtube,size: 20,)),),
+                                          child: IconButton(onPressed: () {
+                                            widget.youtube_Onpressed();
+                                          }, icon: FaIcon(FontAwesomeIcons.youtube,size: 20,)),),
                                       ),
                                       Expanded(
                                         flex: 1,
                                         child: Container(
                                           // margin: EdgeInsets.only(right: 17),
                                           // width: 10,
-                                          child: IconButton(onPressed: widget.googlePlus_Onpressed(), icon: FaIcon(FontAwesomeIcons.googlePlus,size: 20,)),),
+                                          child: IconButton(onPressed:() {
+                                            widget.googlePlus_Onpressed();
+                                          }, icon: FaIcon(FontAwesomeIcons.googlePlus,size: 20,)),),
                                       ),
                                       Expanded(
                                         flex: 1,
                                         child: Container(
                                           // margin: EdgeInsets.only(right: 17),
                                           // width: 10,
-                                          child: IconButton(onPressed: widget.linkedIn_Onpressed(), icon: FaIcon(FontAwesomeIcons.linkedin,size: 20,)),),
+                                          child: IconButton(onPressed: () {
+                                            widget.linkedIn_Onpressed();
+                                          }, icon: FaIcon(FontAwesomeIcons.linkedin,size: 20,)),),
                                       ),
                                      // Container(child: IconButton(onPressed: widget.linkedIn_Onpressed(), icon: Icon(Icons.facebook,size: 20,)),),
                                     ],),
@@ -225,14 +239,18 @@ class _ContactsIconDescriptionState extends State<ContactsIconDescription> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Container(
+              SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child:Container(
                 width: MediaQuery.of(context).size.width/2.45,
                 margin: EdgeInsets.only(right: 2),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Container(
+                    SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child:Container(
                       margin: EdgeInsets.only(bottom: 5),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -240,21 +258,22 @@ class _ContactsIconDescriptionState extends State<ContactsIconDescription> {
                         children: <Widget>[
                           Container(
                               margin: EdgeInsets.only(right:2),
-                              child: Icon(widget.icon1,size: 17,color: Colors.amber,)),
+                              child: Icon(widget.icon1,size: 15,color: Colors.amber,)),
                           Container(
                             margin: EdgeInsets.only(right: 2),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                Text(widget.icon1_H1,style: TextStyle(fontSize: 8,fontWeight: FontWeight.bold),),
-                                Text(widget.icon1_H2,),
+                                Text(widget.icon1_H1,style: TextStyle(fontSize: 10,fontWeight: FontWeight.bold),textAlign: TextAlign.start,),
+                                Text(widget.icon1_H2,style: TextStyle(fontSize: 10,),textAlign: TextAlign.start,),
+                                Text(widget.icon1_H3,style: TextStyle(fontSize: 10,),textAlign: TextAlign.start,),
                               ],
                             ),
                           ),
                         ],
                       ),
-                    ),
+                    )),
                     Container(
                       margin: EdgeInsets.only(bottom: 5),
                       child: Row(
@@ -263,15 +282,15 @@ class _ContactsIconDescriptionState extends State<ContactsIconDescription> {
                         children: <Widget>[
                           Container(
                               margin: EdgeInsets.only(right: 2),
-                              child: Icon(widget.icon2,size: 17,color: Colors.amber,)),
+                              child: Icon(widget.icon2,size: 15,color: Colors.amber,)),
                           Container(
                             margin: EdgeInsets.only(right: 2),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                Text(widget.icon2_H1,style: TextStyle(fontSize: 8,fontWeight: FontWeight.bold),),
-                                Text(widget.icon2_H2,),
+                                Text(widget.icon2_H1,style: TextStyle(fontSize: 10,fontWeight: FontWeight.bold),),
+                                Text(widget.icon2_H2,style: TextStyle(fontSize: 10),),
                               ],
                             ),
                           ),
@@ -285,15 +304,15 @@ class _ContactsIconDescriptionState extends State<ContactsIconDescription> {
                       children: <Widget>[
                         Container(
                             margin: EdgeInsets.only(right: 2),
-                            child: Icon(widget.icon3,size: 17,color: Colors.amber,)),
+                            child: Icon(widget.icon3,size: 15,color: Colors.amber,)),
                         Container(
                           margin: EdgeInsets.only(right: 2),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              Text(widget.icon3_H1,style: TextStyle(fontSize: 8,fontWeight: FontWeight.bold),),
-                              Text(widget.icon3_H2,),
+                              Text(widget.icon3_H1,style: TextStyle(fontSize: 10,fontWeight: FontWeight.bold),),
+                              Text(widget.icon3_H2,style: TextStyle(fontSize: 10,),),
                             ],
                           ),
                         ),
@@ -301,14 +320,14 @@ class _ContactsIconDescriptionState extends State<ContactsIconDescription> {
                       ],
                     ),
                   ],),
-              ),
+              )),
               Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Container(
                       width: MediaQuery.of(context).size.width/2.3,
-                      child: Text(widget.Description_H1,style: TextStyle(fontSize: 12,fontWeight: FontWeight.normal))),
+                      child: Text(widget.Description_H1,style: TextStyle(fontWeight: FontWeight.normal),textAlign: TextAlign.start,)),
                   Container(
                       width: MediaQuery.of(context).size.width/2.3,
                       child: Column(
@@ -323,19 +342,25 @@ class _ContactsIconDescriptionState extends State<ContactsIconDescription> {
                               Container(
                                 margin: EdgeInsets.only(right: 17),
                                 width: 10,
-                                child: IconButton(onPressed: widget.facebook_Onpressed(), icon: Icon(Icons.facebook,size: 20,)),),
+                                child: IconButton(onPressed: () {
+                                  widget.facebook_Onpressed();
+                                }, icon: Icon(Icons.facebook,size: 20,)),),
                               Container(
                                 margin: EdgeInsets.only(right: 17),
                                 width: 10,
-                                child: IconButton(onPressed: widget.twitter_Onpressed(), icon: FaIcon(FontAwesomeIcons.twitter,size: 20,)),),
+                                child: IconButton(onPressed:() {
+                                  widget.twitter_Onpressed();
+                                }, icon: FaIcon(FontAwesomeIcons.twitter,size: 20,)),),
                               Container(
                                 margin: EdgeInsets.only(right: 17),
                                 width: 10,
-                                child: IconButton(onPressed: widget.youtube_Onpressed(), icon: FaIcon(FontAwesomeIcons.youtube,size: 20,)),),
+                                child: IconButton(onPressed: () {
+                                            widget.youtube_Onpressed();
+                                          }, icon: FaIcon(FontAwesomeIcons.youtube,size: 20,)),),
                               Container(
                                 margin: EdgeInsets.only(right: 17),
                                 width: 10,
-                                child: IconButton(onPressed: widget.googlePlus_Onpressed(), icon: FaIcon(FontAwesomeIcons.googlePlus,size: 20,)),),
+                                child: IconButton(onPressed: (){widget.googlePlus_Onpressed();}, icon: FaIcon(FontAwesomeIcons.googlePlus,size: 20,)),),
                               Container(
                                 margin: EdgeInsets.only(right: 17),
                                 width: 10,

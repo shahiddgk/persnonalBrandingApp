@@ -27,21 +27,21 @@ class ChatProvider {
     return firebaseFirestore.collection(collectionPath).doc(docPath).update(dataNeedUpdate);
   }
 
-  Stream<QuerySnapshot> getChatStream(String groupChatId, int limit) {
+  Stream<QuerySnapshot> getChatStream(String groupChatId, String groupChatIdWithProject,int limit) {
     return firebaseFirestore
         .collection(FirestoreConstants.pathMessageCollection)
         .doc(groupChatId)
-        .collection(groupChatId)
+        .collection(groupChatIdWithProject)
         .orderBy(FirestoreConstants.timestamp, descending: true)
         .limit(limit)
         .snapshots();
   }
 
-  void sendMessage(String content, int type, String groupChatId, String currentUserId, String peerId) {
+  void sendMessage(String content, int type, String groupChatId,String groupChatIdWithProjectId ,String currentUserId, String peerId) {
     DocumentReference documentReference = firebaseFirestore
         .collection(FirestoreConstants.pathMessageCollection)
         .doc(groupChatId)
-        .collection(groupChatId)
+        .collection(groupChatIdWithProjectId)
         .doc(DateTime.now().millisecondsSinceEpoch.toString());
 
     MessageChat messageChat = MessageChat(

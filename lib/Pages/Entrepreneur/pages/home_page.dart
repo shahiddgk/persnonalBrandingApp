@@ -28,7 +28,10 @@ import 'package:provider/provider.dart';
 import 'pages.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({Key? key}) : super(key: key);
+  HomePage({Key? key,required this.ProjectId}) : super(key: key);
+
+  String ProjectId;
+
 
   @override
   State createState() => HomePageState();
@@ -490,6 +493,7 @@ class HomePageState extends State<HomePage> {
                     peerId: userChat.id,
                     peerAvatar: userChat.photoUrl,
                     peerNickname: userChat.nickname,
+                    projectId: widget.ProjectId,
                   ),
                 ),
               );

@@ -20,9 +20,11 @@ import 'package:personal_branding/Pages/Entrepreneur/pages/chat_page.dart';
 import 'package:personal_branding/Pages/Entrepreneur/pages/home_page.dart';
 import 'package:personal_branding/Pages/login.dart';
 import 'package:personal_branding/constants/firestore_constants.dart';
+import 'package:personal_branding/models/request/all_projects_request.dart';
 import 'package:personal_branding/models/request/user_save_start_up_request.dart';
 import 'package:personal_branding/models/request/widget_upload_file.dart';
 import 'package:personal_branding/models/response/session_user_model.dart';
+import 'package:personal_branding/models/response/startup_response_all_project_list.dart';
 import 'package:personal_branding/models/response/startup_response_model.dart';
 import 'package:personal_branding/network/http_manager.dart';
 import 'package:personal_branding/providers/auth_provider.dart';
@@ -72,6 +74,7 @@ class _EntrepreneurState extends State<Entrepreneur> {
   bool _isLoading = true;
   bool _isLogInSession = true;
   List<StartUpReadResponse> startUpReadResponse = [];
+  List<AllProjectList> allProjectsListResponse = [];
   String date = "";
   DateTime selectedDate = DateTime.now();
   dynamic selectValue = "Partnership";
@@ -110,8 +113,10 @@ class _EntrepreneurState extends State<Entrepreneur> {
   void initState() {
     super.initState();
     _checkedLogin();
-    if (globalSessionUser.token != "") {
+    if (globalSessionUser.id != 1) {
       _getStartUpList();
+    } else if(globalSessionUser.id == 1) {
+      _getAllProjects();
     } else {
       setState(() {
         _isLoading = false;
@@ -125,77 +130,77 @@ class _EntrepreneurState extends State<Entrepreneur> {
       }
     });
 
-    _isLoading == false
-        && _isCheckingSession == false
-        && globalSessionUser.id != 0 ?
-    registerNotification() : null;
-    _isLoading == false
-        && _isCheckingSession == false
-        && globalSessionUser.id != 0 ?
-    configLocalNotification(): null;
+    // _isLoading == false
+    //     && _isCheckingSession == false
+    //     && globalSessionUser.id != 0 ?
+    // registerNotification() : null;
+    // _isLoading == false
+    //     && _isCheckingSession == false
+    //     && globalSessionUser.id != 0 ?
+    // configLocalNotification(): null;
 
   }
 
-  void registerNotification() {
-    firebaseMessaging.requestPermission();
-
-    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-      print('onMessage: $message');
-      if (message.notification != null) {
-        showNotification(message.notification!);
-      }
-      return;
-    });
-
-    firebaseMessaging.getToken().then((token) {
-      print(globalSessionUser.id);
-      print('push token: $token');
-      if (token != null) {
-        FirebaseFirestore.instance.collection(FirestoreConstants.pathUserCollection).doc(_isLoading == false && _isCheckingSession == false && globalSessionUser.id != 0 ? "${globalSessionUser.id}":'').update({'pushToken': token});
-        //homeProvider.updateDataFirestore(FirestoreConstants.pathUserCollection, _isLoading == false && _isCheckingSession == false && globalSessionUser.id != 0 ? "${globalSessionUser.id}":'', {'pushToken': token});
-      }
-    }).catchError((err) {
-      showAlert(context, err.toString(), true, () {
-        setState(() {
-          _isLoading = false;
-        });
-      }, () {
-      });
-    });
-  }
-
-  void configLocalNotification() {
-    AndroidInitializationSettings initializationSettingsAndroid = AndroidInitializationSettings('app_icon');
-    IOSInitializationSettings initializationSettingsIOS = IOSInitializationSettings();
-    InitializationSettings initializationSettings =
-    InitializationSettings(android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
-    flutterLocalNotificationsPlugin.initialize(initializationSettings);
-  }
-
-  void showNotification(RemoteNotification remoteNotification) async {
-    AndroidNotificationDetails androidPlatformChannelSpecifics = AndroidNotificationDetails(
-      Platform.isAndroid ? 'Branding' : 'com.ratedsolution.personalBranding',
-      'Ahmed Hussein',
-      'New Message received',
-      playSound: true,
-      enableVibration: true,
-      importance: Importance.max,
-      priority: Priority.high,
-    );
-    IOSNotificationDetails iOSPlatformChannelSpecifics = IOSNotificationDetails();
-    NotificationDetails platformChannelSpecifics =
-    NotificationDetails(android: androidPlatformChannelSpecifics, iOS: iOSPlatformChannelSpecifics);
-
-    print(remoteNotification);
-
-    await flutterLocalNotificationsPlugin.show(
-      0,
-      remoteNotification.title,
-      remoteNotification.body,
-      platformChannelSpecifics,
-      payload: null,
-    );
-  }
+  // void registerNotification() {
+  //   firebaseMessaging.requestPermission();
+  //
+  //   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+  //     print('onMessage: $message');
+  //     if (message.notification != null) {
+  //       showNotification(message.notification!);
+  //     }
+  //     return;
+  //   });
+  //
+  //   firebaseMessaging.getToken().then((token) {
+  //     print(globalSessionUser.id);
+  //     print('push token: $token');
+  //     if (token != null) {
+  //       FirebaseFirestore.instance.collection(FirestoreConstants.pathUserCollection).doc(_isLoading == false && _isCheckingSession == false && globalSessionUser.id != 0 ? "${globalSessionUser.id}":'').update({'pushToken': token});
+  //       //homeProvider.updateDataFirestore(FirestoreConstants.pathUserCollection, _isLoading == false && _isCheckingSession == false && globalSessionUser.id != 0 ? "${globalSessionUser.id}":'', {'pushToken': token});
+  //     }
+  //   }).catchError((err) {
+  //     showAlert(context, err.toString(), true, () {
+  //       setState(() {
+  //         _isLoading = false;
+  //       });
+  //     }, () {
+  //     });
+  //   });
+  // }
+  //
+  // void configLocalNotification() {
+  //   AndroidInitializationSettings initializationSettingsAndroid = AndroidInitializationSettings('app_icon');
+  //   IOSInitializationSettings initializationSettingsIOS = IOSInitializationSettings();
+  //   InitializationSettings initializationSettings =
+  //   InitializationSettings(android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
+  //   flutterLocalNotificationsPlugin.initialize(initializationSettings);
+  // }
+  //
+  // void showNotification(RemoteNotification remoteNotification) async {
+  //   AndroidNotificationDetails androidPlatformChannelSpecifics = AndroidNotificationDetails(
+  //     Platform.isAndroid ? 'Branding' : 'com.ratedsolution.personalBranding',
+  //     'Ahmed Hussein',
+  //     'New Message received',
+  //     playSound: true,
+  //     enableVibration: true,
+  //     importance: Importance.max,
+  //     priority: Priority.high,
+  //   );
+  //   IOSNotificationDetails iOSPlatformChannelSpecifics = IOSNotificationDetails();
+  //   NotificationDetails platformChannelSpecifics =
+  //   NotificationDetails(android: androidPlatformChannelSpecifics, iOS: iOSPlatformChannelSpecifics);
+  //
+  //   print(remoteNotification);
+  //
+  //   await flutterLocalNotificationsPlugin.show(
+  //     0,
+  //     remoteNotification.title,
+  //     remoteNotification.body,
+  //     platformChannelSpecifics,
+  //     payload: null,
+  //   );
+  // }
 
   Future _checkedLogin() async {
     await getUserSession().then((value) => {
@@ -231,19 +236,6 @@ class _EntrepreneurState extends State<Entrepreneur> {
     }).catchError((e) {
       print("e::$e");
       print(e.toString());
-      if(e.toString() == "Error: Token is Expired")
-      {
-        logoutSessionUser();
-
-        showAlert(context, e.toString(), true, () {
-          setState(() {
-            _isLoading = false;
-          });
-        }, () {
-          Entrepreneur();
-        });
-
-      }
         showAlert(context, e.toString(), true, () {
           setState(() {
             _isLoading = false;
@@ -251,6 +243,30 @@ class _EntrepreneurState extends State<Entrepreneur> {
         }, () {
           _getStartUpList();
         });
+    });
+  }
+
+  _getAllProjects() {
+    setState(() {
+      _isLoading = true;
+    });
+    HTTPManager().AllProjects(globalSessionUser.token, AllProjectsListRequest(id: "${globalSessionUser.id}"))
+        .then((value) {
+      setState(() {
+        _isLoading = false;
+        allProjectsListResponse = value;
+      });
+    }).catchError((e) {
+      print("e::$e");
+      print(e.toString());
+
+      showAlert(context, e.toString(), true, (){
+        setState(() {
+          _isLoading = false;
+        });
+      }, () {
+        _getAllProjects();
+      });
     });
   }
 
@@ -328,23 +344,6 @@ class _EntrepreneurState extends State<Entrepreneur> {
           leading: MenuWidget(),
         ),
         resizeToAvoidBottomInset: true,
-        floatingActionButton: !_isLoading
-            ? globalSessionUser.id != 0
-                ? FloatingActionButton(
-          onPressed: () {
-            if (globalSessionUser.usertype == "admin") {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => HomePage()),
-              );
-            } else {
-              _BottomSheet(context, globalSessionUser.id);
-            }
-          },
-          child: Icon(Icons.message),
-        )
-                : null
-            : null,
         body: !_isLoading
             ? SafeArea(
                 child: Center(
@@ -462,7 +461,7 @@ class _EntrepreneurState extends State<Entrepreneur> {
                                           ],
                                         ),
                                       ),
-                                      globalSessionUser.id != 0 &&
+                                      globalSessionUser.id != 1 &&
                                               !_isLoading &&
                                               startUpReadResponse != null
                                           ? ListView.builder(
@@ -510,6 +509,19 @@ class _EntrepreneurState extends State<Entrepreneur> {
                                                             children: [
 
                                                               ExpansionTileDetail(Description: startUpReadResponse[index].message,),
+                                                              ButtonWithWidth(
+                                                                  title: "START A CHAT",
+                                                                  onPressed: (){
+                                                                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ChatPage(
+                                                                    peerNickname: startUpReadResponse[index].title,
+                                                                    peerAvatar:
+                                                                    ' ',
+                                                                    peerId: "${globalSessionUser.id}",
+                                                                    projectId: "${startUpReadResponse[index].id}",
+                                                                  )));
+                                                                  //_BottomSheet(context, globalSessionUser.id,startUpReadResponse[index].id);
+
+                                                              }, Width: MediaQuery.of(context).size.width),
                                                               Container(
                                                                 alignment: Alignment
                                                                     .centerLeft,
@@ -595,7 +607,155 @@ class _EntrepreneurState extends State<Entrepreneur> {
                                                 );
                                               },
                                             )
-                                          : Column(
+                                          : globalSessionUser.id == 1 &&
+                                          !_isLoading &&
+                                          allProjectsListResponse != null
+                                          ?  ListView.builder(
+                                        itemCount:
+                                        allProjectsListResponse.length,
+                                        physics:
+                                        const NeverScrollableScrollPhysics(),
+                                        shrinkWrap: true,
+                                        itemBuilder: (context, index) {
+                                          return Visibility(
+                                            visible: isNewVisible,
+                                            child: Container(
+                                              margin: const EdgeInsets.only(
+                                                  bottom: 10),
+                                              child: Column(
+                                                children: [
+                                                  GestureDetector(
+                                                    onTap: () {
+                                                      visibilityAllProjects(
+                                                          allProjectsListResponse[index]);
+                                                    },
+                                                    child: ExpansionTile(
+                                                      collapsedTextColor:
+                                                      Colors.white,
+                                                      collapsedIconColor:
+                                                      Colors.white,
+                                                      iconColor:
+                                                      Colors.black,
+                                                      textColor:
+                                                      Colors.black,
+                                                      collapsedBackgroundColor:
+                                                      Colors.black,
+                                                      title: Text(
+                                                        allProjectsListResponse[
+                                                        index]
+                                                            .title,
+                                                      ),
+                                                      expandedCrossAxisAlignment:
+                                                      CrossAxisAlignment
+                                                          .start,
+                                                      expandedAlignment:
+                                                      Alignment
+                                                          .centerLeft,
+                                                      children: [
+
+                                                        ExpansionTileDetail(Description: allProjectsListResponse[index].message,),
+                                                        ButtonWithWidth(
+                                                            title: "START A CHAT",
+                                                            onPressed: (){
+                                                              if (globalSessionUser.usertype == "admin") {
+                                                                Navigator.pushReplacement(
+                                                                  context,
+                                                                  MaterialPageRoute(builder: (context) => ChatPage(
+                                                                    peerId: "${allProjectsListResponse[index].userId}",
+                                                                    peerAvatar: '',
+                                                                    peerNickname: allProjectsListResponse[index].title,
+                                                                    projectId: "${allProjectsListResponse[index].id}",
+                                                                  ),),
+                                                                );
+                                                              } else {
+                                                                _BottomSheet(context, globalSessionUser.id,allProjectsListResponse[index].id);
+                                                              }
+                                                            }, Width: MediaQuery.of(context).size.width),
+                                                        Container(
+                                                          alignment: Alignment
+                                                              .centerLeft,
+                                                          decoration: BoxDecoration(
+                                                              border: Border.all(
+                                                                  color: indexx ==
+                                                                      allProjectsListResponse[index].id
+                                                                      ? Colors.black
+                                                                      : Colors.white)),
+                                                          child: Row(
+                                                            children: [
+                                                              SmallButton(
+                                                                title:
+                                                                'Browse',
+                                                                onPressed:
+                                                                    () async {
+                                                                  selectFile(
+                                                                    allProjectsListResponse[index].id,);
+                                                                },
+                                                              ),
+                                                              Visibility(
+                                                                visible: indexx ==
+                                                                    allProjectsListResponse[index].id && FileName != ' '
+                                                                    ? true
+                                                                    : false,
+                                                                child:
+                                                                Container(
+                                                                  child: Text(
+                                                                      "$FileName"),
+                                                                ),
+                                                              )
+                                                            ],
+                                                          ),
+                                                        ),
+                                                        Visibility(
+                                                          visible: indexx ==
+                                                              allProjectsListResponse[index]
+                                                                  .id
+                                                              ? true
+                                                              : false,
+                                                          child:
+                                                          SmallButton(
+                                                            title:
+                                                            "Submit",
+                                                            onPressed:
+                                                                () {
+                                                              if(files==null)return;
+                                                              uploadFile(
+                                                                  files,
+                                                                  allProjectsListResponse[index]
+                                                                      .id);
+                                                            },
+                                                          ),
+                                                        ),
+                                                        Container(
+                                                          margin: const EdgeInsets
+                                                              .only(
+                                                              top:
+                                                              10),
+                                                          child: ListView
+                                                              .builder(
+                                                              physics:
+                                                              const NeverScrollableScrollPhysics(),
+                                                              shrinkWrap:
+                                                              true,
+                                                              itemCount: allProjectsListResponse[index]
+                                                                  .partnerFiles
+                                                                  .length,
+                                                              itemBuilder:
+                                                                  (context,
+                                                                  count) {
+                                                                return  StartUplistTileDetail(fileInput: allProjectsListResponse[index].partnerFiles[count].fileInput, onTap: (){
+                                                                  _launchURL(allProjectsListResponse[index].partnerFiles[count].image);
+                                                                },);
+                                                              }),
+                                                        )
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                      ) : Column(
                                               children: [
                                                 NewIdeaField(titleFieldController: _titleFieldController, industryFieldController: _industryFieldController, messageFieldController: _messageFieldController, dateFieldController: _dateFieldController, onTap: (){_selectDate(context);},),
                                                 ButtonWithWidth(
@@ -638,11 +798,7 @@ class _EntrepreneurState extends State<Entrepreneur> {
                                                 ),
 
                                                 ButtonsRow(RegisterClick: (){
-                                                  // Navigator.of(context).push(
-                                                  //     MaterialPageRoute(
-                                                  //         builder:
-                                                  //             (context) =>
-                                                  //             Register()));
+
                                                 }, LoginClick: (){
                                                   Navigator.of(context).push(
                                                       MaterialPageRoute(
@@ -661,20 +817,8 @@ class _EntrepreneurState extends State<Entrepreneur> {
                                           child: Column(
                                             children: [
                                               NewIdeaField(titleFieldController: _titleFieldController, industryFieldController: _industryFieldController, messageFieldController: _messageFieldController, dateFieldController: _dateFieldController, onTap: (){_selectDate(context);},),
-                                              // Button(
-                                              //     title: "Browse",
-                                              //     onPressed: () {
-                                              //       print(
-                                              //           "browse clicked line 589");
-                                              //     },
-                                              //     Width: 100),
-                                              if (selectValue1 != ' ')
 
-                                                // RadioButtons(RadioValue: const ['Partnership', 'investment',], selectedValue: selectValue1, radioButtonValue: (value) {
-                                                //   selectValue = value;
-                                                //   setState(() {});
-                                                //   print(selectValue);
-                                                // },),
+                                              if (selectValue1 != ' ')
 
                                                 CustomRadioButton(
                                                   elevation: 0,
@@ -740,6 +884,12 @@ class _EntrepreneurState extends State<Entrepreneur> {
   }
 
   void visibility(StartUpReadResponse startUpReadResponse) {
+    setState(() {
+      isVisible = !isVisible;
+    });
+  }
+
+  void visibilityAllProjects(AllProjectList allProjectsListResponse) {
     setState(() {
       isVisible = !isVisible;
     });
@@ -820,6 +970,8 @@ class _EntrepreneurState extends State<Entrepreneur> {
   }
 
 
+
+
   _getStartUp() {
     setState(() {
       _isLoading = false;
@@ -834,7 +986,8 @@ class _EntrepreneurState extends State<Entrepreneur> {
     }).catchError((e) {
       print("e::$e");
       print(e.toString());
-      showAlert(context, e.toString(), true, () {
+
+      showAlert(context, e.toString(), true, (){
         setState(() {
           _isLoading = false;
         });
@@ -858,7 +1011,8 @@ class _EntrepreneurState extends State<Entrepreneur> {
   }
 }
 
-void _BottomSheet(BuildContext context, int id) {
+// ignore: non_constant_identifier_names
+void _BottomSheet(BuildContext context, int id,int projectId) {
   showModalBottomSheet(
       isScrollControlled: true,
       shape: RoundedRectangleBorder(
@@ -879,6 +1033,7 @@ void _BottomSheet(BuildContext context, int id) {
                 peerAvatar:
                     'https://pixelz.cc/wp-content/uploads/2016/11/windows-10-uhd-4k-wallpaper.jpg',
                 peerId: "$id",
+                projectId: "$projectId",
               )),
         );
       });

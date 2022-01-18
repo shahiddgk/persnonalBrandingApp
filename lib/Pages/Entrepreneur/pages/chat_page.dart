@@ -16,35 +16,40 @@ import 'package:personal_branding/utills/utils.dart';
 import 'package:personal_branding/widgets/loading_view.dart';
 import 'package:provider/provider.dart';
 
+import '../entrepreneur.dart';
 import 'pages.dart';
 
 class ChatPage extends StatefulWidget {
   final String peerId;
   final String peerAvatar;
   final String peerNickname;
+  final String projectId;
 
-  ChatPage({Key? key, required this.peerId, required this.peerAvatar, required this.peerNickname}) : super(key: key);
+  ChatPage({Key? key, required this.peerId, required this.peerAvatar, required this.peerNickname, required this.projectId}) : super(key: key);
 
   @override
   State createState() => ChatPageState(
         peerId: this.peerId,
         peerAvatar: this.peerAvatar,
         peerNickname: this.peerNickname,
+        projectId: this.projectId,
       );
 }
 
 class ChatPageState extends State<ChatPage> {
-  ChatPageState({Key? key, required this.peerId, required this.peerAvatar, required this.peerNickname});
+  ChatPageState({Key? key, required this.peerId, required this.peerAvatar, required this.peerNickname,required this.projectId});
 
   String peerId;
-  String peerAvatar="https://data.1freewallpapers.com/download/triangle-solid-black-gold-4k-abstract-1366x768.jpg";
+  String peerAvatar=" ";
   String peerNickname ;
-  late String currentUserId="EufKOLTdlwQPntK8VAxkmP9iWqF2";
+  String currentUserId="0";
+  String projectId = "0";
 
   List<QueryDocumentSnapshot> listMessage = [];
   int _limit = 20;
   int _limitIncrement = 20;
   String groupChatId = "";
+  String groupChatIdWithProjectId = "";
 
   File? imageFile;
   bool isLoading = false;
@@ -108,8 +113,10 @@ class ChatPageState extends State<ChatPage> {
     }
     if (currentUserId.compareTo(peerId) > 0) {
       groupChatId = '$currentUserId-$peerId';
+      groupChatIdWithProjectId = '$currentUserId-$peerId-$projectId';
     } else {
       groupChatId = '$peerId-$currentUserId';
+      groupChatIdWithProjectId = '$peerId-$currentUserId-$projectId';
     }
 
     chatProvider.updateDataFirestore(
@@ -164,7 +171,7 @@ class ChatPageState extends State<ChatPage> {
   void onSendMessage(String content, int type) {
     if (content.trim().isNotEmpty) {
       textEditingController.clear();
-      chatProvider.sendMessage(content, type, groupChatId, currentUserId, peerId);
+      chatProvider.sendMessage(content, type, groupChatId, groupChatIdWithProjectId,currentUserId, peerId);
       listScrollController.animateTo(0, duration: Duration(milliseconds: 300), curve: Curves.easeOut);
     } else {
       Fluttertoast.showToast(msg: 'Nothing to send', backgroundColor: ColorConstants.greyColor);
@@ -450,8 +457,10 @@ class ChatPageState extends State<ChatPage> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-        child: currentUserId == "1" ? Scaffold(
-          appBar: currentUserId == "1"? AppBar(title: Text(widget.peerNickname),): null,
+        onWillPop: _onWillPop,
+        child: Scaffold(
+          appBar: AppBar(
+            title: Text(widget.peerNickname),),
           body: Container(
             decoration: BoxDecoration(borderRadius: BorderRadius.circular(10.0)),
             child: Stack(
@@ -476,31 +485,7 @@ class ChatPageState extends State<ChatPage> {
               ],
             ),
           ),
-        ) : Container(
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(10.0)),
-          child: Stack(
-            children: <Widget>[
-              Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  // List of messages
-                  buildListMessage(),
-
-                  // Sticker
-                  isShowSticker ? buildSticker() : SizedBox.shrink(),
-
-                  // Input content
-                  buildInput(),
-                ],
-              ),
-
-              // Loading
-              buildLoading()
-
-            ],
-          ),
-        ),
-        onWillPop: onBackPress,
+    )
     );
   }
 
@@ -693,7 +678,7 @@ class ChatPageState extends State<ChatPage> {
     return Flexible(
       child: groupChatId.isNotEmpty
           ? StreamBuilder<QuerySnapshot>(
-              stream: chatProvider.getChatStream(groupChatId, _limit),
+              stream: chatProvider.getChatStream(groupChatId, groupChatIdWithProjectId ,_limit),
               builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
                 if (snapshot.hasData) {
                   listMessage = snapshot.data!.docs;
@@ -723,5 +708,9 @@ class ChatPageState extends State<ChatPage> {
               ),
             ),
     );
+  }
+
+  Future<bool> _onWillPop() async {
+    return (await Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>Entrepreneur())));
   }
 }

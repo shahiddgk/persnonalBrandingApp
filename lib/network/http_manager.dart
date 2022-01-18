@@ -1,6 +1,7 @@
 import 'package:http/http.dart' as http;
 
 import 'package:fluttericon/mfg_labs_icons.dart';
+import 'package:personal_branding/models/request/all_projects_request.dart';
 import 'package:personal_branding/models/request/loin_request.dart';
 import 'package:personal_branding/models/request/register_request.dart';
 import 'package:personal_branding/models/request/social_login_request.dart';
@@ -16,6 +17,7 @@ import 'package:personal_branding/models/response/future_goals_response_list.dar
 import 'package:personal_branding/models/response/general_response_model.dart';
 import 'package:personal_branding/models/response/session_user_model.dart';
 import 'package:personal_branding/models/response/start_up_save_response.dart';
+import 'package:personal_branding/models/response/startup_response_all_project_list.dart';
 import 'package:personal_branding/models/response/startup_response_model.dart';
 import 'package:personal_branding/models/response/testimonials_response_list.dart';
 import 'package:personal_branding/network/api_urls.dart';
@@ -128,6 +130,17 @@ class HTTPManager {
     StartUpListResponse startUpListResponse =
     StartUpListResponse.fromJson(response.data);
     return startUpListResponse.startUpList;
+  }
+
+  Future<List<AllProjectList>> AllProjects(String token,AllProjectsListRequest allProjectsListRequest) async {
+    print(token);
+    String userid;
+    final url = ApplicationURLs.API_ALL_PROJECT_LIST ;
+    print(url);
+    final GeneralResponseModel response = await _handler.post(url,allProjectsListRequest.toJson(),true);
+    AllProjectsListResponse allProjectsListResponse =
+    AllProjectsListResponse.fromJson(response.data);
+    return allProjectsListResponse.AllProjects;
   }
 
   Future<SaveStartUpReadResponse> savestartUpUser(String token,SaveStartUpRequest startUpRequest) async {

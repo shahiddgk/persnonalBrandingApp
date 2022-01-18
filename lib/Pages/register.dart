@@ -149,6 +149,30 @@ class _RegisterState extends State<Register> {
                                 ],
                               )
                             ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Divider(),
+                                SignInButton(
+                                  Buttons.GoogleDark,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(12)
+                                  ),
+                                  onPressed: _registerUserWithGmail,
+                                ),
+                                Divider(),
+                                SignInButton(
+                                  Buttons.Facebook,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(12)
+                                  ),
+                                  onPressed: _registerUserWithFacebook,
+                                ),
+                                Divider(),
+                                ForgotPassword(title: "Forgot Password!",onPressed: () {},)
+                              ],
+                            )
                           ],
                         ),
                       ),

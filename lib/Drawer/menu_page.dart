@@ -22,38 +22,14 @@ class MenuPage extends StatefulWidget {
 }
 
 class _MenuPageState extends State<MenuPage> {
-
-  bool _isCheckingSession = true;
-  bool _isLoading = true;
   
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
 
-    _checkedLogin();
   }
 
-  Future _checkedLogin() async {
-    await getUserSession().then((value) => {
-      if (value.id == 0)
-        {
-          setState(() {
-            _isCheckingSession = false;
-            _isLoading = false;
-          })
-        }
-      else
-        {
-          setState(() {
-            _isCheckingSession = false;
-            globalSessionUser = value;
-            _isLoading = false;
-          }),
-        }
-    });
-  }
-  
   @override
   Widget build(BuildContext context) => Theme(
     data: ThemeData.dark(),
@@ -63,29 +39,6 @@ class _MenuPageState extends State<MenuPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Container(
-              //     child:  _isLoading == false &&
-              //         _isCheckingSession == false &&
-              //         globalSessionUser.token != ""
-              //         ? Row(
-              //       children: [
-              //         TextButton(onPressed: (){}, child: Text(globalSessionUser.name,style: TextStyle(color: Colors.white),)),
-              //         TextButton(child: const Text('  Logout',style: TextStyle(color: Colors.white),),onPressed: (){
-              //           setState(() {
-              //             _isLoading = true;
-              //           });
-              //           logoutSessionUser().then((value) => {
-              //             setState(() {
-              //               globalSessionUser = value;
-              //               _isLoading = false;
-              //             })
-              //           });
-              //         },)
-              //       ],
-              //     ): TextButton(child:  const Text('  Login',style: TextStyle(color: Colors.white),),onPressed: (){
-              //       Navigator.of(context).push(MaterialPageRoute(builder: (context)=>LogIn()));
-              //     },)
-              // ),
               Spacer(),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -179,6 +132,7 @@ class _MenuPageState extends State<MenuPage> {
 class MenuItems{
   static const home = MenuItem('Home');
   static const about = MenuItem('About');
+  static const leadership = MenuItem('Leadership');
   static const career = MenuItem('Career');
   static const startup = MenuItem('Start Up');
   static const gallery = MenuItem('Gallery');
@@ -188,6 +142,7 @@ class MenuItems{
   static const all = <MenuItem>[
     home,
     about,
+    leadership,
     career,
     startup,
     gallery,

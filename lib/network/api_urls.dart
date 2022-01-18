@@ -26,6 +26,8 @@ class ApplicationURLs{
   // ignore: constant_identifier_names
   static const API_STARTUP_LIST = BASE_URL + "user-data";
 
+  static const API_ALL_PROJECT_LIST = BASE_URL + "all-projects";
+
   // ignore: constant_identifier_names
   static const API_SOCIAL = BASE_URL + "social/redirect/";
 

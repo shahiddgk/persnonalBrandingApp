@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:personal_branding/Pages/login.dart';
 import 'package:personal_branding/models/response/session_user_model.dart';
 import 'package:personal_branding/utills/styles.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
@@ -26,6 +27,37 @@ late SessionUserModel globalSessionUser = SessionUserModel(
 Future showAlert(BuildContext context, String message, bool isError,
     VoidCallback cancelCallback, VoidCallback retryCallback) async {
   print("IsError:${isError}");
+  message.contains("Authorization Token not found") ?
+  Alert(
+    context: context,
+    type: isError ? AlertType.error : AlertType.success,
+    title: isError ? "Error" : "Success",
+    desc: message,
+    style: AlertStyle(
+        isCloseButton: false,
+        isOverlayTapDismiss: false,
+        alertElevation: 8.0,
+        titleStyle: TextStyle(
+            fontWeight: FontWeight.bold, color: Colors.black, fontSize: 28)),
+    buttons: [
+      if (isError)
+        DialogButton(
+          gradient: LinearGradient(colors: <Color>[primaryColor, primaryColor]),
+          border: Border.all(color: primaryColor, width: 1),
+          radius: BorderRadius.circular(10),
+          child: const Text(
+            "Sign In",
+            style: TextStyle(color: Colors.black, fontSize: 20),
+          ),
+          onPressed: () {
+            Navigator.of(context).push(MaterialPageRoute(builder: (context)=>LogIn()));
+            cancelCallback();
+          },
+          width: 120,
+        ),
+    ],
+  ).show()
+      :
   Alert(
     context: context,
     type: isError ? AlertType.error : AlertType.success,
