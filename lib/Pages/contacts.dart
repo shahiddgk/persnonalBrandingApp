@@ -1,9 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:kf_drawer/kf_drawer.dart';
 import 'package:personal_branding/Drawer/widget_menu_widget.dart';
 import 'package:personal_branding/Pages/login.dart';
 import 'package:personal_branding/Pages/register.dart';
+import 'package:personal_branding/constants/firestore_constants.dart';
 import 'package:personal_branding/utills/utils.dart';
 import 'package:personal_branding/widgets/Buttons/widget_button_with_widthn.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading1.dart';
@@ -33,6 +37,7 @@ class _ContactsState extends State<Contacts> {
   TextEditingController _messageFieldController = TextEditingController();
   bool _isCheckingSession = true;
   bool _isLoading = true;
+  final GoogleSignIn googleSignIn = GoogleSignIn();
 
   @override
   void initState() {
@@ -63,9 +68,7 @@ class _ContactsState extends State<Contacts> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-        onWillPop: _onWillPop,
-        child:Scaffold(
+    return Scaffold(
       appBar: AppBar(
         actions: [
           _isLoading == false
@@ -75,6 +78,14 @@ class _ContactsState extends State<Contacts> {
             setState(() {
               _isLoading = true;
             });
+            // FirebaseFirestore.instance.collection(FirestoreConstants.pathUserCollection).doc("${globalSessionUser.id}").update(
+            //     {
+            //       'Token': ' '
+            //     }
+            // );
+            googleSignIn.signOut();
+            googleSignIn.disconnect();
+            FacebookAuth.i.logOut();
             logoutSessionUser().then((value) => {
               setState(() {
                 globalSessionUser = value;
@@ -103,7 +114,7 @@ class _ContactsState extends State<Contacts> {
         title: _isLoading == false &&
             _isCheckingSession == false &&
             globalSessionUser.token != ""? Text("Welcome ${globalSessionUser.name}") : null,
-        leading: MenuWidget(),
+       // leading: MenuWidget(),
       ),
       body: SafeArea(
         child: Center(
@@ -174,7 +185,7 @@ class _ContactsState extends State<Contacts> {
           ),
         ),
       ),
-    ));
+    );
   }
 
   Future<bool> _onWillPop() async {

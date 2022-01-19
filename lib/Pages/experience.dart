@@ -1,12 +1,15 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kf_drawer/kf_drawer.dart';
 import 'package:personal_branding/models/response/experience_response_list.dart';
 import 'package:personal_branding/network/http_manager.dart';
 import 'package:personal_branding/utills/utils.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading1.dart';
+import 'package:personal_branding/widgets/Headings/widget_heading1_button.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading2withdescription.dart';
+import 'package:personal_branding/widgets/widget_heading1_buttons_and_marquee.dart';
 import 'package:personal_branding/widgets/widget_icon_with_description.dart';
 
 import '../drawer.dart';
@@ -56,9 +59,7 @@ class _ExperienceState extends State<Experience> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-        onWillPop: _onWillPop,
-        child:Scaffold(
+    return Scaffold(
       // appBar: AppBar(
       //   leading: IconButton(onPressed:  widget.onMenuPressed, icon: Icon(Icons.menu),),
       // ),
@@ -97,7 +98,7 @@ class _ExperienceState extends State<Experience> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
-                          Heading1("EXPERIENCE"),
+                          Heading1WithButtonAndMarquee("EXPERIENCE"),
 
                           Heading2WithDescription("14 YEARS EXPERIENCE","Dr.Ahmed Hussein have decades of experience in Pediatrics and Neonatology. He has an outstanding track record as clinician as well as business leader. Manages three subsidiaries - Pyramids Health Services, Ability Pediatric Rehabilitation Medical Center, Pyramids Dialysis Center."),
 
@@ -111,6 +112,7 @@ class _ExperienceState extends State<Experience> {
                                 itemCount: experienceReadResponse.length,
                             ),
                           ),
+                          // IconDescription(  FontAwesomeIcons.briefcase,"Business Development Consultant", "Cara Group", "May 2007 – Septrmber 2014","Lorem Ipsum is simply dummy text of the printing and typesetting industry.")
                           // IconDescription("https://branding.ratedsolution.com/public/images/20211127071232.png", "Executive &amp; Entrepreneur", "Sophia Antipolis innovative ecosystem", "October 2007 – November 2014","Lorem Ipsum is simply dummy text of the printing and typesetting industry."),
                           // IconDescription("https://branding.ratedsolution.com/public/images/20211127071554.png", "Business Development Consultant", "Cara Group", "May 2007 – Septrmber 2014","Lorem Ipsum is simply dummy text of the printing and typesetting industry."),
                            ],
@@ -129,7 +131,7 @@ class _ExperienceState extends State<Experience> {
           child: CircularProgressIndicator(),
         ),
       )
-    ));
+    );
   }
 
   Future<bool> _onWillPop() async {

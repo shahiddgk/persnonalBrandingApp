@@ -3,7 +3,9 @@ import 'dart:io';
 import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart';
 
 import 'package:custom_radio_grouped_button/custom_radio_grouped_button.dart';
@@ -85,15 +87,15 @@ class _EntrepreneurState extends State<Entrepreneur> {
   final FirebaseMessaging firebaseMessaging = FirebaseMessaging.instance;
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
-  //late List<File> files;
+
   int indexx = -1;
   dynamic selectValue1 = " ";
   late Map<int, dynamic> filesMap;
   late SessionUserModel sessionUserModel;
 
   late String currentUserId = "1";
- // late HomeProvider homeProvider;
   late Map<String, String> project_id;
+  final GoogleSignIn googleSignIn = GoogleSignIn();
 
   List<File> files = [];
 
@@ -152,6 +154,7 @@ class _EntrepreneurState extends State<Entrepreneur> {
   //     return;
   //   });
   //
+  //
   //   firebaseMessaging.getToken().then((token) {
   //     print(globalSessionUser.id);
   //     print('push token: $token');
@@ -176,31 +179,31 @@ class _EntrepreneurState extends State<Entrepreneur> {
   //   InitializationSettings(android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
   //   flutterLocalNotificationsPlugin.initialize(initializationSettings);
   // }
-  //
-  // void showNotification(RemoteNotification remoteNotification) async {
-  //   AndroidNotificationDetails androidPlatformChannelSpecifics = AndroidNotificationDetails(
-  //     Platform.isAndroid ? 'Branding' : 'com.ratedsolution.personalBranding',
-  //     'Ahmed Hussein',
-  //     'New Message received',
-  //     playSound: true,
-  //     enableVibration: true,
-  //     importance: Importance.max,
-  //     priority: Priority.high,
-  //   );
-  //   IOSNotificationDetails iOSPlatformChannelSpecifics = IOSNotificationDetails();
-  //   NotificationDetails platformChannelSpecifics =
-  //   NotificationDetails(android: androidPlatformChannelSpecifics, iOS: iOSPlatformChannelSpecifics);
-  //
-  //   print(remoteNotification);
-  //
-  //   await flutterLocalNotificationsPlugin.show(
-  //     0,
-  //     remoteNotification.title,
-  //     remoteNotification.body,
-  //     platformChannelSpecifics,
-  //     payload: null,
-  //   );
-  // }
+
+  void showNotification(RemoteNotification remoteNotification) async {
+    AndroidNotificationDetails androidPlatformChannelSpecifics = AndroidNotificationDetails(
+      Platform.isAndroid ? 'Branding' : 'com.ratedsolution.personalBranding',
+      'Ahmed Hussein',
+      'New Message received',
+      playSound: true,
+      enableVibration: true,
+      importance: Importance.max,
+      priority: Priority.high,
+    );
+    IOSNotificationDetails iOSPlatformChannelSpecifics = IOSNotificationDetails();
+    NotificationDetails platformChannelSpecifics =
+    NotificationDetails(android: androidPlatformChannelSpecifics, iOS: iOSPlatformChannelSpecifics);
+
+    print(remoteNotification);
+
+    await flutterLocalNotificationsPlugin.show(
+      0,
+      remoteNotification.title,
+      remoteNotification.body,
+      platformChannelSpecifics,
+      payload: null,
+    );
+  }
 
   Future _checkedLogin() async {
     await getUserSession().then((value) => {
@@ -301,9 +304,7 @@ class _EntrepreneurState extends State<Entrepreneur> {
         break;
     }
 
-    return WillPopScope(
-        onWillPop: _onWillPop,
-        child: Scaffold(
+    return Scaffold(
         appBar: AppBar(
           actions: [
             _isLoading == false
@@ -313,6 +314,15 @@ class _EntrepreneurState extends State<Entrepreneur> {
               setState(() {
                 _isLoading = true;
               });
+
+              googleSignIn.signOut();
+              googleSignIn.disconnect();
+              FacebookAuth.i.logOut();
+              // FirebaseFirestore.instance.collection(FirestoreConstants.pathUserCollection).doc("${globalSessionUser.id}").update(
+              //     {
+              //       'Token': ' '
+              //     }
+             // );
               logoutSessionUser().then((value) => {
                 setState(() {
                   globalSessionUser = value;
@@ -341,7 +351,7 @@ class _EntrepreneurState extends State<Entrepreneur> {
           title: _isLoading == false &&
               _isCheckingSession == false &&
               globalSessionUser.id != 0 ? Text("Welcome ${globalSessionUser.name}") : null,
-          leading: MenuWidget(),
+          //leading: MenuWidget(),
         ),
         resizeToAvoidBottomInset: true,
         body: !_isLoading
@@ -461,156 +471,13 @@ class _EntrepreneurState extends State<Entrepreneur> {
                                           ],
                                         ),
                                       ),
-                                      globalSessionUser.id != 1 &&
+                                      globalSessionUser.id != 0 &&
                                               !_isLoading &&
                                               startUpReadResponse != null
-                                          ? ListView.builder(
-                                              itemCount:
-                                                  startUpReadResponse.length,
-                                              physics:
-                                                  const NeverScrollableScrollPhysics(),
-                                              shrinkWrap: true,
-                                              itemBuilder: (context, index) {
-                                                return Visibility(
-                                                  visible: isNewVisible,
-                                                  child: Container(
-                                                    margin: const EdgeInsets.only(
-                                                        bottom: 10),
-                                                    child: Column(
-                                                      children: [
-                                                        GestureDetector(
-                                                          onTap: () {
-                                                            visibility(
-                                                                startUpReadResponse[
-                                                                    index]);
-                                                          },
-                                                          child: ExpansionTile(
-                                                            collapsedTextColor:
-                                                                Colors.white,
-                                                            collapsedIconColor:
-                                                                Colors.white,
-                                                            iconColor:
-                                                                Colors.black,
-                                                            textColor:
-                                                                Colors.black,
-                                                            collapsedBackgroundColor:
-                                                                Colors.black,
-                                                            title: Text(
-                                                              startUpReadResponse[
-                                                                      index]
-                                                                  .title,
-                                                            ),
-                                                            expandedCrossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
-                                                            expandedAlignment:
-                                                                Alignment
-                                                                    .centerLeft,
-                                                            children: [
-
-                                                              ExpansionTileDetail(Description: startUpReadResponse[index].message,),
-                                                              ButtonWithWidth(
-                                                                  title: "START A CHAT",
-                                                                  onPressed: (){
-                                                                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ChatPage(
-                                                                    peerNickname: startUpReadResponse[index].title,
-                                                                    peerAvatar:
-                                                                    ' ',
-                                                                    peerId: "${globalSessionUser.id}",
-                                                                    projectId: "${startUpReadResponse[index].id}",
-                                                                  )));
-                                                                  //_BottomSheet(context, globalSessionUser.id,startUpReadResponse[index].id);
-
-                                                              }, Width: MediaQuery.of(context).size.width),
-                                                              Container(
-                                                                alignment: Alignment
-                                                                    .centerLeft,
-                                                                decoration: BoxDecoration(
-                                                                    border: Border.all(
-                                                                        color: indexx ==
-                                                                                startUpReadResponse[index].id
-                                                                            ? Colors.black
-                                                                            : Colors.white)),
-                                                                child: Row(
-                                                                  children: [
-                                                                    SmallButton(
-                                                                      title:
-                                                                          'Browse',
-                                                                      onPressed:
-                                                                          () async {
-                                                                        selectFile(
-                                                                            startUpReadResponse[index].id,);
-                                                                      },
-                                                                    ),
-                                                                    Visibility(
-                                                                      visible: indexx ==
-                                                                              startUpReadResponse[index].id && FileName != ' '
-                                                                          ? true
-                                                                          : false,
-                                                                      child:
-                                                                          Container(
-                                                                        child: Text(
-                                                                            "$FileName"),
-                                                                      ),
-                                                                    )
-                                                                  ],
-                                                                ),
-                                                              ),
-                                                              Visibility(
-                                                                visible: indexx ==
-                                                                        startUpReadResponse[index]
-                                                                            .id
-                                                                    ? true
-                                                                    : false,
-                                                                child:
-                                                                    SmallButton(
-                                                                  title:
-                                                                      "Submit",
-                                                                  onPressed:
-                                                                      () {
-                                                                    if(files==null)return;
-                                                                    uploadFile(
-                                                                        files,
-                                                                        startUpReadResponse[index]
-                                                                            .id);
-                                                                  },
-                                                                ),
-                                                              ),
-                                                              Container(
-                                                                margin: const EdgeInsets
-                                                                    .only(
-                                                                        top:
-                                                                            10),
-                                                                child: ListView
-                                                                    .builder(
-                                                                        physics:
-                                                                            const NeverScrollableScrollPhysics(),
-                                                                        shrinkWrap:
-                                                                            true,
-                                                                        itemCount: startUpReadResponse[index]
-                                                                            .partnerFiles
-                                                                            .length,
-                                                                        itemBuilder:
-                                                                            (context,
-                                                                                count) {
-                                                                          return  StartUplistTileDetail(fileInput: startUpReadResponse[index].partnerFiles[count].fileInput, onTap: (){
-                                                                            _launchURL(startUpReadResponse[index].partnerFiles[count].image);
-                                                                          },);
-                                                                        }),
-                                                              )
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                );
-                                              },
-                                            )
-                                          : globalSessionUser.id == 1 &&
+                                          ? globalSessionUser.id == 1 &&
                                           !_isLoading &&
                                           allProjectsListResponse != null
-                                          ?  ListView.builder(
+                                          ? ListView.builder(
                                         itemCount:
                                         allProjectsListResponse.length,
                                         physics:
@@ -655,7 +522,7 @@ class _EntrepreneurState extends State<Entrepreneur> {
 
                                                         ExpansionTileDetail(Description: allProjectsListResponse[index].message,),
                                                         ButtonWithWidth(
-                                                            title: "START A CHAT",
+                                                            title: "START CHATTING",
                                                             onPressed: (){
                                                               if (globalSessionUser.usertype == "admin") {
                                                                 Navigator.pushReplacement(
@@ -755,7 +622,152 @@ class _EntrepreneurState extends State<Entrepreneur> {
                                             ),
                                           );
                                         },
-                                      ) : Column(
+                                      ) : ListView.builder(
+                                              itemCount:
+                                                  startUpReadResponse.length,
+                                              physics:
+                                                  const NeverScrollableScrollPhysics(),
+                                              shrinkWrap: true,
+                                              itemBuilder: (context, index) {
+                                                return Visibility(
+                                                  visible: isNewVisible,
+                                                  child: Container(
+                                                    margin: const EdgeInsets.only(
+                                                        bottom: 10),
+                                                    child: Column(
+                                                      children: [
+                                                        GestureDetector(
+                                                          onTap: () {
+                                                            visibility(
+                                                                startUpReadResponse[
+                                                                    index]);
+                                                          },
+                                                          child: ExpansionTile(
+                                                            collapsedTextColor:
+                                                                Colors.white,
+                                                            collapsedIconColor:
+                                                                Colors.white,
+                                                            iconColor:
+                                                                Colors.black,
+                                                            textColor:
+                                                                Colors.black,
+                                                            collapsedBackgroundColor:
+                                                                Colors.black,
+                                                            title: Text(
+                                                              startUpReadResponse[
+                                                                      index]
+                                                                  .title,
+                                                            ),
+                                                            expandedCrossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            expandedAlignment:
+                                                                Alignment
+                                                                    .centerLeft,
+                                                            children: [
+
+                                                              ExpansionTileDetail(Description: startUpReadResponse[index].message,),
+                                                              ButtonWithWidth(
+                                                                  title: "START CHATTING",
+                                                                  onPressed: (){
+                                                                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ChatPage(
+                                                                    peerNickname: startUpReadResponse[index].title,
+                                                                    peerAvatar:
+                                                                    ' ',
+                                                                    peerId: "${globalSessionUser.id}",
+                                                                    projectId: "${startUpReadResponse[index].id}",
+                                                                  )));
+                                                                  //_BottomSheet(context, globalSessionUser.id,startUpReadResponse[index].id);
+
+                                                              }, Width: MediaQuery.of(context).size.width),
+                                                              Container(
+                                                                alignment: Alignment
+                                                                    .centerLeft,
+                                                                decoration: BoxDecoration(
+                                                                    border: Border.all(
+                                                                        color: indexx ==
+                                                                                startUpReadResponse[index].id
+                                                                            ? Colors.black
+                                                                            : Colors.white)),
+                                                                child: Row(
+                                                                  children: [
+                                                                    SmallButton(
+                                                                      title:
+                                                                          'Browse',
+                                                                      onPressed:
+                                                                          () async {
+                                                                        selectFile(
+                                                                            startUpReadResponse[index].id,);
+                                                                      },
+                                                                    ),
+                                                                    Visibility(
+                                                                      visible: indexx ==
+                                                                              startUpReadResponse[index].id && FileName != ' '
+                                                                          ? true
+                                                                          : false,
+                                                                      child:
+                                                                          Container(
+                                                                        child: Text(
+                                                                            "$FileName"),
+                                                                      ),
+                                                                    )
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                              Visibility(
+                                                                visible: indexx ==
+                                                                        startUpReadResponse[index]
+                                                                            .id
+                                                                    ? true
+                                                                    : false,
+                                                                child:
+                                                                    SmallButton(
+                                                                  title:
+                                                                      "Submit",
+                                                                  onPressed:
+                                                                      () {
+                                                                    if(files==null)return;
+                                                                    uploadFile(
+                                                                        files,
+                                                                        startUpReadResponse[index]
+                                                                            .id);
+                                                                    FileName == ' ';
+                                                                    indexx == 0;
+                                                                  },
+                                                                ),
+                                                              ),
+                                                              Container(
+                                                                margin: const EdgeInsets
+                                                                    .only(
+                                                                        top:
+                                                                            10),
+                                                                child: ListView
+                                                                    .builder(
+                                                                        physics:
+                                                                            const NeverScrollableScrollPhysics(),
+                                                                        shrinkWrap:
+                                                                            true,
+                                                                        itemCount: startUpReadResponse[index]
+                                                                            .partnerFiles
+                                                                            .length,
+                                                                        itemBuilder:
+                                                                            (context,
+                                                                                count) {
+                                                                          return  StartUplistTileDetail(fileInput: startUpReadResponse[index].partnerFiles[count].fileInput, onTap: (){
+                                                                            _launchURL(startUpReadResponse[index].partnerFiles[count].image);
+                                                                          },);
+                                                                        }),
+                                                              )
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                );
+                                              },
+                                            )
+                                          : Column(
                                               children: [
                                                 NewIdeaField(titleFieldController: _titleFieldController, industryFieldController: _industryFieldController, messageFieldController: _messageFieldController, dateFieldController: _dateFieldController, onTap: (){_selectDate(context);},),
                                                 ButtonWithWidth(
@@ -880,7 +892,7 @@ class _EntrepreneurState extends State<Entrepreneur> {
                 child: Center(
                   child: CircularProgressIndicator(),
                 ),
-              )));
+              ));
   }
 
   void visibility(StartUpReadResponse startUpReadResponse) {
@@ -954,6 +966,7 @@ class _EntrepreneurState extends State<Entrepreneur> {
         .then((value) {
           setState(() {
             FileName == ' ';
+            indexx == 0;
           });
           _getStartUp();
       print(value);

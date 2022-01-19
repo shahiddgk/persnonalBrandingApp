@@ -6,17 +6,17 @@ import 'package:responsive_framework/responsive_framework.dart';
 import 'package:marquee_text/marquee_text.dart';
 
 // ignore: must_be_immutable
-class Heading1WithButton extends StatefulWidget {
+class Heading1WithButtonAndMarquee extends StatefulWidget {
   // ignore: non_constant_identifier_names
   String H1;
 
-  Heading1WithButton(this.H1);
+  Heading1WithButtonAndMarquee(this.H1);
 
   @override
-  _Heading1WithButtonState createState() => _Heading1WithButtonState();
+  _Heading1WithButtonAndMarqueeState createState() => _Heading1WithButtonAndMarqueeState();
 }
 
-class _Heading1WithButtonState extends State<Heading1WithButton> {
+class _Heading1WithButtonAndMarqueeState extends State<Heading1WithButtonAndMarquee> {
   @override
   Widget build(BuildContext context) {
     return ResponsiveWrapper.of(context).isTablet || ResponsiveWrapper.of(context).isDesktop ? Container(
@@ -25,18 +25,16 @@ class _Heading1WithButtonState extends State<Heading1WithButton> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
 
-          Container(
-              margin: EdgeInsets.only(right: 130),
-              child: const MarqueeText(
-                text: TextSpan(
-                  text: 'Success is where preparation and opportunity meet.',
-                ),
-                style: TextStyle(
-                  fontSize: 24,
-                  color: Colors.amber,
-                ),
-                speed: 30,
-              )),
+          const MarqueeText(
+            text: TextSpan(
+              text: 'Success is where preparation and opportunity meet.',
+            ),
+            style: TextStyle(
+              fontSize: 24,
+              color: Colors.amber,
+            ),
+            speed: 30,
+          ),
 
           Text(widget.H1,style: TextStyle(fontSize: 38,fontWeight: FontWeight.bold)
           ),
@@ -66,7 +64,7 @@ class _Heading1WithButtonState extends State<Heading1WithButton> {
 
             ),
           ),
-         // Button(title: "LET's START SOMETHING BIG", onPressed: (){Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>Entrepreneur()));},),
+          // Button(title: "LET's START SOMETHING BIG", onPressed: (){Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>Entrepreneur()));},),
           Container(margin:EdgeInsets.only(top: 25,bottom: 25),height: 7,width: 100,color: Colors.amber,),
         ],
       ),
@@ -76,18 +74,16 @@ class _Heading1WithButtonState extends State<Heading1WithButton> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
 
-         Container(
-             margin: EdgeInsets.only(right: 130),
-             child: const MarqueeText(
-            text: TextSpan(
-              text: 'Success is where preparation and opportunity meet.',
-            ),
-            style: TextStyle(
-              fontSize: 24,
-              color: Colors.amber,
-            ),
-            speed: 30,
-          )),
+          const MarqueeText(
+                text: TextSpan(
+                  text: 'Success is where preparation and opportunity meet.',
+                ),
+                style: TextStyle(
+                  fontSize: 24,
+                  color: Colors.amber,
+                ),
+                speed: 30,
+              ),
 
           Text(widget.H1,style: TextStyle(fontSize: 28,fontWeight: FontWeight.bold)
           ),

@@ -8,7 +8,9 @@ import 'package:personal_branding/Pages/register.dart';
 import 'package:personal_branding/drawer.dart';
 import 'package:personal_branding/utills/utils.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading1.dart';
+import 'package:personal_branding/widgets/Headings/widget_heading1_button.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading2withdescription.dart';
+import 'package:personal_branding/widgets/widget_heading1_buttons_and_marquee.dart';
 import 'package:personal_branding/widgets/widget_pictutre_professional_coaching.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
@@ -74,9 +76,7 @@ class _ProfessionalCoachingState extends State<ProfessionalCoaching> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-        onWillPop: _onWillPop,
-        child:Scaffold(
+    return Scaffold(
       appBar: AppBar(
         actions: [
           _isLoading == false
@@ -114,7 +114,7 @@ class _ProfessionalCoachingState extends State<ProfessionalCoaching> {
         title: _isLoading == false &&
             _isCheckingSession == false &&
             globalSessionUser.token != ""? Text("Welcome ${globalSessionUser.name}") : null,
-        leading: MenuWidget(),
+       // leading: MenuWidget(),
       ),
       body: SafeArea(
         child: Center(
@@ -133,7 +133,7 @@ class _ProfessionalCoachingState extends State<ProfessionalCoaching> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: <Widget>[
-                                Heading1("VEDIO GALLERY"),
+                              Heading1WithButtonAndMarquee("VEDIO GALLERY"),
                               Heading2WithDescription("JUST MY AWESOME SKILLS", "As Tony Robbins says, ““Goals are like magnets. They’ll attract the things that make them come true.”“Create a vision and never let the environment, other people’s beliefs, or the limits of what has been done in the past shape your decisions.”"),
 
                               Column(
@@ -201,7 +201,7 @@ class _ProfessionalCoachingState extends State<ProfessionalCoaching> {
           ),
         ),
       ),
-    ));
+    );
   }
 
   Future<bool> _onWillPop() async {

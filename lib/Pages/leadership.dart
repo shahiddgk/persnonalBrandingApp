@@ -1,13 +1,19 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:personal_branding/Drawer/widget_menu_widget.dart';
 import 'package:personal_branding/Pages/register.dart';
+import 'package:personal_branding/constants/firestore_constants.dart';
 import 'package:personal_branding/drawer.dart';
 import 'package:personal_branding/utills/utils.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading1.dart';
+import 'package:personal_branding/widgets/Headings/widget_heading1_button.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading2withdescription.dart';
 import 'package:personal_branding/widgets/widget_eye_with_name.dart';
+import 'package:personal_branding/widgets/widget_heading1_buttons_and_marquee.dart';
 import 'package:personal_branding/widgets/widget_percentage_bar.dart';
 import 'package:responsive_framework/responsive_wrapper.dart';
 
@@ -35,8 +41,9 @@ class _LeadershipState extends State<Leadership> {
     EyeWithName(Name: 'Practices active listening',),
     EyeWithName(Name: 'confronting conflicts',),
   ];
+  final GoogleSignIn googleSignIn = GoogleSignIn();
 
-  double percent = 90;
+  //double percent = 90;
 
   Future _checkedLogin() async {
     await getUserSession().then((value) => {
@@ -68,9 +75,7 @@ class _LeadershipState extends State<Leadership> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: _onWillPop,
-        child: Scaffold(
+    return Scaffold(
       appBar: AppBar(
         actions: [
           _isLoading == false
@@ -80,6 +85,14 @@ class _LeadershipState extends State<Leadership> {
             setState(() {
               _isLoading = true;
             });
+            // FirebaseFirestore.instance.collection(FirestoreConstants.pathUserCollection).doc("${globalSessionUser.id}").update(
+            //     {
+            //       'Token': ' '
+            //     }
+            // );
+            googleSignIn.signOut();
+            googleSignIn.disconnect();
+            FacebookAuth.i.logOut();
             logoutSessionUser().then((value) => {
               setState(() {
                 globalSessionUser = value;
@@ -108,7 +121,7 @@ class _LeadershipState extends State<Leadership> {
         title: _isLoading == false &&
             _isCheckingSession == false &&
             globalSessionUser.token != ""? Text("Welcome ${globalSessionUser.name}") : null,
-        leading: MenuWidget(),
+      //  leading: MenuWidget(),
       ),
       body: SafeArea(
         child: Center(
@@ -125,7 +138,7 @@ class _LeadershipState extends State<Leadership> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
-                  Heading1("LEADERSHIP SKILLS"),
+                  Heading1WithButtonAndMarquee("LEADERSHIP SKILLS"),
 
                   Heading2WithDescription("WHAT MAKES A GOOD LEADER","Good leaders are able to lead their team to meet goals effectively, and on time, while acknowledging individual needs. They possess the best skills relevant to the tasks at hand to manage the different personalities within the team and get everyone to work together to meet the overarching goal."),
 
@@ -164,10 +177,10 @@ class _LeadershipState extends State<Leadership> {
           ),
         ),
       ),
-    ));
+    );
   }
 
-  Future<bool> _onWillPop() async {
-    return (await Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>MainWidget(title: ' '))));
-  }
+  // Future<bool> _onWillPop() async {
+  //   return (await Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>MainWidget(title: ' '))));
+  // }
 }

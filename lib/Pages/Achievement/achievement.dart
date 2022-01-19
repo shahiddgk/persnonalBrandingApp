@@ -6,8 +6,10 @@ import 'package:personal_branding/models/response/achievement_response_list.dart
 import 'package:personal_branding/network/http_manager.dart';
 import 'package:personal_branding/utills/utils.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading1.dart';
+import 'package:personal_branding/widgets/Headings/widget_heading1_button.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading2_description_picure.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading2withdescription.dart';
+import 'package:personal_branding/widgets/widget_heading1_buttons_and_marquee.dart';
 
 import '../../drawer.dart';
 import 'achievement_picture_details.dart';
@@ -99,7 +101,7 @@ class _AchievementState extends State<Achievement> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: <Widget>[
-                            Heading1("ACHIEVEMENT"),
+                            Heading1WithButtonAndMarquee("ACHIEVEMENT"),
 
                             Heading2WithDescription("OUR PORTFOLIO","Tony’s 6 internationally best selling books, audio, video, and seminar trainings will empower you with the knowledge and tool you need to create lifelong success in life and business. More than 4 million people have attended Tony’s live seminars, and more than 50 million people from 100 countries have experienced the absolute power of his teachings, making him the #1 personal and professional development leader of all time.ypesetting industry."),
 

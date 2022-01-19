@@ -1,4 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:kf_drawer/kf_drawer.dart';
 import 'package:personal_branding/Drawer/widget_menu_widget.dart';
 import 'package:personal_branding/Pages/Achievement/achievement.dart';
@@ -7,6 +10,7 @@ import 'package:personal_branding/Pages/Future_Goals/future_goals.dart';
 import 'package:personal_branding/Pages/about.dart';
 import 'package:personal_branding/Pages/login.dart';
 import 'package:personal_branding/Pages/register.dart';
+import 'package:personal_branding/constants/firestore_constants.dart';
 import 'package:personal_branding/utills/utils.dart';
 
 
@@ -21,6 +25,7 @@ class _AboutSectionState extends State<AboutSection> with SingleTickerProviderSt
   late TabController controller;
   bool _isCheckingSession = true;
   bool _isLoading = true;
+  final GoogleSignIn googleSignIn = GoogleSignIn();
 
   @override
   void initState() {
@@ -69,6 +74,14 @@ class _AboutSectionState extends State<AboutSection> with SingleTickerProviderSt
             setState(() {
               _isLoading = true;
             });
+            // FirebaseFirestore.instance.collection(FirestoreConstants.pathUserCollection).doc("${globalSessionUser.id}").update(
+            //     {
+            //       'Token': ' '
+            //     }
+            // );
+            googleSignIn.signOut();
+            googleSignIn.disconnect();
+            FacebookAuth.i.logOut();
             logoutSessionUser().then((value) => {
               setState(() {
                 globalSessionUser = value;
@@ -97,7 +110,7 @@ class _AboutSectionState extends State<AboutSection> with SingleTickerProviderSt
         title: _isLoading == false &&
             _isCheckingSession == false &&
             globalSessionUser.token != ""? Text("Welcome ${globalSessionUser.name}") : null,
-        leading: MenuWidget(),
+        // leading: MenuWidget(),
          bottom: TabBar(
           isScrollable: true,
           controller: controller,
@@ -106,7 +119,7 @@ class _AboutSectionState extends State<AboutSection> with SingleTickerProviderSt
             Tab(text: "ABOUT",),
             Tab(text: "BIOGRAPHY",),
             Tab(text: "ACHIEVEMENT",),
-            Tab(text: "FUTURE GOALS",),
+            Tab(text: "ACTIVITIES",),
           ],),
       ),
       body: TabBarView(

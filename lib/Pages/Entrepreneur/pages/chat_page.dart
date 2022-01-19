@@ -456,9 +456,7 @@ class ChatPageState extends State<ChatPage> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-        onWillPop: _onWillPop,
-        child: Scaffold(
+    return Scaffold(
           appBar: AppBar(
             title: Text(widget.peerNickname),),
           body: Container(
@@ -472,7 +470,7 @@ class ChatPageState extends State<ChatPage> {
                       buildListMessage(),
 
                       // Sticker
-                      isShowSticker ? buildSticker() : SizedBox.shrink(),
+                     // isShowSticker ? buildSticker() : SizedBox.shrink(),
 
                       // Input content
                       buildInput(),
@@ -485,7 +483,6 @@ class ChatPageState extends State<ChatPage> {
               ],
             ),
           ),
-    )
     );
   }
 
@@ -612,32 +609,33 @@ class ChatPageState extends State<ChatPage> {
       child: Row(
         children: <Widget>[
           // Button send image
-          Material(
-            child: Container(
-              margin: EdgeInsets.symmetric(horizontal: 1),
-              child: IconButton(
-                icon: Icon(Icons.image),
-                onPressed: getImage,
-                color: ColorConstants.primaryColor,
-              ),
-            ),
-            color: Colors.white,
-          ),
-          Material(
-            child: Container(
-              margin: EdgeInsets.symmetric(horizontal: 1),
-              child: IconButton(
-                icon: Icon(Icons.face),
-                onPressed: getSticker,
-                color: ColorConstants.primaryColor,
-              ),
-            ),
-            color: Colors.white,
-          ),
+          // Material(
+          //   child: Container(
+          //     margin: EdgeInsets.symmetric(horizontal: 1),
+          //     child: IconButton(
+          //       icon: Icon(Icons.image),
+          //       onPressed: getImage,
+          //       color: ColorConstants.primaryColor,
+          //     ),
+          //   ),
+          //   color: Colors.white,
+          // ),
+          // Material(
+          //   child: Container(
+          //     margin: EdgeInsets.symmetric(horizontal: 1),
+          //     child: IconButton(
+          //       icon: Icon(Icons.face),
+          //       onPressed: getSticker,
+          //       color: ColorConstants.primaryColor,
+          //     ),
+          //   ),
+          //   color: Colors.white,
+          // ),
 
           // Edit text
           Flexible(
             child: Container(
+              margin: EdgeInsets.only(left: 10),
               child: TextField(
                 onSubmitted: (value) {
                   onSendMessage(textEditingController.text, TypeMessage.text);

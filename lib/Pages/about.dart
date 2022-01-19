@@ -6,6 +6,7 @@ import 'package:personal_branding/models/response/about_response_model.dart';
 import 'package:personal_branding/network/http_manager.dart';
 import 'package:personal_branding/utills/utils.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading1.dart';
+import 'package:personal_branding/widgets/Headings/widget_heading1_button.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading2withdescription.dart';
 import 'package:personal_branding/widgets/widget_about_section_details.dart';
 
@@ -23,6 +24,7 @@ class _AboutState extends State<About> {
   late AboutReadResponse aboutReadResponse;
   String api_response = "";
   bool _isLoading = true;
+  bool _useRtlText = false;
 
   @override
   void initState() {
@@ -56,7 +58,7 @@ class _AboutState extends State<About> {
         onWillPop: _onWillPop,
         child:Scaffold(
       // appBar: AppBar(
-      //   leading: IconButton(onPressed:  widget.onMenuPressed, icon: Icon(Icons.menu),),
+      //  // leading: IconButton(onPressed:  widget.onMenuPressed, icon: Icon(Icons.menu),),
       // ),
       body: _isLoading == false ?  SafeArea(
         child: Center(
@@ -101,7 +103,10 @@ class _AboutState extends State<About> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: <Widget>[
-                              Heading1("ABOUT"),
+
+                              Heading1WithButton("ABOUT"),
+
+                             // _buildMarquee(),
 
                               AboutSectionDetails(aboutReadResponse.name, aboutReadResponse.email, aboutReadResponse.phone, aboutReadResponse.dob, aboutReadResponse.address, aboutReadResponse.nationality),
 

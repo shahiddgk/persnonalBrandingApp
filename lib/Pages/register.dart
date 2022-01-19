@@ -57,9 +57,7 @@ class _RegisterState extends State<Register> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-        onWillPop: _onWillPop,
-        child:Scaffold(
+    return Scaffold(
       appBar: AppBar(
 
       ),
@@ -170,7 +168,7 @@ class _RegisterState extends State<Register> {
                                   onPressed: _registerUserWithFacebook,
                                 ),
                                 Divider(),
-                                ForgotPassword(title: "Forgot Password!",onPressed: () {},)
+                               // ForgotPassword(title: "Forgot Password!",onPressed: () {},)
                               ],
                             )
                           ],
@@ -182,7 +180,7 @@ class _RegisterState extends State<Register> {
               ),
         ),
       ),
-    ));
+    );
   }
 
   _registerUserWithGmail() async {

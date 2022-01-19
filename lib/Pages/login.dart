@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
@@ -45,9 +46,7 @@ class _LogInState extends State<LogIn> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-        onWillPop: _onWillPop,
-        child:Scaffold(
+    return Scaffold(
       appBar: AppBar(
         // leading: IconButton(onPressed: (){
         //   Navigator.of(context).pop();
@@ -136,7 +135,7 @@ class _LogInState extends State<LogIn> {
                                 onPressed: _registerUserWithFacebook,
                               ),
                               Divider(),
-                              ForgotPassword(title: "Forgot Password!",onPressed: () {},)
+                              //ForgotPassword(title: "Forgot Password!",onPressed: () {},)
                             ],
                           )
                         ],
@@ -149,7 +148,7 @@ class _LogInState extends State<LogIn> {
           ),
         ),
       ),
-    ));
+    );
   }
 
   _registerUserWithGmail() async {
@@ -174,16 +173,25 @@ class _LogInState extends State<LogIn> {
       HTTPManager().registerUserWithSocialAccount(SocialLoginRequest(name: name,email: googleSignInAccount.email, id: googleSignInAccount.id, provider: "google")).then((value) {
 
         sessionUserModel = value;
-        FirebaseFirestore.instance.collection(FirestoreConstants.pathUserCollection).doc("${sessionUserModel.id}").set(
-            {
-              FirestoreConstants.nickname: sessionUserModel.name,
-              FirestoreConstants.photoUrl: '',
-              FirestoreConstants.id: sessionUserModel.id,
-              'createdAt': DateTime.now().millisecondsSinceEpoch.toString(),
-              FirestoreConstants.chattingWith: null
-            });
+
         saveUserSession(value);
         print(saveUserSession(value));
+        FirebaseMessaging.instance.getToken().then((token) {
+
+          FirebaseFirestore.instance.collection(FirestoreConstants.pathUserCollection).doc("${sessionUserModel.id}").set(
+              {
+                FirestoreConstants.nickname: sessionUserModel.name,
+                FirestoreConstants.photoUrl: '',
+                FirestoreConstants.id: sessionUserModel.id,
+                'createdAt': DateTime.now().millisecondsSinceEpoch.toString(),
+                FirestoreConstants.chattingWith: null,
+                'Token' : token
+              });
+
+        }).catchError((e){
+          print(e);
+        });
+
         Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>MainWidget(title: " ")));
 
       }).catchError((e) {
@@ -218,14 +226,21 @@ class _LogInState extends State<LogIn> {
           HTTPManager().registerUserWithSocialAccount(SocialLoginRequest(name: _userObj["name"], email: _userObj["email"], id: _userObj["id"], provider: "facebook")).then((value) {
 
             sessionUserModel = value;
-            FirebaseFirestore.instance.collection(FirestoreConstants.pathUserCollection).doc("${sessionUserModel.id}").set(
-                {
-                  FirestoreConstants.nickname: sessionUserModel.name,
-                  FirestoreConstants.photoUrl: '',
-                  FirestoreConstants.id: sessionUserModel.id,
-                  'createdAt': DateTime.now().millisecondsSinceEpoch.toString(),
-                  FirestoreConstants.chattingWith: null
-                });
+            FirebaseMessaging.instance.getToken().then((token) {
+
+              FirebaseFirestore.instance.collection(FirestoreConstants.pathUserCollection).doc("${sessionUserModel.id}").set(
+                  {
+                    FirestoreConstants.nickname: sessionUserModel.name,
+                    FirestoreConstants.photoUrl: '',
+                    FirestoreConstants.id: sessionUserModel.id,
+                    'createdAt': DateTime.now().millisecondsSinceEpoch.toString(),
+                    FirestoreConstants.chattingWith: null,
+                    'Token' : token
+                  });
+
+            }).catchError((e){
+              print(e);
+            });
             saveUserSession(value);
             print(saveUserSession(value));
             Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>MainWidget(title: " ")));
@@ -256,14 +271,21 @@ class _LogInState extends State<LogIn> {
           email: _emailFieldController.text, password: _passwordFieldController.text))
           .then((value) {
         sessionUserModel = value;
-        FirebaseFirestore.instance.collection(FirestoreConstants.pathUserCollection).doc("${sessionUserModel.id}").set(
-            {
-              FirestoreConstants.nickname: sessionUserModel.name,
-              FirestoreConstants.photoUrl: '',
-              FirestoreConstants.id: sessionUserModel.id,
-              'createdAt': DateTime.now().millisecondsSinceEpoch.toString(),
-              FirestoreConstants.chattingWith: null
-            });
+        FirebaseMessaging.instance.getToken().then((token) {
+
+          FirebaseFirestore.instance.collection(FirestoreConstants.pathUserCollection).doc("${sessionUserModel.id}").set(
+              {
+                FirestoreConstants.nickname: sessionUserModel.name,
+                FirestoreConstants.photoUrl: '',
+                FirestoreConstants.id: sessionUserModel.id,
+                'createdAt': DateTime.now().millisecondsSinceEpoch.toString(),
+                FirestoreConstants.chattingWith: null,
+                'Token' : token
+              });
+
+        }).catchError((e){
+          print(e);
+        });
         saveUserSession(value);
         print(saveUserSession(value));
         Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>MainWidget(title: " ")));

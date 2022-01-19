@@ -5,7 +5,9 @@ import 'package:personal_branding/models/response/testimonials_response_list.dar
 import 'package:personal_branding/network/http_manager.dart';
 import 'package:personal_branding/utills/utils.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading1.dart';
+import 'package:personal_branding/widgets/Headings/widget_heading1_button.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading2withdescription.dart';
+import 'package:personal_branding/widgets/widget_heading1_buttons_and_marquee.dart';
 import 'package:personal_branding/widgets/widget_testimonial_picture_details.dart';
 
 import '../../drawer.dart';
@@ -59,9 +61,7 @@ class _TestimonialsState extends State<Testimonials> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-        onWillPop: _onWillPop,
-        child:Scaffold(
+    return Scaffold(
       // appBar: AppBar(
       //   leading: IconButton(onPressed:  widget.onMenuPressed, icon: Icon(Icons.menu),),
       // ),
@@ -100,7 +100,7 @@ class _TestimonialsState extends State<Testimonials> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: <Widget>[
-                            Heading1("TESTIMONIAL"),
+                            Heading1WithButtonAndMarquee("TESTIMONIAL"),
 
                             Heading2WithDescription("TRUSTED PERSONALITIES AROUND THE WORLD","Dr.Ahmed Hussein have decades of experience in Pediatrics and Neonatology. He has an outstanding track record as clinician as well as business leader. Manages three subsidiaries - Pyramids Health Services, Ability Pediatric Rehabilitation Medical Center, Pyramids Dialysis Center."),
                             // Align(alignment: Alignment.centerRight,child: TextButton(child:Text("YOUR THOUGHTS",style: TextStyle(color: Colors.grey),) ,onPressed: (){
@@ -133,7 +133,7 @@ class _TestimonialsState extends State<Testimonials> {
           child: CircularProgressIndicator(),
         ),
       )
-    ));
+    );
   }
 
   Future<bool> _onWillPop() async {

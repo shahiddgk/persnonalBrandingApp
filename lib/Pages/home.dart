@@ -59,48 +59,47 @@ class _HomeState extends State<Home> {
     return WillPopScope(
         onWillPop: _onWillPop,
         child:Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: _isLoading == false
-            && _isCheckingSession == false
-            && globalSessionUser.id != 0 ? Text("Welcome ${globalSessionUser.name}") : null,
-        leading: MenuWidget(),
-        actions: [
-           _isLoading == false
-               && _isCheckingSession == false
-               && globalSessionUser.id != 0 ?
-          IconButton(onPressed: (){
-            setState(() {
-              _isLoading = true;
-            });
-            googleSignIn.signOut();
-            googleSignIn.disconnect();
-            FacebookAuth.i.logOut();
-            logoutSessionUser().then((value) => {
-              setState(() {
-                globalSessionUser = value;
-                _isLoading = false;
-              })
-            });
-          },icon: const Icon(Icons.logout),) :
-          Row(
-            children: <Widget>[
-              Container(
-                height: 35,
-                child: TextButton(onPressed: (){Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Register()));}, child: Text("SIGN UP ",style: TextStyle(color: Colors.black),),
-                ),
-              decoration: BoxDecoration(borderRadius: BorderRadius.circular(30),border: Border.all(color: Colors.black)),),
-              const Text(" | ",style: TextStyle(color: Colors.black,fontSize: 25,fontWeight: FontWeight.bold),),
-              Container(
-                alignment: Alignment.center,
-                margin: const EdgeInsets.only(right: 5),
-                height: 35,
-                child: TextButton(onPressed: (){Navigator.of(context).push(MaterialPageRoute(builder: (context)=>LogIn()));}, child: Text("SIGN IN ",style: TextStyle(color: Colors.black),),
-                ),
-                decoration: BoxDecoration(borderRadius: BorderRadius.circular(30),border: Border.all(color: Colors.black)),),
-            ],)
-        ],
-      ),
+      // appBar: AppBar(
+      // //   title: _isLoading == false
+      // //       && _isCheckingSession == false
+      // //       && globalSessionUser.id != 0 ? Text("Welcome ${globalSessionUser.name}") : null,
+      // // //  leading: MenuWidget(),
+      // //   actions: [
+      // //      _isLoading == false
+      // //          && _isCheckingSession == false
+      // //          && globalSessionUser.id != 0 ?
+      // //     IconButton(onPressed: (){
+      // //       setState(() {
+      // //         _isLoading = true;
+      // //       });
+      // //       googleSignIn.signOut();
+      // //       googleSignIn.disconnect();
+      // //       FacebookAuth.i.logOut();
+      // //       logoutSessionUser().then((value) => {
+      // //         setState(() {
+      // //           globalSessionUser = value;
+      // //           _isLoading = false;
+      // //         })
+      // //       });
+      // //     },icon: const Icon(Icons.logout),) :
+      // //     Row(
+      // //       children: <Widget>[
+      // //         Container(
+      // //           height: 35,
+      // //           child: TextButton(onPressed: (){Navigator.of(context).push(MaterialPageRoute(builder: (context)=>Register()));}, child: Text("SIGN UP ",style: TextStyle(color: Colors.black),),
+      // //           ),
+      // //         decoration: BoxDecoration(borderRadius: BorderRadius.circular(30),border: Border.all(color: Colors.black)),),
+      // //         const Text(" | ",style: TextStyle(color: Colors.black,fontSize: 25,fontWeight: FontWeight.bold),),
+      // //         Container(
+      // //           alignment: Alignment.center,
+      // //           margin: const EdgeInsets.only(right: 5),
+      // //           height: 35,
+      // //           child: TextButton(onPressed: (){Navigator.of(context).push(MaterialPageRoute(builder: (context)=>LogIn()));}, child: Text("SIGN IN ",style: TextStyle(color: Colors.black),),
+      // //           ),
+      // //           decoration: BoxDecoration(borderRadius: BorderRadius.circular(30),border: Border.all(color: Colors.black)),),
+      // //       ],)
+      // //   ],
+      // ),
       body: Container(
         child: Stack(
           children: [

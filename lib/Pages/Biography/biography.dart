@@ -6,7 +6,9 @@ import 'package:personal_branding/models/response/biography_response_model.dart'
 import 'package:personal_branding/network/http_manager.dart';
 import 'package:personal_branding/utills/utils.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading1.dart';
+import 'package:personal_branding/widgets/Headings/widget_heading1_button.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading2_description_picure.dart';
+import 'package:personal_branding/widgets/widget_heading1_buttons_and_marquee.dart';
 
 import '../../drawer.dart';
 import '../home.dart';
@@ -116,7 +118,7 @@ class _BiographyState extends State<Biography>
                                           CrossAxisAlignment.start,
                                       mainAxisAlignment: MainAxisAlignment.start,
                                       children: <Widget>[
-                                        Heading1("BIOGRAPHY"),
+                                        Heading1WithButtonAndMarquee("BIOGRAPHY"),
 
                                     ListView.builder(
                                       physics: const NeverScrollableScrollPhysics(),

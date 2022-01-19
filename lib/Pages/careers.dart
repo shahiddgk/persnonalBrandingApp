@@ -4,7 +4,9 @@ import 'package:personal_branding/models/response/career_response_list.dart';
 import 'package:personal_branding/network/http_manager.dart';
 import 'package:personal_branding/utills/utils.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading1.dart';
+import 'package:personal_branding/widgets/Headings/widget_heading1_button.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading2withdescription.dart';
+import 'package:personal_branding/widgets/widget_heading1_buttons_and_marquee.dart';
 import 'package:personal_branding/widgets/widget_icon_with_description.dart';
 
 import '../drawer.dart';
@@ -57,9 +59,7 @@ class _CareerState extends State<Career> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-        onWillPop: _onWillPop,
-        child:Scaffold(
+    return Scaffold(
       // appBar: AppBar(
       //   leading: IconButton(onPressed:  widget.onMenuPressed, icon: Icon(Icons.menu),),
       // ),
@@ -98,7 +98,7 @@ class _CareerState extends State<Career> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: <Widget>[
-                              Heading1("CAREER"),
+                              Heading1WithButtonAndMarquee("CAREER"),
 
                               Heading2WithDescription("LET KEEP IN TOUCH","Direct all organizational operations, policies, and objectives to maximize productivity and returns.Analyze complex scenarios and use creative problem-solving to turn challenges into profitable opportunities.Interview, appoint, train, and assign responsibilities to department managers.Monitor cost-effectiveness of operations and personnel using quantitative data, offering feedback and making cuts where necessaryCoordinate and approve budgets for product development, marketing, overhead, and growth. "),
 
@@ -124,10 +124,10 @@ class _CareerState extends State<Career> {
           child: CircularProgressIndicator(),
         ),
       )
-    ));
+    );
   }
 
-  Future<bool> _onWillPop() async {
-    return (await Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>MainWidget(title: ' '))));
-  }
+  // Future<bool> _onWillPop() async {
+  //   return (await Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>MainWidget(title: ' '))));
+  // }
 }
