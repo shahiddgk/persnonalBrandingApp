@@ -525,7 +525,7 @@ class _EntrepreneurState extends State<Entrepreneur> {
                                                             title: "START CHATTING",
                                                             onPressed: (){
                                                               if (globalSessionUser.usertype == "admin") {
-                                                                Navigator.pushReplacement(
+                                                                Navigator.push(
                                                                   context,
                                                                   MaterialPageRoute(builder: (context) => ChatPage(
                                                                     peerId: "${allProjectsListResponse[index].userId}",

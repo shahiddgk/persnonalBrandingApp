@@ -13,6 +13,8 @@ import 'package:personal_branding/Pages/register.dart';
 import 'package:personal_branding/constants/firestore_constants.dart';
 import 'package:personal_branding/utills/utils.dart';
 
+import 'buisnesses.dart';
+
 
 // ignore: must_be_immutable
 class AboutSection extends KFDrawerContent {
@@ -119,7 +121,7 @@ class _AboutSectionState extends State<AboutSection> with SingleTickerProviderSt
             Tab(text: "ABOUT",),
             Tab(text: "BIOGRAPHY",),
             Tab(text: "ACHIEVEMENT",),
-            Tab(text: "ACTIVITIES",),
+            Tab(text: "BUSINESSES",),
           ],),
       ),
       body: TabBarView(
@@ -128,7 +130,7 @@ class _AboutSectionState extends State<AboutSection> with SingleTickerProviderSt
           About(),
           Biography(),
         Achievement(),
-        FutureGoals(),
+          Businesses(),
         // Achievement(),
       ],
       )

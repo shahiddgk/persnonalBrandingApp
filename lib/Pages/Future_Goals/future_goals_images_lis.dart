@@ -2,17 +2,17 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class BiographyImagesList extends StatefulWidget {
+class FutureGoalsImagesList extends StatefulWidget {
 
   dynamic urlImages ;
 
-  BiographyImagesList(this.urlImages);
+  FutureGoalsImagesList(this.urlImages);
 
   @override
-  _BiographyImagesListState createState() => _BiographyImagesListState();
+  _FutureGoalsImagesListState createState() => _FutureGoalsImagesListState();
 }
 
-class _BiographyImagesListState extends State<BiographyImagesList> {
+class _FutureGoalsImagesListState extends State<FutureGoalsImagesList> {
 
   int activeIndex = 0;
 
@@ -46,7 +46,7 @@ class _BiographyImagesListState extends State<BiographyImagesList> {
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(image: DecorationImage(
-            image: NetworkImage(widget.urlImages[index].img),
+          image: NetworkImage(widget.urlImages[index].img),
         )
         ),
         child: Column(

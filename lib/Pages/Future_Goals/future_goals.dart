@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kf_drawer/kf_drawer.dart';
+import 'package:personal_branding/Pages/Future_Goals/future_goals_images_lis.dart';
+import 'package:personal_branding/Pages/Future_Goals/future_goals_vedio_screen.dart';
 import 'package:personal_branding/models/response/future_goals_response_list.dart';
 import 'package:personal_branding/network/http_manager.dart';
 import 'package:personal_branding/utills/utils.dart';
@@ -98,7 +100,7 @@ class _FutureGoalsState extends State<FutureGoals> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: <Widget>[
-                            Heading1WithButtonAndMarquee("FUN & ACTIVITIES"),
+                            Heading1WithButtonAndMarquee("FUN & ACTIVITIES","Stop chasing the money and start chasing the passion."),
 
                            // Heading2WithDescription("OUR PORTFOLIO","Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."),
 
@@ -114,7 +116,20 @@ class _FutureGoalsState extends State<FutureGoals> {
                                       },
                                       child: Container(
                                         width: MediaQuery.of(context).size.width,
-                                        child: Heading2WithDescriptionWiithImage(futureGoalsReadResponse[index].title, futureGoalsReadResponse[index].body, futureGoalsReadResponse[index].images.length>0?futureGoalsReadResponse[index].cover:"",() {
+                                        child: Heading2WithDescriptionWiithImage(futureGoalsReadResponse[index].title, futureGoalsReadResponse[index].body, futureGoalsReadResponse[index].images.length>0?futureGoalsReadResponse[index].cover:" ",() {
+                                          futureGoalsReadResponse[
+                                          index].images != [] ?
+                                          Navigator.of(context).push(MaterialPageRoute(builder: (context)=>FutureGoalsImagesList(futureGoalsReadResponse[index]
+                                              .images
+                                              .length >
+                                              0
+                                              ? futureGoalsReadResponse[
+                                          index].images
+                                              : [],))) : Navigator.of(context).push(MaterialPageRoute(builder: (context)=>FutureGoalsVedioList(futureGoalsReadResponse[index]
+                                              .video!=''
+                                              ? futureGoalsReadResponse[
+                                          index].video
+                                              : '',)));
 
                                         }),
                                       ),

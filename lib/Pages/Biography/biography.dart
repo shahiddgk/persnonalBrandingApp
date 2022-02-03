@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:kf_drawer/kf_drawer.dart';
 import 'package:personal_branding/Pages/Biography/biography_images_list.dart';
+import 'package:personal_branding/Pages/Biography/biography_vedio_list.dart';
 import 'package:personal_branding/Pages/Biography/picture_detail.dart';
 import 'package:personal_branding/models/response/biography_response_model.dart';
 import 'package:personal_branding/network/http_manager.dart';
 import 'package:personal_branding/utills/utils.dart';
+import 'package:personal_branding/widgets/Headings/widget_biography_headings.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading1.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading1_button.dart';
+import 'package:personal_branding/widgets/Headings/widget_heading2.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading2_description_picure.dart';
+import 'package:personal_branding/widgets/widget_biography_bullet_points.dart';
 import 'package:personal_branding/widgets/widget_heading1_buttons_and_marquee.dart';
+import 'package:responsive_framework/responsive_wrapper.dart';
 
 import '../../drawer.dart';
 import '../home.dart';
@@ -33,7 +38,7 @@ class _BiographyState extends State<Biography>
     // TODO: implement initState
     super.initState();
 
-    _getBiographyList();
+   //_getBiographyList();
   }
 
   _getBiographyList() {
@@ -71,8 +76,7 @@ class _BiographyState extends State<Biography>
         //       Tab(text: "FUTURE\n GOALS",),
         //     ],),
         // ),
-        body: _isLoading == false
-            ? SafeArea(
+        body: SafeArea(
                 child: Center(
                   child: Column(
                     children: <Widget>[
@@ -118,50 +122,81 @@ class _BiographyState extends State<Biography>
                                           CrossAxisAlignment.start,
                                       mainAxisAlignment: MainAxisAlignment.start,
                                       children: <Widget>[
-                                        Heading1WithButtonAndMarquee("BIOGRAPHY"),
+                                        Heading1WithButtonAndMarquee("BIOGRAPHY","It is better to fail in originality than to succeed in imitation."),
+                                        
+                                        Heading2("Dr.Ahmed's Biography"),
 
-                                    ListView.builder(
-                                      physics: const NeverScrollableScrollPhysics(),
-                                            itemCount:
-                                                biographyReadResponse.length,
-                                            shrinkWrap: true,
-                                            itemBuilder: (context, index) {
-                                              return GestureDetector(
-                                                onTap: () {
-                                                  // Navigator.of(context).push(
-                                                  //     MaterialPageRoute(
-                                                  //         builder: (context) =>
-                                                  //             PictureDetails()));
-                                                },
-                                                child: Container(
-                                                  width: MediaQuery.of(context)
-                                                      .size
-                                                      .width,
-                                                  child: Heading2WithDescriptionWiithImage(
-                                                      biographyReadResponse[index]
-                                                          .title,
-                                                      biographyReadResponse[index]
-                                                          .body,
-                                                      biographyReadResponse[index]
-                                                                  .images
-                                                                  .length >
-                                                              0
-                                                          ? biographyReadResponse[
-                                                                  index].cover
-                                                          : "",
-                                                      () {
-                                                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>BiographyImagesList(biographyReadResponse[index]
-                                                            .images
-                                                            .length >
-                                                            0
-                                                            ? biographyReadResponse[
-                                                        index].images
-                                                            : [],)));
-                                                      }),
-                                                ),
-                                              );
-                                            },
-                                        ),
+                                        BiographyHeadings(BiographyHeading: "Dr.Ahmed In Short (Competencies and Accomplishments)",),
+
+                                        BiographyBulletoints(Point: "Academic and Teaching",),
+                                        BiographyBulletoints(Point: "Licensed Consultant - DOH",),
+                                        BiographyBulletoints(Point: "Publication & Med Research",),
+                                        BiographyBulletoints(Point: "Networking",),
+                                        BiographyBulletoints(Point: "Leadership",),
+                                        BiographyBulletoints(Point: "Business Owner (UAE & Others)",),
+                                    
+                                        BiographyHeadings(BiographyHeading: "MBBS (Egypt), DCH (UK), MRCP (Ireland)"),
+                                        BiographyBulletoints(Point: "Managing Director of Hayat Health"),
+                                        BiographyBulletoints(Point: "Consultant Pediatrician and Neonatologist"),
+                                        BiographyBulletoints(Point: "Member of Royal College of Physicians (Ireland)"),
+                                        BiographyBulletoints(Point: "Chairman of Abu Dhabi Pediatric Club (638 Members)"),
+                                        BiographyBulletoints(Point: "Daman’s Second Opinion Physician for Home care"),
+
+                                        BiographyHeadings(BiographyHeading: "Clinician"),
+                                        BiographyBulletoints(Point: "MRCP Member of the Royal College of Physician in Ireland, since 1992"),
+                                        BiographyBulletoints(Point: "Post graduate Qualification and Training in UK & Ireland (1986 onwards)"),
+                                        BiographyBulletoints(Point: "Early adopter of new specialization “Neonatology” in 1988 (Dublin)"),
+                                        BiographyBulletoints(Point: "Clinical Achievement of VLBW (Very Low Birth Weight) baby of 450 grams, who is now an engineer."),
+                                        BiographyBulletoints(Point: "Currently, Senior Consultant Pediatric & Neonatology (Valid License)."),
+
+                                    // ListView.builder(
+                                    //   physics: const NeverScrollableScrollPhysics(),
+                                    //         itemCount:
+                                    //             biographyReadResponse.length,
+                                    //         shrinkWrap: true,
+                                    //         itemBuilder: (context, index) {
+                                    //           return GestureDetector(
+                                    //             onTap: () {
+                                    //               // Navigator.of(context).push(
+                                    //               //     MaterialPageRoute(
+                                    //               //         builder: (context) =>
+                                    //               //             PictureDetails()));
+                                    //             },
+                                    //             child: Container(
+                                    //               width: MediaQuery.of(context)
+                                    //                   .size
+                                    //                   .width,
+                                    //               child: Heading2WithDescriptionWiithImage(
+                                    //                   biographyReadResponse[index]
+                                    //                       .title,
+                                    //                   biographyReadResponse[index]
+                                    //                       .body,
+                                    //                   biographyReadResponse[index]
+                                    //                               .images
+                                    //                               .length >
+                                    //                           0
+                                    //                       ? biographyReadResponse[
+                                    //                               index].cover
+                                    //                       : "",
+                                    //                   () {
+                                    //                     biographyReadResponse[
+                                    //                     index].images != [] ?
+                                    //                     Navigator.of(context).push(MaterialPageRoute(builder: (context)=>BiographyImagesList(biographyReadResponse[index]
+                                    //                         .images
+                                    //                         .length >
+                                    //                         0
+                                    //                         ? biographyReadResponse[
+                                    //                     index].images
+                                    //                         : [],))) : Navigator.of(context).push(MaterialPageRoute(builder: (context)=>BiographyVedioList(biographyReadResponse[index]
+                                    //                         .video!=''
+                                    //                         ? biographyReadResponse[
+                                    //                     index].video
+                                    //                         : '',)));
+                                    //                   }),
+                                    //             ),
+                                    //           );
+                                    //         },
+                                    //     ),
                                       ],
                                     ),
                                 ),
@@ -172,11 +207,6 @@ class _BiographyState extends State<Biography>
                       ),
                     ],
                   ),
-                ),
-              )
-            : Container(
-                child: const Center(
-                  child: CircularProgressIndicator(),
                 ),
               )));
   }

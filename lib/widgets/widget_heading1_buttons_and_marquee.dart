@@ -10,7 +10,9 @@ class Heading1WithButtonAndMarquee extends StatefulWidget {
   // ignore: non_constant_identifier_names
   String H1;
 
-  Heading1WithButtonAndMarquee(this.H1);
+  String MarqueeText;
+
+  Heading1WithButtonAndMarquee(this.H1,this.MarqueeText);
 
   @override
   _Heading1WithButtonAndMarqueeState createState() => _Heading1WithButtonAndMarqueeState();
@@ -25,16 +27,17 @@ class _Heading1WithButtonAndMarqueeState extends State<Heading1WithButtonAndMarq
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
 
-          const MarqueeText(
-            text: TextSpan(
-              text: 'Success is where preparation and opportunity meet.',
-            ),
-            style: TextStyle(
-              fontSize: 24,
-              color: Colors.amber,
-            ),
-            speed: 30,
-          ),
+          //  MarqueeText(
+          //    alwaysScroll: true,
+          //   text: TextSpan(
+          //     text: widget.MarqueeText,
+          //   ),
+          //   style: TextStyle(
+          //     fontSize: 24,
+          //     color: Colors.amber,
+          //   ),
+          //   speed: 30,
+          // ),
 
           Text(widget.H1,style: TextStyle(fontSize: 38,fontWeight: FontWeight.bold)
           ),
@@ -53,7 +56,7 @@ class _Heading1WithButtonAndMarqueeState extends State<Heading1WithButtonAndMarq
                   borderRadius: BorderRadius.circular(12), // <-- Radius
                 ),
               ),
-              child: const Text("LET'S START SOMETHING BIG",
+              child: const Text("TURN IDEA INTO BUISNESS",
                 style: TextStyle(
                   fontSize: 10,
                   color: Colors.black,
@@ -74,16 +77,17 @@ class _Heading1WithButtonAndMarqueeState extends State<Heading1WithButtonAndMarq
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
 
-          const MarqueeText(
-                text: TextSpan(
-                  text: 'Success is where preparation and opportunity meet.',
-                ),
-                style: TextStyle(
-                  fontSize: 24,
-                  color: Colors.amber,
-                ),
-                speed: 30,
-              ),
+           // MarqueeText(
+           //   alwaysScroll: true,
+           //      text: TextSpan(
+           //        text: widget.MarqueeText,
+           //      ),
+           //      style: TextStyle(
+           //        fontSize: 24,
+           //        color: Colors.amber,
+           //      ),
+           //      speed: 30,
+           //    ),
 
           Text(widget.H1,style: TextStyle(fontSize: 28,fontWeight: FontWeight.bold)
           ),
@@ -98,7 +102,7 @@ class _Heading1WithButtonAndMarqueeState extends State<Heading1WithButtonAndMarq
                   borderRadius: BorderRadius.circular(12), // <-- Radius
                 ),
               ),
-              child: const Text("LET'S START SOMETHING BIG",
+              child: const Text("TURN IDEA INTO BUISNESS",
                 style: TextStyle(
                   fontSize: 10,
                   color: Colors.black,

@@ -233,16 +233,17 @@ class _MainWidgetState extends State<MainWidget> with TickerProviderStateMixin {
                   Navigator.of(context).pop();
                   Navigator.of(context).push(MaterialPageRoute(builder: (context) => Entrepreneur()));
                 }, content:const Text("START UP",style: TextStyle(color: Colors.white),)),
-                // MLMenuItem(onClick: (){
-                //   Navigator.of(context).pop();
-                //   Navigator.of(context).push(MaterialPageRoute(builder: (context) => ProfessionalCoaching()));
-                // }, content:const Text("VEDIO GAllERY",style: TextStyle(color: Colors.white),)),
+                MLMenuItem(onClick: (){
+                  Navigator.of(context).pop();
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => ProfessionalCoaching()));
+                }, content:const Text("GAllERY",style: TextStyle(color: Colors.white),)),
                 MLMenuItem(onClick: (){
                   Navigator.of(context).pop();
                   Navigator.of(context).push(MaterialPageRoute(builder: (context) => Contacts()));
-                }, content:const Text("CONTACTS",style: TextStyle(color: Colors.white),)),
+                }, content:const Text("CONTACT",style: TextStyle(color: Colors.white),)),
               ],),
           appBar: AppBar(
+            centerTitle: true,
               title: _isLoading == false
                   && _isCheckingSession == false
                   && globalSessionUser.id != 0 ? Text("Welcome ${globalSessionUser.name}") : null,

@@ -9,29 +9,32 @@ import 'package:personal_branding/widgets/Headings/widget_heading1.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading1_button.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading2withdescription.dart';
 import 'package:personal_branding/widgets/widget_biography_bullet_points.dart';
+import 'package:personal_branding/widgets/widget_buisness_image.dart';
 import 'package:personal_branding/widgets/widget_heading1_buttons_and_marquee.dart';
-import 'package:personal_branding/widgets/widget_leadership.dart';
 import 'package:personal_branding/widgets/widget_testimonial_picture_details.dart';
 
 import '../../drawer.dart';
 
 // ignore: must_be_immutable
-class Achievement extends KFDrawerContent {
+class Businesses extends KFDrawerContent {
 
 
   @override
-  _AchievementState createState() => _AchievementState();
+  _BusinessesState createState() => _BusinessesState();
 }
 
-class _AchievementState extends State<Achievement> {
+class _BusinessesState extends State<Businesses> {
   TextEditingController _organizatonController = new TextEditingController();
   TextEditingController _targetIndustryController = new TextEditingController();
   TextEditingController _messageController = new TextEditingController();
 
   late List<TestimonialsReadResponse> testimonialsReadResponse;
+  List <IconData>IconsList = [FontAwesomeIcons.paperPlane,FontAwesomeIcons.briefcase,FontAwesomeIcons.hospital,FontAwesomeIcons.shieldAlt,FontAwesomeIcons.arrowsAlt,FontAwesomeIcons.industry,FontAwesomeIcons.addressBook,FontAwesomeIcons.ambulance,FontAwesomeIcons.archive,FontAwesomeIcons.blog];
+
 
   String api_response = "";
   bool _isLoading = true;
+  bool _isLoadingData = true;
 
 
   @override
@@ -39,7 +42,7 @@ class _AchievementState extends State<Achievement> {
     // TODO: implement initState
     super.initState();
 
-   // _getTestimonialsList();
+    //_getTestimonialsList();
   }
 
 
@@ -62,15 +65,13 @@ class _AchievementState extends State<Achievement> {
     });
   }
 
-  List <IconData>IconsList = [FontAwesomeIcons.arrowsAlt,FontAwesomeIcons.paperPlane,FontAwesomeIcons.briefcase,FontAwesomeIcons.hospital,FontAwesomeIcons.shieldAlt,FontAwesomeIcons.industry,FontAwesomeIcons.addressBook,FontAwesomeIcons.ambulance,FontAwesomeIcons.archive,FontAwesomeIcons.blog];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       // appBar: AppBar(
       //   leading: IconButton(onPressed:  widget.onMenuPressed, icon: Icon(Icons.menu),),
       // ),
-        body:SafeArea(
+        body: SafeArea(
           child: Center(
             child: Column(
               children: <Widget>[
@@ -105,49 +106,41 @@ class _AchievementState extends State<Achievement> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: <Widget>[
-                              Heading1WithButtonAndMarquee("ACADEMIC ACHIEVEMENTS","The way to get started is to quit talking and begin doing."),
+                              Heading1WithButtonAndMarquee("Businesses Outside UAE","The way to get started is to quit talking and begin doing."),
 
                               //Heading2WithDescription("TRUSTED PERSONALITIES AROUND THE WORLD","Dr.Ahmed Hussein have decades of experience in Pediatrics and Neonatology. He has an outstanding track record as clinician as well as business leader. Manages three subsidiaries - Pyramids Health Services, Ability Pediatric Rehabilitation Medical Center, Pyramids Dialysis Center."),
                               // Align(alignment: Alignment.centerRight,child: TextButton(child:Text("YOUR THOUGHTS",style: TextStyle(color: Colors.grey),) ,onPressed: (){
                               //   Navigator.push(context, MaterialPageRoute(builder: (context)=>NewIdea()));
                               // },)),
 
-                              LeadershipIconsWithDetail(IconsList[0], "Chairman of Pediatric Club KSA, 420 Members 185-1992", "KSA & EGYPT",Column(
-                                children: [
-                                  BiographyBulletoints(Point:"Chairman of Pediatric Club KSA, 420 Members (1985-1992)."),
-                                  BiographyBulletoints(Point: "Chairman of Pediatric Assembly KSA, 115 Members (1985-1992)"),
-                                  BiographyBulletoints(Point: "Member of the Scientific Committee of Alexandria Pediatric Club (1998-2000)"),
-                                  BiographyBulletoints(Point: "Member of (SPA) Saudi Pediatric Association 1985 – 2002")
-                                ],
-                              )),
+                              buisnessPictureDetails("https://dr.ratedsolution.com/public/images/egypt.png", "Founder & CEO Projects in pipeline", "Egypt", Column(children: [
+                                BiographyBulletoints(Point:  "Founder and CEO of TIBA Hospital  (the first Specialized Hospital in Alexandria for Pediatric & Obstetrics) 1998 – 2001.",),
+                                BiographyBulletoints(Point:  " Industry of Real-estate Development (Talent, One and Sharm Henaish).",),
+                                BiographyBulletoints(Point:  " In Partnership with ORA  (owned by Najeeb Saweeris) to develop 560 Acre in the Northern Cost of Egypt.",),
+                                BiographyBulletoints(Point:  "Home care,Nursing Home, Health Care Projects in the Pipe-line ",),
+                              ],)),
 
-                              LeadershipIconsWithDetail(IconsList[1], "Member of (EMA) Emirates Medical Association) since 2005 2005 -Present", "UAE",Column(
-                                children: [
-                                  BiographyBulletoints(Point:"Chairman of Pediatric Club UAE, 638 Members (2006 to date)"),
-                                  BiographyBulletoints(Point: "Teaching Activities (some of my students are now Consultant Pediatricians)"),
-                                  BiographyBulletoints(Point: "International Speaker in pediatrics."),
-                                  BiographyBulletoints(Point: "Chairperson of the “Arab Pediatric Congress” – APC, 2015 to date"),
-                                  BiographyBulletoints(Point: "Member of (EMA) Emirates Medical Association) since 2005")
-                                ],
-                              )),
+                              buisnessPictureDetails("https://dr.ratedsolution.com/public/images/ksa.png", "Home Care Project Future Plan", "Kingdom Of Saudi Arabia", Column(children: [
+                                BiographyBulletoints(Point:  "Established a Home care Project  in KSA (Sada El Reaya) but was sold out in 2019. We plan to start it again with Hayat Health",),
 
-                              LeadershipIconsWithDetail(IconsList[2], "Researcher 1989 -1991", "Publication &  Research",Column(
-                                children: [
-                                  BiographyBulletoints(Point:"Publications: 1986 First Edition “1100 MCQs in Pediatrics” (750 Pages)"),
-                                  BiographyBulletoints(Point: "Research work in Pediatric"),
-                                  BiographyBulletoints(Point: "Anemia in children (1989), Dr. John O'Connell et al"),
-                                  BiographyBulletoints(Point: "IQ in the children of the Arab culture in (1991)"),
-                                ],
-                              )),
+                              ],)),
+
+                              buisnessPictureDetails("https://dr.ratedsolution.com/public/images/moroco.png", "Shareholder", "Morocco", Column(children: [
+                                BiographyBulletoints(Point:  "Health care General Hospital – 20-bedded ",),
+                                BiographyBulletoints(Point:  "Insurance Medical and General",),
+                                BiographyBulletoints(Point:  "Education  British School (Nursery to secondary),Business School (Canadian Universities affiliation)",),
+
+                              ],)),
 
                               // ListView.builder(
                               //   shrinkWrap: true,
                               //   physics: const NeverScrollableScrollPhysics(),
                               //   itemCount: testimonialsReadResponse.length,
                               //   itemBuilder: (context,index) {
-                              //     return testimonialPictureDetails(IconsList[index], testimonialsReadResponse[index].profession, testimonialsReadResponse[index].companyName, testimonialsReadResponse[index].description);
+                              //     return testimonialPictureDetails(testimonialsReadResponse[index].image, testimonialsReadResponse[index].profession, testimonialsReadResponse[index].companyName, testimonialsReadResponse[index].description);
                               //   },
                               // )
+
                               //   testimonialPictureDetails("https://branding.ratedsolution.com/public/images/20211127071232.png", "SENIOR DESIGNER", "Sophia Antipolis innovative ecosystem", "Lorem Ipsum is simply dummy text of the printing and typesetting industry"),
                               //   testimonialPictureDetails("https://branding.ratedsolution.com/public/images/20211127071232.png", "SENIOR DESIGNER", "Sophia Antipolis innovative ecosystem", "Lorem Ipsum is simply dummy text of the printing and typesetting industry"),
                             ],

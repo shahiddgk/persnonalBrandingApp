@@ -98,18 +98,30 @@ class _CareerState extends State<Career> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: <Widget>[
-                              Heading1WithButtonAndMarquee("CAREER"),
+                              Heading1WithButtonAndMarquee("CAREER","Opportunities don't happen. You create them."),
 
                               Heading2WithDescription("LET KEEP IN TOUCH","Direct all organizational operations, policies, and objectives to maximize productivity and returns.Analyze complex scenarios and use creative problem-solving to turn challenges into profitable opportunities.Interview, appoint, train, and assign responsibilities to department managers.Monitor cost-effectiveness of operations and personnel using quantitative data, offering feedback and making cuts where necessaryCoordinate and approve budgets for product development, marketing, overhead, and growth. "),
 
-                              ListView.builder(
+                              careerReadResponse == [] ? ListView.builder(
                                 shrinkWrap: true,
                                 physics: const NeverScrollableScrollPhysics(),
                                 itemCount: careerReadResponse.length,
                                 itemBuilder: (context,index) {
                                   return IconDescription(careerReadResponse[index].image,careerReadResponse[index].profession,careerReadResponse[index].companyName,careerReadResponse[index].duration,careerReadResponse[index].description);
                                 },
+                              ) : Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    margin: const EdgeInsets.only(top: 15,bottom: 10),
+                                    width: MediaQuery.of(context).size.width,
+                                    height: 2,
+                                    color: Colors.grey,),
+                                  const Text("No Vacancies Available!"),
+                                ],
                               )
+
                             ],
                           ),),)
                     ],

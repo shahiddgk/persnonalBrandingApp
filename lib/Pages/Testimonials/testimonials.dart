@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kf_drawer/kf_drawer.dart';
 import 'package:personal_branding/Pages/Testimonials/new_idea.dart';
 import 'package:personal_branding/models/response/testimonials_response_list.dart';
@@ -26,6 +27,8 @@ class _TestimonialsState extends State<Testimonials> {
   TextEditingController _messageController = new TextEditingController();
 
   late List<TestimonialsReadResponse> testimonialsReadResponse;
+  List <IconData>IconsList = [FontAwesomeIcons.paperPlane,FontAwesomeIcons.briefcase,FontAwesomeIcons.hospital,FontAwesomeIcons.shieldAlt,FontAwesomeIcons.arrowsAlt,FontAwesomeIcons.industry,FontAwesomeIcons.addressBook,FontAwesomeIcons.ambulance,FontAwesomeIcons.archive,FontAwesomeIcons.blog];
+
 
   String api_response = "";
   bool _isLoading = true;
@@ -100,7 +103,7 @@ class _TestimonialsState extends State<Testimonials> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: <Widget>[
-                            Heading1WithButtonAndMarquee("TESTIMONIAL"),
+                            Heading1WithButtonAndMarquee("TESTIMONIAL","The way to get started is to quit talking and begin doing."),
 
                             Heading2WithDescription("TRUSTED PERSONALITIES AROUND THE WORLD","Dr.Ahmed Hussein have decades of experience in Pediatrics and Neonatology. He has an outstanding track record as clinician as well as business leader. Manages three subsidiaries - Pyramids Health Services, Ability Pediatric Rehabilitation Medical Center, Pyramids Dialysis Center."),
                             // Align(alignment: Alignment.centerRight,child: TextButton(child:Text("YOUR THOUGHTS",style: TextStyle(color: Colors.grey),) ,onPressed: (){

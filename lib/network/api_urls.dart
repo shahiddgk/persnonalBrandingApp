@@ -21,6 +21,8 @@ class ApplicationURLs{
   // ignore: constant_identifier_names
   static const API_ACHIEVEMENT = BASE_URL + "achievements";
   // ignore: constant_identifier_names
+  static const API_GALLERY = BASE_URL + "gallery";
+  // ignore: constant_identifier_names
   static const API_FUTURE_GOALS = BASE_URL + "futuregoals";
 
   // ignore: constant_identifier_names

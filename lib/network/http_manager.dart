@@ -14,6 +14,7 @@ import 'package:personal_branding/models/response/biography_response_model.dart'
 import 'package:personal_branding/models/response/career_response_list.dart';
 import 'package:personal_branding/models/response/experience_response_list.dart';
 import 'package:personal_branding/models/response/future_goals_response_list.dart';
+import 'package:personal_branding/models/response/gallery_resaponse_model.dart';
 import 'package:personal_branding/models/response/general_response_model.dart';
 import 'package:personal_branding/models/response/session_user_model.dart';
 import 'package:personal_branding/models/response/start_up_save_response.dart';
@@ -86,6 +87,16 @@ class HTTPManager {
     ExperienceListResponse experienceListResponse =
     ExperienceListResponse.fromJson(response.data);
     return experienceListResponse.experienceList;
+  }
+
+  // ignore: non_constant_identifier_names
+  Future<List<GalleryReadResponse>> Gallery() async {
+    final url = ApplicationURLs.API_GALLERY;
+
+    final GeneralResponseModel response = await _handler.get(url, true);
+    GalleryListResponse galleryListResponse =
+    GalleryListResponse.fromJson(response.data);
+    return galleryListResponse.galleryList;
   }
 
   Future<List<TestimonialsReadResponse>> Testimonials() async {

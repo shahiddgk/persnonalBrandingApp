@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
@@ -203,16 +204,30 @@ class _RegisterState extends State<Register> {
       HTTPManager().registerUserWithSocialAccount(SocialLoginRequest(name: googleSignInAccount.displayName!,email: googleSignInAccount.email, id: googleSignInAccount.id, provider: "google")).then((value) {
 
         sessionUserModel = value;
-        FirebaseFirestore.instance.collection(FirestoreConstants.pathUserCollection).doc("${sessionUserModel.id}").set(
-            {
-              FirestoreConstants.nickname: sessionUserModel.name,
-              FirestoreConstants.photoUrl: '',
-              FirestoreConstants.id: sessionUserModel.id,
-              'createdAt': DateTime.now().millisecondsSinceEpoch.toString(),
-              FirestoreConstants.chattingWith: null
-            });
         saveUserSession(value);
         print(saveUserSession(value));
+        FirebaseMessaging.instance.getToken().then((token) {
+          FirebaseFirestore.instance.collection(FirestoreConstants.pathUserCollection).doc("${sessionUserModel.id}").set(
+              {
+                FirestoreConstants.nickname: sessionUserModel.name,
+                FirestoreConstants.photoUrl: '',
+                FirestoreConstants.id: sessionUserModel.id,
+                'createdAt': DateTime.now().millisecondsSinceEpoch.toString(),
+                FirestoreConstants.chattingWith: null,
+                'Token' : token
+              });
+        }).catchError((e){
+          print(e);
+        });
+
+        // FirebaseFirestore.instance.collection(FirestoreConstants.pathUserCollection).doc("${sessionUserModel.id}").set(
+        //     {
+        //       FirestoreConstants.nickname: sessionUserModel.name,
+        //       FirestoreConstants.photoUrl: '',
+        //       FirestoreConstants.id: sessionUserModel.id,
+        //       'createdAt': DateTime.now().millisecondsSinceEpoch.toString(),
+        //       FirestoreConstants.chattingWith: null
+        //     });
         Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>MainWidget(title: " ")));
 
       }).catchError((e) {
@@ -246,16 +261,25 @@ class _RegisterState extends State<Register> {
           HTTPManager().registerUserWithSocialAccount(SocialLoginRequest(name: _userObj["name"], email: _userObj["email"], id: _userObj["id"], provider: "facebook")).then((value) {
 
             sessionUserModel = value;
-            FirebaseFirestore.instance.collection(FirestoreConstants.pathUserCollection).doc("${sessionUserModel.id}").set(
-                {
-                  FirestoreConstants.nickname: sessionUserModel.name,
-                  FirestoreConstants.photoUrl: '',
-                  FirestoreConstants.id: sessionUserModel.id,
-                  'createdAt': DateTime.now().millisecondsSinceEpoch.toString(),
-                  FirestoreConstants.chattingWith: null
-                });
+
             saveUserSession(value);
             print(saveUserSession(value));
+
+            FirebaseMessaging.instance.getToken().then((token) {
+
+              FirebaseFirestore.instance.collection(FirestoreConstants.pathUserCollection).doc("${sessionUserModel.id}").set(
+                  {
+                    FirestoreConstants.nickname: sessionUserModel.name,
+                    FirestoreConstants.photoUrl: '',
+                    FirestoreConstants.id: sessionUserModel.id,
+                    'createdAt': DateTime.now().millisecondsSinceEpoch.toString(),
+                    FirestoreConstants.chattingWith: null,
+                    'Token' : token
+                  });
+
+            }).catchError((e){
+              print(e);
+            });
             Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>MainWidget(title: " ")));
 
           }).catchError((e) {
@@ -267,8 +291,6 @@ class _RegisterState extends State<Register> {
               _registerUserWithFacebook();
             });
           });
-
-
         });
       });
     });

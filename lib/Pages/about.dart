@@ -7,8 +7,11 @@ import 'package:personal_branding/network/http_manager.dart';
 import 'package:personal_branding/utills/utils.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading1.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading1_button.dart';
+import 'package:personal_branding/widgets/Headings/widget_heading2.dart';
 import 'package:personal_branding/widgets/Headings/widget_heading2withdescription.dart';
 import 'package:personal_branding/widgets/widget_about_section_details.dart';
+import 'package:personal_branding/widgets/widget_biography_bullet_points.dart';
+import 'package:responsive_framework/responsive_wrapper.dart';
 
 import '../drawer.dart';
 
@@ -104,16 +107,39 @@ class _AboutState extends State<About> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: <Widget>[
 
-                              Heading1WithButton("ABOUT"),
+                              Heading2("DR.AHMED HUSSEIN"),
+                             Container(
+                               margin:const EdgeInsets.only(top: 20,bottom: 10),
+                               child:  ResponsiveWrapper.of(context).isTablet || ResponsiveWrapper.of(context).isDesktop ? Text("MBBS (Egypt), DCH (UK), MRCP (Ireland)",style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold)) : Container(
+                                   margin: EdgeInsets.only(right: MediaQuery.of(context).size.width*0.28),
+                                   child:Text("MBBS (Egypt), DCH (UK), MRCP (Ireland)",style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold))),
+                             ),
 
-                             // _buildMarquee(),
+                              Container(margin:EdgeInsets.only(top: 25,bottom: 25),height: 7,width: 100,color: Colors.amber,),
 
-                              AboutSectionDetails(aboutReadResponse.name, aboutReadResponse.email, aboutReadResponse.phone, aboutReadResponse.dob, aboutReadResponse.address, aboutReadResponse.nationality),
+                             // AboutSectionDetails(aboutReadResponse.name, aboutReadResponse.email, aboutReadResponse.phone, aboutReadResponse.dob, aboutReadResponse.address, aboutReadResponse.nationality),
 
-                              Heading2WithDescription("PROFESSIONAL PROFILE",aboutReadResponse.statement),
+                              BiographyBulletoints(Point: "Managing Director of Hayat Health"),
+                              BiographyBulletoints(Point: "Consultant Pediatrician and Neonatologist"),
+                              BiographyBulletoints(Point: "Member of Royal College of Physicians (Ireland)"),
+                              BiographyBulletoints(Point: "Chairman of Abu Dhabi Pediatric Club"),
+                              BiographyBulletoints(Point: "Daman’s Second Opinion Physician for Home care"),
+                              BiographyBulletoints(Point: "Business Owner (UAE and Others)"),
 
-                              Image.asset("images/sign.png"),
-
+                               ResponsiveWrapper.of(context).isDesktop || ResponsiveWrapper.of(context).isTablet ?
+                              SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child:Row(children: [
+                                Image.network("https://dr.ratedsolution.com/public/images/ph.png"),
+                                Image.network("https://dr.ratedsolution.com/public/images/phs.png"),
+                                Image.network("https://dr.ratedsolution.com/public/images/pd.png"),
+                              ],)) : SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child:Row(children: [
+                                    Image.network("https://dr.ratedsolution.com/public/images/ph.png",height: 100,width: 100,),
+                                    Image.network("https://dr.ratedsolution.com/public/images/phs.png",height: 100,width: 100,),
+                                    Image.network("https://dr.ratedsolution.com/public/images/pd.png",height: 100,width: 100,),
+                                  ],))
                               // Button(title: "Download Resume as PDF",onPressed: (){},)
                             ],
                           ),

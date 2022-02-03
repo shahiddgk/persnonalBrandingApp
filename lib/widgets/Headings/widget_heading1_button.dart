@@ -25,18 +25,18 @@ class _Heading1WithButtonState extends State<Heading1WithButton> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
 
-          Container(
-              margin: EdgeInsets.only(right: 130),
-              child: const MarqueeText(
-                text: TextSpan(
-                  text: 'Success is where preparation and opportunity meet.',
-                ),
-                style: TextStyle(
-                  fontSize: 24,
-                  color: Colors.amber,
-                ),
-                speed: 30,
-              )),
+          // Container(
+          //     margin: EdgeInsets.only(right: 130),
+          //     child: const MarqueeText(
+          //       text: TextSpan(
+          //         text: 'There is no responsibility without authority.',
+          //       ),
+          //       style: TextStyle(
+          //         fontSize: 24,
+          //         color: Colors.amber,
+          //       ),
+          //       speed: 30,
+          //     )),
 
           Text(widget.H1,style: TextStyle(fontSize: 38,fontWeight: FontWeight.bold)
           ),
@@ -55,7 +55,7 @@ class _Heading1WithButtonState extends State<Heading1WithButton> {
                   borderRadius: BorderRadius.circular(12), // <-- Radius
                 ),
               ),
-              child: const Text("LET'S START SOMETHING BIG",
+              child: const Text("TURN IDEA INTO BUISNESS",
                 style: TextStyle(
                   fontSize: 10,
                   color: Colors.black,
@@ -76,18 +76,18 @@ class _Heading1WithButtonState extends State<Heading1WithButton> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
 
-         Container(
-             margin: EdgeInsets.only(right: 130),
-             child: const MarqueeText(
-            text: TextSpan(
-              text: 'Success is where preparation and opportunity meet.',
-            ),
-            style: TextStyle(
-              fontSize: 24,
-              color: Colors.amber,
-            ),
-            speed: 30,
-          )),
+         // Container(
+         //     margin: EdgeInsets.only(right: 130),
+         //     child: const MarqueeText(
+         //    text: TextSpan(
+         //      text: 'Success is where preparation and opportunity meet.',
+         //    ),
+         //    style: TextStyle(
+         //      fontSize: 24,
+         //      color: Colors.amber,
+         //    ),
+         //    speed: 30,
+         //  )),
 
           Text(widget.H1,style: TextStyle(fontSize: 28,fontWeight: FontWeight.bold)
           ),
@@ -102,7 +102,7 @@ class _Heading1WithButtonState extends State<Heading1WithButton> {
                   borderRadius: BorderRadius.circular(12), // <-- Radius
                 ),
               ),
-              child: const Text("LET'S START SOMETHING BIG",
+              child: const Text("TURN IDEA INTO BUISNESS",
                 style: TextStyle(
                   fontSize: 10,
                   color: Colors.black,

@@ -18,6 +18,7 @@ import 'package:personal_branding/widgets/TextFields/widget_message_field.dart';
 import 'package:personal_branding/widgets/TextFields/widget_name_field.dart';
 import 'package:personal_branding/widgets/Buttons/widget_button.dart';
 import 'package:personal_branding/widgets/widget_contacts_icon_description.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../drawer.dart';
 
@@ -155,7 +156,7 @@ class _ContactsState extends State<Contacts> {
 
                               Heading2WithDescription("LET KEEP IN TOUCH","Feel free to send me direct email.I am open to suggestions and communicative about ideas and bringing something new & big change this world. Let's make it worth a while we live in this world."),
 
-                              ContactsIconDescription(Icons.location_on_sharp, "Dr. Ahmed Hussein", "PO Box 73515 - Abu Dhabi," ,"United Arab Emirates.",Icons.email, "Email", "ahmed@drahmed.ae", Icons.phone, "Phone", "+123-456-7890", "I'm also on Social Networks"," We can connect through social meida platforms as well.",(){},(){},(){},(){},(){}),
+                              ContactsIconDescription(Icons.location_on_sharp, "Dr. Ahmed Hussein", "PO Box 73515 - Abu Dhabi," ,"United Arab Emirates.",Icons.email, "Email", "ahmed@drahmed.ae", Icons.phone, "Phone", "+123-456-7890", "I'm also on Social Networks"," We can connect through social meida platforms as well.",(){_launchURL("https://www.facebook.com");},(){_launchURL("https://twitter.com");},(){_launchURL("https://www.youtube.com");},(){_launchURL("https://plus.google.com");},(){_launchURL("https://www.linkedin.com");}),
 
                               Heading2("DROP ME A LINE"),
 
@@ -186,6 +187,14 @@ class _ContactsState extends State<Contacts> {
         ),
       ),
     );
+  }
+  _launchURL(String url) async {
+    url = url; // you can use your url
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Unable to open url : $url';
+    }
   }
 
   Future<bool> _onWillPop() async {

@@ -93,51 +93,51 @@ class _ContactsIconDescriptionState extends State<ContactsIconDescription> {
                             ],
                           ),
                         ),
-                        Container(
-                          margin: EdgeInsets.only(bottom: 5),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: <Widget>[
-                              Container(
-                                  margin: EdgeInsets.only(right: 2),
-                                  child: Icon(widget.icon2,size: 28,color: Colors.amber,)),
-                              Container(
-                                margin: EdgeInsets.only(right: 2),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    Text(widget.icon2_H1,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
-                                    Text(widget.icon2_H2,style: TextStyle(fontSize: 16),),
-                                  ],
-                                ),
-                              ),
-
-                            ],
-                          ),
-                        ),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: <Widget>[
-                            Container(
-                                margin: EdgeInsets.only(right: 2),
-                                child: Icon(widget.icon3,size: 28,color: Colors.amber,)),
-                            Container(
-                              margin: EdgeInsets.only(right: 2),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Text(widget.icon3_H1,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
-                                  Text(widget.icon3_H2,style: TextStyle(fontSize: 16),),
-                                ],
-                              ),
-                            ),
-
-                          ],
-                        ),
+                        // Container(
+                        //   margin: EdgeInsets.only(bottom: 5),
+                        //   child: Row(
+                        //     crossAxisAlignment: CrossAxisAlignment.start,
+                        //     mainAxisAlignment: MainAxisAlignment.start,
+                        //     children: <Widget>[
+                        //       Container(
+                        //           margin: EdgeInsets.only(right: 2),
+                        //           child: Icon(widget.icon2,size: 28,color: Colors.amber,)),
+                        //       Container(
+                        //         margin: EdgeInsets.only(right: 2),
+                        //         child: Column(
+                        //           mainAxisAlignment: MainAxisAlignment.start,
+                        //           crossAxisAlignment: CrossAxisAlignment.start,
+                        //           children: <Widget>[
+                        //             Text(widget.icon2_H1,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                        //             Text(widget.icon2_H2,style: TextStyle(fontSize: 16),),
+                        //           ],
+                        //         ),
+                        //       ),
+                        //
+                        //     ],
+                        //   ),
+                        // ),
+                        // Row(
+                        //   crossAxisAlignment: CrossAxisAlignment.start,
+                        //   mainAxisAlignment: MainAxisAlignment.start,
+                        //   children: <Widget>[
+                        //     Container(
+                        //         margin: EdgeInsets.only(right: 2),
+                        //         child: Icon(widget.icon3,size: 28,color: Colors.amber,)),
+                        //     Container(
+                        //       margin: EdgeInsets.only(right: 2),
+                        //       child: Column(
+                        //         mainAxisAlignment: MainAxisAlignment.start,
+                        //         crossAxisAlignment: CrossAxisAlignment.start,
+                        //         children: <Widget>[
+                        //           Text(widget.icon3_H1,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                        //           Text(widget.icon3_H2,style: TextStyle(fontSize: 16),),
+                        //         ],
+                        //       ),
+                        //     ),
+                        //
+                        //   ],
+                        // ),
                       ],),
                     ),
                   ),
@@ -265,60 +265,60 @@ class _ContactsIconDescriptionState extends State<ContactsIconDescription> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                Text(widget.icon1_H1,style: TextStyle(fontSize: 10,fontWeight: FontWeight.bold),textAlign: TextAlign.start,),
-                                Text(widget.icon1_H2,style: TextStyle(fontSize: 10,),textAlign: TextAlign.start,),
-                                Text(widget.icon1_H3,style: TextStyle(fontSize: 10,),textAlign: TextAlign.start,),
+                                Text(widget.icon1_H1,style: TextStyle(fontSize: 10,fontWeight: FontWeight.bold),textAlign: TextAlign.justify,),
+                                Text(widget.icon1_H2,style: TextStyle(fontSize: 10,),textAlign: TextAlign.justify,),
+                                Text(widget.icon1_H3,style: TextStyle(fontSize: 10,),textAlign: TextAlign.justify,),
                               ],
                             ),
                           ),
                         ],
                       ),
                     )),
-                    Container(
-                      margin: EdgeInsets.only(bottom: 5),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: <Widget>[
-                          Container(
-                              margin: EdgeInsets.only(right: 2),
-                              child: Icon(widget.icon2,size: 15,color: Colors.amber,)),
-                          Container(
-                            margin: EdgeInsets.only(right: 2),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Text(widget.icon2_H1,style: TextStyle(fontSize: 10,fontWeight: FontWeight.bold),),
-                                Text(widget.icon2_H2,style: TextStyle(fontSize: 10),),
-                              ],
-                            ),
-                          ),
-
-                        ],
-                      ),
-                    ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: <Widget>[
-                        Container(
-                            margin: EdgeInsets.only(right: 2),
-                            child: Icon(widget.icon3,size: 15,color: Colors.amber,)),
-                        Container(
-                          margin: EdgeInsets.only(right: 2),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Text(widget.icon3_H1,style: TextStyle(fontSize: 10,fontWeight: FontWeight.bold),),
-                              Text(widget.icon3_H2,style: TextStyle(fontSize: 10,),),
-                            ],
-                          ),
-                        ),
-
-                      ],
-                    ),
+                    // Container(
+                    //   margin: EdgeInsets.only(bottom: 5),
+                    //   child: Row(
+                    //     crossAxisAlignment: CrossAxisAlignment.start,
+                    //     mainAxisAlignment: MainAxisAlignment.start,
+                    //     children: <Widget>[
+                    //       Container(
+                    //           margin: EdgeInsets.only(right: 2),
+                    //           child: Icon(widget.icon2,size: 15,color: Colors.amber,)),
+                    //       Container(
+                    //         margin: EdgeInsets.only(right: 2),
+                    //         child: Column(
+                    //           mainAxisAlignment: MainAxisAlignment.start,
+                    //           crossAxisAlignment: CrossAxisAlignment.start,
+                    //           children: <Widget>[
+                    //             Text(widget.icon2_H1,style: TextStyle(fontSize: 10,fontWeight: FontWeight.bold),),
+                    //             Text(widget.icon2_H2,style: TextStyle(fontSize: 10),),
+                    //           ],
+                    //         ),
+                    //       ),
+                    //
+                    //     ],
+                    //   ),
+                    // ),
+                    // Row(
+                    //   crossAxisAlignment: CrossAxisAlignment.start,
+                    //   mainAxisAlignment: MainAxisAlignment.start,
+                    //   children: <Widget>[
+                    //     Container(
+                    //         margin: EdgeInsets.only(right: 2),
+                    //         child: Icon(widget.icon3,size: 15,color: Colors.amber,)),
+                    //     Container(
+                    //       margin: EdgeInsets.only(right: 2),
+                    //       child: Column(
+                    //         mainAxisAlignment: MainAxisAlignment.start,
+                    //         crossAxisAlignment: CrossAxisAlignment.start,
+                    //         children: <Widget>[
+                    //           Text(widget.icon3_H1,style: TextStyle(fontSize: 10,fontWeight: FontWeight.bold),),
+                    //           Text(widget.icon3_H2,style: TextStyle(fontSize: 10,),),
+                    //         ],
+                    //       ),
+                    //     ),
+                    //
+                    //   ],
+                    // ),
                   ],),
               )),
               Column(
@@ -337,34 +337,46 @@ class _ContactsIconDescriptionState extends State<ContactsIconDescription> {
                           Text(widget.Description,style: TextStyle(fontWeight: FontWeight.normal),textAlign: TextAlign.justify,),
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: <Widget>[
-                              Container(
+                              GestureDetector(
+                                  onTap: () {
+                                    widget.facebook_Onpressed();
+                                  },
+                                  child:Container(
                                 margin: EdgeInsets.only(right: 17),
                                 width: 10,
-                                child: IconButton(onPressed: () {
-                                  widget.facebook_Onpressed();
-                                }, icon: Icon(Icons.facebook,size: 20,)),),
-                              Container(
+                                child: Icon(Icons.facebook,size: 20,),)),
+                             GestureDetector(
+                                 onTap: () {
+                                   widget.twitter_Onpressed();
+                                 },
+                                 child:Container(
                                 margin: EdgeInsets.only(right: 17),
                                 width: 10,
-                                child: IconButton(onPressed:() {
-                                  widget.twitter_Onpressed();
-                                }, icon: FaIcon(FontAwesomeIcons.twitter,size: 20,)),),
-                              Container(
+                                child: Icon(FontAwesomeIcons.twitter,size: 20,),)),
+                              GestureDetector(
+                                  onTap: () {
+                                    widget.youtube_Onpressed();
+                                  },
+                                  child:Container(
                                 margin: EdgeInsets.only(right: 17),
                                 width: 10,
-                                child: IconButton(onPressed: () {
-                                            widget.youtube_Onpressed();
-                                          }, icon: FaIcon(FontAwesomeIcons.youtube,size: 20,)),),
-                              Container(
+                                child: Icon(FontAwesomeIcons.youtube,size: 20,),)),
+                              GestureDetector(
+                                  onTap: (){widget.googlePlus_Onpressed();},
+                                  child:Container(
                                 margin: EdgeInsets.only(right: 17),
                                 width: 10,
-                                child: IconButton(onPressed: (){widget.googlePlus_Onpressed();}, icon: FaIcon(FontAwesomeIcons.googlePlus,size: 20,)),),
-                              Container(
+                                child: Icon(FontAwesomeIcons.googlePlus,size: 20,),)),
+                              GestureDetector(
+                                  onTap: () {
+    widget.linkedIn_Onpressed();
+    },
+                                  child:Container(
                                 margin: EdgeInsets.only(right: 17),
                                 width: 10,
-                                child: IconButton(onPressed: widget.linkedIn_Onpressed(), icon: FaIcon(FontAwesomeIcons.linkedin,size: 20,)),),
+                                child: Icon(FontAwesomeIcons.linkedin,size: 20,),)),
                               // Container(child: IconButton(onPressed: widget.linkedIn_Onpressed(), icon: Icon(Icons.facebook,size: 20,)),),
                             ],)
                         ],

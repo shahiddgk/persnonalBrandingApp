@@ -458,6 +458,7 @@ class ChatPageState extends State<ChatPage> {
   Widget build(BuildContext context) {
     return Scaffold(
           appBar: AppBar(
+            centerTitle: true,
             title: Text(widget.peerNickname),),
           body: Container(
             decoration: BoxDecoration(borderRadius: BorderRadius.circular(10.0)),
