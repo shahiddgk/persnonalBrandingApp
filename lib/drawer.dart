@@ -236,7 +236,7 @@ class _MainWidgetState extends State<MainWidget> with TickerProviderStateMixin {
                 MLMenuItem(onClick: (){
                   Navigator.of(context).pop();
                   Navigator.of(context).push(MaterialPageRoute(builder: (context) => ProfessionalCoaching()));
-                }, content:const Text("GAllERY",style: TextStyle(color: Colors.white),)),
+                }, content:const Text("GALLERY",style: TextStyle(color: Colors.white),)),
                 MLMenuItem(onClick: (){
                   Navigator.of(context).pop();
                   Navigator.of(context).push(MaterialPageRoute(builder: (context) => Contacts()));

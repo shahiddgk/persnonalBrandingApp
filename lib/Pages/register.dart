@@ -305,6 +305,28 @@ class _RegisterState extends State<Register> {
       HTTPManager()
           .registerUser(RegisterRequest(email: _emailFieldController.text, password: _passwordFieldController.text, passwordConfirmation: _confirmPasswordFieldController.text, name: _nameFieldController.text))
           .then((value) {
+            print(value);
+            sessionUserModel = value;
+
+            FirebaseMessaging.instance.getToken().then((token) {
+
+              FirebaseFirestore.instance.collection(FirestoreConstants.pathUserCollection).doc("${sessionUserModel.id}").set(
+                  {
+                    FirestoreConstants.nickname: sessionUserModel.name,
+                    FirestoreConstants.photoUrl: '',
+                    FirestoreConstants.id: sessionUserModel.id,
+                    'createdAt': DateTime.now().millisecondsSinceEpoch.toString(),
+                    FirestoreConstants.chattingWith: null,
+                    'Token' : token
+                  });
+
+            }).catchError((e){
+              print(e);
+            });
+
+            saveUserSession(value);
+            print(saveUserSession(value));
+
         Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>MainWidget(title: " ")));
       }).catchError((e) {
         print(e);

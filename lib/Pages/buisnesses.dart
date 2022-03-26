@@ -106,7 +106,7 @@ class _BusinessesState extends State<Businesses> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: <Widget>[
-                              Heading1WithButtonAndMarquee("Businesses Outside UAE","The way to get started is to quit talking and begin doing."),
+                              Heading1WithButtonAndMarquee("BUSINESSES OUTSIDE UAE","The way to get started is to quit talking and begin doing."),
 
                               //Heading2WithDescription("TRUSTED PERSONALITIES AROUND THE WORLD","Dr.Ahmed Hussein have decades of experience in Pediatrics and Neonatology. He has an outstanding track record as clinician as well as business leader. Manages three subsidiaries - Pyramids Health Services, Ability Pediatric Rehabilitation Medical Center, Pyramids Dialysis Center."),
                               // Align(alignment: Alignment.centerRight,child: TextButton(child:Text("YOUR THOUGHTS",style: TextStyle(color: Colors.grey),) ,onPressed: (){

@@ -207,19 +207,24 @@ class _ProfessionalCoachingState extends State<ProfessionalCoaching> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
-                                    Heading2(galleryReadResponse[index].title),
+                                     Heading2(galleryReadResponse[index].title),
                                     Container(
                                       margin: EdgeInsets.only(top: 10),
                                       width: MediaQuery.of(context).size.width,
-                                      height:  MediaQuery.of(context).size.height/3,
+                                      height:  MediaQuery.of(context).size.height/5,
                                       child: Stack(
                                         children: [
+
+                                          // Container(
+                                          //   child: Image.network(galleryReadResponse[index].images[0].img),
+                                          // ),
 
                                           CarouselSlider.builder(
                                             controller: _sliderController,
                                             itemCount: galleryReadResponse[index].images.length,
                                           slideBuilder: (count){
                                               final urlImage = galleryReadResponse[index].images[count].img;
+                                              print(urlImage);
                                               return buildImage(urlImage,count);
                                           },
                                             slideIndicator: CircularSlideIndicator(
@@ -228,20 +233,6 @@ class _ProfessionalCoachingState extends State<ProfessionalCoaching> {
                                             ),
                                             initialPage: 0,
                                           ),
-
-                                          // CarouselSlider.builder(
-                                          //   itemCount: galleryReadResponse.length,
-                                          //   itemBuilder: (context, count, realIndex){
-                                          //     final  urlImage = galleryReadResponse[index].images[count].img;
-                                          //     return buildImage(urlImage,count);
-                                          //   },
-                                          //   options: CarouselOptions(
-                                          //     height: MediaQuery.of(context).size.height,
-                                          //     viewportFraction: 1,
-                                          //     autoPlayInterval: Duration(seconds: 4),
-                                          //     onPageChanged: (index, reason) => setState(()=>activeIndex = index),
-                                          //   ),
-                                          // ),
 
                                           Container(margin:EdgeInsets.only(left: 5),child: Align(alignment: Alignment.centerLeft,
                                                 child: IconButton(icon: Icon(Icons.arrow_back_ios),color: Colors.black, onPressed: () {_sliderController.previousPage();},),)),
@@ -341,26 +332,17 @@ class _ProfessionalCoachingState extends State<ProfessionalCoaching> {
   );
 
   Widget buildImage(String urlImage, int index) => Stack(
-      children: [
-        Container(
-          color: Colors.grey,
-          child: Container(
-              alignment: Alignment.bottomLeft,
-              height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(image: DecorationImage(
-                  image: NetworkImage(urlImage[index]),
-                  fit: BoxFit.fill
-              )
-              ),
-              child: Column(
-                // children: [
-                //   Image.asset("1.JPG"),
-                // ],
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.end,
-              )),
-        ),
+    children: [
+      Container(
+          alignment: Alignment.bottomLeft,
+          width: MediaQuery.of(context).size.width,
+          // decoration: BoxDecoration(image: DecorationImage(
+          //     image: NetworkImage(urlImage[index]),
+          //     fit: BoxFit.fill
+          // )
+          // ),
+          child: Image.network(urlImage,fit: BoxFit.cover,)
+      ),
       ],
   );
 

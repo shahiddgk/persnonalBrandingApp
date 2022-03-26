@@ -19,14 +19,14 @@ class SessionUserModel {
       required this.token});
 
   SessionUserModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    name = json['name'];
-    email = json['email'];
-    usertype = json['usertype'];
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
-    status = json['status'];
-    token = json['token'];
+    id = json['id']??0;
+    name = json['name']??'';
+    email = json['email']??'';
+    usertype = json['usertype']??'';
+    createdAt = json['created_at']??'';
+    updatedAt = json['updated_at']??'';
+    status = json['status']??'';
+    token = json['token']??'';
   }
 
   Map<String, dynamic> toJson() {

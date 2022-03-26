@@ -1,6 +1,6 @@
 class ApplicationURLs{
-  static const BASE_URL = "https://dr.ratedsolution.com/api/";
-  static const SOCIAL_URL = "https://dr.ratedsolution.com/api/social/handle";
+  static const BASE_URL = "https://drahmed.ae/api/";
+  static const SOCIAL_URL = "https://drahmed.ae/api/social/handle";
 
   //Authentication
   // ignore: constant_identifier_names
