@@ -1,21 +1,29 @@
 {
   "project_info": {
-    "project_number": "432743666780",
-    "firebase_url": "https://chatapptest-d8b3f-default-rtdb.firebaseio.com",
-    "project_id": "chatapptest-d8b3f",
-    "storage_bucket": "chatapptest-d8b3f.appspot.com"
+    "project_number": "898255970494",
+    "firebase_url": "https://dr-ahmed-branding-default-rtdb.firebaseio.com",
+    "project_id": "dr-ahmed-branding",
+    "storage_bucket": "dr-ahmed-branding.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:432743666780:android:a598da153588f2219c4299",
+        "mobilesdk_app_id": "1:898255970494:android:9096570f8d598ced2f7eef",
         "android_client_info": {
           "package_name": "com.ratedsolution.personal_branding"
         }
       },
       "oauth_client": [
         {
-          "client_id": "432743666780-kqq6mhe9rt306a47s3c375lrh3tqgepm.apps.googleusercontent.com",
+          "client_id": "898255970494-2h6h1glpg2fmjcr2tvu8t7uir59vvbti.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ratedsolution.personal_branding",
+            "certificate_hash": "3f42a15efbc1edbe093c12b73801f518f2e0f1dd"
+          }
+        },
+        {
+          "client_id": "898255970494-ra014mpmda6cicooooaidbnada9vkcdi.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.ratedsolution.personal_branding",
@@ -23,28 +31,21 @@
           }
         },
         {
-          "client_id": "432743666780-6a9k2j27brmgnne29bbc289cquih1se7.apps.googleusercontent.com",
+          "client_id": "898255970494-c6un31ibnrpaa4fg8pvgddnm8eeon614.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAKJ-06i_xI3b-uM0XNbzZ4gvay3to_-70"
+          "current_key": "AIzaSyDyvQOzFcns1w0s9DFCl8MYc115cvhC29A"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "432743666780-6a9k2j27brmgnne29bbc289cquih1se7.apps.googleusercontent.com",
+              "client_id": "898255970494-c6un31ibnrpaa4fg8pvgddnm8eeon614.apps.googleusercontent.com",
               "client_type": 3
-            },
-            {
-              "client_id": "432743666780-hvb2o1a35h7k8usbjiecftqmfo4u25f6.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.ratedsolution.personalBranding"
-              }
             }
           ]
         }
