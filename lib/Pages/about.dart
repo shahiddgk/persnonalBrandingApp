@@ -132,13 +132,15 @@ class _AboutState extends State<About> {
                                   child:Row(children: [
                                 Image.network("https://dr.ratedsolution.com/public/images/ph.png"),
                                 Image.network("https://dr.ratedsolution.com/public/images/phs.png"),
-                                Image.network("https://dr.ratedsolution.com/public/images/pd.png"),
+                                Image.network("https://drahmed.ae/public/images/hh.png"),
+                                Image.network("https://drahmed.ae/public/images/pd.png")
                               ],)) : SingleChildScrollView(
                                   scrollDirection: Axis.horizontal,
                                   child:Row(children: [
                                     Image.network("https://dr.ratedsolution.com/public/images/ph.png",height: 100,width: 100,),
                                     Image.network("https://dr.ratedsolution.com/public/images/phs.png",height: 100,width: 100,),
-                                    Image.network("https://dr.ratedsolution.com/public/images/pd.png",height: 100,width: 100,),
+                                    Image.network("https://drahmed.ae/public/images/hh.png",height: 100,width: 100,),
+                                    Image.network("https://drahmed.ae/public/images/pd.png",height: 100,width: 100,),
                                   ],))
                               // Button(title: "Download Resume as PDF",onPressed: (){},)
                             ],

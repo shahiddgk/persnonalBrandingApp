@@ -3,6 +3,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
+import 'package:linkedin_login/linkedin_login.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:kf_drawer/kf_drawer.dart';
@@ -39,6 +40,14 @@ class _LogInState extends State<LogIn> {
   late SessionUserModel sessionUserModel;
   Map _userObj = {};
   late String name;
+
+  final String redirectUrl = "https://drahmed.ae/social/handle/linkedin";
+  final String clientId = '78gve1yqzry3h7';
+  final String clientSecret = 'n4M9wPOCAt8Rfb8Q';
+
+
+  bool logoutUser = false;
+
 
   @override
   Widget build(BuildContext context) {
@@ -131,6 +140,14 @@ class _LogInState extends State<LogIn> {
                                 onPressed: _registerUserWithFacebook,
                               ),
                               Divider(),
+                              SignInButton(
+                                Buttons.LinkedIn,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12)
+                                ),
+                                onPressed: _registerUserWithLinkedIn,
+                              ),
+                              Divider(),
                               //ForgotPassword(title: "Forgot Password!",onPressed: () {},)
                             ],
                           )
@@ -202,6 +219,90 @@ class _LogInState extends State<LogIn> {
       });
     }
 
+  }
+
+  _registerUserWithLinkedIn() async {
+    print("linkedin Buttin clicked");
+    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>LinkedInUserWidget(
+      appBar: AppBar(title: const Text("Linkedln Sign Up"),
+      centerTitle: true,),
+      redirectUrl: redirectUrl,
+      clientId: clientId,
+      clientSecret: clientSecret,
+      destroySession: _checkedLogin(),
+      projection:  const [
+        ProjectionParameters.id,
+        ProjectionParameters.localizedFirstName,
+        ProjectionParameters.localizedLastName,
+        ProjectionParameters.firstName,
+        ProjectionParameters.lastName,
+        ProjectionParameters.profilePicture,
+      ],
+      onGetUserProfile: (linkedInUserModel) async {
+
+        print("Last Name:${linkedInUserModel.user.localizedLastName}");
+        print("Email:${linkedInUserModel.user.email!.elements![0].handleDeep!.emailAddress}");
+
+        String? fullName = "${linkedInUserModel.user.localizedFirstName} " + "${linkedInUserModel.user.localizedLastName}";
+        print("FirstName:$fullName");
+        String? email = linkedInUserModel.user.email!.elements![0].handleDeep!.emailAddress;
+        String? userID = linkedInUserModel.user.userId;
+
+
+
+        HTTPManager().registerUserWithSocialAccount(SocialLoginRequest(name: fullName, email: email.toString(), id: userID.toString(), provider: "linkedin")).then((value)
+        {
+
+          sessionUserModel = value;
+          FirebaseMessaging.instance.getToken().then((token) {
+
+            FirebaseFirestore.instance.collection(FirestoreConstants.pathUserCollection).doc("${sessionUserModel.id}").set(
+                {
+                  FirestoreConstants.nickname: sessionUserModel.name,
+                  FirestoreConstants.photoUrl: '',
+                  FirestoreConstants.id: sessionUserModel.id,
+                  'createdAt': DateTime.now().millisecondsSinceEpoch.toString(),
+                  FirestoreConstants.chattingWith: null,
+                  'Token' : token
+                });
+
+          }).catchError((e){
+            print(e);
+          });
+
+          saveUserSession(value);
+          print(saveUserSession(value));
+          //Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (buildcontext)=>MainWidget(title: " ")));
+          Navigator.of(context).pop();
+        });
+
+      },
+      onError: (UserFailedAction e) {
+        print('Error: ${e.toString()}');
+      },
+    )
+    )
+    );
+  }
+
+  bool _checkedLogin() {
+     getUserSession().then((value) => {
+      if (value.id == 0)
+        {
+          setState(() {
+            logoutUser = true;
+          })
+        }
+      else
+        {
+          setState(() {
+            logoutUser = false;
+            globalSessionUser = value;
+            _isLoading = false;
+          }),
+        }
+    });
+    return logoutUser;
   }
 
   _registerUserWithFacebook() async {

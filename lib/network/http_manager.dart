@@ -5,6 +5,8 @@ import 'package:personal_branding/models/request/all_projects_request.dart';
 import 'package:personal_branding/models/request/loin_request.dart';
 import 'package:personal_branding/models/request/register_request.dart';
 import 'package:personal_branding/models/request/social_login_request.dart';
+import 'package:personal_branding/models/request/update_profile.dart';
+import 'package:personal_branding/models/request/user_data_requesst.dart';
 import 'package:personal_branding/models/request/user_save_start_up_request.dart';
 import 'package:personal_branding/models/request/user_start_up_request.dart';
 import 'package:personal_branding/models/request/widget_upload_file.dart';
@@ -21,6 +23,7 @@ import 'package:personal_branding/models/response/start_up_save_response.dart';
 import 'package:personal_branding/models/response/startup_response_all_project_list.dart';
 import 'package:personal_branding/models/response/startup_response_model.dart';
 import 'package:personal_branding/models/response/testimonials_response_list.dart';
+import 'package:personal_branding/models/response/user_data.dart';
 import 'package:personal_branding/network/api_urls.dart';
 import 'package:personal_branding/network/response_handler.dart';
 
@@ -53,6 +56,15 @@ class HTTPManager {
     SessionUserModel sessionUserModel =
         SessionUserModel.fromJson(response.user);
     return sessionUserModel;
+  }
+
+  Future<UserProfileData> getUserData(UserDataRequest userDataRequest) async {
+    final url = ApplicationURLs.API_GET_PROFILE_DATA;
+    final GeneralResponseModel response =
+    await _handler.post(url, userDataRequest.toJson(), false);
+    UserProfileData userProfileData = UserProfileData.fromJson(response.data);
+    print(userProfileData);
+    return userProfileData;
   }
 
   Future<GeneralResponseModel> logoutuser(token) async {
@@ -153,6 +165,7 @@ class HTTPManager {
     return allProjectsListResponse.AllProjects;
   }
 
+
   Future<SaveStartUpReadResponse> savestartUpUser(String token,SaveStartUpRequest startUpRequest) async {
 
     print(startUpRequest.title);
@@ -161,6 +174,7 @@ class HTTPManager {
     print(startUpRequest.purpose);
     print(startUpRequest.date);
     print(startUpRequest.userid);
+    print(startUpRequest);
     print(token);
 
     final url = ApplicationURLs.API_SAVE_STARTUP;
@@ -179,5 +193,14 @@ class HTTPManager {
     await _handler.postWithFile(url,id,files,true,token);
     print(response.token);
   }
+
+  Future updateProfile(Map<String, String> updateProfile,files) async {
+
+    final url = ApplicationURLs.API_UPDATE_PROFILE;
+    final GeneralResponseModel response =
+    await _handler.postWithFileWithoutToken(url,updateProfile,files,true,);
+    print(response.token);
+  }
+
 
 }

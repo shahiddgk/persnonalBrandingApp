@@ -37,6 +37,51 @@ class ResponseHandler {
     }
   }
 
+  Future<GeneralResponseModel> postWithFileWithoutToken(
+      String url,
+      Map<String, String> params,
+      List<File> files,
+      bool isHeaderRequired,) async {
+    var head = Map<String, Object>();
+    head['content-type'] = 'application/x-www-form-urlencoded';
+    var res;
+    try {
+      final request = http.MultipartRequest('POST', Uri.parse(url),);
+      if (files.length > 0) {
+        files.forEach((element) async {
+          final file = await http.MultipartFile.fromPath(
+              'more_files[]',
+              element
+                  .path); //,contentType: MediaType(mimeTypeData[0], mimeTypeData[1])
+          request.files.add(file);
+          EasyLoading.show(status: "Uploading...");
+
+        });
+
+      }
+      request.fields.addAll(params);
+      await request.send().then((response) {
+        if (response.statusCode == 200)
+        {
+          print("Uploaded!");
+          EasyLoading.showSuccess("Successful");
+          EasyLoading.dismiss(animation: true);
+        }
+        res = GeneralResponseModel(
+
+            status: response.statusCode == 200,
+
+            // message: response.statusCode == 200
+            //     ? "User $message"
+            //     : "User Not $message",
+            data: null);
+      });
+      return res;
+    } on SocketException {
+      throw FetchDataException('No Internet connection');
+    }
+  }
+
   Future<GeneralResponseModel> postWithFile(
       String url,
       Map<String, String> params,

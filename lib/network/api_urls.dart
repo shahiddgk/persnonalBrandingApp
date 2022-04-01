@@ -25,6 +25,10 @@ class ApplicationURLs{
   // ignore: constant_identifier_names
   static const API_FUTURE_GOALS = BASE_URL + "futuregoals";
 
+  static const API_UPDATE_PROFILE = BASE_URL + "update-profile";
+
+  static const API_GET_PROFILE_DATA = BASE_URL + "get-profile-data";
+
   // ignore: constant_identifier_names
   static const API_STARTUP_LIST = BASE_URL + "user-data";
 

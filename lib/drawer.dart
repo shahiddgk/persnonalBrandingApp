@@ -13,6 +13,7 @@ import 'package:personal_branding/Drawer/menu_page.dart';
 import 'package:personal_branding/Pages/about.dart';
 import 'package:personal_branding/Pages/careersectiontab.dart';
 import 'package:personal_branding/Pages/login.dart';
+import 'package:personal_branding/Pages/profilepage.dart';
 import 'package:personal_branding/Pages/register.dart';
 import 'package:personal_branding/utills/utils.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
@@ -241,6 +242,17 @@ class _MainWidgetState extends State<MainWidget> with TickerProviderStateMixin {
                   Navigator.of(context).pop();
                   Navigator.of(context).push(MaterialPageRoute(builder: (context) => Contacts()));
                 }, content:const Text("CONTACT",style: TextStyle(color: Colors.white),)),
+                globalSessionUser.id != 0 ?
+                  MLMenuItem(onClick: () {
+                    Navigator.of(context).pop();
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => ProfilePage()));
+                  },
+                      content: const Text(
+                        "PROFILE", style: TextStyle(color: Colors.white),)) : MLMenuItem(onClick: () {},
+                    content: const Text(
+                      " ", style: TextStyle(color: Colors.white),))
+
               ],),
           appBar: AppBar(
             centerTitle: true,
